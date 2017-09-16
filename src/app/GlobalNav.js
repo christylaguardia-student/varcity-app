@@ -12,7 +12,7 @@ export default function Header() {
           <li><Link to="/">Home</Link></li>
           <li><input placeholder="search"/></li>
           <li><Link to="/athletes">Search</Link></li>
-          <li><Link to="/athletes/:id">Profile</Link></li>
+          <li><Link to="athletes/:id">Profile</Link></li>
         </ul>
         <Switch>
           <Route exact path="/" component={Home} />
