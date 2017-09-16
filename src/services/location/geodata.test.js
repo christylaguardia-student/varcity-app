@@ -1,9 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { getStates, getCities } from './geodata';
-import countries from './countries';
+import { getCountries, getStates, getCities } from './geodata';
 
 describe('geodata api service', () => {
+
+  describe('countries', () => {
+    it('returns all countries', () => {
+      return getCountries()
+        .then(countries => expect(countries.length).toBeGreaterThan(0));
+    });
+  });
   
   describe('states', () => {
     it('returns states for a country', () => {
@@ -19,12 +25,12 @@ describe('geodata api service', () => {
   });
 
   describe('cities', () => {
-    it('returns a list of all cites for a state', () => {
+    it('returns all cites for a state', () => {
       return getCities('Japan', 'Miyagi')
         .then(cities => expect(cities.length).toBeGreaterThan(0));
     });
   
-    it('returns empty array when no cites are found are found', () => {
+    it('returns empty array when no cites are found', () => {
       return getCities('Japan', 'bad state or region name')
         .then(cities => expect(cities.length).toEqual(0));
     });

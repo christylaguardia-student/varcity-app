@@ -10,6 +10,17 @@ const API_URL = 'https://geodata.solutions/restapi';
 
 module.exports = {
   
+  getCountries() {
+    return superagent
+      .get(`${API_URL}?country`)
+      .then(res => {
+        const results = JSON.parse(res.text);
+        const keys = Object.keys(results).filter(k => k !== 'appendix');
+        const states = keys.map(key => results[key].country_name);
+        return states;
+      });
+    },
+
   getStates(country) {
     return superagent
       .get(`${API_URL}?country=${country}`)
