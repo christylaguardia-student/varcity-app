@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class InfoContainer extends Component {
 
@@ -11,4 +12,8 @@ class InfoContainer extends Component {
   }
 }
 
-export default InfoContainer;
+export default connect(state => {
+  return {
+    info: state.info
+  };
+}, {})(InfoContainer);

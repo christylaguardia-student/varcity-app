@@ -5,7 +5,7 @@ import SportsContainer from '../sports/SportsContainer';
 import EduContainer from '../edu/EduContainer';
 import MediaContainer from '../media/MediaContainer';
 
-export default function Header() {
+export default function ProfileNava() {
   return (
     <Router>
       <div>
