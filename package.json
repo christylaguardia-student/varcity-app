@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bulma": "^0.5.2",
+    "lodash": "^4.17.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
@@ -10,9 +12,12 @@
     "react-scripts": "1.0.13",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "riek": "^1.1.0",
     "superagent": "^3.6.0"
   },
   "scripts": {
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start": "react-scripts start",
     "build": "react-scripts build && npm run copy",
     "copy": "rm -rf ../varcity-server/public && cp -R ./build ../varcity-server/public",
@@ -23,6 +28,7 @@
   "devDependencies": {
     "enzyme": "^2.9.1",
     "enzyme-to-json": "^1.6.0",
+    "node-sass-chokidar": "0.0.3",
     "react-test-renderer": "^15.6.1"
   }
 }

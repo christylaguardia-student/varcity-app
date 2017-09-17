@@ -1,0 +1,1 @@
+export const ATHLETE_UPDATED = 'ATHLETE_UPDATED';

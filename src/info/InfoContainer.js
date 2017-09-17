@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 // import { connect } from 'react-redux';
+import 'bulma/css/bulma.css';
+import BasicInfo from './BasicInfo';
 
 class InfoContainer extends Component {
   render() {
   
     return (
-      <div>
-        <h1>Info Container</h1>
+      <div className="column is-mobile">
+        <BasicInfo />
       </div>
     )
   }
