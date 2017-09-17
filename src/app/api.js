@@ -19,6 +19,14 @@ export default {
       return response.body
     })
   },
+  changeField({payload}) {
+    return req
+    .post(`${AUTH_API_URL}/change`)
+    .send(payload)
+    .then(response => {
+      return response.body
+    })
+  },
     verify() {
       return req
       .get(`${AUTH_API_URL}/verify`)
