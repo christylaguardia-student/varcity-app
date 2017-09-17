@@ -1,17 +1,5 @@
 import { AUTHORIZED, AUTH_FAILURE } from './constants';
 import authAPI from './api';
-const superagent = require('superagent');
-
-
-async function httpTaskCallback ({value}){
-  return superagent.post('/change').query({value: value})
-  .then(results => {
-    console.log('htc: ', results)
-    return results
-  })
-}
-
-
 
 export function signUp({ payload }) {
   console.log('signup: ',payload)
@@ -19,6 +7,7 @@ export function signUp({ payload }) {
       return authAPI.signUpNewUser({ payload })
       .then(
         res => {
+          console.log('ressignup: ', res)
           dispatch({ type: AUTHORIZED, payload: res.token });
         },
         error => {
@@ -29,9 +18,9 @@ export function signUp({ payload }) {
 }
 
 export function httpCallback ({value}) {
-  console.log('in callback in action:', value);
   return function(dispatch) {
-    return authAPI.changeField({ value })
+    console.log('in callback in action:', value);
+    return authAPI.changeField( value )
     .then(
       res => {
         console.log(res)

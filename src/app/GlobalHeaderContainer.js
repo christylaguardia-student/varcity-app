@@ -37,7 +37,8 @@ function mapDispatchToProps(dispatch) {
 const mapStateToProps = (state) => {
   return {
     id: state.id,
-    value: 'myvalue'
+    value: 'myvalue',
+    firstName: state.firstName
   };
 };
 

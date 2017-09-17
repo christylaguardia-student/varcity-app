@@ -3,13 +3,15 @@ require('dotenv').config()
 const AUTH_API_URL = process.env.REACT_APP_AUTH_API_URL;
 
 export default {
-  signUpNewUser({payload}) {
-    return req
+  async signUpNewUser({payload}) {
+    console.log('signup app: ', payload)
+    const newUser = await req
       .post(`${AUTH_API_URL}/signup`)
       .send(payload)
-      .then(newUser => {
+
+        console.log('newUser: ', newUser)
         return newUser
-      })
+
   },
   signIn({payload}) {
     return req
@@ -19,7 +21,8 @@ export default {
       return response.body
     })
   },
-  changeField({payload}) {
+  changeField(payload) {
+    console.log('changeField: ', payload)
     return req
     .post(`${AUTH_API_URL}/change`)
     .send(payload)
