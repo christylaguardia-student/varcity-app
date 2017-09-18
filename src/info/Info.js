@@ -42,7 +42,7 @@ export class Info extends Component {
       { id: 1, text: 'in' },
       { id: 2, text: 'cm' }
     ];
-    
+
     const weightUOM = [
       { id: 1, text: 'lb' },
       { id: 2, text: 'kg' }
@@ -61,20 +61,21 @@ export class Info extends Component {
             <TextInput value={value} propName="lastName" label="Last Name" change={httpCallback} />
             <DateInput value={value} propName="dob" label="Birthday" change={httpCallback} />
             <Toggle value={value} propName="public" label="Public Profile?" change={httpCallback} />
-            
-            <TextSelect value={value} propName="primarySport" label="Primary Sport" options={riekSportList} change={httpCallback} /> 
+
+            <TextSelect value={value} propName="primarySport" label="Primary Sport" options={riekSportList} change={httpCallback} />
             <TextInput value={value} propName="position" label="Position" change={httpCallback} />
-            
+
             <TextInput value={value} propName="organization" label="School/Organization" change={httpCallback} />
+
             <TextSelect value={value} propName="country" label="Country" options={this.props.location.countries} change={this.handleCountryChange} /> 
             <TextSelect value={value} propName="region" label="State/Region" options={this.props.location.regions} change={() => this.handleRegionChange(this.value)} /> 
             <TextSelect value={value} propName="city" label="City" options={this.props.location.cities} change={this.saveLocation} /> 
-            
+           
             <div className="field body is-narrow is-grouped is-grouped-multiline">
               <NumberInput value={value} propName="height" label="Height" change={httpCallback}/>
-              <TextSelect value={value} propName="heightUOM" label="(in/cm)" options={heightUOM} change={httpCallback} /> 
+              <TextSelect value={value} propName="heightUOM" label="(in/cm)" options={heightUOM} change={httpCallback} />
               <NumberInput value={value} propName="weight" label="Weight" change={httpCallback}/>
-              <TextSelect value={value} propName="weightUOM" label="(lb/kg)" options={weightUOM} change={httpCallback} /> 
+              <TextSelect value={value} propName="weightUOM" label="(lb/kg)" options={weightUOM} change={httpCallback} />
             </div>
 
             <div className="is-grouped is-grouped-multiline">

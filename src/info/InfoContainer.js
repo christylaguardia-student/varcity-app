@@ -4,6 +4,7 @@ import 'bulma/css/bulma.css';
 import Info from './Info';
 
 class InfoContainer extends Component {
+
   render() {
     return (
       <div className="column is-mobile">

@@ -1,20 +1,38 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import GlobalHeader from './GlobalHeader';
-import { signIn, signUp, httpCallback } from './actions';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from './Home';
+import SearchContainer from '../search/SearchContainer';
+import ProfileContainer from '../profile/ProfileContainer'
+import { signIn, signUp, httpCallback } from './actions';
+// import Home from './Home';
 
-
-export async function GlobalHeaderContainer(props) {
-
+export function GlobalHeaderContainer() {
   return (
+   <div> <Router>
     <div>
-      <GlobalHeader props={props} />
-      <Home props={props}/>
+      <ul>
+        <li><Link to="/">Home</Link></li>
+        <li><input placeholder="search"/></li>
+        <li><Link to="/athletes">Search</Link></li>
+        <li><Link to="/athletes/:id">Profile</Link></li>
+      </ul>
+
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/athletes" component={SearchContainer} />
+        <Route exact path="/athletes/:id" component={ProfileContainer} />
+      </Switch>
+    </div>
+  </Router>
+
+
+    <div>
+      <GlobalHeader />
     </div>
   );
 }
-
 function mapDispatchToProps(dispatch) {
   return {
     signUp: (email, password) => {
@@ -33,8 +51,8 @@ const mapStateToProps = (state) => {
   return {
     id: state.id,
     value: 'myvalue',
-    firstName: state.firstName
-  };
+    authorized: state.authorized
+    };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(GlobalHeader);
