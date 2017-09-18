@@ -23,9 +23,9 @@ export function GalleryItem({ options, select, description, videoUrl = '', image
       <img src={image} alt={description} />
       {/* <button onClick={() => onRemove(item)} >X</button> */}
       <div className="is-grouped is-grouped-multiline">
-        <TextSelect className="select" value={select} propName="mediaType" label="Media Type" change={httpCallback} options={options} />
+        <TextSelect className="select" value={select} propName="mediaType" label="Media Type" change={httpCallback} options={options} disabled={false} />
         {select.text === 'video link' &&
-        <UrlInput value={value} propName="videoUrl" label="Video Link" change={httpCallback} />
+        <UrlInput value={value} propName="videoUrl" label="Video Link" change={httpCallback} disabled={false} />
         }
         {select.text === 'image upload' &&
         <div className="file">
@@ -42,7 +42,7 @@ export function GalleryItem({ options, select, description, videoUrl = '', image
           </label>
         </div>
         }
-        <TextArea value={value} propName="description" label="Description" change={httpCallback} />
+        <TextArea value={value} propName="description" label="Description" change={httpCallback} disabled={false} />
       </div>
     </div>
   );

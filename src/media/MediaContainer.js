@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import 'bulma/css/bulma.css';
 import { MediaGallery } from './MediaGallery';
 
-class MediaContainer extends Component {
+export class MediaContainer extends Component {
 
   constructor(props) {
     super(props);
@@ -32,7 +32,7 @@ class MediaContainer extends Component {
     return (
       <div className="column is-mobile">
         <h1>Media Container</h1>
-        <MediaGallery onUpdate={this.onUpdate}/>
+        <MediaGallery />
       </div>
     )
   }

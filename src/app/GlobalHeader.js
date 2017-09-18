@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Home from './Home';
+// import Home from './Home';
 import SearchContainer from '../search/SearchContainer';
 import MediaContainer from '../media/MediaContainer';
 import ProfileContainer from './ProfileContainer';
@@ -63,5 +63,5 @@ function mapDispatchToProps(dispatch) {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(GlobalHeader);
 
