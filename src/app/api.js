@@ -8,17 +8,14 @@ export default {
       .post(`${AUTH_API_URL}/signup`)
       .send(payload)
       .then(newUser => {
-        console.log('nu: ', newUser)
         return newUser;
       });
   },
   signIn( token ) {
-    console.log('pl: ',token)
     return req
       .post(`${AUTH_API_URL}/signin`)
       .set('Authorization', token)
       .then(response => {
-        console.log(response.body)
         return response.body.user;
       });
   },

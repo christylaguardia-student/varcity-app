@@ -2,7 +2,6 @@ import { AUTHORIZED, AUTH_FAILURE } from './constants';
 import authAPI from './api';
 
 export function signUp({ payload }) {
-  console.log('signup: ',payload)
     return function(dispatch) {
       return authAPI.signUpNewUser({ payload })
       .then(
@@ -11,8 +10,8 @@ export function signUp({ payload }) {
           const storage = localStorage;
           storage.setItem('varcity', token)
           return authAPI.signIn(token)
-          .then(result =>{
-            dispatch({ type: AUTHORIZED, payload: result });
+          .then(savedUser => {
+            dispatch({ type: AUTHORIZED, payload: savedUser });
           })
         },
         error => {
@@ -28,7 +27,6 @@ export function httpCallback ({value}) {
     return authAPI.changeField( value )
     .then(
       res => {
-        console.log('r: ',res)
         dispatch({ type: AUTHORIZED, payload: res.token });
       },
       error => {
@@ -39,14 +37,13 @@ export function httpCallback ({value}) {
 };
 
 export function signIn() {
-
   return function(dispatch) {
     const storage = localStorage;
     const token = storage.getItem('varcity')
     return authAPI.signIn(token)
     .then(
       res => {
-        dispatch({ type: AUTHORIZED, payload: null});
+        dispatch({ type: AUTHORIZED, payload: res});
       },
       error => {
         dispatch({ type: AUTH_FAILURE, payload: error.status });
