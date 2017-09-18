@@ -4,7 +4,7 @@ import Home from './Home';
 import SearchContainer from '../search/SearchContainer';
 import ProfileContainer from '../profile/ProfileContainer';
 
-export default function Header() {
+export default function GlobalHeader() {
   return (
     <Router>
       <div>
@@ -19,6 +19,7 @@ export default function Header() {
           <Route exact path="/athletes" component={SearchContainer} />
           <Route exact path="/athletes/:id" component={ProfileContainer} />
         </Switch>
+
       </div>
     </Router>
   )

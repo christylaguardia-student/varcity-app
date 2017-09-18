@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import GlobalHeader from './GlobalHeader';
 import { signIn, signUp, httpCallback } from './actions';
 import Home from './Home';
-
+import { withRouter } from 'react-router'
 
 export async function GlobalHeaderContainer(props) {
-
+  console.log('ghc: ', props)
   return (
     <div>
       <GlobalHeader props={props} />
-      <Home />
+      <Home props={props}/>
     </div>
   );
 }
@@ -33,7 +33,7 @@ const mapStateToProps = (state) => {
   return {
     id: state.id,
     value: 'myvalue',
-    firstName: state.firstName
+    authorized: state.authorized
     };
 };
 

@@ -13,7 +13,6 @@ export default function Home({signIn, signUp, httpCallback, value}) {
   };
 
   return (
-
     <div>
       <h1>Welcome to Varcity Network</h1>
       <h3>Join Now! It's Free!</h3>

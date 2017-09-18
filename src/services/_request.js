@@ -1,17 +1,6 @@
 import superagent from 'superagent';
-import store from '../store/index';
 
 export const API_URL = '/api';
-// let token = '';
-
-// store.subscribe(() => {
-//   const { token: newToken } = store.getState().auth;
-
-//   if (newToken !== token) {
-//     token = newToken;
-//     token ? localStorage.token = token : localStorage.clear('token');
-//   }
-// });
 
 const wrapper = cmd => cmd
   // .set('Authorization', token)
@@ -23,7 +12,6 @@ const wrapper = cmd => cmd
     }
   );
 
-// export const getStoredToken = () => localStorage.token; 
 
 export const request =  {
   get(url) {
