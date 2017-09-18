@@ -1,72 +1,26 @@
 import * as actions from './constants';
-import geodataApi from '../services/geodataApi';
+import athleteApi from '../services/athleteApi';
 
-// TODO 
-// import athleteApi from '../services/athleteApi';
-
-// export function makeUpdateAthlete(api) {
-//   return function updateAthlete(athleteData) {
-//     return dispatch => {
-//       return api
-//         .update(athleteData)
-//         .then(athlete => dispatch({ type: actions.ATHLETE_UPDATED, payload: athlete }))
-//     }
-//   }
-// }
-
-export function makeGetCountries(api) {
-  return function getCountries() {
+export function makeGetInfo(api) {
+  return function getInfo(id) {
     return dispatch => {
       return api
-        .getCountries()
-        .then(countries => {
-          let riekList = [];
-          countries.forEach((country, index) => {
-            riekList.push({ id: index, text: country });
-          });
-          return riekList;
-        })
-        .then(countries => dispatch({ type: actions.GET_COUNTRIES, payload: countries }));
+        .get(id)
+        .then(athlete => dispatch({ type: actions.GET_INFO, payload: athlete }));
     };
   };
 }
 
-export const getCountries = makeGetCountries(geodataApi);
+export const getInfo = makeGetInfo(athleteApi);
 
-export function makeGetRegions(api) {
-  return function getRegions(country) {
+export function makeUpdateInfo(api) {
+  return function updateInfo(infoData) {
     return dispatch => {
       return api
-        .getRegions()
-        .then(regions => {
-          let riekList = [];
-          regions.forEach((region, index) => {
-            riekList.push({ id: index, text: region });
-          });
-          return riekList;
-        })
-        .then(regions => dispatch({ type: actions.GET_REGIONS, payload: regions }));
+        .update(infoData)
+        .then(athlete => dispatch({ type: actions.UPDATE_INFO, payload: athlete }));
     };
   };
 }
 
-export const getRegions = makeGetRegions(geodataApi);
-
-export function makeGetCities(api) {
-  return function getCities(country, region) {
-    return dispatch => {
-      return api
-        .getCities()
-        .then(cities => {
-          let riekList = [];
-          cities.forEach((city, index) => {
-            riekList.push({ id: index, text: city });
-          });
-          return riekList;
-        })
-        .then(cities => dispatch({ type: actions.GET_CITIES, payload: cities }));
-    };
-  };
-}
-
-export const getCities = makeGetCities(geodataApi);
+export const updateInfo = makeUpdateInfo(athleteApi);

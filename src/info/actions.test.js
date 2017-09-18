@@ -1,64 +1,36 @@
 import * as actions from './constants';
-import { makeGetCountries, makeGetRegions, makeGetCities } from './actions';
+import { makeGetInfo, makeUpdateInfo } from './actions';
 
 describe('info actions', () => {
-  
-  it('gets countries', () => {
-    const countries = [ 'Japan', 'Russia', 'Brazil' ];
-    const riekCountries = [{ id: 0, text:'Japan' }, { id: 1, text:'Russia' }, { id: 2, text: 'Brazil' }];
-    const mockApi = {
-      getCountries() { return Promise.resolve(countries); }
-    };
+
+  const testId = 123;
+  const testInfo = { info: 'my info' };
+  const testApi = {
+    get(testId) { return Promise.resolve(testId); },
+    update() { return Promise.resolve(testInfo); }
+  };
+
+  it('gets info', () => {
+    const dispatched = [];
+    const dispatch = (action) => { dispatched.push(action); };
+    const getInfo = makeGetInfo(testApi);
+    const dispatchFn = getInfo(testId);
     
+    dispatchFn(dispatch)
+      .then(() => {
+        expect(dispatched).toEqual([{ type: actions.GET_INFO, payload: testId }]);
+      });
+  });
+
+  it('updates athlete info', () => {
     const dispatched = [];
     const dispatch = (action) => { dispatched.push(action); };
-    const getCountries = makeGetCountries(mockApi);
-    const dispatchFn = getCountries();
+    const updateInfo = makeUpdateInfo(testApi);
+    const dispatchFn = updateInfo(testInfo);
     
     dispatchFn(dispatch)
       .then(() => {
-        expect(dispatched).toEqual([{ type: actions.GET_COUNTRIES, payload: riekCountries }]);
+        expect(dispatched).toEqual([{ type: actions.UPDATE_INFO, payload: testInfo }]);
       });
   });
-  
-  it('gets regions', () => {
-    const country = 'Japan';
-    const riekRegions = [{ id: 0, text:'Miyagi' }, { id: 1, text:'Miyazaki' }, { id: 2, text: 'Nagano' }];
-    const regions = ['Miyagi', 'Miyazaki', 'Nagano'];
-    const mockApi = {
-      getRegions(country) { return Promise.resolve(regions); }
-    };
-
-    const dispatched = [];
-    const dispatch = (action) => { dispatched.push(action); };
-    const getRegions = makeGetRegions(mockApi);
-    const dispatchFn = getRegions();
-
-    dispatchFn(dispatch)
-      .then(() => {
-        expect(dispatched).toEqual([{ type: actions.GET_REGIONS, payload: riekRegions }]);
-      });
-  });
-  
-  it('gets cities', () => {
-    const country = 'Japan';
-    const region = 'Miyagi';
-    const riekCities = [{ id: 0, text:'Yamoto' }, { id: 1, text:'Watari' }, { id: 2, text: 'Wakuya' }];
-    const cities = ['Yamoto', 'Watari', 'Wakuya'];
-
-    const mockApi = {
-      getCities(country, region) { return Promise.resolve(cities); }
-    };
-
-    const dispatched = [];
-    const dispatch = (action) => { dispatched.push(action); };
-    const getCities = makeGetCities(mockApi);
-    const dispatchFn = getCities();
-
-    dispatchFn(dispatch)
-      .then(() => {
-        expect(dispatched).toEqual([{ type: actions.GET_CITIES, payload: riekCities }]);
-      });
-  });
-
 });

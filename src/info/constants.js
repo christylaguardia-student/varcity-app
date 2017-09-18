@@ -1,5 +1,2 @@
-export const UPDATE_ATHLETE_INFO = 'UPDATE_ATHLETE_INFO';
-export const UPDATE_ATHLETE_BIO = 'UPDATE_ATHLETE_BIO';
-export const GET_COUNTRIES = 'GET_COUNTRIES';
-export const GET_REGIONS = 'GET_REGIONS';
-export const GET_CITIES = 'GET_CITIES';
+export const GET_INFO = 'GET_INFO';
+export const UPDATE_INFO = 'UPDATE_INFO';

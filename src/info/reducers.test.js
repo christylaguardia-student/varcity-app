@@ -1,28 +1,23 @@
 import * as actions from './constants';
-import { info, location } from './reducers';
+import { info } from './reducers';
 
-describe('location reducer', () => {
-
-  const state = { countries: [], regions: [], cities: [] };
+describe('info reducer', () => {
 
   it('initial state', () => {
-    const newState = location(undefined, { type: undefined });
-    expect(newState).toEqual(state);
+    const newState = info(undefined, { type: undefined });
+    expect(newState).toEqual({});
   });
-    
-  it('gets countries', () => {
-    const newState = location(state, { type: actions.GET_COUNTRIES, payload: [] });
-    expect(newState).toEqual(state);
+
+  it('gets athlete info', () => {
+    const testId = 123;
+    const newState = info({}, { type: actions.GET_INFO, payload: testId });
+    expect(newState).toEqual(testId);
   });
-    
-  it('gets regions', () => {
-    const newState = location(state, { type: actions.GET_REGIONS, payload: [] });
-    expect(newState).toEqual(state);
-  });
-    
-  it('gets cities', () => {
-    const newState = location(state, { type: actions.GET_CITIES, payload: [] });
-    expect(newState).toEqual(state);
+
+  it('updates athlete info', () => {
+    const testInfo = { firstName: 'Christy', lastName: 'La Guardia' };
+    const newState = info({}, { type: actions.UPDATE_INFO, payload: testInfo });
+    expect(newState).toEqual(testInfo);
   });
 
 });
