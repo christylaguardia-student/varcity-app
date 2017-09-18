@@ -1,35 +1,35 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from './Home';
 import SearchContainer from '../search/SearchContainer';
 import ProfileContainer from './ProfileContainer';
 import { signIn, signUp, httpCallback } from './actions';
 
 export function GlobalHeader({authorized}) {
-console.log(authorized)
+  console.log(authorized);
   return (
     <div>
-    <div>Global header!{authorized}</div>
-    <div>
-     <Router>
-      <div>{authorized}
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><input placeholder="search"/></li>
-          <li><Link to="/athletes">Search</Link></li>
-          <li><Link to="/athletes/:id">Profile</Link></li>
-        </ul>
-</div>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/athletes" component={SearchContainer} />
-          <Route exact path="/athletes/:id" component={ProfileContainer} />
-        </Switch>
-    </Router>
-</div>
-</div>
-  )
+      <div>Global header!{authorized}</div>
+      <div>
+        <Router>
+          <div>{authorized}
+            <ul>
+              <li><Link to="/">Home</Link></li>
+              <li><input placeholder="search"/></li>
+              <li><Link to="/athletes">Search</Link></li>
+              <li><Link to="/athletes/:id">Profile</Link></li>
+            </ul>
+          </div>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/athletes" component={SearchContainer} />
+            <Route exact path="/athletes/:id" component={ProfileContainer} />
+          </Switch>
+        </Router>
+      </div>
+    </div>
+  );
 }
 // const mapStateToProps = (state) => {
 //   return {
@@ -53,12 +53,12 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
- const mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     id: state.id,
     value: 'myvalue',
     authorized: state.authorized
-    };
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
