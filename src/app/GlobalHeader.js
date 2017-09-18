@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from './Home';
 import SearchContainer from '../search/SearchContainer';
 import ProfileContainer from '../profile/ProfileContainer';
+import MediaContainer from '../media/MediaContainer';
 
 export default function Header() {
   return (
@@ -15,7 +16,7 @@ export default function Header() {
           <li><Link to="/athletes/:id">Profile</Link></li>
         </ul>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={MediaContainer}/>
           <Route exact path="/athletes" component={SearchContainer} />
           <Route exact path="/athletes/:id" component={ProfileContainer} />
         </Switch>

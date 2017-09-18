@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import GlobalHeaderContainer from './GlobalHeaderContainer';
+import GlobalHeader from './GlobalHeader';
 import GlobalFooter from './GlobalFooter';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <GlobalHeaderContainer />
+        <GlobalHeader />
         <GlobalFooter />
       </div>
     );
