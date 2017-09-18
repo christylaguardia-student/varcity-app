@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './Home';
 import SearchContainer from '../search/SearchContainer';
-import ProfileContainer from '../profile/ProfileContainer'
+import ProfileContainer from './ProfileContainer';
 import { signIn, signUp, httpCallback } from './actions';
-
 
 export function GlobalHeader({authorized}) {
 console.log(authorized)

@@ -31,7 +31,6 @@ export function GlobalHeaderContainer() {
     <div>
       <GlobalHeader />
     </div>
-    </div>
   );
 }
 function mapDispatchToProps(dispatch) {

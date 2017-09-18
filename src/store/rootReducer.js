@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
-import { info, location } from '../info/reducers';
+import { info } from '../info/reducers';
+import { location } from '../info/location/reducers';
+import { app } from '../app/reducers';
 import { authorized } from '../app/reducers'
 import { sport } from '../sports/reducers';
 import { edu } from '../edu/reducers';

@@ -6,9 +6,9 @@ export function signUp({ payload }) {
       return authAPI.signUpNewUser({ payload })
       .then(
         res => {
-          const {token} = res.body
+          const {token} = res.body;
           const storage = localStorage;
-          storage.setItem('varcity', token)
+          storage.setItem('varcity', token);
           return authAPI.signIn(token)
           .then(savedUser => {
             dispatch({ type: AUTHORIZED, payload: savedUser });
@@ -18,7 +18,7 @@ export function signUp({ payload }) {
           dispatch({ type: AUTH_FAILURE, payload: error.status });
         }
       );
-    };
+  };
 }
 
 export function httpCallback ({value}) {
@@ -34,12 +34,12 @@ export function httpCallback ({value}) {
       }
     );
   };
-};
+}
 
 export function signIn() {
   return function(dispatch) {
     const storage = localStorage;
-    const token = storage.getItem('varcity')
+    const token = storage.getItem('varcity');
     return authAPI.signIn(token)
     .then(
       res => {
