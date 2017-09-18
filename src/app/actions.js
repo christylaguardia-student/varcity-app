@@ -1,17 +1,5 @@
 import { AUTHORIZED, AUTH_FAILURE } from './constants';
 import authAPI from './api';
-const superagent = require('superagent');
-
-
-async function httpTaskCallback ({value}){
-  return superagent.post('/change').query({value: value})
-  .then(results => {
-    console.log('htc: ', results)
-    return results
-  })
-}
-
-
 
 export function signUp({ payload }) {
   console.log('signup: ',payload)
@@ -19,7 +7,13 @@ export function signUp({ payload }) {
       return authAPI.signUpNewUser({ payload })
       .then(
         res => {
-          dispatch({ type: AUTHORIZED, payload: res.token });
+          const {token} = res.body
+          const storage = localStorage;
+          storage.setItem('varcity', token)
+          return authAPI.signIn(token)
+          .then(result =>{
+            dispatch({ type: AUTHORIZED, payload: result });
+          })
         },
         error => {
           dispatch({ type: AUTH_FAILURE, payload: error.status });
@@ -29,12 +23,12 @@ export function signUp({ payload }) {
 }
 
 export function httpCallback ({value}) {
-  console.log('in callback in action:', value);
   return function(dispatch) {
-    return authAPI.changeField({ value })
+    console.log('in callback in action:', value);
+    return authAPI.changeField( value )
     .then(
       res => {
-        console.log(res)
+        console.log('r: ',res)
         dispatch({ type: AUTHORIZED, payload: res.token });
       },
       error => {
@@ -44,13 +38,15 @@ export function httpCallback ({value}) {
   };
 };
 
-export function signIn({payload}) {
+export function signIn() {
+
   return function(dispatch) {
-    return authAPI.signIn({payload})
+    const storage = localStorage;
+    const token = storage.getItem('varcity')
+    return authAPI.signIn(token)
     .then(
       res => {
-        console.log('signin: ', res)
-        dispatch({ type: AUTHORIZED, payload: res.token});
+        dispatch({ type: AUTHORIZED, payload: null});
       },
       error => {
         dispatch({ type: AUTH_FAILURE, payload: error.status });
