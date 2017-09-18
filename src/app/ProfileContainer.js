@@ -5,7 +5,7 @@ import SportsContainer from '../sports/SportsContainer';
 import EduContainer from '../edu/EduContainer';
 import MediaContainer from '../media/MediaContainer';
 
-export default function ProfileNav() {
+export default function ProfileContainer() {
   return (
     <Router>
       <div>
@@ -23,5 +23,5 @@ export default function ProfileNav() {
         </Switch>
       </div>
     </Router>
-  )
+  );
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RIEInput } from 'riek';
 
 export default function Home({signIn, signUp, httpCallback, value}) {
+  console.log(signIn, signUp, httpCallback, value)
   Home.propTypes = {
     email: PropTypes.string,
     password: PropTypes.string,
@@ -13,12 +13,10 @@ export default function Home({signIn, signUp, httpCallback, value}) {
   };
 
   return (
-
     <div>
       <h1>Welcome to Varcity Network</h1>
       <h3>Join Now! It's Free!</h3>
       <div>
-      <RIEInput value={value} change={httpCallback} propName="firstName"/>
         <div> Sign Up </div>
         <form
           onSubmit={event => {
