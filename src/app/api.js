@@ -1,39 +1,39 @@
 import req from 'superagent';
-require('dotenv').config()
+require('dotenv').config();
 const AUTH_API_URL = process.env.REACT_APP_AUTH_API_URL;
 
 export default {
-  signUpNewUser({payload}) {
+  signUpNewUser({ payload }) {
     return req
       .post(`${AUTH_API_URL}/signup`)
       .send(payload)
       .then(newUser => {
-        return newUser
-      })
+        console.log('nu: ', newUser)
+        return newUser;
+      });
   },
-  signIn({payload}) {
+  signIn( token ) {
+    console.log('pl: ',token)
     return req
-    .post(`${AUTH_API_URL}/signin`)
-    .send(payload)
-    .then(response => {
-      return response.body
-    })
+      .post(`${AUTH_API_URL}/signin`)
+      .set('Authorization', token)
+      .then(response => {
+        console.log(response.body)
+        return response.body.user;
+      });
   },
-  changeField({payload}) {
+  changeField(payload) {
+    console.log('changeField: ', payload);
     return req
-    .post(`${AUTH_API_URL}/change`)
-    .send(payload)
-    .then(response => {
-      return response.body
-    })
+      .post(`${AUTH_API_URL}/change`)
+      .send(payload)
+      .then(response => {
+        return response.body;
+      });
   },
-    verify() {
-      return req
-      .get(`${AUTH_API_URL}/verify`)
-      .then(verifiedUser => {
-        return verifiedUser
-      })
-
+  verify() {
+    return req.get(`${AUTH_API_URL}/verify`).then(verifiedUser => {
+      return verifiedUser;
+    });
   }
 };
-
