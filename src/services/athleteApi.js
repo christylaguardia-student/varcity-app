@@ -1,6 +1,6 @@
 import superagent from 'superagent';
 
-export const API_URL = '/api/athletes/'
+export const API_URL = '/api/athletes'
 
 const wrap = cmd => cmd
 .then(res => {

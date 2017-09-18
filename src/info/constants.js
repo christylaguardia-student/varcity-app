@@ -1,1 +1,1 @@
-export const ATHLETE_UPDATED = 'ATHLETE_UPDATED';
+export const GET_COUNTRIES = 'GET_COUNTRIES';
