@@ -5,15 +5,15 @@ import {
   AUTH_FAILURE
 } from './constants';
 
-export function app(state = null, { type, payload }) {
+export function authorized(state = null, { type, payload }) {
   console.log(type, payload)
   switch (type) {
     case SIGN_IN:
       return null;
     case SIGN_UP:
-      return state;
+      return null;
     case AUTHORIZED:
-      return state;
+      return payload;
     case AUTH_FAILURE:
       return null;
     default:
