@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import 'bulma/css/bulma.css';
-import { getCountries } from './actions';
+// import { getCountries } from './actions';
 import Info from './Info';
 import Bio from './Bio';
 
 class InfoContainer extends Component {
 
-  componentDidMount() {
-    this.props.getCountries();
-  }
+  
 
   render() {
     return (
@@ -21,8 +19,10 @@ class InfoContainer extends Component {
   }
 }
 
-export default connect(state => {
-  return {
-    info: state.info
-  };
-}, { getCountries })(InfoContainer);
+export default InfoContainer;
+
+// export default connect(state => {
+//   return {
+//     info: state.info
+//   };
+// }, { getCountries })(InfoContainer);

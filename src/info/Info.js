@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import 'bulma/css/bulma.css';
+import { getCountries } from './actions';
 import { TextInput, NumberInput, DateInput, Toggle, TextSelect, UrlInput } from '../app/FormControls';
 import riekSportList from './riekSportsList';
 
@@ -8,8 +10,14 @@ function httpCallback() { console.log('pretending to make api call')};
 const value = '';
 const placeholderOptions = [{id:0,text:'thingzero'},{id:1,text:'thingone'}]
 
-export default class BasicInfo extends Component {
+export class Info extends Component {
 
+  componentDidMount() {
+    this.props.getCountries();
+  }
+
+  // TODO: handle country and region change
+  
   render() {
     const heightUOM = [
       { id: 1, text: "in" },
@@ -37,9 +45,9 @@ export default class BasicInfo extends Component {
             <TextInput value={value} propName="position" label="Position" change={httpCallback} />
             
             <TextInput value={value} propName="organization" label="School/Organization" change={httpCallback} />
-            <TextSelect value={value} propName="country" label="Country" options={this.props.info} change={httpCallback} /> 
-            <TextSelect value={value} propName="region" label="State/Region" options={placeholderOptions} change={httpCallback} /> 
-            <TextSelect value={value} propName="city" label="City" options={placeholderOptions} change={httpCallback} /> 
+            <TextSelect value={value} propName="country" label="Country" options={this.props.location.countries} change={httpCallback} /> 
+            <TextSelect value={value} propName="region" label="State/Region" options={this.props.location.regions} change={httpCallback} /> 
+            <TextSelect value={value} propName="city" label="City" options={this.props.location.cities} change={httpCallback} /> 
             
             <div className="field body is-narrow is-grouped is-grouped-multiline">
               <NumberInput value={value} propName="height" label="Height" change={httpCallback}/>
@@ -58,3 +66,11 @@ export default class BasicInfo extends Component {
       </div>
   )}
 };
+
+
+export default connect(state => {
+  return {
+    info: state.info,
+    location: state.location
+  };
+}, { getCountries })(Info);
