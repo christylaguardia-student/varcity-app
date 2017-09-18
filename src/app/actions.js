@@ -46,8 +46,7 @@ export function signIn() {
     return authAPI.signIn(token)
     .then(
       res => {
-        console.log('signin: ', res.body.user)
-        dispatch({ type: AUTHORIZED, payload: res.token});
+        dispatch({ type: AUTHORIZED, payload: null});
       },
       error => {
         dispatch({ type: AUTH_FAILURE, payload: error.status });

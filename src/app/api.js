@@ -18,6 +18,7 @@ export default {
       .post(`${AUTH_API_URL}/signin`)
       .set('Authorization', token)
       .then(response => {
+        console.log(response.body)
         return response.body.user;
       });
   },
