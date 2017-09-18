@@ -6,7 +6,7 @@ import {
 } from './constants';
 
 export function app(state = null, { type, payload }) {
-  console.log(type, payload)
+  console.log(type, payload);
   switch (type) {
     case SIGN_IN:
       return null;

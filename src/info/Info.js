@@ -2,21 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import 'bulma/css/bulma.css';
 import { getCountries, getRegions, getCities } from './location/actions';
-import { TextInput, TextArea, NumberInput, DateInput, Toggle, TextSelect, UrlInput } from '../app/FormControls';
+import { TextInput, TextArea, NumberInput, DateInput, Toggle, ToggleEditMode, TextSelect, UrlInput } from '../app/FormControls';
 import riekSportList from './riekSportsList';
 
 // just do this for now
+// eslint-disable-next-line
 function httpCallback() { console.log('pretending to make api call');}
 const value = '';
 
 export class Info extends Component {
+
+  constructor(props) {
+    super(props);
+    this.handleCountryChange = this.handleCountryChange.bind(this);
+    this.handleRegionChange = this.handleRegionChange.bind(this);
+    this.saveLocation = this.saveLocation.bind(this);
+  }
 
   componentDidMount() {
     this.props.getCountries();
   }
 
   handleCountryChange(country) {
-    this.props.getRegions(country);
+    console.log(country);
+    // this.props.getRegions(country);
   }
 
   handleRegionChange(country, region) {
@@ -41,6 +50,8 @@ export class Info extends Component {
 
     return (
       <div className="field">
+        <ToggleEditMode value="edit" propName="edit" change={httpCallback} disabled={false} /> 
+
         <div className="tile is-ancestor">
           <div className="tile is-vertical">
             <UrlInput value={value} propName="profileUrl" label="Image" placeholder="Profile Image URL" change={httpCallback} />
@@ -56,7 +67,7 @@ export class Info extends Component {
             
             <TextInput value={value} propName="organization" label="School/Organization" change={httpCallback} />
             <TextSelect value={value} propName="country" label="Country" options={this.props.location.countries} change={this.handleCountryChange} /> 
-            <TextSelect value={value} propName="region" label="State/Region" options={this.props.location.regions} change={this.handleRegionChange} /> 
+            <TextSelect value={value} propName="region" label="State/Region" options={this.props.location.regions} change={() => this.handleRegionChange(this.value)} /> 
             <TextSelect value={value} propName="city" label="City" options={this.props.location.cities} change={this.saveLocation} /> 
             
             <div className="field body is-narrow is-grouped is-grouped-multiline">
@@ -80,7 +91,6 @@ export class Info extends Component {
       </div>
     );}
 }
-
 
 export default connect(state => {
   return {

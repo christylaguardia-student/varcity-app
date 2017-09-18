@@ -10,7 +10,7 @@ export async function GlobalHeaderContainer(props) {
   return (
     <div>
       <GlobalHeader props={props} />
-      <Home />
+      <Home props={props}/>
     </div>
   );
 }
@@ -34,7 +34,7 @@ const mapStateToProps = (state) => {
     id: state.id,
     value: 'myvalue',
     firstName: state.firstName
-    };
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
