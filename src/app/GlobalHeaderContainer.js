@@ -10,27 +10,10 @@ import { signIn, signUp, httpCallback } from './actions';
 
 export function GlobalHeaderContainer() {
   return (
-   <div> <Router>
-    <div>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><input placeholder="search"/></li>
-        <li><Link to="/athletes">Search</Link></li>
-        <li><Link to="/athletes/:id">Profile</Link></li>
-      </ul>
+   <div>
+    <GlobalHeader />
+  </div>
 
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/athletes" component={SearchContainer} />
-        <Route exact path="/athletes/:id" component={ProfileContainer} />
-      </Switch>
-    </div>
-  </Router>
-
-
-    <div>
-      <GlobalHeader />
-    </div>
   );
 }
 function mapDispatchToProps(dispatch) {
