@@ -4,8 +4,8 @@ import { makeGetCountries, makeGetRegions, makeGetCities } from './actions';
 describe('info actions', () => {
   
   it('gets countries', () => {
-    const countries = [ 'Japan', 'Russia', 'Brazil' ]
-    const riekCountries = [{ id: 0, text:'Japan' }, { id: 1, text:'Russia' }, { id: 2, text: 'Brazil' }]
+    const countries = [ 'Japan', 'Russia', 'Brazil' ];
+    const riekCountries = [{ id: 0, text:'Japan' }, { id: 1, text:'Russia' }, { id: 2, text: 'Brazil' }];
     const mockApi = {
       getCountries() { return Promise.resolve(countries); }
     };
@@ -16,14 +16,14 @@ describe('info actions', () => {
     const dispatchFn = getCountries();
     
     dispatchFn(dispatch)
-    .then(() => {
-      expect(dispatched).toEqual([{ type: actions.GET_COUNTRIES, payload: riekCountries }]);
-    });
+      .then(() => {
+        expect(dispatched).toEqual([{ type: actions.GET_COUNTRIES, payload: riekCountries }]);
+      });
   });
   
   it('gets regions', () => {
     const country = 'Japan';
-    const riekRegions = [{ id: 0, text:'Miyagi' }, { id: 1, text:'Miyazaki' }, { id: 2, text: 'Nagano' }]
+    const riekRegions = [{ id: 0, text:'Miyagi' }, { id: 1, text:'Miyazaki' }, { id: 2, text: 'Nagano' }];
     const regions = ['Miyagi', 'Miyazaki', 'Nagano'];
     const mockApi = {
       getRegions(country) { return Promise.resolve(regions); }
@@ -43,7 +43,7 @@ describe('info actions', () => {
   it('gets cities', () => {
     const country = 'Japan';
     const region = 'Miyagi';
-    const riekCities = [{ id: 0, text:'Yamoto' }, { id: 1, text:'Watari' }, { id: 2, text: 'Wakuya' }]
+    const riekCities = [{ id: 0, text:'Yamoto' }, { id: 1, text:'Watari' }, { id: 2, text: 'Wakuya' }];
     const cities = ['Yamoto', 'Watari', 'Wakuya'];
 
     const mockApi = {

@@ -23,12 +23,12 @@ export function makeGetCountries(api) {
           let riekList = [];
           countries.forEach((country, index) => {
             riekList.push({ id: index, text: country });
-          })
+          });
           return riekList;
         })
-        .then(countries => dispatch({ type: actions.GET_COUNTRIES, payload: countries }))
-    }
-  }
+        .then(countries => dispatch({ type: actions.GET_COUNTRIES, payload: countries }));
+    };
+  };
 }
 
 export const getCountries = makeGetCountries(geodataApi);
@@ -42,12 +42,12 @@ export function makeGetRegions(api) {
           let riekList = [];
           regions.forEach((region, index) => {
             riekList.push({ id: index, text: region });
-          })
+          });
           return riekList;
         })
-        .then(regions => dispatch({ type: actions.GET_REGIONS, payload: regions }))
-    }
-  }
+        .then(regions => dispatch({ type: actions.GET_REGIONS, payload: regions }));
+    };
+  };
 }
 
 export const getRegions = makeGetRegions(geodataApi);
@@ -61,12 +61,12 @@ export function makeGetCities(api) {
           let riekList = [];
           cities.forEach((city, index) => {
             riekList.push({ id: index, text: city });
-          })
+          });
           return riekList;
         })
-        .then(cities => dispatch({ type: actions.GET_CITIES, payload: cities }))
-    }
-  }
+        .then(cities => dispatch({ type: actions.GET_CITIES, payload: cities }));
+    };
+  };
 }
 
 export const getCities = makeGetCities(geodataApi);
