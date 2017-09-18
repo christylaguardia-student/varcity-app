@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
+import 'bulma/css/bulma.css';
+// import { getCountries } from './actions';
+import Info from './Info';
+import Bio from './Bio';
 
 class InfoContainer extends Component {
-  render() {
+
   
+
+  render() {
     return (
-      <div>
-        <h1>Info Container</h1>
+      <div className="column is-mobile">
+        <Info />
+        <Bio />
       </div>
     )
   }
 }
 
+export default InfoContainer;
+
 // export default connect(state => {
 //   return {
 //     info: state.info
 //   };
-// }, {})(InfoContainer);
-
-export default InfoContainer;
+// }, { getCountries })(InfoContainer);
