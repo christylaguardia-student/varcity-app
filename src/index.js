@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
-
 import './styles/index.css';
 import App from './app/App';
 import store from './store/index';

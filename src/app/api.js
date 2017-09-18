@@ -4,7 +4,6 @@ const AUTH_API_URL = process.env.REACT_APP_AUTH_API_URL;
 
 export default {
   signUpNewUser({ payload }) {
-    console.log('sunu: ', payload)
     return req
       .post(`${AUTH_API_URL}/signup`)
       .send(payload)

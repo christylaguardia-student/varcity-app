@@ -3,7 +3,6 @@ import authAPI from './api';
 
 export function signUp({ payload }) {
     return function(dispatch) {
-      console.log('si: ', payload)
       return authAPI.signUpNewUser({ payload })
       .then(
         res => {
