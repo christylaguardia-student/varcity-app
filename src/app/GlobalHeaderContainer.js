@@ -1,17 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
+import React from 'react';
 import { connect } from 'react-redux';
 import GlobalHeader from './GlobalHeader';
 import { signIn, signUp, httpCallback } from './actions';
 import Home from './Home';
-import { RIEInput } from 'riek';
 
 
 export async function GlobalHeaderContainer(props) {
-  console.log('in ghc props: ', props);
-  const value='default';
-  const change='change'
+
   return (
     <div>
       <GlobalHeader props={props} />
@@ -39,7 +34,7 @@ const mapStateToProps = (state) => {
     id: state.id,
     value: 'myvalue',
     firstName: state.firstName
-  };
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
