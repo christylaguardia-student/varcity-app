@@ -1,26 +1,15 @@
-import superagent from 'superagent';
+import { request } from './_request';
 
-export const API_URL = '/api/geodata'
-
-const wrap = cmd => cmd
-.then(res => {
-  console.log('API response', res.body);
-  return res.body;
-},
-({ response }) => {
-  throw response.body.error;
-});
+export const API_URL = '/geodata';
 
 export default {
   getCountries() {
-    return wrap(superagent.get(`${API_URL}/countries`));
+    return request.get(`${API_URL}/countries`);
   },
-
   getRegions(country) {
-    return wrap(superagent.patch(`${API_URL}/regions?country=${country}`));
+    return request.get(`${API_URL}/regions?country=${country}`);
   },
-
   getCities(country, region) {
-    return wrap(superagent.patch(`${API_URL}/regions?country=${country}&region=${region}`));
+    return request.get(`${API_URL}/regions?country=${country}&region=${region}`);
   }
 }

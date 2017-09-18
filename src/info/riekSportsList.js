@@ -38,7 +38,7 @@ maleSports.forEach(sport => sports.push(
 
 femaleSports.forEach(sport => sports.push(
   { id: ++id, text: `${sport} - Girl's`},
-  { id: ++id, text: `${sport} - Women\'s`}
+  { id: ++id, text: `${sport} - Women's`}
 ));
 
 export default sports.sort((a,b) => a.text > b.text ? 1 : -1)

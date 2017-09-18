@@ -1,25 +1,12 @@
-import superagent from 'superagent';
+import { request } from './_request';
 
-export const API_URL = '/api/athletes'
-
-const wrap = cmd => cmd
-.then(res => {
-  console.log('API response', res.body);
-  return res.body;
-},
-({ response }) => {
-  throw response.body.error;
-});
+const API_URL = '/athletes';
 
 export default {
   get(id) {
-    return wrap(superagent.get(`${API_URL}/${id}`));
+    return request.get(`${API_URL}/${id}`);
   },
-
   update(id, data) {
-    return wrap(superagent.patch(`${API_URL}/${id}`).send(data));
+    return request.patch(`${API_URL}/${id}`, data);
   }
-
-  // TODO: search
-
-}
+};
