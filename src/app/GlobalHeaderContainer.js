@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import GlobalHeader from './GlobalHeader';
 import { signIn, signUp } from './actions';
 
-
 function mapDispatchToProps(dispatch) {
   return {
     signUp: (email, password) => {
@@ -18,6 +17,7 @@ function mapStateToProps(state) {
   return {
     id: state.id,
     authorized: state.authorized
+
   }
 }
 

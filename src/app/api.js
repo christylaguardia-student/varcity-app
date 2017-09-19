@@ -1,6 +1,6 @@
 import req from 'superagent';
 require('dotenv').config();
-const AUTH_API_URL = process.env.REACT_APP_AUTH_API_URL;
+const AUTH_API_URL = process.env.REACT_APP_AUTH_API_URL || '/api/auth';
 
 export default {
   signUpNewUser({ payload }) {

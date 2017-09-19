@@ -24,7 +24,6 @@ export default function GlobalHeader({ id, authorized }) {
                 <Link to="/athletes/:id">Profile</Link>
               </li>
             </ul>
-
           </div>
       </div>
     </div>
