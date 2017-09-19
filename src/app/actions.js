@@ -23,7 +23,6 @@ export function signUp({ payload }) {
 
 export function httpCallback ({value}) {
   return function(dispatch) {
-    console.log('in callback in action:', value);
     return authAPI.changeField( value )
     .then(
       res => {

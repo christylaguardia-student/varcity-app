@@ -1,16 +1,39 @@
 import React, { Component } from 'react';
-import GlobalHeader from './GlobalHeader';
 import GlobalFooter from './GlobalFooter';
+import GlobalHeaderContainer from './GlobalHeaderContainer';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom';
+import SearchContainer from '../search/SearchContainer';
+import ProfileContainer from './ProfileContainer';
+import Home from './Home';
+import { connect } from 'react-redux';
 
 class App extends Component {
   render() {
+    const { authorized } = this.props;
+    const notAuth = [
+      <Route key="1" exact path="/" component={Home} />,
+      <Redirect key="2" to="/" />
+    ];
+    const auth = [
+      <Route key="3" exact path="/athletes" component={SearchContainer} />,
+      <Route key="4" exact path="/athletes/:id" component={ProfileContainer} />,
+      <Redirect key="5" to="/athletes" />
+    ];
     return (
-      <div>
-        <GlobalHeader />
-        <GlobalFooter />
-      </div>
+      <Router>
+        <div>
+          <GlobalHeaderContainer />
+          <Switch>{authorized ? auth : notAuth}</Switch>
+          <GlobalFooter />
+        </div>
+      </Router>
     );
   }
 }
 
-export default App;
+export default connect(state => ({ authorized: state.authorized }), null)(App);

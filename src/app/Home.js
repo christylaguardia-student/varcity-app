@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { Redirect } from 'react-router-dom';
+import { signIn, signUp } from './actions';
+import { connect } from 'react-redux';
 
-export default function Home({signIn, signUp, httpCallback, value}) {
-  console.log(signIn, signUp, httpCallback, value);
+export function Home({signIn, signUp}) {
+
   Home.propTypes = {
     email: PropTypes.string,
     password: PropTypes.string,
     signUp: PropTypes.func,
-    signIn: PropTypes.func,
-    value: PropTypes.string,
-    httpCallback: PropTypes.func
+    signIn: PropTypes.func
   };
 
   return (
@@ -54,3 +53,21 @@ export default function Home({signIn, signUp, httpCallback, value}) {
   );
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    signUp: (email, password) => {
+      dispatch(signUp(email, password));
+    },
+    signIn: (email, password) => {
+      dispatch(signIn(email, password));
+    }
+  };
+}
+
+function mapStateToProps(state) {
+  return {
+    id: state.id,
+    authorized: state.authorized
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
