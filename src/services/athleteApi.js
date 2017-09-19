@@ -6,7 +6,7 @@ export default {
   get(id, tab = '') {
     return request.get(`${API_URL}/${id}/${tab}`);
   },
-  update(id, tab, data) {
+  update(id, data, tab = '') {
     return request.patch(`${API_URL}/${id}/${tab}`, data);
   }
 };

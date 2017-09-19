@@ -18,7 +18,7 @@ export function makeUpdateMedia(api) {
   return function updateMedia(id, media) {
     return dispatch => {
       return api
-        .update(id, 'media', media)
+        .update(id, media, 'media')
         .then(media => dispatch({ type: actions.UPDATE_MEDIA, payload: media }))
         .catch(console.log);
     };
