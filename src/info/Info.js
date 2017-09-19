@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import 'bulma/css/bulma.css';
 import { TextInput, TextArea, NumberInput, DateInput, Toggle, ToggleEditMode, TextSelect, UrlInput } from '../app/FormControls';
-import riekSportList from './riekSportsList';
+import riekSportList from '../utils/sports';
 
 export default function Info() {
   // console.log(this.props);
