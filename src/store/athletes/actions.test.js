@@ -1,5 +1,5 @@
 import * as actions from './constants';
-import { makeGetInfo, makeUpdateInfo } from './actions';
+import { makeGetInfo, makeUpdateAthlete } from './actions';
 
 describe('info actions', () => {
 
@@ -25,12 +25,12 @@ describe('info actions', () => {
   it('updates athlete info', () => {
     const dispatched = [];
     const dispatch = (action) => { dispatched.push(action); };
-    const updateInfo = makeUpdateInfo(testApi);
+    const updateInfo = makeUpdateAthlete(testApi);
     const dispatchFn = updateInfo(testInfo);
     
     dispatchFn(dispatch)
       .then(() => {
-        expect(dispatched).toEqual([{ type: actions.UPDATE_INFO, payload: testInfo }]);
+        expect(dispatched).toEqual([{ type: actions.UPDATE, payload: testInfo }]);
       });
   });
 });

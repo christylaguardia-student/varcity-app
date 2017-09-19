@@ -1,6 +1,6 @@
 
 let id = 0;
-let sports = [];
+let sports = [{ id: id, text: '' }];
 
 const maleSports = [
   'Basketball',

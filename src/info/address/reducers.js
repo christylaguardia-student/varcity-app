@@ -1,6 +1,6 @@
 import * as actions from './constants';
 
-export function location(state = { countries: [], regions: [], cities: [] }, { type, payload }) {
+export function address(state = { countries: [], regions: [], cities: [] }, { type, payload }) {
   switch(type) {
     case actions.GET_COUNTRIES:
       return { countries: payload, regions: [], cities: [] };

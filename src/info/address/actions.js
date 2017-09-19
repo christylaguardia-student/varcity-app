@@ -13,7 +13,9 @@ export function makeGetCountries(api) {
           });
           return riekList;
         })
-        .then(countries => dispatch({ type: actions.GET_COUNTRIES, payload: countries }));
+        .then(countries => {
+          dispatch({ type: actions.GET_COUNTRIES, payload: countries });
+        });
     };
   };
 }
