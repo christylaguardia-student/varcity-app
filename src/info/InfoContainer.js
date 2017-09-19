@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import 'bulma/css/bulma.css';
-import { getInfo } from '../athletes/actions';
+import { getInfo } from '../store/athletes/actions';
 import { getCountries, getRegions, getCities } from './address/actions';
 import Info from './Info';
 

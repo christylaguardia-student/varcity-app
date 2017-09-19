@@ -1,5 +1,5 @@
 import * as actions from './constants';
-import athleteApi from '../services/athleteApi';
+import athleteApi from '../../services/athleteApi';
 
 export function makeGetInfo(api) {
   return function getInfo(id) {

@@ -1,7 +1,7 @@
 import * as actions from './constants';
 import { makeGetCountries, makeGetRegions, makeGetCities } from './actions';
 
-describe('location actions', () => {
+describe('address actions', () => {
   
   const testCountry = 'Japan';
   const testCountries = [ 'Japan', 'Russia', 'Brazil' ];
