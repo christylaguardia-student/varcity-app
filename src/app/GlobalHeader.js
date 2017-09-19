@@ -24,20 +24,8 @@ export default function GlobalHeader({ id, authorized }) {
                 <Link to="/athletes/:id">Profile</Link>
               </li>
             </ul>
-
           </div>
       </div>
     </div>
   );
 }
-
- const mapStateToProps = (state) => {
-  return {
-    id: state.id,
-    value: 'myvalue',
-    authorized: state.authorized
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(GlobalHeader);
-
