@@ -25,6 +25,7 @@ class App extends Component {
       <Redirect key="5" to="/athletes" />
     ];
     return (
+
       <Router>
         <div>
           <GlobalHeaderContainer />
@@ -32,6 +33,7 @@ class App extends Component {
           <GlobalFooter />
         </div>
       </Router>
+
     );
   }
 }
