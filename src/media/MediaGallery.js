@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import 'bulma/css/bulma.css';
 import PropTypes from 'prop-types';
 import { TextSelect, TextArea, UrlInput } from '../app/FormControls';
+import { updateMedia, getMedia } from './actions';
 
 // GalleryItem.propTypes = {
 //   description: PropTypes.string.isRequired,
@@ -15,7 +17,7 @@ import { TextSelect, TextArea, UrlInput } from '../app/FormControls';
 function httpCallback() { console.log('pretending to make api call') }
 let value = '';
 
-export function GalleryItem({ options, select, description, videoUrl = '', image = '', mediaType, onUpdate }) {
+export function GalleryItem({ options, select, description, videoUrl = '', image = '', mediaType, rotateGallery }) {
   console.log('select is', select);
 
   return (
@@ -61,30 +63,48 @@ export class MediaGallery extends Component {
         { id: "1", text: "image upload" }
       ]
     }
+    // this.rotateGallery = this.rotateGallery.bind(this);
+    // this.handleMediaSubmit = this.handleMediaSubmit.bind(this);
+    // this.getMedia = this.getMedia.bind(this);
+    // this.handleImageSelect = this.handleImageSelect.bind(this);
   }
 
-    onUpdate(incr) {
-      const itemCount = this.state.items.length;
-      let newItem = this.state.itemNum + incr;
-      if (newItem === itemCount) newItem = 0;
-      else if (newItem === -1) newItem = itemCount - 1;
-      this.setState({ itemNum: newItem });
-    }
+  componentDidMount() {
+    // this.props.getMedia();
+  }
+
+  handleMediaSubmit(media) {
+    // this.props.updateMedia(media);
+  }
+
+  rotateGallery(incr) {
+    const itemCount = this.state.items.length;
+    let newItem = this.state.itemNum + incr;
+    if (newItem === itemCount) newItem = 0;
+    else if (newItem === -1) newItem = itemCount - 1;
+    this.setState({ itemNum: newItem });
+  }
 
   render() {
-    const { items, onUpdate, itemNum, select, selectOptions } = this.state;
-    // const itemGallery = items.map((item, i) => (
-    //   <GalleryItem key={i} item={item} description={item.description} url={item.url} onUpdate={onUpdate} select={select} options={selectOptions}/>
-    // ));
+    const { items, rotateGallery, itemNum, select, selectOptions } = this.state;
+    const itemGallery = items.map((item, i) => (
+      <GalleryItem key={i} image={item} description={item.description} videoUrl={item.url} mediaType={item.mediaType} rotateGallery={rotateGallery} select={select} options={selectOptions}/>
+    ));
     return (
       <div className="tile">
-        <GalleryItem onUpdate={onUpdate} select={select} options={selectOptions}/>
+        {/* <GalleryItem rotateGallery={rotateGallery} select={select} options={selectOptions}/> */}
         <nav id="galleryNav">
-          <button onClick={() => onUpdate(-1)}>&laquo; Previous</button> <button onClick={() => onUpdate(1)}>Next &raquo;</button>
+          <button onClick={() => rotateGallery(-1)}>&laquo; Previous</button> <button onClick={() => rotateGallery(1)}>Next &raquo;</button>
           <p>item {itemNum + 1} of {items.length}</p>
         </nav>
-        {/* {itemGallery[itemNum]} */}
+        {itemGallery[itemNum]}
       </div>
     );
   }
 }
+
+export default connect(state => {
+  return {
+    media: state.items,
+  };
+}, { getMedia, updateMedia })(MediaGallery);

@@ -6,7 +6,8 @@ export function makeGetMedia(api) {
     return dispatch => {
       return api
         .get(id, 'media')
-        .then(media => dispatch({ type: actions.GET_MEDIA, payload: media }));
+        .then(media => dispatch({ type: actions.GET_MEDIA, payload: media }))
+        .catch(console.log);
     };
   };
 }
@@ -14,11 +15,12 @@ export function makeGetMedia(api) {
 export const getMedia = makeGetMedia(athleteApi);
 
 export function makeUpdateMedia(api) {
-  return function updateMedia(media) {
+  return function updateMedia(id, media) {
     return dispatch => {
       return api
-        .update(media)
-        .then(media => dispatch({ type: actions.UPDATE_MEDIA, payload: media }));
+        .update(id, 'media', media)
+        .then(media => dispatch({ type: actions.UPDATE_MEDIA, payload: media }))
+        .catch(console.log);
     };
   };
 }
