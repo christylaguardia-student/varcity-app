@@ -6,7 +6,9 @@ export function makeGetInfo(api) {
     return dispatch => {
       return api
         .get(id)
-        .then(athlete => dispatch({ type: actions.GET_INFO, payload: athlete }));
+        .then(athleteInfo => {
+          dispatch({ type: actions.GET_INFO, payload: athleteInfo });
+        });
     };
   };
 }

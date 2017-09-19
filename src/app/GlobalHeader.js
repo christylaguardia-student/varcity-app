@@ -10,8 +10,8 @@ export function GlobalHeader({authorized}) {
   console.log(authorized);
   return (
     <div>
-      <div>Global header!{authorized}</div>
       <div>
+        Global header!{authorized}
         <Router>
           <div>{authorized}
             <ul>
@@ -20,12 +20,12 @@ export function GlobalHeader({authorized}) {
               <li><Link to="/athletes">Search</Link></li>
               <li><Link to="/athletes/:id">Profile</Link></li>
             </ul>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/athletes" component={SearchContainer} />
+              <Route exact path="/athletes/:id" component={ProfileContainer} />
+            </Switch>
           </div>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/athletes" component={SearchContainer} />
-            <Route exact path="/athletes/:id" component={ProfileContainer} />
-          </Switch>
         </Router>
       </div>
     </div>
@@ -61,5 +61,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(GlobalHeader);
 

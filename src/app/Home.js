@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// import { Redirect } from 'react-router-dom';
 
 export default function Home({signIn, signUp, httpCallback, value}) {
-  console.log(signIn, signUp, httpCallback, value)
+  console.log(signIn, signUp, httpCallback, value);
   Home.propTypes = {
     email: PropTypes.string,
     password: PropTypes.string,
