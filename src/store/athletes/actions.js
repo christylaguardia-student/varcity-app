@@ -15,14 +15,14 @@ export function makeGetInfo(api) {
 
 export const getInfo = makeGetInfo(athleteApi);
 
-export function makeUpdateInfo(api) {
-  return function updateInfo(infoData) {
+export function makeUpdateAthlete(api) {
+  return function updateAthlete(data) {
     return dispatch => {
       return api
-        .update(infoData)
-        .then(athlete => dispatch({ type: actions.UPDATE_INFO, payload: athlete }));
+        .update(data)
+        .then(athlete => dispatch({ type: actions.UPDATE, payload: athlete }));
     };
   };
 }
 
-export const updateInfo = makeUpdateInfo(athleteApi);
+export const updateAthlete = makeUpdateAthlete(athleteApi);

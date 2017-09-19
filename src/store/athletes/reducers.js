@@ -5,7 +5,7 @@ export function athletes(state = defaultValues, { type, payload }) {
   switch(type) {
     case actions.GET_INFO:
       return payload;
-    case actions.UPDATE_INFO:
+    case actions.UPDATE:
       return payload;
     default:
       return state;

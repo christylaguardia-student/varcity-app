@@ -17,7 +17,7 @@ describe('athletes reducer', () => {
 
   it('updates info and bio', () => {
     const testInfo = { firstName: 'Christy', lastName: 'La Guardia' };
-    const newState = athletes({}, { type: actions.UPDATE_INFO, payload: testInfo });
+    const newState = athletes({}, { type: actions.UPDATE, payload: testInfo });
     expect(newState).toEqual(testInfo);
   });
 
