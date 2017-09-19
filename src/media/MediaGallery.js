@@ -14,45 +14,43 @@ import { updateMedia, getMedia } from './actions';
 // }
 
 // just do this for now
+
 let value = '';
 let mediaItem = { description: '', mediaType: '', videoUrl: '', image: '' };
-function holdData(value) { 
-  let result = '';
-  if(value.mediaType) result = value.mediaType.text;
-  else result = Object.values(value)[0];
-  mediaItem[Object.keys(value)] = result;
-}
 
-export function GalleryItem({ options, select, description, videoUrl = '', image = '', mediaType, rotateGallery }) {
-  console.log('select is', select);
+export function GalleryItem({ onSubmit, onSelect, holdData, options, select, description, videoUrl = '', image = '', mediaType, rotateGallery }) {
 
   return (
     <div className="galleryView">
-      <img src={image} alt={description} />
-      {/* <button onClick={() => onRemove(item)} >X</button> */}
-      <div className="is-grouped is-grouped-multiline">
-        <TextSelect className="select" value={select} propName="mediaType" label="Media Type" change={holdData} options={options} disabled={false} />
-        {select.text === 'video link' &&
-        <UrlInput value={value} propName="videoUrl" label="Video Link" change={holdData} disabled={false} />
-        }
-        {select.text === 'image upload' &&
-        <div className="file">
-          <label className="file-label">
-            <input className="file-input" type="file" name="imageUrl" />
-            <span className="file-cta">
-              <span className="icon file-icon">
-                <i class="fa fa-upload"></i>
-              </span>
-              <span class="file-label">
-                Choose a file...
-              </span>
-            </span>
-          </label>
+        <img src={image} alt={description} />
+        {/* <button onClick={() => onRemove(item)} >X</button> */}
+        <div className="is-grouped is-grouped-multiline">
+          <TextSelect className="select" value={select} propName="mediaType" label="Media Type" change={onSelect} options={options} disabled={false} />
+          {select.text === 'video link' &&
+            <UrlInput value={value} propName="videoUrl" label="Video Link" change={holdData} disabled={false} />
+          }
+
+          {/* image file upload */}
+          <form className="field" encType="multipart/formData" action="">
+            {select.text === 'image upload' &&
+              <div className="file">
+                <label className="file-label">
+                  <input className="file-input" type="file" name="imageUrl" onChange={e => this.readFile(e)} onClick={e => e.target.value = null}/>
+                  <span className="file-cta">
+                    <span className="icon file-icon">
+                      <i className="fa fa-upload"></i>
+                    </span>
+                    <span className="file-label">
+                      Choose a file...
+                    </span>
+                  </span>
+                </label>
+              </div>
+            }
+          </form>
+          <TextArea value={value} propName="description" label="Description" change={holdData} disabled={false} />
+          {/* <button onClick={() => onSubmit()} */}
         </div>
-        }
-        <TextArea value={value} propName="description" label="Description" change={holdData} disabled={false} />
-        {/* <button onClick={() => onSubmit()} */}
-      </div>
     </div>
   );
 }
@@ -63,25 +61,33 @@ export class MediaGallery extends Component {
     super(props);
     this.state = {
       itemNum: 0,
-      select: { id: "0", text: "video link" },
+      image: '',
+      select: { id: "0", text: "Select media type" },
       selectOptions: [
-        { id: "0", text: "video link" },
-        { id: "1", text: "image upload" }
+        { id: "0", text: "Select the media type" },
+        { id: "1", text: "video link" },
+        { id: "2", text: "image upload" }
       ]
     }
     // this.rotateGallery = this.rotateGallery.bind(this);
-    // this.handleMediaSubmit = this.handleMediaSubmit.bind(this);
+    this.handleImageSubmit = this.handleImageSubmit.bind(this);
     // this.getMedia = this.getMedia.bind(this);
     // this.handleImageSelect = this.handleImageSelect.bind(this);
+    this.onSelect = this.onSelect.bind(this);
   }
 
   componentDidMount() {
     // this.props.getMedia(456);
   }
 
-  handleMediaSubmit(media) {
-    // this.props.updateMedia(media);
+  handleImageSubmit(e) {
+    e.preventDefault();
+    // let image = new FormData();
+    // console.log('incoming media is', media, 'image to upload is', image);
+    // this.props.updateMedia(image);
   }
+
+  handleImageChange
 
   rotateGallery(incr) {
     // const itemCount = this.props.items.length;
@@ -89,6 +95,22 @@ export class MediaGallery extends Component {
     // if (newItem === itemCount) newItem = 0;
     // else if (newItem === -1) newItem = itemCount - 1;
     // this.setState({ itemNum: newItem });
+  }
+
+  holdData(value) { 
+    let result = '';
+    if(value.mediaType) result = value.mediaType.text;
+    else result = Object.values(value)[0];
+    mediaItem[Object.keys(value)] = result;
+    if (mediaItem.mediaType === 'video link') mediaItem.image = ''; 
+    else if (mediaItem.mediaType === 'image upload') mediaItem.videoUrl = '';
+    console.log('mediaItem is', mediaItem);
+  }
+
+  onSelect(value) {
+    console.log('value in onSelect is', value.mediaType);
+    this.setState({ select: value.mediaType })
+    this.holdData(value);
   }
 
   render() {
@@ -99,10 +121,10 @@ export class MediaGallery extends Component {
     // ));
     return (
       <div className="field">
-        <ToggleEditMode value="edit" propName="edit" change={holdData} disabled={false} />
+        <ToggleEditMode value="edit" propName="edit" change={this.holdData} disabled={false} />
 
         <div className="tile">
-          <GalleryItem rotateGallery={rotateGallery} select={select} options={selectOptions}/>
+          <GalleryItem rotateGallery={rotateGallery} select={select} options={selectOptions} holdData={this.holdData} onSelect={this.onSelect} onSubmit={this.handleImageSubmit} image={this.state.image}/>
           {/* {itemGallery[itemNum]} */}
           {/* <nav id="galleryNav">
             <button onClick={() => rotateGallery(-1)}>&laquo; Previous</button> <button onClick={() => rotateGallery(1)}>Next &raquo;</button>
