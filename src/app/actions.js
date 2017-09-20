@@ -15,7 +15,7 @@ export function retrieveWithToken() {
         dispatch({ type: RETRIEVE_ID_WITH_TOKEN, payload: id });
       });
     } else {
-      dispatch({ type: AUTH_FAILURE, payload: {id:null} });
+      dispatch({ type: AUTH_FAILURE, payload: null });
     }
   };
 }
@@ -45,6 +45,8 @@ export function signIn({ payload }) {
     const { token } = storage.getItem('varcity') || '';
     return authAPI.signIn({ payload }).then(
       res => {
+        storage.setItem('varcity', res.token);
+        
         dispatch({ type: AUTHORIZED, payload: res.user._id });
       },
       error => {
