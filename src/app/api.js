@@ -1,6 +1,6 @@
 import req from 'superagent';
 require('dotenv').config();
-const AUTH_API_URL = process.env.REACT_APP_AUTH_API_URL;
+const AUTH_API_URL = process.env.REACT_APP_AUTH_API_URL || '/api/auth';
 
 export default {
   signUpNewUser({ payload }) {
@@ -11,12 +11,19 @@ export default {
         return newUser;
       });
   },
-  signIn( token ) {
+  signIn({ payload }) {
+    let { email, password, token } = '';
+    if (payload.email) email = payload.email;
+    if (payload.password) password = payload.password;
+    if (payload.token) token = payload.token;
+
     return req
       .post(`${AUTH_API_URL}/signin`)
+      .send({email, password})
       .set('Authorization', token)
       .then(response => {
-        return response.body.user;
+        console.log(10, response);
+        return response.body;
       });
   },
   changeField(payload) {
@@ -25,7 +32,7 @@ export default {
       .post(`${AUTH_API_URL}/change`)
       .send(payload)
       .then(response => {
-        return response.body;
+        // return response.body;
       });
   },
   verify() {

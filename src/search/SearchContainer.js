@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class MediaContainer extends Component {
+class Search extends Component {
 
   render() {
     return (
@@ -19,4 +19,4 @@ class MediaContainer extends Component {
   }
 }
 
-export default MediaContainer;
+export default Search;
