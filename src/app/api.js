@@ -13,12 +13,17 @@ export default {
   },
   signIn({ payload }) {
     const { email, password, token } = payload || '';
+    // if (token) {
+    //   const storage = localStorage;
+    //   storage.setItem('varcity', token);
+    // }
     return req
       .post(`${AUTH_API_URL}/signin`)
-      .send({email, password})
+      .send({ email, password })
       .set('Authorization', token)
       .then(response => {
-        return response.body.token;
+
+        return response.body;
       });
   },
   changeField(payload) {
