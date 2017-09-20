@@ -1,27 +1,77 @@
 import React, { Component } from 'react';
-import GlobalHeader from './GlobalHeader';
 import GlobalFooter from './GlobalFooter';
+import GlobalHeaderContainer from './GlobalHeaderContainer';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom';
+import SearchContainer from './SearchContainer';
+import ProfileContainer from './ProfileContainer';
 import Home from './Home';
-import Education from './Education';
-
-
-import { PropTypes } from 'react';
-import Header from './Header'
+import About from './About';
+import { connect } from 'react-redux';
+import { retrieveWithToken } from './actions';
+import 'bulma/css/bulma.css';
 
 class App extends Component {
-  render() {
-    return (
-      // <div>
-      //   <GlobalHeader />
-      //   <GlobalFooter />
-      // </div>
+  componentWillMount() {
+    this.props.retrieveWithToken();
+  }
 
-      <div className="container-fluid">
-      <Header />
-      {this.props.children}
-    </div>
+  render() {
+    let routes = null;
+
+    const { authId } = this.props;
+
+    if (authId && Object.entries(authId).length !== 0) {
+      routes = [
+        <Route key="1" exact path="/about" component={About} />,
+        <Route key="3" exact path="/athletes" component={SearchContainer} />,
+        <Route
+          key="4"
+          path={`/athletes/${authId}`}
+          component={ProfileContainer}
+        />,
+        <Redirect key="5" to={`/athletes/${authId}`} />
+      ];
+    } else {
+      routes = [
+        <Route key="1" exact path="/" component={Home} />,
+        <Route key="1" path="/about" component={About} />,
+        <Redirect key="2" to="/" />
+      ];
+    }
+
+    return (
+      <Router>
+        <div>
+          <GlobalHeaderContainer />
+          <Switch>{routes}</Switch>
+          <GlobalFooter />
+        </div>
+      </Router>
     );
   }
 }
 
+<<<<<<< Updated upstream
+function mapDispatchToProps(dispatch) {
+  return {
+    retrieveWithToken: () => {
+      dispatch(retrieveWithToken());
+    }
+  };
+}
+
+export default connect(state => ({ authId: state.authId }), mapDispatchToProps)(
+  App
+);
+=======
+App.PropTypes = {
+  children: PropTypes.object.isRequired
+};
+
 export default App;
+>>>>>>> Stashed changes

@@ -1,19 +1,31 @@
 import { combineReducers } from 'redux';
+<<<<<<< Updated upstream
+import { authId } from '../app/reducers';
+import { athletes } from './athletes/reducers';
+import { address } from '../info/address/reducers';
+=======
 import { info } from '../info/reducers';
 import { location } from '../info/location/reducers';
 import { app } from '../app/reducers';
-import { authorized } from '../app/reducers'
+import { authId } from '../app/reducers'
 import { sport } from '../sports/reducers';
-import { edu } from '../edu/reducers';
+>>>>>>> Stashed changes
+import { educations } from '../edu/reducers';
 import { media } from '../media/reducers';
-import { search } from '../search/reducers';
 
 export default combineReducers({
-  authorized,
+  authId,
+<<<<<<< Updated upstream
+  athletes,
+  address,
+  educations,
+  media
+=======
   info,
   location,
   sport,
-  edu,
+  educations,
   media,
   search
+>>>>>>> Stashed changes
 });

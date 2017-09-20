@@ -1,23 +1,24 @@
 import {
-  SIGN_UP,
-  SIGN_IN,
   AUTHORIZED,
-  AUTH_FAILURE
+  AUTH_FAILURE,
+  NO_LOCAL_TOKEN,
+  RETRIEVE_ID_WITH_TOKEN,
+  SIGN_OUT
 } from './constants';
 
-export function authorized(state = null, { type, payload }) {
-  console.log(type, payload)
+export function authId(state = {}, { type, payload }) {
   switch (type) {
-    case SIGN_IN:
-      return null;
-    case SIGN_UP:
-      return null;
     case AUTHORIZED:
       return payload;
     case AUTH_FAILURE:
+      return null;
+    case NO_LOCAL_TOKEN:
+      return null;
+    case RETRIEVE_ID_WITH_TOKEN:
+      return payload;
+    case SIGN_OUT:
       return null;
     default:
       return state;
   }
 }
-

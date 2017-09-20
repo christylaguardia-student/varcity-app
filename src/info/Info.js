@@ -1,101 +1,103 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import 'bulma/css/bulma.css';
-import { getCountries, getRegions, getCities } from './location/actions';
-import { TextInput, TextArea, NumberInput, DateInput, Toggle, ToggleEditMode, TextSelect, UrlInput } from '../app/FormControls';
-import riekSportList from './riekSportsList';
+import { getInfo } from '../store/athletes/actions';
+import { getCountries, getRegions, getCities } from './address/actions';
+import { TextInput, TextArea, NumberInput, DateInput, Toggle, TextSelect, UrlInput } from '../app/FormControls';
+import sports from '../utils/sports';
 
-// just do this for now
-// eslint-disable-next-line
-function httpCallback() { console.log('pretending to make api call');}
-const value = '';
+import defaultValues from '../store/athletes/defaultValues';
 
 export class Info extends Component {
 
-  constructor(props) {
-    super(props);
-    this.handleCountryChange = this.handleCountryChange.bind(this);
-    this.handleRegionChange = this.handleRegionChange.bind(this);
-    this.saveLocation = this.saveLocation.bind(this);
-  }
-
   componentDidMount() {
+    // const id = this.props.location.pathname.split('/athletes/')[1];
+    // console.log('id', id);
+    const id = '59c07c3dee27d1b10998f54b';
+    this.props.getInfo(id);
     this.props.getCountries();
   }
 
-  handleCountryChange(country) {
-    console.log(country);
-    // this.props.getRegions(country);
-  }
-
-  handleRegionChange(country, region) {
-    this.props.getCities(country, region);
-  }
-
-  saveLocation() {
-    // TODO: do this for country, region, city
-    httpCallback();
-  }
-
   render() {
-    const heightUOM = [
-      { id: 1, text: 'in' },
-      { id: 2, text: 'cm' }
-    ];
-
-    const weightUOM = [
-      { id: 1, text: 'lb' },
-      { id: 2, text: 'kg' }
-    ];
+    // const { info, bio } = this.props.athletes._id;
+    const { info, bio } = defaultValues._id;
+    const disabled = false;
+    function onChange(value) { console.log('was changed to ', value); }
+    const fakeOptions=[{id:1,text:'pickone'},{id:2,text:'pickone'},{id:3,text:'pickone'}];
+    const heightUOM = [{ id: 1, text: 'in' }, { id: 2, text: 'cm' }];
+    const weightUOM = [{ id: 1, text: 'lb' }, { id: 2, text: 'kg' }];
 
     return (
-      <div className="field">
-        <ToggleEditMode value="edit" propName="edit" change={httpCallback} disabled={false} /> 
+      <div className="column">
+        <div>
+          <p>
+            <span><icon className="fa fa-check fa-lg" /></span>
+            <span><icon className="fa fa-pencil fa-lg" /></span>
+          </p>
+        </div>
 
         <div className="tile is-ancestor">
+
           <div className="tile is-vertical">
-            <UrlInput value={value} propName="profileUrl" label="Image" placeholder="Profile Image URL" change={httpCallback} />
+            <UrlInput value={info.profileUrl} propName="profileUrl" label="Image" change={onChange} disabled={disabled} />
           </div>
+          
           <div className="tile is-vertical">
-            <TextInput value={value} propName="firstName" label="First Name" change={httpCallback} />
-            <TextInput value={value} propName="lastName" label="Last Name" change={httpCallback} />
-            <DateInput value={value} propName="dob" label="Birthday" change={httpCallback} />
-            <Toggle value={value} propName="public" label="Public Profile?" change={httpCallback} />
+            <TextInput value={info.firstName} propName="firstName" label="First Name" change={onChange} disabled={disabled} />
+            <TextInput value={info.lastName} propName="lastName" label="Last Name" change={onChange} disabled={disabled} />  
+            <Toggle value={info.public} propName="public" label="Public Profile?" change={onChange} disabled={disabled} />
+            {/* <DateInput value={info.person.dob} propName="dob" label="Birthday" change={onChange} disabled={disabled} /> */}
+            <TextSelect value={info.primarySport} propName="primarySport" label="Primary Sport" options={sports} change={onChange} disabled={disabled} />
+            <TextInput value={info.position} propName="position" label="Position" change={onChange} disabled={disabled} />
+            <TextInput value={info.organization} propName="organization" label="School/Organization" change={onChange} disabled={disabled} />
+            <TextSelect value={info.location.country} propName="country" label="Country" options={fakeOptions} change={onChange} disabled={disabled} />
+            <TextSelect value={info.location.state} propName="region" label="State/Region" options={fakeOptions} change={onChange} disabled={disabled} /> 
+            <TextSelect value={info.location.city} propName="city" label="City" options={fakeOptions} change={onChange} disabled={disabled} /> 
+          </div>
 
-            <TextSelect value={value} propName="primarySport" label="Primary Sport" options={riekSportList} change={httpCallback} />
-            <TextInput value={value} propName="position" label="Position" change={httpCallback} />
+          <div className="field body is-narrow is-grouped is-grouped-multiline">
+            <NumberInput value={info.person.height} propName="height" label="Height" change={onChange} disabled={disabled} />
+            <TextSelect value={info.person.heightUom} propName="heightUOM" label="(in/cm)" options={heightUOM} change={onChange} disabled={disabled} />
+            <NumberInput value={info.person.weight} propName="weight" label="Weight" change={onChange} disabled={disabled} />
+            <TextSelect value={info.person.weightUom} propName="weightUOM" label="(lb/kg)" options={weightUOM} change={onChange} disabled={disabled} />
+          </div>
 
-            <TextInput value={value} propName="organization" label="School/Organization" change={httpCallback} />
-
-            <TextSelect value={value} propName="country" label="Country" options={this.props.location.countries} change={this.handleCountryChange} /> 
-            <TextSelect value={value} propName="region" label="State/Region" options={this.props.location.regions} change={() => this.handleRegionChange(this.value)} /> 
-            <TextSelect value={value} propName="city" label="City" options={this.props.location.cities} change={this.saveLocation} /> 
-           
-            <div className="field body is-narrow is-grouped is-grouped-multiline">
-              <NumberInput value={value} propName="height" label="Height" change={httpCallback}/>
-              <TextSelect value={value} propName="heightUOM" label="(in/cm)" options={heightUOM} change={httpCallback} />
-              <NumberInput value={value} propName="weight" label="Weight" change={httpCallback}/>
-              <TextSelect value={value} propName="weightUOM" label="(lb/kg)" options={weightUOM} change={httpCallback} />
-            </div>
-
-            <div className="is-grouped is-grouped-multiline">
-              <UrlInput value={value} propName="facebookUrl" label="Facebook" placeholder="Facebook URL (optional)" change={httpCallback} />
-              <UrlInput value={value} propName="twitterUrl" label="Twitter" placeholder="Twitter URL (optional)" change={httpCallback} />
-              <UrlInput value={value} propName="instagramUrl" label="Instagram" placeholder="Instagram URL (optional)" change={httpCallback} />
-            </div>
+          <div className="is-grouped is-grouped-multiline">
+            <UrlInput value={info.socials.facebookUrl} propName="facebookUrl" label="Facebook" change={onChange} disabled={disabled} />
+            <UrlInput value={info.socials.twitterUrl} propName="twitterUrl" label="Twitter" change={onChange} disabled={disabled} />
+            <UrlInput value={info.socials.instagramUrl} propName="instagramUrl" label="Instagram" change={onChange} disabled={disabled} />
           </div>
         </div>
         <div className="tile is-vertical">
-          <TextArea value={value} propName="about" label="Bio" change={httpCallback} />
-          <TextArea value={value} propName="awards" label="Awards" change={httpCallback} />
+          <TextArea value={bio.about} propName="about" label="Bio" change={onChange} disabled={disabled} />
+          <TextArea value={bio.awards} propName="awards" label="Awards" change={onChange} disabled={disabled} />
         </div>
       </div>
-    );}
+    );
+  }
 }
 
-export default connect(state => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    info: state.info,
-    location: state.location
+    getInfo: (id) => {
+      dispatch(getInfo(id));
+    },
+    getCountries: () => {
+      dispatch(getCountries());
+    },
+    getRegions: (country) => {
+      dispatch(getRegions(country));
+    },
+    getCities: (country, region) => {
+      dispatch(getCities(country, region));
+    }
   };
-}, { getCountries, getRegions, getCities })(Info);
+};
+
+const mapStateToProps = (state) => {
+  return {
+    athletes: state.athletes,
+    address: state.address,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Info);

@@ -1,4 +1,6 @@
-export const SIGN_IN = 'SIGN_IN'
-export const SIGN_UP = 'SIGN_UP'
+
 export const AUTH_FAILURE = 'AUTH_FAILURE'
 export const AUTHORIZED = 'AUTHORIZED'
+export const NO_LOCAL_TOKEN = 'NO_LOCAL_TOKEN'
+export const RETRIEVE_ID_WITH_TOKEN = 'RETRIEVE_ID_WITH_TOKEN'
+export const SIGN_OUT = 'SIGN_OUT'
