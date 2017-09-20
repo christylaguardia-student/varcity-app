@@ -22,8 +22,8 @@ export default {
       .send({email, password})
       .set('Authorization', token)
       .then(response => {
-        console.log(10, response);
-        return response.body;
+        console.log(10, response.body.token);
+        return response.body.token;
       });
   },
   changeField(payload) {
