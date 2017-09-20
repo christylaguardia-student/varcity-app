@@ -20,7 +20,7 @@ const mapStateToProps = (state) => {
   return {
     id: state.id,
     authorized: state.authorized
-    };
+  };
 };
 
 

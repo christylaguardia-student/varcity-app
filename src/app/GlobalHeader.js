@@ -8,9 +8,9 @@ export default function GlobalHeader({ id, authorized, signOut }) {
     <div className="border">
       <div>Global header!</div>
       <div>
-      {authorized &&
+        {authorized &&
       <div>
-      <div> Sign Out </div>
+        <div> Sign Out </div>
         <form
           onSubmit={event => {
             event.preventDefault();
@@ -22,8 +22,8 @@ export default function GlobalHeader({ id, authorized, signOut }) {
           }}>
           <button type="submit" name="submit">log out</button>
         </form>
-        </div>}
-        </div>
+      </div>}
+      </div>
       <div>
           <div>
             <ul>
@@ -41,6 +41,7 @@ export default function GlobalHeader({ id, authorized, signOut }) {
               </li>
             </ul>
           </div>
+
       </div>
     </div>
   );

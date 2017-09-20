@@ -7,30 +7,39 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
-import SearchContainer from '../search/SearchContainer';
+import SearchContainer from './SearchContainer';
 import ProfileContainer from './ProfileContainer';
 import Home from './Home';
+import About from './About';
 import { connect } from 'react-redux';
 
 class App extends Component {
   render() {
 
-    const { authorized, id } = this.props || '';
+    let routes = null;
+    const { authorized, id } = this.props;
 
-    const notAuth = [
-      <Route key="1" exact path="/" component={Home} />,
-      <Redirect key="2" to="/" />
-    ];
-    const auth = [
-      <Route key="4" path={`/athletes/${id}`} component={ProfileContainer} />,
-      <Route key="3" path="/athletes" component={SearchContainer} />,
-      <Redirect key="5" to="/athletes" />
-    ];
+    if (authorized) {
+      routes = [
+        <Route key="1" exact path="/about" component={About} />,
+        <Route key="3" path="/athletes" component={SearchContainer} />,
+        <Route key="4" path="/athletes/:id" component={ProfileContainer} />,
+        <Redirect key="5" to={`/athletes/${id}`} />
+      ];
+    } else {
+      routes = [
+        <Route key="1" exact path="/" component={Home} />,
+        <Route key="1" path="/about" component={About} />,
+        <Redirect key="2" to="/" />
+      ];
+    }
+
     return (
       <Router>
         <div>
           <GlobalHeaderContainer />
-          <Switch>{authorized ? auth : notAuth}</Switch>
+
+          <Switch>{routes}</Switch>
           <GlobalFooter />
         </div>
       </Router>
@@ -42,3 +51,4 @@ export default connect(
   state => ({ authorized: state.authorized, id: state.id }),
   null
 )(App);
+
