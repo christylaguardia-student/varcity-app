@@ -12,7 +12,6 @@ import ProfileContainer from './ProfileContainer';
 import Home from './Home';
 import About from './About';
 import { connect } from 'react-redux';
-import 'bulma/css/bulma.css';
 
 class App extends Component {
   render() {
@@ -23,8 +22,8 @@ class App extends Component {
     if (authorized) {
       routes = [
         <Route key="1" exact path="/about" component={About} />,
-        <Route key="3" path="/athletes" component={SearchContainer} />,
         <Route key="4" path="/athletes/:id" component={ProfileContainer} />,
+        <Route key="3" path="/athletes" component={SearchContainer} />,
         <Redirect key="5" to={`/athletes/${id}`} />
       ];
     } else {

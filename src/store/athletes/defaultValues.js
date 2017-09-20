@@ -9,7 +9,7 @@ export default {
       primarySport: '',
       position: '',
       person: {
-        dob: '',
+        dob: '9/20/2017',
         gender: '', 
         height: 0,
         heightUom: 'in',

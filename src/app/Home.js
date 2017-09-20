@@ -14,7 +14,7 @@ export function Home({signIn, signUp}) {
 
   return (
     <div>
-      <div className="content">
+      <div className="container is-fluid content">
         <h1 className="title">Varcity Network</h1>
         <p className="subtitle">Connecting student athletes to success.</p>
         <h3>Join Now! It's Free!</h3>
