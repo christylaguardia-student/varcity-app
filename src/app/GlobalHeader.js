@@ -1,18 +1,34 @@
 import React from 'react';
-import { BrowserRouter as Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { signOut } from './actions';
 
-
-export default function GlobalHeader({ id, authorized }) {
+export default function GlobalHeader({ id, authorized, signOut }) {
   console.log(1, id, authorized);
-
   return (
-    <div>
-      <div className="border">Global header!</div>
+    <div className="border">
+      <div>Global header!</div>
+      <div>
+      {authorized &&
+      <div>
+      <div> Sign Out </div>
+        <form
+          onSubmit={event => {
+            event.preventDefault();
+            const form = event.target;
+            signOut({
+              payload: { payload: null }
+            });
+            form.reset();
+          }}>
+          <button type="submit" name="submit">log out</button>
+        </form>
+        </div>}
+        </div>
       <div>
           <div>
             <ul>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/">Home in the global header</Link>
               </li>
               <li>
                 <input placeholder="search" />
@@ -21,7 +37,7 @@ export default function GlobalHeader({ id, authorized }) {
                 <Link to="/athletes">Search</Link>
               </li>
               <li>
-                <Link to="/athletes/:id">Profile</Link>
+                <Link to={`/athletes/${id}`}>Profile</Link>
               </li>
             </ul>
           </div>

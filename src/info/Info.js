@@ -1,19 +1,19 @@
 import React from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import 'bulma/css/bulma.css';
-import { TextInput, TextArea, NumberInput, DateInput, Toggle, ToggleEditMode, TextSelect, UrlInput } from '../app/FormControls';
-import riekSportList from './riekSportsList';
+// import { TextInput, TextArea, NumberInput, DateInput, Toggle, ToggleEditMode, TextSelect, UrlInput } from '../app/FormControls';
+// import riekSportList from './riekSportsList';
 
 export default function Info() {
   // console.log(this.props);
-  const { info, bio } = this.props.athletes;
+  // const { info, bio } = this.props.athletes;
 
-  
-  const disabled = false;
-  function httpCallback() { console.log('pretending to make riek api call'); }
 
-  const heightUOM = [{ id: 1, text: 'in' }, { id: 2, text: 'cm' }];
-  const weightUOM = [{ id: 1, text: 'lb' }, { id: 2, text: 'kg' }];
+  // const disabled = false;
+  // function httpCallback() { console.log('pretending to make riek api call'); }
+
+  // const heightUOM = [{ id: 1, text: 'in' }, { id: 2, text: 'cm' }];
+  // const weightUOM = [{ id: 1, text: 'lb' }, { id: 2, text: 'kg' }];
 
   return (
     <div className="column is-mobile field">
@@ -23,8 +23,8 @@ export default function Info() {
           {/* <UrlInput propName={info.profileUrl} name="profileUrl" label="Image" change={httpCallback} disabled={disabled} /> */}
         </div>
         <div className="tile is-vertical">
-          <TextInput propName={info.firstName} name="firstName" label="First Name" change={httpCallback} disabled={disabled} />
-          <TextInput propName={info.lastName} name="lastName" label="Last Name" change={httpCallback} disabled={disabled} />
+          {/* <TextInput propName={info.firstName} name="firstName" label="First Name" change={httpCallback} disabled={disabled} />
+          <TextInput propName={info.lastName} name="lastName" label="Last Name" change={httpCallback} disabled={disabled} /> */}
           {/* <DateInput propName={info.dob} name="dob" label="Birthday" change={httpCallback} disabled={disabled} /> */}
           {/* <Toggle propName={info.public} name="public" label="Public Profile?" />
           <TextSelect propName={info.primarySport} name="primarySport" label="Primary Sport" options={riekSportList} />
@@ -33,7 +33,7 @@ export default function Info() {
           {/* <TextSelect propName={this.props.address.countries} name="country" label="Country" options={this.props.address.countries} />  */}
           {/* <TextSelect propName={value} name="region" label="State/Region" options={this.props.address.regions} change={() => this.handleRegionChange(this.value)} disabled={disabled} />  */}
           {/* <TextSelect propName={value} name="city" label="City" options={this.props.address.cities} change={this.saveAddress} disabled={disabled} />  */}
-          
+
           <div className="field body is-narrow is-grouped is-grouped-multiline">
             {/* <NumberInput propName={info.height} name="height" label="Height" /> */}
             {/* <TextSelect propName={'info.heightUOM'} name="heightUOM" label="(in/cm)" options={heightUOM} /> */}

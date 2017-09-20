@@ -14,14 +14,14 @@ import { connect } from 'react-redux';
 
 class App extends Component {
   render() {
-    const { authorized } = this.props;
+    const { authorized, id } = this.props;
     const notAuth = [
       <Route key="1" exact path="/" component={Home} />,
       <Redirect key="2" to="/" />
     ];
     const auth = [
-      <Route key="3" exact path="/athletes" component={SearchContainer} />,
-      <Route key="4" exact path="/athletes/:id" component={ProfileContainer} />,
+      <Route key="4" path={`/athletes/${id}`} component={ProfileContainer} />,
+      <Route key="3" path="/athletes" component={SearchContainer} />,
       <Redirect key="5" to="/athletes" />
     ];
     return (
@@ -29,11 +29,11 @@ class App extends Component {
         <div>
           <GlobalHeaderContainer />
           <Switch>{authorized ? auth : notAuth}</Switch>
-          <GlobalFooter />
+            <GlobalFooter />
         </div>
       </Router>
     );
   }
 }
 
-export default connect(state => ({ authorized: state.authorized }), null)(App);
+export default connect(state => ({ authorized: state.authorized, id: state.id }), null)(App);
