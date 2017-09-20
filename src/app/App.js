@@ -16,19 +16,19 @@ import { connect } from 'react-redux';
 class App extends Component {
   render() {
     let routes = null;
-    const { authorized } = this.props;
+    const { authorized, id } = this.props;
 
     if (authorized) {
       routes = [
         <Route key="1" exact path="/about" component={About} />,
-        <Route key="3" exact path="/athletes" component={SearchContainer} />,
-        <Route key="4" exact path="/athletes/:id" component={ProfileContainer} />,
-        <Redirect key="5" to={`/athletes/${authorized._id}`} />
+        <Route key="3" path="/athletes" component={SearchContainer} />,
+        <Route key="4" path="/athletes/:id" component={ProfileContainer} />,
+        <Redirect key="5" to={`/athletes/${id}`} />
       ];
     } else {
       routes = [
         <Route key="1" exact path="/" component={Home} />,
-        <Route key="1" exact path="/about" component={About} />,
+        <Route key="1" path="/about" component={About} />,
         <Redirect key="2" to="/" />
       ];
     }
