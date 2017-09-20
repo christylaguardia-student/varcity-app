@@ -1,17 +1,14 @@
 import {
-  SIGN_UP,
-  SIGN_IN,
   AUTHORIZED,
-  AUTH_FAILURE
+  AUTH_FAILURE,
+  SIGN_OUT
 } from './constants';
 
 export function authorized(state = null, { type, payload }) {
-  // console.log(type, payload);
+  console.log(type, payload);
   switch (type) {
-    case SIGN_IN:
-      return null;
-    case SIGN_UP:
-      return null;
+    case SIGN_OUT:
+    return null;
     case AUTHORIZED:
       return payload;
     case AUTH_FAILURE:

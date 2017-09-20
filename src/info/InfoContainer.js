@@ -5,24 +5,24 @@ import { getInfo } from '../store/athletes/actions';
 import { getCountries, getRegions, getCities } from './address/actions';
 import Info from './Info';
 
-// export class InfoContainer extends Component {
+export class InfoContainer extends Component {
 
-//   componentDidMount() {
-//     const id = this.props.location.pathname.split('/athletes/')[1];
-//     console.log('id', id);
-//     this.props.getInfo(id);
-//     this.props.getCountries();
-//   }
-  
-//   render() {
-//     return(
-//       <div>
-//         info container
-//         <Info />
-//       </div>
-//     );
-//   }
-// }
+  componentDidMount() {
+    const id = this.props.location.pathname.split('/athletes/')[1];
+    console.log('id', id);
+    this.props.getInfo(id);
+    this.props.getCountries();
+  }
+
+  render() {
+    return(
+      <div>
+        info container
+        <Info />
+      </div>
+    );
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
