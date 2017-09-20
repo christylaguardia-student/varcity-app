@@ -19,6 +19,7 @@ function mapDispatchToProps(dispatch) {
 const mapStateToProps = (state) => {
   return {
     id: state.id,
+    authId: state.authId,
     authorized: state.authorized
   };
 };

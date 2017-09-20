@@ -17,14 +17,14 @@ class App extends Component {
   render() {
 
     let routes = null;
-    const { authorized, id } = this.props;
-
-    if (authorized) {
+    const { authId } = this.props;
+    console.log(22, authId)
+    if (authId) {
       routes = [
         <Route key="1" exact path="/about" component={About} />,
-        <Route key="3" path="/athletes" component={SearchContainer} />,
-        <Route key="4" path="/athletes/:id" component={ProfileContainer} />,
-        <Redirect key="5" to={`/athletes/${id}`} />
+        <Route key="4" path={`/athletes/${authId}`} component={ProfileContainer} />,
+        <Route key="3" exact path="/athletes" component={SearchContainer} />,
+        <Redirect key="5" to={`/athletes/${authId}`} />
       ];
     } else {
       routes = [
@@ -38,7 +38,6 @@ class App extends Component {
       <Router>
         <div>
           <GlobalHeaderContainer />
-
           <Switch>{routes}</Switch>
           <GlobalFooter />
         </div>
@@ -48,7 +47,7 @@ class App extends Component {
 }
 
 export default connect(
-  state => ({ authorized: state.authorized, id: state.id }),
+  state => ({ authId: state.authId }),
   null
 )(App);
 
