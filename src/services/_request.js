@@ -7,7 +7,7 @@ const wrapper = cmd => cmd
   .then(res => res.body,
     ({ response }) => {
       const { body, text } = response;
-      const error = body ? body.message || body.error || body : text;
+      const error = body ? body.error || body : text;
       throw error;
     }
   );

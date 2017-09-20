@@ -13,30 +13,20 @@ export default {
   },
   signIn({ payload }) {
     const { email, password, token } = payload || '';
-    // if (token) {
-    //   const storage = localStorage;
-    //   storage.setItem('varcity', token);
-    // }
     return req
       .post(`${AUTH_API_URL}/signin`)
       .send({ email, password })
       .set('Authorization', token)
       .then(response => {
-
         return response.body;
       });
   },
-  changeField(payload) {
+  retrieveWithToken(token) {
     return req
-      .post(`${AUTH_API_URL}/change`)
-      .send(payload)
+      .post(`${AUTH_API_URL}/tokenator`)
+      .send({ token })
       .then(response => {
-        // return response.body;
+        return response.text;
       });
-  },
-  verify() {
-    return req.get(`${AUTH_API_URL}/verify`).then(verifiedUser => {
-      return verifiedUser;
-    });
   }
 };
