@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { signOut } from './actions';
-import 'bulma/css/bulma.css';
 
 export default function GlobalHeader({ id, authorized, signOut }) {
   console.log(1, id, authorized);

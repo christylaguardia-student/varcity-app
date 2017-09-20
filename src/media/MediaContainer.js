@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import 'bulma/css/bulma.css';
 import { MediaGallery } from './MediaGallery';
 
 export class MediaContainer extends Component {
