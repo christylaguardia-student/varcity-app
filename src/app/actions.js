@@ -6,7 +6,7 @@ export function signUp({ payload }) {
     return authAPI.signUpNewUser({ payload })
     .then(
       res => {
-        const { token } = res.body.token;
+        const { token } = res.body.token.token;
         const storage = localStorage;
         storage.setItem('varcity', token);
         payload.token = token;

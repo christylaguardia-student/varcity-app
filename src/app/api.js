@@ -12,11 +12,7 @@ export default {
       });
   },
   signIn({ payload }) {
-    let { email, password, token } = '';
-    if (payload.email) email = payload.email;
-    if (payload.password) password = payload.password;
-    if (payload.token) token = payload.token;
-
+    const { email, password, token } = payload || '';
     return req
       .post(`${AUTH_API_URL}/signin`)
       .send({email, password})
