@@ -12,22 +12,21 @@ export default {
       });
   },
   signIn({ payload }) {
-    let { email, password, token } = '';
-    if (payload.email) email = payload.email;
-    if (payload.password) password = payload.password;
-    if (payload.token) token = payload.token;
-
+    const { email, password, token } = payload || '';
+    // if (token) {
+    //   const storage = localStorage;
+    //   storage.setItem('varcity', token);
+    // }
     return req
       .post(`${AUTH_API_URL}/signin`)
-      .send({email, password})
+      .send({ email, password })
       .set('Authorization', token)
       .then(response => {
-        console.log(10, response.body.token);
-        return response.body.token;
+
+        return response.body;
       });
   },
   changeField(payload) {
-    console.log('changeField: ', payload);
     return req
       .post(`${AUTH_API_URL}/change`)
       .send(payload)

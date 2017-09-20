@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom';
 import { signOut } from './actions';
 
 export default function GlobalHeader({ authId, signOut }) {
-  console.log(1, authId);
   return (
     <div className="border">
       <div>Global header!</div>
       <div>
-        {authId &&
+        {(authId && Object.entries(authId).length !== 0) &&
       <div>
         <div> Sign Out </div>
         <form

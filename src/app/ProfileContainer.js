@@ -10,7 +10,6 @@ class ProfileContainer extends Component {
 
   render() {
     const id = this.props.location.pathname.split('/athletes/')[1];
-    console.log(3, id);
     return (
       <Router>
         <div>
@@ -31,5 +30,5 @@ class ProfileContainer extends Component {
     );
   }
 }
-export default connect(state => ({ id: state.id, authorization: state.authorization }), null)(ProfileContainer);
+export default connect(state => ({ id: state.id }), null)(ProfileContainer);
 
