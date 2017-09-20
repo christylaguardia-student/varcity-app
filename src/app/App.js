@@ -14,7 +14,9 @@ import { connect } from 'react-redux';
 
 class App extends Component {
   render() {
-    const { authorized, id } = this.props;
+
+    const { authorized, id } = this.props || '';
+
     const notAuth = [
       <Route key="1" exact path="/" component={Home} />,
       <Redirect key="2" to="/" />
@@ -29,11 +31,14 @@ class App extends Component {
         <div>
           <GlobalHeaderContainer />
           <Switch>{authorized ? auth : notAuth}</Switch>
-            <GlobalFooter />
+          <GlobalFooter />
         </div>
       </Router>
     );
   }
 }
 
-export default connect(state => ({ authorized: state.authorized, id: state.id }), null)(App);
+export default connect(
+  state => ({ authorized: state.authorized, id: state.id }),
+  null
+)(App);

@@ -37,7 +37,7 @@ export default function GlobalHeader({ id, authorized, signOut }) {
                 <Link to="/athletes">Search</Link>
               </li>
               <li>
-                <Link to={`/athletes/${id}`}>Profile</Link>
+                {/* <Link to={`/athletes/${id}`}>Profile</Link> */}
               </li>
             </ul>
           </div>

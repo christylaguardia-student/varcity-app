@@ -17,9 +17,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.authorized ? state.authorized._id : state.id)
   return {
-    id: state.authorized ? state.authorized._id : state.id,
+    id: state.id,
     authorized: state.authorized
     };
 };

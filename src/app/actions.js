@@ -10,7 +10,6 @@ export function signUp({ payload }) {
         const storage = localStorage;
         storage.setItem('varcity', token);
         payload.token = token;
-        console.log(87,payload)
         return authAPI.signIn({payload}).then(savedUser => {
           dispatch({ type: AUTHORIZED, payload: savedUser });
         });
@@ -43,7 +42,6 @@ export function signIn({ payload }) {
     const token = storage.getItem('varcity');
     console.log(11, token);
     if (!token) payload.token = null
-      // console.log(90, payload.email, payload.password)
       return authAPI.signIn({payload}).then(
         res => {
           console.log(50, res);
@@ -61,7 +59,6 @@ export function signOut() {
   return function(dispatch) {
     const storage = localStorage;
     const token = storage.removeItem('varcity');
-    console.log(11, token);
     dispatch({ type: AUTHORIZED, payload: null });
   };
 }
