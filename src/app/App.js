@@ -46,4 +46,4 @@ class App extends Component {
   }
 }
 
-export default connect(state => ({ authorized: state.authorized}), null)(App);
+export default connect(state => ({ authorized: state.authorized }), null)(App);
