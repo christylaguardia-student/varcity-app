@@ -1,67 +1,50 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-// import Home from './Home';
-import SearchContainer from '../search/SearchContainer';
-import MediaContainer from '../media/MediaContainer';
-import ProfileContainer from './ProfileContainer';
-import { signIn, signUp, httpCallback } from './actions';
+import { Link } from 'react-router-dom';
+import { signOut } from './actions';
 
-export function GlobalHeader({ authorized }) {
-  console.log(authorized)
+export default function GlobalHeader({ id, authorized, signOut }) {
+  console.log(1, id, authorized);
   return (
-    <Router>
+    <div className="border">
+      <div>Global header!</div>
       <div>
-        <div>Global header!{authorized}</div>
+        {authorized &&
+      <div>
+        <div> Sign Out </div>
+        <form
+          onSubmit={event => {
+            event.preventDefault();
+            const form = event.target;
+            signOut({
+              payload: { payload: null }
+            });
+            form.reset();
+          }}>
+          <button type="submit" name="submit">log out</button>
+        </form>
+      </div>}
+      </div>
+      <div>
         <div>
-          <div>{authorized}
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><input placeholder="search" /></li>
-              <li><Link to="/athletes">Search</Link></li>
-              <li><Link to="/athletes/:id">Profile</Link></li>
-            </ul>
-          </div>
-          <Switch>
-            <Route exact path="/" component={MediaContainer} />
-            {/* <Route exact path="/" component={Home} /> */}
-            <Route exact path="/athletes" component={SearchContainer} />
-            <Route exact path="/athletes/:id" component={ProfileContainer} />
-          </Switch>
+          <ul>
+            <li>
+              <Link to="/">Home in the global header</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <input placeholder="search" />
+            </li>
+            <li>
+              <Link to="/athletes">Search</Link>
+            </li>
+            <li>
+              <Link to={`/athletes/${id}`}>Profile</Link>
+            </li>
+          </ul>
         </div>
       </div>
-    </Router>
-  )
+    </div>
+  );
 }
-// const mapStateToProps = (state) => {
-//   return {
-//     id: state.id,
-//     value: 'myvalue',
-//     authorized: state.authorized
-//     };
-// };
-
-function mapDispatchToProps(dispatch) {
-  return {
-    signUp: (email, password) => {
-      dispatch(signUp(email, password));
-    },
-    signIn: (email, password) => {
-      dispatch(signIn(email, password));
-    },
-    httpCallback: value => {
-      dispatch(httpCallback(value));
-    }
-  };
-}
-
- const mapStateToProps = (state) => {
-  return {
-    id: state.id,
-    value: 'myvalue',
-    authorized: state.authorized
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(GlobalHeader);
-

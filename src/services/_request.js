@@ -6,6 +6,7 @@ const wrapper = cmd => cmd
   // .set('Authorization', token)
   .then(res => res.body,
     ({ response }) => {
+      console.log('API response', response);
       const { body, text } = response;
       const error = body ? body.message || body.error || body : text;
       throw error;

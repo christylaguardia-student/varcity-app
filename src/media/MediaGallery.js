@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import 'bulma/css/bulma.css';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { TextSelect, TextArea, UrlInput, Toggle, ToggleEditMode } from '../app/FormControls';
 import { updateMedia, getMedia } from './actions';
 
@@ -109,12 +109,12 @@ export class MediaGallery extends Component {
     // this.setState({ itemNum: newItem });
   }
 
-  holdData(value) { 
+  holdData(value) {
     let result = '';
     if(value.mediaType) result = value.mediaType.text;
     else result = Object.values(value)[0];
     mediaItem[Object.keys(value)] = result;
-    if (mediaItem.mediaType === 'video link') mediaItem.image = ''; 
+    if (mediaItem.mediaType === 'video link') mediaItem.image = '';
     else if (mediaItem.mediaType === 'image upload') mediaItem.videoUrl = '';
     console.log('mediaItem is', mediaItem);
   }
