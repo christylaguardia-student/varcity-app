@@ -1,6 +1,7 @@
 import {
   AUTHORIZED,
   AUTH_FAILURE,
+  NO_LOCAL_TOKEN,
   RETRIEVE_ID_WITH_TOKEN,
   SIGN_OUT
 } from './constants';
@@ -15,7 +16,7 @@ export function retrieveWithToken() {
         dispatch({ type: RETRIEVE_ID_WITH_TOKEN, payload: id });
       });
     } else {
-      dispatch({ type: AUTH_FAILURE, payload: null });
+      dispatch({ type: NO_LOCAL_TOKEN, payload: null });
     }
   };
 }
@@ -23,7 +24,7 @@ export function signUp({ payload }) {
   return function(dispatch) {
     return authAPI.signUpNewUser({ payload }).then(
       res => {
-        const { token, user } = res.body;
+        const { token } = res.body;
         const storage = localStorage;
         storage.clear('varcity');
         storage.setItem('varcity', token);
@@ -33,7 +34,7 @@ export function signUp({ payload }) {
         });
       },
       error => {
-        dispatch({ type: AUTH_FAILURE, payload: error.status });
+        dispatch({ type: AUTH_FAILURE, payload: null });
       }
     );
   };
@@ -41,8 +42,6 @@ export function signUp({ payload }) {
 
 export function signIn({ payload }) {
   return function(dispatch) {
-    const storage = localStorage;
-    const { token } = storage.getItem('varcity') || '';
     return authAPI.signIn({ payload }).then(
       res => {
         storage.setItem('varcity', res.token);
@@ -50,7 +49,7 @@ export function signIn({ payload }) {
         dispatch({ type: AUTHORIZED, payload: res.user._id });
       },
       error => {
-        dispatch({ type: AUTH_FAILURE, payload: error.status });
+        dispatch({ type: AUTH_FAILURE, payload: null});
       }
     );
   };
@@ -59,7 +58,7 @@ export function signIn({ payload }) {
 export function signOut() {
   return function(dispatch) {
     const storage = localStorage;
-    const token = storage.removeItem('varcity');
+    storage.removeItem('varcity');
     dispatch({ type: SIGN_OUT, payload: null });
   };
 }
