@@ -16,11 +16,14 @@ import { retrieveWithToken } from './actions';
 import 'bulma/css/bulma.css';
 
 class App extends Component {
+  componentWillMount() {
+    this.props.retrieveWithToken();
+  }
+
   render() {
     let routes = null;
 
-    const { authId, retrieveWithToken } = this.props;
-    retrieveWithToken();
+    const { authId } = this.props;
 
     if (authId && Object.entries(authId).length !== 0) {
       routes = [

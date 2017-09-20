@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+// import 'bulma/css/bulma.css';
 // import PropTypes from 'prop-types';
 import { TextSelect, TextArea, UrlInput, Toggle, ToggleEditMode } from '../app/FormControls';
 import { updateMedia, getMedia } from './actions';
@@ -12,12 +14,11 @@ import { updateMedia, getMedia } from './actions';
 //   // onRemove: PropTypes.func.isRequired
 // }
 
-// just do this for now
 
 let value = '';
 let mediaItem = { description: '', mediaType: '', videoUrl: '', image: '' };
 
-export function GalleryItem({ onSubmit, onSelect, holdData, options, select, description, videoUrl = '', image = '', mediaType, rotateGallery }) {
+export function GalleryItem({ onImageChange, onImageSubmit, onSelect, holdData, options, select, description, videoUrl = '', image = '', mediaType, rotateGallery }) {
 
   return (
     <div className="galleryView">
@@ -30,11 +31,11 @@ export function GalleryItem({ onSubmit, onSelect, holdData, options, select, des
           }
 
           {/* image file upload */}
-          <form className="field" encType="multipart/formData" action="">
+          <form className="field" encType="multipart/formData" onSubmit={e => onImageSubmit(e)}>
             {select.text === 'image upload' &&
               <div className="file">
                 <label className="file-label">
-                  <input className="file-input" type="file" name="imageUrl" onChange={e => this.readFile(e)} onClick={e => e.target.value = null}/>
+                  <input className="file-input" type="file" name="imageUrl" onChange={e => onImageChange(e)} />
                   <span className="file-cta">
                     <span className="icon file-icon">
                       <i className="fa fa-upload"></i>
@@ -48,8 +49,8 @@ export function GalleryItem({ onSubmit, onSelect, holdData, options, select, des
             }
           </form>
           <TextArea value={value} propName="description" label="Description" change={holdData} disabled={false} />
-          {/* <button onClick={() => onSubmit()} */}
         </div>
+      <button className="submitButton" type="submit" onClick={e => onImageSubmit(e)}>Upload Image</button>
     </div>
   );
 }
@@ -70,23 +71,35 @@ export class MediaGallery extends Component {
     }
     // this.rotateGallery = this.rotateGallery.bind(this);
     this.handleImageSubmit = this.handleImageSubmit.bind(this);
-    // this.getMedia = this.getMedia.bind(this);
-    // this.handleImageSelect = this.handleImageSelect.bind(this);
+    this.handleImageChange = this.handleImageChange.bind(this);
+    this.holdData = this.holdData.bind(this);
     this.onSelect = this.onSelect.bind(this);
   }
 
   componentDidMount() {
-    // this.props.getMedia(456);
+    this.props.getMedia(123);
   }
-
+  
   handleImageSubmit(e) {
     e.preventDefault();
+    console.log('handlImageSubmit', mediaItem);
     // let image = new FormData();
-    // console.log('incoming media is', media, 'image to upload is', image);
-    // this.props.updateMedia(image);
+    this.props.updateMedia(123, mediaItem);
   }
 
-  handleImageChange
+  // referenced: https://codepen.io/hartzis/pen/VvNGZP?editors=0011
+  handleImageChange(e) {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+    reader.onloadend = () => {
+      this.holdData({ image: reader.result });
+      // this.setState({
+        // image: reader.result      
+      };
+      reader.readAsArrayBuffer(file);
+  }
 
   rotateGallery(incr) {
     // const itemCount = this.props.items.length;
@@ -123,7 +136,7 @@ export class MediaGallery extends Component {
         <ToggleEditMode value="edit" propName="edit" change={this.holdData} disabled={false} />
 
         <div className="tile">
-          <GalleryItem rotateGallery={rotateGallery} select={select} options={selectOptions} holdData={this.holdData} onSelect={this.onSelect} onSubmit={this.handleImageSubmit} image={this.state.image}/>
+          <GalleryItem rotateGallery={rotateGallery} select={select} options={selectOptions} holdData={this.holdData} onSelect={this.onSelect} onImageSubmit={this.handleImageSubmit} onImageChange={this.handleImageChange} image={this.state.image}/>
           {/* {itemGallery[itemNum]} */}
           {/* <nav id="galleryNav">
             <button onClick={() => rotateGallery(-1)}>&laquo; Previous</button> <button onClick={() => rotateGallery(1)}>Next &raquo;</button>
@@ -135,9 +148,22 @@ export class MediaGallery extends Component {
   }
 }
 
-export default connect(state => {
-  console.log('state in mediagallery is', state);
-  return {
-    media: state.items,
-  };
-}, { getMedia, updateMedia })(MediaGallery);
+const mapStateToProps = (state) => { 
+  return ({
+    media: state.items
+  })
+};
+
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ getMedia, updateMedia }, dispatch);
+// }
+
+const mapDispatchToProps = { getMedia, updateMedia };
+
+export default connect(mapStateToProps, mapDispatchToProps, 
+  // (state, dispatch, own) => {
+  // return {
+  //   media: 
+  // }
+// }
+)(MediaGallery);

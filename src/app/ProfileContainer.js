@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Info from '../info/Info';
 import SportsContainer from '../sports/SportsContainer';
 import EduContainer from '../edu/EduContainer';
-import MediaContainer from '../media/MediaContainer';
+import MediaGallery from '../media/MediaGallery';
 
 class ProfileContainer extends Component {
 
@@ -23,7 +23,7 @@ class ProfileContainer extends Component {
             <Route path={`/athletes/${id}`} component={Info} />
             <Route path={`/athletes/${id}/sports`} component={SportsContainer} />
             <Route path={`/athletes/${id}/edu`} component={EduContainer} />
-            <Route path={`/athletes/${id}/media`} component={MediaContainer} />
+            <Route path={`/athletes/${id}/media`} component={MediaGallery} />
           </Switch>
         </div>
       </Router>
