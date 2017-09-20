@@ -8,7 +8,7 @@ export function TextInput({ value, propName, label, change, disabled=true }) {
       {label}
       <RIEInput
         isDisabled={disabled}
-        value={value}
+        value={value || ''}
         change={change}
         propName={propName}
         className="input"
@@ -23,7 +23,7 @@ export function TextArea({ value, propName, label, change, disabled=true }) {
       {label}
       <RIETextArea
         isDisabled={disabled}
-        value={value}
+        value={value || ''}
         change={change}
         propName={propName}
         rows={8}
@@ -40,7 +40,7 @@ export function NumberInput({ value, propName, label, change, disabled=true }) {
       {label}
       <RIENumber
         isDisabled={disabled}
-        value={value}
+        value={value || 0}
         change={change}
         propName={propName}
         className="input"
@@ -56,7 +56,7 @@ export function DateInput({ value, propName, label, change, disabled=true }) {
       <RIEInput
         isDisabled={disabled}
         type="text"
-        value={value}
+        value={value || ''}
         change={change}
         propName={propName}
         className="input"
@@ -71,7 +71,7 @@ export function Toggle({ value, propName, label, change, disabled=true }) {
       {label}
       <RIEToggle
         isDisabled={disabled}
-        value={value}
+        value={value || 'No'}
         change={change}
         propName={propName}
         textTrue="Yes"
@@ -107,7 +107,7 @@ export function TextSelect({ value, propName, label, options, change, disabled=t
       {label}
       <RIESelect
         isDisabled={disabled}
-        value={value}
+        value={value || ''}
         change={change}
         propName={propName}
         options={options}
@@ -123,7 +123,7 @@ export function UrlInput({ value, propName, label, change, disabled=true }) {
       {label}
       <RIEInput
         isDisabled={disabled}
-        value={value}
+        value={value || ''}
         change={change}
         propName={propName}
         className="input"
@@ -139,7 +139,7 @@ export function EmailInput({ value, propName, label, change, disabled=true }) {
       <RIEInput
         isDisabled={disabled}
         type="email"
-        value={value}
+        value={value || ''}
         change={change}
         propName={propName}
         className="input has-icons-left"
