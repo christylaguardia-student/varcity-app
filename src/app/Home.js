@@ -14,7 +14,8 @@ export function Home({signIn, signUp}) {
 
   return (
     <div>
-      <h1>Welcome to Varcity Network</h1>
+      <h1>Varcity Network</h1>
+      <p>Connecting student-athletes to success.</p>
       <h3>Join Now! It's Free!</h3>
       <div>
         <div> Sign Up </div>

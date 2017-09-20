@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
   return {
     id: state.authorized ? state.authorized._id : state.id,
     authorized: state.authorized
-    };
+  };
 };
 
 
