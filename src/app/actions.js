@@ -1,6 +1,24 @@
-import { AUTHORIZED, AUTH_FAILURE, SIGN_OUT } from './constants';
+import {
+  AUTHORIZED,
+  AUTH_FAILURE,
+  RETRIEVE_ID_WITH_TOKEN,
+  SIGN_OUT
+} from './constants';
 import authAPI from './api';
 
+export function retrieveWithToken() {
+  const storage = localStorage;
+  const token = storage.getItem('varcity') || '';
+  return function(dispatch) {
+    if (token) {
+      return authAPI.retrieveWithToken(token).then(id => {
+        dispatch({ type: RETRIEVE_ID_WITH_TOKEN, payload: id });
+      });
+    } else {
+      dispatch({ type: AUTH_FAILURE, payload: {id:null} });
+    }
+  };
+}
 export function signUp({ payload }) {
   return function(dispatch) {
     return authAPI.signUpNewUser({ payload }).then(
@@ -24,21 +42,15 @@ export function signUp({ payload }) {
 export function signIn({ payload }) {
   return function(dispatch) {
     const storage = localStorage;
-    const {token}  = storage.getItem('varcity') || '';
-
-    if (token || payload) {
-      if (token && payload)
-      payload.token  = token;
-
-      return authAPI.signIn({ payload }).then(
-        res => {
-          dispatch({ type: AUTHORIZED, payload: res.user._id });
-        },
-        error => {
-          dispatch({ type: AUTH_FAILURE, payload: error.status });
-        }
-      );
-    } return
+    const { token } = storage.getItem('varcity') || '';
+    return authAPI.signIn({ payload }).then(
+      res => {
+        dispatch({ type: AUTHORIZED, payload: res.user._id });
+      },
+      error => {
+        dispatch({ type: AUTH_FAILURE, payload: error.status });
+      }
+    );
   };
 }
 
@@ -47,18 +59,5 @@ export function signOut() {
     const storage = localStorage;
     const token = storage.removeItem('varcity');
     dispatch({ type: SIGN_OUT, payload: null });
-  };
-}
-
-export function httpCallback({ value }) {
-  return function(dispatch) {
-    return authAPI.changeField(value).then(
-      res => {
-        // dispatch({ type: AUTHORIZED, payload: res.token });
-      },
-      error => {
-        // dispatch({ type: AUTH_FAILURE, payload: error.status });
-      }
-    );
   };
 }
