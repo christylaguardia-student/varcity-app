@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { reset } from 'redux-form';
 import * as actions from './actions';
-import 
+import AddEduForm from './AddEduFrom';
 
 // TODO: import AddEduForm
 
 const AddEducation = ({ dispatch }) =>
 <div className='AddEducation'>
-  <AddEduForm onSubmit={(values) => 
+  <AddEduForm onSubmit={(values) => {
     dispatch(createNewEducation({
       institution: values.institution,
       year: values.year,

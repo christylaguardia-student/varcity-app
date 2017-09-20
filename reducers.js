@@ -1,5 +1,5 @@
 import * as actions from './constants';
-import initialState from './initialState';
+import initialState from './educationInitial';
 
 export function edu(state = initialState.educations, { type, payload }) {
   return state;
@@ -18,13 +18,14 @@ export function educations(state = [], action) {
 
       case 'DELETE_EDUCATION':
           const educations = state.educations;
+          const newState = Object.assign([], state);
           // const index = events.findIndex(e => e._id === payload);
           // return {
           //     ...state,
           //     events: [...events.slice(0, index), ...events.slice(index + 1)]
           // };
           // }
-          return state.filter((education) => education._id !== action.id)
+          return state.filter((education) => education.id !== action.id)
       default: 
           return state;
       }

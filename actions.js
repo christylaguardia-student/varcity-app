@@ -1,5 +1,5 @@
 import * as actions from './constants';
-import './eduApi';
+import eduApi from './eduApi';
 
 
 export function getAllEducation(id) {
@@ -32,6 +32,43 @@ export const createNewEducation = (education, newId) => {
       testScores: education.testScores,
       saving: false    
   }
+}
+
+
+export function createEducation(education) {
+    return function(dispatch) {
+        return EduApi.createEducation(education)
+        .then(response => {
+            dispatch(createNewEducationSuccess(response));
+            return response;
+        }).catch(error => {
+            throw(error);
+        });
+    };
+}
+
+export function loadEducationsSuccess(cats) {
+    return {type: actions.LOAD_EDUCATIONS_SUCCESS, educations};
+  }
+    
+  export function createCatSuccess(cat) {
+    return {type: actions.CREATE_EDUCATION_SUCCESS, education};
+  }
+  
+  export function deleteCatSuccess(cat) {
+    return {type: actions.DELETE_EDUCATION_SUCCESS, education};
+  }
+  
+
+export function loadEducations() {
+    return function(dispatch) {
+        return EduApi.getAllEducation()
+        .then(educations => {
+            dispatch(loadEducationsSuccess(educations));
+        }).catch(error => {
+            throw(error);
+        });
+    };
 }
 
 export function createNewEducationSuccess (education) {
