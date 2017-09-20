@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { signOut } from './actions';
 
 export default function GlobalHeader({ authId, signOut }) {
   return (

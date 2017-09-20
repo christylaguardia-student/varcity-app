@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { signIn, signUp } from './actions';
 import { connect } from 'react-redux';
 
-export function Home({signIn, signUp}) {
+export function Home({signIn, signUp, authId}) {
 
   Home.propTypes = {
     email: PropTypes.string,
@@ -89,7 +89,6 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    id: state.id,
     authId: state.authId
   };
 }
