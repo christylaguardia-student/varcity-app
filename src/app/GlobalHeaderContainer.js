@@ -4,11 +4,11 @@ import { signIn, signUp, signOut } from './actions';
 
 function mapDispatchToProps(dispatch) {
   return {
-    signUp: (email, password) => {
-      dispatch(signUp(email, password));
+    signUp: ({payload}) => {
+      dispatch(signUp({payload}));
     },
-    signIn: (email, password) => {
-      dispatch(signIn(email, password));
+    signIn: ({payload}) => {
+      dispatch(signIn({payload}));
     },
     signOut: () => {
       dispatch(signOut());
@@ -17,10 +17,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.authorized ? state.authorized._id : state.id)
   return {
-    id: state.authorized ? state.authorized._id : state.id,
-    authorized: state.authorized
+    id: state.id,
+    authId: state.authId
   };
 };
 

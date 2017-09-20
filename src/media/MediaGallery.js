@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import 'bulma/css/bulma.css';
+// import 'bulma/css/bulma.css';
 // import PropTypes from 'prop-types';
 import { TextSelect, TextArea, UrlInput, Toggle, ToggleEditMode } from '../app/FormControls';
 import { updateMedia, getMedia } from './actions';
