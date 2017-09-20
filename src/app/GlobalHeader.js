@@ -33,6 +33,9 @@ export default function GlobalHeader({ authId, signOut }) {
               <input placeholder="search" />
             </li>
             <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
               <Link to="/athletes">Search</Link>
             </li>
             <li>
