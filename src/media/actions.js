@@ -16,6 +16,7 @@ export const getMedia = makeGetMedia(athleteApi);
 
 export function makeUpdateMedia(api) {
   return function updateMedia(id, media) {
+    console.log('inside updateMedia, id is', id, 'media is', media);
     return dispatch => {
       return api
         .update(id, media, 'media')

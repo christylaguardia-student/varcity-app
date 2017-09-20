@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import 'bulma/css/bulma.css';
 import PropTypes from 'prop-types';
 import { TextSelect, TextArea, UrlInput, Toggle, ToggleEditMode } from '../app/FormControls';
@@ -76,14 +77,14 @@ export class MediaGallery extends Component {
   }
 
   componentDidMount() {
-    // this.props.getMedia(456);
+    // this.props.getMedia(id);
   }
-
+  
   handleImageSubmit(e) {
     e.preventDefault();
-    console.log('incoming image is', image, 'this.state.file is', this.state.file);
-    let image = new FormData();
-    this.props.updateMedia(image);
+    console.log('handlImageSubmit', mediaItem);
+    // let image = new FormData();
+    this.props.updateMedia(123, mediaItem);
   }
 
   // referenced: https://codepen.io/hartzis/pen/VvNGZP?editors=0011
@@ -92,12 +93,12 @@ export class MediaGallery extends Component {
 
     let reader = new FileReader();
     let file = e.target.files[0];
-    reader.readAsArrayBuffer(file);
     reader.onloadend = () => {
       this.holdData({ image: reader.result });
       // this.setState({
-      // image: reader.result      
-    };
+        // image: reader.result      
+      };
+      reader.readAsArrayBuffer(file);
   }
 
   rotateGallery(incr) {
@@ -125,7 +126,7 @@ export class MediaGallery extends Component {
   }
 
   render() {
-    const { items } = this.props;
+    // const { items } = this.props;
     const { itemNum, rotateGallery, select, selectOptions } = this.state;
     // const itemGallery = items.map((item, i) => (
     //   <GalleryItem key={i} image={item} description={item.description} videoUrl={item.url} mediaType={item.mediaType} rotateGallery={rotateGallery} select={select} options={selectOptions}/>
@@ -147,9 +148,22 @@ export class MediaGallery extends Component {
   }
 }
 
-export default connect(state => {
-  console.log('state in mediagallery is', state);
-  return {
-    media: state.items,
-  };
-}, { getMedia, updateMedia })(MediaGallery);
+const mapStateToProps = (state) => { 
+  return ({
+    media: state.items
+  })
+};
+
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ getMedia, updateMedia }, dispatch);
+// }
+
+const mapDispatchToProps = { getMedia, updateMedia };
+
+export default connect(mapStateToProps, mapDispatchToProps, 
+  // (state, dispatch, own) => {
+  // return {
+  //   media: 
+  // }
+// }
+)(MediaGallery);
