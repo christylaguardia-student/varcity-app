@@ -23,7 +23,7 @@ export default {
       .set('Authorization', token)
       .then(response => {
         console.log(10, response);
-        return response.body.token;
+        return response.body;
       });
   },
   changeField(payload) {
