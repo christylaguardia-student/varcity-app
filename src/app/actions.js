@@ -2,7 +2,6 @@ import { AUTHORIZED, AUTH_FAILURE } from './constants';
 import authAPI from './api';
 
 export function signUp({ payload }) {
-  console.log(88, payload)
   return function(dispatch) {
     return authAPI.signUpNewUser({ payload })
     .then(
