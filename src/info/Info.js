@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import 'bulma/css/bulma.css';
 import { getInfo } from '../store/athletes/actions';
 import { getCountries, getRegions, getCities } from './address/actions';
+import { TextInput, TextArea, NumberInput, DateInput, Toggle, ToggleEditMode, TextSelect, UrlInput } from '../app/FormControls';
+import sports from '../utils/sports';
 
 export class Info extends Component {
 
@@ -14,9 +16,15 @@ export class Info extends Component {
   }
   
   render() {
-    return(
+    const { info, bio } = this.props.athletes;
+    const disabled = false;
+
+    function onChange(value) { console.log('was changed to ', value); }
+
+    return (
       <div>
-        info
+        <TextInput propName={info.firstName} name="firstName" label="First Name" change={onChange} disabled={disabled} />
+        <TextInput propName={info.lastName} name="lastName" label="Last Name" change={onChange} disabled={disabled} />  
       </div>
     );
   }
@@ -41,7 +49,6 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    // id: '59c07c3dee27d1b10998f54b', //this.props.location,
     athletes: state.athletes,
     address: state.address,
   };

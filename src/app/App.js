@@ -12,10 +12,12 @@ import ProfileContainer from './ProfileContainer';
 import Home from './Home';
 import About from './About';
 import { connect } from 'react-redux';
+import 'bulma/css/bulma.css';
 
 class App extends Component {
   render() {
     let routes = null;
+    console.log('this.props',this.props);
     const { authorized, id } = this.props;
 
     if (authorized) {
@@ -45,4 +47,4 @@ class App extends Component {
   }
 }
 
-export default connect(state => ({ authorized: state.authorized }), null)(App);
+export default connect(state => ({ authorized: state.authorized}), null)(App);

@@ -1,16 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { signOut } from './actions';
+import 'bulma/css/bulma.css';
 
 export default function GlobalHeader({ id, authorized, signOut }) {
   console.log(1, id, authorized);
   return (
-    <div className="border">
-      <div>Global header!</div>
-      <div>
+    <div className="navbar-menu is-active">
+      <div className="navbar-start">
         {authorized &&
       <div>
-        <div> Sign Out </div>
         <form
           onSubmit={event => {
             event.preventDefault();
@@ -20,7 +19,7 @@ export default function GlobalHeader({ id, authorized, signOut }) {
             });
             form.reset();
           }}>
-          <button type="submit" name="submit">log out</button>
+          <button className="button is-primary is-outlined" type="submit" name="submit">Logout</button>
         </form>
       </div>}
       </div>
@@ -28,7 +27,7 @@ export default function GlobalHeader({ id, authorized, signOut }) {
         <div>
           <ul>
             <li>
-              <Link to="/">Home in the global header</Link>
+              <Link to="/"><i className="fa fa-home fa-2x"></i></Link>
             </li>
             <li>
               <Link to="/about">About</Link>
