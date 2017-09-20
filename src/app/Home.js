@@ -78,11 +78,11 @@ export function Home({signIn, signUp}) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    signUp: (email, password) => {
-      dispatch(signUp(email, password));
+    signUp: ({payload}) => {
+      dispatch(signUp({payload}));
     },
-    signIn: (email, password) => {
-      dispatch(signIn(email, password));
+    signIn: ({payload}) => {
+      dispatch(signIn({payload}));
     }
   };
 }
@@ -90,7 +90,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     id: state.id,
-    authorized: state.authorized
-  };
+    authId: state.authId
+    };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

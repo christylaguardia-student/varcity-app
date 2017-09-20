@@ -16,7 +16,7 @@ export class Info extends Component {
     this.props.getInfo(id);
     this.props.getCountries();
   }
-  
+
   render() {
     // const { info, bio } = this.props.athletes._id;
     const { info, bio } = defaultValues._id;

@@ -12,18 +12,42 @@ import ProfileContainer from './ProfileContainer';
 import Home from './Home';
 import About from './About';
 import { connect } from 'react-redux';
+import { signIn } from './actions';
 
 class App extends Component {
-  render() {
-    let routes = null;
-    const { authorized, id } = this.props;
+  constructor(props) {
+    super(props)
+    this.state = {
+      authId: ''
+    }
 
-    if (authorized) {
+  }
+
+async checkForToken() {
+  const storage = localStorage;
+  const token  = storage.getItem('varcity') || '';
+  if (token !== '') {
+  const user = await signIn({token: token})
+  }
+}
+
+  render() {
+
+    let routes = null;
+    const { authId, signIn } = this.props;
+    this.checkForToken()
+
+
+    if (authId && Object.entries(authId).length !== 0) {
       routes = [
         <Route key="1" exact path="/about" component={About} />,
-        <Route key="4" path="/athletes/:id" component={ProfileContainer} />,
-        <Route key="3" path="/athletes" component={SearchContainer} />,
-        <Redirect key="5" to={`/athletes/${id}`} />
+        <Route key="3" exact path="/athletes" component={SearchContainer} />,
+        <Route
+          key="4"
+          path={`/athletes/${authId}`}
+          component={ProfileContainer}
+        />,
+        <Redirect key="5" to={`/athletes/${authId}`} />
       ];
     } else {
       routes = [
@@ -45,4 +69,14 @@ class App extends Component {
   }
 }
 
-export default connect(state => ({ authorized: state.authorized }), null)(App);
+function mapDispatchToProps(dispatch) {
+  return {
+    signIn: ({ payload }) => {
+      dispatch(signIn({ payload }));
+    }
+  };
+}
+
+export default connect(state => ({ authId: state.authId }), mapDispatchToProps)(
+  App
+);

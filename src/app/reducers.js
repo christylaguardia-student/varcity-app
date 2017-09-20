@@ -4,8 +4,7 @@ import {
   SIGN_OUT
 } from './constants';
 
-export function authorized(state = null, { type, payload }) {
-  console.log(type, payload);
+export function authId(state = {}, { type, payload }) {
   switch (type) {
     case SIGN_OUT:
     return null;
