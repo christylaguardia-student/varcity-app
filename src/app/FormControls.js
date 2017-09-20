@@ -55,7 +55,7 @@ export function DateInput({ value, propName, label, change, disabled=true }) {
       {label}
       <RIEInput
         isDisabled={disabled}
-        type="date"
+        type="text"
         value={value}
         change={change}
         propName={propName}

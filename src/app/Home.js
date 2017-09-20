@@ -14,9 +14,11 @@ export function Home({signIn, signUp}) {
 
   return (
     <div>
-      <h1>Varcity Network</h1>
-      <p>Connecting student-athletes to success.</p>
-      <h3>Join Now! It's Free!</h3>
+      <div className="container is-fluid content">
+        <h1 className="title">Varcity Network</h1>
+        <p className="subtitle">Connecting student athletes to success.</p>
+        <h3>Join Now! It's Free!</h3>
+      </div>
       <div>
         <div> Sign Up </div>
         <form
@@ -29,9 +31,19 @@ export function Home({signIn, signUp}) {
             });
             form.reset();
           }}>
-          <input type="text" name="email" placeholder="email" />
-          <input type="text" name="password" placeholder="password" />
-          <button type="submit" name="submit" />
+          <div className="control has-icons-left has-icons-right">
+            <input className="input" type="text" name="email" placeholder="email" />
+            <span className="icon is-small is-left">
+              <i className="fa fa-user"></i>
+            </span>
+          </div>
+          <div className="control has-icons-left has-icons-right">
+            <input className="input" type="password" name="password" placeholder="password" />
+            <span className="icon is-small is-left">
+              <i className="fa fa-lock"></i>
+            </span>
+          </div>
+          <button className="button is-primary is-outlined" type="submit" name="submit">Sign Up</button>
         </form>
 
         <div> Sign In </div>
@@ -45,9 +57,19 @@ export function Home({signIn, signUp}) {
             });
             form.reset();
           }}>
-          <input type="text" name="email" placeholder="email" />
-          <input type="text" name="password" placeholder="password" />
-          <button type="submit" name="submit" />
+          <div className="control has-icons-left has-icons-right">
+            <input className="input" type="text" name="email" placeholder="email" />
+            <span className="icon is-small is-left">
+              <i className="fa fa-user"></i>
+            </span>
+          </div>
+          <div className="control has-icons-left has-icons-right">
+            <input className="input" type="password" name="password" placeholder="password" />
+            <span className="icon is-small is-left">
+              <i className="fa fa-lock"></i>
+            </span>
+          </div>
+          <button className="button is-primary is-outlined" type="submit" name="submit">Sign In</button>
         </form>
       </div>
     </div>
@@ -69,6 +91,6 @@ function mapStateToProps(state) {
   return {
     id: state.id,
     authId: state.authId
-    };
+  };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

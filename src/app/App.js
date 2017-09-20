@@ -13,29 +13,30 @@ import Home from './Home';
 import About from './About';
 import { connect } from 'react-redux';
 import { signIn } from './actions';
+import 'bulma/css/bulma.css';
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       authId: ''
+    };
+
+  }
+
+  async checkForToken() {
+    const storage = localStorage;
+    const token  = storage.getItem('varcity') || '';
+    if (token !== '') {
+      const user = await signIn({token: token});
     }
-
   }
-
-async checkForToken() {
-  const storage = localStorage;
-  const token  = storage.getItem('varcity') || '';
-  if (token !== '') {
-  const user = await signIn({token: token})
-  }
-}
 
   render() {
 
     let routes = null;
     const { authId, signIn } = this.props;
-    this.checkForToken()
+    this.checkForToken();
 
 
     if (authId && Object.entries(authId).length !== 0) {
