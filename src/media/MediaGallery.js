@@ -77,7 +77,7 @@ export class MediaGallery extends Component {
   }
 
   componentDidMount() {
-    // this.props.getMedia(id);
+    this.props.getMedia(123);
   }
   
   handleImageSubmit(e) {

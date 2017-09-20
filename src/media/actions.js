@@ -18,9 +18,13 @@ export function makeUpdateMedia(api) {
   return function updateMedia(id, media) {
     console.log('inside updateMedia, id is', id, 'media is', media);
     return dispatch => {
+      console.log('id is', id, 'media is', media);
       return api
         .update(id, media, 'media')
-        .then(media => dispatch({ type: actions.UPDATE_MEDIA, payload: media }))
+        .then(media => {
+          console.log('returned media is', media);
+          dispatch({ type: actions.UPDATE_MEDIA, payload: media });
+        })
         .catch(console.log);
     };
   };
