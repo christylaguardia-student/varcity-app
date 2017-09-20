@@ -1,39 +1,76 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getInfo } from '../store/athletes/actions';
+import { getInfo, updateInfo } from '../store/athletes/actions';
 import { getCountries, getRegions, getCities } from './address/actions';
 import { TextInput, TextArea, NumberInput, DateInput, Toggle, TextSelect, UrlInput } from '../app/FormControls';
 import sports from '../utils/sports';
-
 import defaultValues from '../store/athletes/defaultValues';
 
 export class Info extends Component {
 
-  componentDidMount() {
-    // const id = this.props.location.pathname.split('/athletes/')[1];
-    // console.log('id', id);
-    const id = '59c07c3dee27d1b10998f54b';
-    this.props.getInfo(id);
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      editModeOn: false
+    };
+
+    this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleCountryChange = this.handleCountryChange.bind(this);
+    this.handleRegionChange = this.handleRegionChange.bind(this);
+    this.handleCityChange = this.handleCityChange.bind(this);
+    this.handleOnClick = this.handleOnClick.bind(this);
+  }
+  
+  componentWillMount() {
+    this.props.getInfo(this.props.currentId);
     this.props.getCountries();
   }
 
+  handleOnChange(value, id) {
+    console.log(id, 'was changed to ', value);
+    this.props.updateInfo(id, value);
+  }
+  
+  handleCountryChange(value) {
+    console.log('was changed to ', value);
+    const { country } = value;
+    this.props.getRegions(country);
+  }
+
+  handleRegionChange(value) {
+
+  }
+
+  handleCityChange(value) {
+
+  }
+
+  handleOnClick() {
+    // console.log('currentId',this.props.currentId,'authId',this.props.authId);
+    // if (this.props.currentId === this.props.authId) {
+    //   console.log('edit mode allowed');
+    //   this.setState({
+    //     editModeOn: this.state.editModeOn ? false : true
+    //   });
+    // } else {
+    //   console.log('edit mode NOT allowed');
+    // }
+  }
+
   render() {
-    // const { info, bio } = this.props.athletes._id;
-    const { info, bio } = defaultValues._id;
-    const disabled = false;
-    function onChange(value) { console.log('was changed to ', value); }
-    const fakeOptions=[{id:1,text:'pickone'},{id:2,text:'pickone'},{id:3,text:'pickone'}];
+    // TODO: set the loading state instead of using defaultValues
+    const { info } = this.props.athletes[this.props.currentId] || defaultValues[123];
+    const onChange = this.handleOnChange;
+    const disabled = this.state.editMode;
     const heightUOM = [{ id: 1, text: 'in' }, { id: 2, text: 'cm' }];
     const weightUOM = [{ id: 1, text: 'lb' }, { id: 2, text: 'kg' }];
 
+    console.log('this.props', this.props);
+    console.log('this.state', this.state);
     return (
       <div className="column">
-        <div>
-          <p>
-            <span><icon className="fa fa-check fa-lg" /></span>
-            <span><icon className="fa fa-pencil fa-lg" /></span>
-          </p>
-        </div>
+        <EditButton editModeOn={this.state.editMode} onClick={this.handleOnClick} />
 
         <div className="tile is-ancestor">
 
@@ -49,16 +86,21 @@ export class Info extends Component {
             <TextSelect value={info.primarySport} propName="primarySport" label="Primary Sport" options={sports} change={onChange} disabled={disabled} />
             <TextInput value={info.position} propName="position" label="Position" change={onChange} disabled={disabled} />
             <TextInput value={info.organization} propName="organization" label="School/Organization" change={onChange} disabled={disabled} />
-            <TextSelect value={info.location.country} propName="country" label="Country" options={fakeOptions} change={onChange} disabled={disabled} />
-            <TextSelect value={info.location.state} propName="region" label="State/Region" options={fakeOptions} change={onChange} disabled={disabled} /> 
-            <TextSelect value={info.location.city} propName="city" label="City" options={fakeOptions} change={onChange} disabled={disabled} /> 
           </div>
 
-          <div className="field body is-narrow is-grouped is-grouped-multiline">
-            <NumberInput value={info.person.height} propName="height" label="Height" change={onChange} disabled={disabled} />
-            <TextSelect value={info.person.heightUom} propName="heightUOM" label="(in/cm)" options={heightUOM} change={onChange} disabled={disabled} />
-            <NumberInput value={info.person.weight} propName="weight" label="Weight" change={onChange} disabled={disabled} />
-            <TextSelect value={info.person.weightUom} propName="weightUOM" label="(lb/kg)" options={weightUOM} change={onChange} disabled={disabled} />
+          <div className="tile is-vertical">
+            <TextSelect value={info.location.country} propName="country" label="Country" options={this.props.address.countries} change={this.handleCountryChange} disabled={disabled} />
+            <TextSelect value={info.location.state} propName="region" label="State/Region" options={this.props.address.regions} change={this.handleRegionChange} disabled={disabled} /> 
+            <TextSelect value={info.location.city} propName="city" label="City" options={this.props.address.regions} change={this.handleCityChange} disabled={disabled} /> 
+          </div>
+
+          <div className="tile is-vertical">
+            <div className="field body is-narrow is-grouped is-grouped-multiline">
+              <NumberInput value={info.person.height} propName="height" label="Height" change={onChange} disabled={disabled} />
+              <TextSelect value={info.person.heightUom} propName="heightUOM" label="(in/cm)" options={heightUOM} change={onChange} disabled={disabled} />
+              <NumberInput value={info.person.weight} propName="weight" label="Weight" change={onChange} disabled={disabled} />
+              <TextSelect value={info.person.weightUom} propName="weightUOM" label="(lb/kg)" options={weightUOM} change={onChange} disabled={disabled} />
+            </div>
           </div>
 
           <div className="is-grouped is-grouped-multiline">
@@ -67,19 +109,42 @@ export class Info extends Component {
             <UrlInput value={info.socials.instagramUrl} propName="instagramUrl" label="Instagram" change={onChange} disabled={disabled} />
           </div>
         </div>
-        <div className="tile is-vertical">
+        {/* <div className="tile is-vertical">
           <TextArea value={bio.about} propName="about" label="Bio" change={onChange} disabled={disabled} />
           <TextArea value={bio.awards} propName="awards" label="Awards" change={onChange} disabled={disabled} />
-        </div>
+        </div> */}
       </div>
     );
   }
 }
 
+function EditButton(editModeOn, onClick) {
+  return (
+    <div>
+      <button className="button" onClick={onClick}>
+        <span>
+          <icon className={
+            editModeOn ? 'fa fa-check fa-lg' : 'fa fa-pencil fa-lg'}
+          /></span>
+      </button>
+    </div>
+  );
+}
+
+const mapStateToProps = (state) => {
+  return {
+    athletes: state.athletes,
+    address: state.address,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     getInfo: (id) => {
       dispatch(getInfo(id));
+    },
+    updateInfo: (id) => {
+      dispatch(updateInfo(id));
     },
     getCountries: () => {
       dispatch(getCountries());
@@ -93,11 +158,13 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const mapStateToProps = (state) => {
-  return {
-    athletes: state.athletes,
-    address: state.address,
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Info);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  (stateProps, dispatchProps, ownProps) => {
+    return {
+      ...stateProps,
+      ...dispatchProps,
+      currentId: ownProps.location.pathname.split('/athletes/')[1],
+    };
+  })(Info);

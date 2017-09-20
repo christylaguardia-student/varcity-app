@@ -18,14 +18,18 @@ export function makeGetInfo(api) {
 
 export const getInfo = makeGetInfo(athleteApi);
 
-export function makeUpdateAthlete(api) {
-  return function updateAthlete(data) {
+export function makeUpdateInfo(api) {
+  return function updateInfo(id, data) {
+    console.log('updateInfo with data', data);
     return dispatch => {
       return api
-        .update(data)
-        .then(athlete => dispatch({ type: actions.UPDATE, payload: athlete }));
+        .update(id, data, 'info')
+        .then(athleteInfo => {
+          console.log('athleteInfo before dispatch in makeUpdateInfo', athleteInfo);
+          dispatch({ type: actions.UPDATE_INFO, payload: athleteInfo });
+        });
     };
   };
 }
 
-export const updateAthlete = makeUpdateAthlete(athleteApi);
+export const updateInfo = makeUpdateInfo(athleteApi);
