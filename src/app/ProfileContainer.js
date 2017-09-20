@@ -13,12 +13,13 @@ class ProfileContainer extends Component {
     return (
       <Router>
         <div>
-          <ul>
-            <li><Link to={`/athletes/${id}`}>Info</Link></li>
-            <li><Link to={`/athletes/${id}/sports`}>Sports</Link></li>
-            <li><Link to={`/athletes/${id}/edu`}>Education</Link></li>
-            <li><Link to={`/athletes/${id}/media`}>Media</Link></li>
-          </ul>
+          <div className="navbar is-transparent is-boxed">
+            <Link className="navbar-item" to={`/athletes/${id}`}>Info</Link>
+            <Link className="navbar-item" to={`/athletes/${id}/sports`}>Sports</Link>
+            <Link className="navbar-item" to={`/athletes/${id}/edu`}>Education</Link>
+            <Link className="navbar-item" to={`/athletes/${id}/media`}>Media</Link>
+            <hr className="navbar-divider" />
+          </div>
           <Switch>
             <Route path={`/athletes/${id}`} component={Info} />
             <Route path={`/athletes/${id}/sports`} component={SportsContainer} />
