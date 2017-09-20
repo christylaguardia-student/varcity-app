@@ -7,13 +7,11 @@ export function signUp({ payload }) {
     .then(
       res => {
         const { token } = res.body.token;
-        console.log(15, token)
         const storage = localStorage;
         storage.setItem('varcity', token);
         payload.token = token;
         return authAPI.signIn({payload}).then(savedUser => {
-          console.log(90, payload)
-          dispatch({ type: AUTHORIZED, payload: savedUser });
+          dispatch({ type: AUTHORIZED, payload: savedUser.user._id });
         });
       },
       error => {

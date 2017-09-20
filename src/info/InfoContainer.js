@@ -9,7 +9,6 @@ export class InfoContainer extends Component {
 
   componentDidMount() {
     const id = this.props.location.pathname.split('/athletes/')[1];
-    console.log('id', id);
     this.props.getInfo(id);
     this.props.getCountries();
   }

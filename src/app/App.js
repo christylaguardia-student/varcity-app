@@ -14,16 +14,19 @@ import About from './About';
 import { connect } from 'react-redux';
 
 class App extends Component {
+
   render() {
 
     let routes = null;
     const { authId } = this.props;
-    console.log(22, authId)
-    if (authId) {
+
+
+    if (authId && Object.entries(authId).length !== 0) {
+
       routes = [
         <Route key="1" exact path="/about" component={About} />,
-        <Route key="4" path={`/athletes/${authId}`} component={ProfileContainer} />,
         <Route key="3" exact path="/athletes" component={SearchContainer} />,
+        <Route key="4" path={`/athletes/${authId}`} component={ProfileContainer} />,
         <Redirect key="5" to={`/athletes/${authId}`} />
       ];
     } else {

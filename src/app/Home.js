@@ -56,8 +56,8 @@ export function Home({signIn, signUp}) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    signUp: (email, password) => {
-      dispatch(signUp(email, password));
+    signUp: ({payload}) => {
+      dispatch(signUp({payload}));
     },
     signIn: ({payload}) => {
       dispatch(signIn({payload}));
@@ -68,8 +68,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     id: state.id,
-    authId: state.authId,
-    authorized: state.authorized
-  };
+    authId: state.authId
+    };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

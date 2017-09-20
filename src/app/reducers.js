@@ -5,7 +5,6 @@ import {
 } from './constants';
 
 export function authId(state = {}, { type, payload }) {
-  console.log(type, payload);
   switch (type) {
     case SIGN_OUT:
     return null;
