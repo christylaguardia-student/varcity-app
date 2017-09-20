@@ -16,7 +16,6 @@ import { connect } from 'react-redux';
 class App extends Component {
   render() {
     let routes = null;
-    console.log('this.props',this.props);
     const { authorized, id } = this.props;
 
     if (authorized) {
