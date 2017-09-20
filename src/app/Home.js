@@ -91,6 +91,6 @@ function mapStateToProps(state) {
   return {
     id: state.id,
     authId: state.authId
-    };
+  };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
