@@ -101,7 +101,9 @@ export function ToggleEditMode({ value, propName, change, disabled=true }) {
   );
 }
 
-export function TextSelect({ value, propName, label, options, change, disabled=true }) {
+const fakeOptions = [{ id: -1, text:'' }];
+
+export function TextSelect({ value, propName, label, options=fakeOptions, change, disabled=true }) {
   return (
     <label className="label">
       {label}
