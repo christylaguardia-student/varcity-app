@@ -59,8 +59,8 @@ function mapDispatchToProps(dispatch) {
     signUp: (email, password) => {
       dispatch(signUp(email, password));
     },
-    signIn: (email, password) => {
-      dispatch(signIn(email, password));
+    signIn: ({payload}) => {
+      dispatch(signIn({payload}));
     }
   };
 }
@@ -68,6 +68,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     id: state.id,
+    authId: state.authId,
     authorized: state.authorized
   };
 }
