@@ -25,9 +25,9 @@ export function GalleryItem({ onImageChange, onImageSubmit, onSelect, holdData, 
         <img src={image} alt={description} />
         {/* <button onClick={() => onRemove(item)} >X</button> */}
         <div className="is-grouped is-grouped-multiline">
-          {/* <TextSelect className="select" value={select} propName="mediaType" label="Media Type" change={onSelect} options={options} disabled={false} /> */}
+          <TextSelect className="select" value={select} propName="mediaType" label="Media Type" change={onSelect} options={options} disabled={false} />
           {select.text === 'video link' &&
-            {/* <UrlInput value={value} propName="videoUrl" label="Video Link" change={holdData} disabled={false} /> */}
+            <UrlInput value={value} propName="videoUrl" label="Video Link" change={holdData} disabled={false} />
           }
 
           {/* image file upload */}
@@ -133,7 +133,7 @@ export class MediaGallery extends Component {
     // ));
     return (
       <div className="field">
-        {/* <ToggleEditMode value="edit" propName="edit" change={this.holdData} disabled={false} /> */}
+        <ToggleEditMode value="edit" propName="edit" change={this.holdData} disabled={false} />
 
         <div className="tile">
           <GalleryItem rotateGallery={rotateGallery} select={select} options={selectOptions} holdData={this.holdData} onSelect={this.onSelect} onImageSubmit={this.handleImageSubmit} onImageChange={this.handleImageChange} image={this.state.image}/>
