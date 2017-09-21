@@ -22,7 +22,6 @@ class App extends Component {
 
   render() {
     let routes = null;
-
     const { authId } = this.props;
 
     if (authId && Object.entries(authId).length !== 0) {

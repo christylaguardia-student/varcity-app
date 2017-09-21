@@ -4,7 +4,6 @@ const AUTH_API_URL = process.env.REACT_APP_SEARCH_API_URL || '/api/search';
 
 export default {
   search({ payload }) {
-    console.log(44, payload);
     return req
       .post(`${AUTH_API_URL}`)
       .send(payload)
