@@ -4,14 +4,11 @@ import { getInfo, updateInfo } from '../store/athletes/actions';
 import { getCountries, getRegions, getCities } from './address/actions';
 import InfoEditor from './InfoEditor';
 import InfoPresentation from './InfoPresentation';
-// import defaultValues from '../store/athletes/defaultValues';
-
 
 // TODO: how to get the exiting/initial values populated correctly?
 // numbers inputs are not updating correctly
 // location dropdowns need to be wired up with the api
 // may need to merge FormControls with Stephanie's
-
 
 export class InfoContainer extends Component {
 
@@ -32,6 +29,7 @@ export class InfoContainer extends Component {
           state: '',
         },
         person: {
+          gender: '',
           height: 0,
           heightUom: '',
           weight: 0,
@@ -39,22 +37,27 @@ export class InfoContainer extends Component {
         },
         about: '',
         awards: '',
+        socials: {
+          facebookUrl: '',
+          twitterUrl: '',
+          instagramUrl: '',
+        }
       }
     };
     
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnSave = this.handleOnSave.bind(this);
-    // this.updateInitialState = this.updateInitialState.bind(this);
+    this.updateInitialState = this.updateInitialState.bind(this);
   }
 
   componentWillMount() {
     this.props.getInfo(this.props.currentId);
   }
 
-  // updateInitialState(info) {
-  //   const { info } = this.props.athletes[this.props.currentId];// || defaultValues[123];
-  //   this.setState({ info });
-  // }
+  updateInitialState() {
+    const { info } = this.props.athletes[this.props.currentId];
+    this.setState({ info });
+  }
 
   handleOnChange(event) {
     const { name, value } = event.target;
@@ -70,6 +73,7 @@ export class InfoContainer extends Component {
   render() {
     const { currentId, authId } = this.props;
     const editModeOn = (authId === currentId);
+    // this.updateInitialState();
 
     return (
       <div>

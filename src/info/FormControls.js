@@ -15,6 +15,21 @@ export function TextInput({ value, prop, label, change }) {
   );
 }
 
+export function UrlInput({ value, prop, label, change }) {
+  return (
+    <label className="label">
+      {label}
+      <input
+        className="input"
+        value={value || ''}
+        name={prop}
+        type="text"
+        placeholder={label}
+        onChange={change} />
+    </label>
+  );
+}
+
 export function NumberInput({ value, prop, label, change }) {
   return (
     <label className="label">
@@ -50,7 +65,7 @@ export function DateInput({ value, prop, label, change }) {
       {label}
       <input
         className="input"
-        value={value || '4/23/1987' }
+        value={value || '1987-04-23' }
         name={prop}
         type="date"
         placeholder={label}
