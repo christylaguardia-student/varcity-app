@@ -38,14 +38,15 @@ export class InfoContainer extends Component {
   // }
 
   handleOnChange(event) {
-    console.log('event',event);
+    const { name, value } = event.target;
+    console.log('updating state with', name, value);
     this.setState({
-      info: { [event.target.name]: event.target.value }
+      info: { [name]: value }
     });
   }
-
+  
   handleOnSave() {
-    console.log('saving state', this.state.info);
+    console.log('saving with id', this.props.currentId, 'and data', this.state.info);
     this.props.updateInfo(this.props.currentId, this.state.info);
   }
 
@@ -84,8 +85,8 @@ const mapDispatchToProps = (dispatch) => {
     getInfo: (id) => {
       dispatch(getInfo(id));
     },
-    updateInfo: (id) => {
-      dispatch(updateInfo(id));
+    updateInfo: (id, data) => {
+      dispatch(updateInfo(id, data));
     },
     getCountries: () => {
       dispatch(getCountries());
