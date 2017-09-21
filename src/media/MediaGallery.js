@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import MediaForm from './MediaForm';
 // import 'bulma/css/bulma.css';
 // import PropTypes from 'prop-types';
 import { Dropdown, TextArea, TextInput } from '../app/FormControls';
@@ -18,37 +19,12 @@ export function GalleryItem({ onChange, onSubmit, props, onImageChange, rotateGa
   return (
     <div className="galleryView">
       {imageUrl && (mediaType === 'Image Upload') &&
-        <img src={imageUrl} alt={description} />
+        <figure className="image is-128x128">
+          <img className="image" src={imageUrl} alt={description} />
+        </figure>
       }
         {/* <button onClick={() => onRemove(item)} >X</button> */}
-        <div className="is-grouped is-grouped-multiline">
-          <Dropdown value={mediaType} prop="mediaType" label="Media Type" change={onChange} options={['Video Link', 'Image Upload']} />
-
-          {mediaType === 'Video Link' &&
-            <TextInput prop="videoUrl" value={videoUrl} label="Video Link" change={onChange} />
-          }
-
-          {/* image file upload */}
-          <form className="field" encType="multipart/formData" onSubmit={e => onSubmit(e)}>
-            {mediaType === 'Image Upload' &&
-              <div className="file">
-                <label className="file-label">
-                  <input className="file-input" type="file" name="imageUrl" onChange={e => onImageChange(e)} />
-                  <span className="file-cta">
-                    <span className="icon file-icon">
-                      <i className="fa fa-upload"></i>
-                    </span>
-                    <span className="file-label">
-                      Choose a file...
-                    </span>
-                  </span>
-                </label>
-              </div>
-            }
-          </form>
-          <TextArea value={description} prop="description" label="Description" change={onChange} />
-        </div>
-      <button className="submitButton" type="submit" onClick={e => onSubmit(e)}>Add Media</button>
+        
     </div>
   );
 }
@@ -98,11 +74,9 @@ export class MediaGallery extends Component {
   handleSubmit(e) {
     e.preventDefault();
     let mediaToSend = this.state.mediaItem;
-    console.log('mediaItem is in handleSubmit', this.state.mediaItem);
     if (mediaToSend.mediaType === 'Video Link') mediaToSend.image = '';
     else if (mediaToSend.mediaType === 'Image Upload') mediaToSend.videoUrl = '';
-    console.log('mediaItem about to send is', this.state.mediaItem);
-    // this.props.updateMedia(this.props.currentId, this.state.mediaItem, 'media');
+    this.props.updateMedia(this.props.currentId, this.state.mediaItem);
   }
 
   // referenced: https://codepen.io/hartzis/pen/VvNGZP?editors=0011
@@ -166,6 +140,8 @@ export class MediaGallery extends Component {
 
         <div className="tile">
           <GalleryItem rotateGallery={rotateGallery} onImageChange={this.handleImageChange} onSubmit={this.handleSubmit} onChange={this.handleChange} props={this.state.mediaItem} />
+          <MediaForm onImageChange={this.handleImageChange} onSubmit={this.handleSubmit} onChange={this.handleChange} props={this.state.mediaItem} />
+          
           {/* {itemGallery[itemNum]} */}
           {/* <nav id="galleryNav">
             <button onClick={() => rotateGallery(-1)}>&laquo; Previous</button> <button onClick={() => rotateGallery(1)}>Next &raquo;</button>
@@ -176,6 +152,48 @@ export class MediaGallery extends Component {
     );
   }
 }
+
+// toggleEditMode() {
+//   if (this.state.editAllowed) {
+//     const newState = this.state.editModeOn ? false : true;
+//     this.setState({
+//       editModeOn: newState
+//     });
+//   }
+// }
+
+// render() {
+//   // this.updateInitialState();
+//   return (
+//     <div>
+//       {this.state.editAllowed ? <ToggleEditor editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} /> : null }
+//       {this.state.editModeOn
+//         ? <InfoEditor id={this.props.currentId} props={this.state.info} change={this.handleOnChange} save={this.handleOnSave} />
+//         : <InfoPresentation info={this.state.info} /> }
+//     </div>
+//   );
+// }
+// }
+
+// function ToggleEditor({ editModeOn, toggleFn }) {
+// const iconClass = editModeOn ? 'fa fa-times fa-lg' : 'fa fa-pencil fa-lg';
+// const buttonText = editModeOn ? 'Close' : 'Edit Your Profile';
+
+// return (
+//   <div>
+//     <p className="control" onClick={toggleFn}>
+//       <a className="button">
+//         <span className="icon is-small">
+//           <i className={iconClass}></i>
+//         </span>
+//         <span>{buttonText}</span>
+//       </a>
+//     </p>
+//   </div>
+// );
+// }
+
+
 
 const mapStateToProps = (state) => { 
   return ({
