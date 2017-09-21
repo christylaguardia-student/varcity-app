@@ -3,8 +3,15 @@ import { connect } from 'react-redux';
 import { getInfo, updateInfo } from '../store/athletes/actions';
 import { getCountries, getRegions, getCities } from './address/actions';
 import InfoEditor from './InfoEditor';
-import { InfoPresentation } from './InfoPresentation';
-import defaultValues from '../store/athletes/defaultValues';
+import InfoPresentation from './InfoPresentation';
+// import defaultValues from '../store/athletes/defaultValues';
+
+
+// TODO: how to get the exiting/initial values populated correctly?
+// numbers inputs are not updating correctly
+// location dropdowns need to be wired up with the api
+// may need to merge FormControls with Stephanie's
+
 
 export class InfoContainer extends Component {
 
@@ -12,9 +19,26 @@ export class InfoContainer extends Component {
     super(props);
 
     this.state = {
-      isLoadingData: true,
       info: {
-        firstName: ''
+        firstName: '',
+        lastName: '',
+        public: false,
+        dob: '',
+        primarySport: '',
+        organization: '',
+        location: {
+          country: '',
+          region: '',
+          state: '',
+        },
+        person: {
+          height: 0,
+          heightUom: '',
+          weight: 0,
+          weightUom: '',
+        },
+        about: '',
+        awards: '',
       }
     };
     
@@ -27,41 +51,25 @@ export class InfoContainer extends Component {
     this.props.getInfo(this.props.currentId);
   }
 
-  // updateInitialState() {
-  //   console.log('this.props', this.props);
-  //   const { info } = this.props.athletes[this.props.currentId];
-  //   this.setState({info});
-  // }
-
-  // componentDidMount() {
-  //   this.updateInitialState();
+  // updateInitialState(info) {
+  //   const { info } = this.props.athletes[this.props.currentId];// || defaultValues[123];
+  //   this.setState({ info });
   // }
 
   handleOnChange(event) {
     const { name, value } = event.target;
-    console.log('updating state with', name, value);
     this.setState({
-      info: { [name]: value }
+      info: { ...this.state.info, [name]: value }
     });
   }
   
   handleOnSave() {
-    console.log('saving with id', this.props.currentId, 'and data', this.state.info);
-    this.props.updateInfo(this.props.currentId, this.state.info);
+    this.props.updateInfo(this.props.currentId, this.state);
   }
 
-
-  // }
-  
   render() {
-    console.log('this.state',this.state);
-    // const { currentId, authId } = this.props;
-    // TODO: determine if edit mode is on, currentId === authId ?
-    // TODO: check if public
-    const editModeOn = true;
-    const { info } = this.props.athletes[this.props.currentId] || defaultValues[123];
-    // this.setState({ info });
-    // this.updateInitialState();
+    const { currentId, authId } = this.props;
+    const editModeOn = (authId === currentId);
 
     return (
       <div>
@@ -71,11 +79,11 @@ export class InfoContainer extends Component {
       </div>
     );
   }
-
 }
 
 const mapStateToProps = (state) => {
   return {
+    authId: state.authId,
     athletes: state.athletes
   };
 };

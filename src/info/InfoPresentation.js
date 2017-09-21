@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function InfoPresentation({ info }) {
+export default function InfoPresentation({ info }) {
   const age = getAge(info.person.dob);
 
   return (

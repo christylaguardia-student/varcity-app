@@ -6,7 +6,7 @@ export function TextInput({ value, prop, label, change }) {
       {label}
       <input
         className="input"
-        value={value}
+        value={value || ''}
         name={prop}
         type="text"
         placeholder={label}
@@ -15,13 +15,13 @@ export function TextInput({ value, prop, label, change }) {
   );
 }
 
-export function NumberInput({ prop, label, change }) {
+export function NumberInput({ value, prop, label, change }) {
   return (
     <label className="label">
       {label}
       <input
         className="input"
-        value={prop}
+        value={value || 0}
         name={prop}
         type="number"
         placeholder={label}
@@ -30,13 +30,13 @@ export function NumberInput({ prop, label, change }) {
   );
 }
 
-export function Checkbox({ prop, label, change }) {
+export function Checkbox({ value, prop, label, change }) {
   return (
     <label className="checkbox">
       {label}
       <input
         className="checkbox"
-        value={prop}
+        value={value || false}
         name={prop}
         type="checkbox"
         onChange={change} />
@@ -44,13 +44,13 @@ export function Checkbox({ prop, label, change }) {
   );
 }
 
-export function DateInput({ prop, label, change }) {
+export function DateInput({ value, prop, label, change }) {
   return (
     <label className="label">
       {label}
       <input
         className="input"
-        value={prop}
+        value={value || '4/23/1987' }
         name={prop}
         type="date"
         placeholder={label}
@@ -59,13 +59,13 @@ export function DateInput({ prop, label, change }) {
   );
 }
 
-export function Dropdown({ prop, label, options, change }) {
+export function Dropdown({ value, prop, label, options, change }) {
   return (
     <label className="label">
       {label}
       <select
         className="input"
-        value={prop.value}
+        value={value || options[0]}
         name={prop}
         onChange={change}>
 
@@ -78,13 +78,13 @@ export function Dropdown({ prop, label, options, change }) {
   );
 }
 
-export function TextArea({ prop, label, change }) {
+export function TextArea({ value, prop, label, change }) {
   return (
     <label className="label">
       {label}
       <textarea
         className="input"
-        value={prop}
+        value={value || ''}
         name={prop}
         rows="10"
         cols="50"
