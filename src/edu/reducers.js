@@ -3,13 +3,8 @@ import * as actions from './constants';
 export function educations(state = [], { type, payload }) {
     switch (type) {
         case actions.LOAD_EDUCATIONS:
-            console.log('in reducer, load educations gives payload of', payload);
             return payload;
         case actions.CREATE_NEW_EDUCATION:
-            console.log('in reducer, create new education returns', [
-                ...state,
-                newEducationItem(payload)
-            ]);
             return [
                 ...state,
                 newEducationItem(payload)

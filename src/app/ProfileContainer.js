@@ -20,10 +20,10 @@ class ProfileContainer extends Component {
             <li><Link to={`/athletes/${id}/media`}>Media</Link></li>
           </ul>
           <Switch>
-            <Route path={`/athletes/${id}`} component={Info} />
-            <Route path={`/athletes/${id}/sports`} component={SportsContainer} />
-            <Route path={`/athletes/${id}/edu`} component={EduPages} />
-            <Route path={`/athletes/${id}/media`} component={MediaGallery} />
+            <Route exact path={`/athletes/:id`} component={Info} />
+            <Route path={`/athletes/:id/sports`} component={SportsContainer} />
+            <Route path={`/athletes/:id/edu`} component={EduPages} />
+            <Route path={`/athletes/:id/media`} component={MediaGallery} />
           </Switch>
         </div>
       </Router>

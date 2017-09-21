@@ -8,16 +8,58 @@ import EduForm from './EduForm';
 
 
 class EduPages extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      educations: {
+        institution: '', 
+        year: 2017, 
+        country: '', 
+        city: '', 
+        state: '', 
+        degree: '', 
+        satReading: '', 
+        satWriting: '', 
+        satMath: '', 
+        actMath: '', 
+        actReading: '', 
+        actScience: '', 
+        actWriting: '', 
+        ibHistory: '', 
+        ibLanguage: '', 
+        ibMath: '', 
+        ibScience: ''
+      }
+    }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
   // componentWillMount() {
   //   if (this.props.educations[0].id == '') {
   //     this.props.actions.loadEducation();
   //   }
   // }
+
+  handleChange(event) {
+    this.setState({
+      educations: {
+      [event.target.name]: event.target.value
+      }
+    });
+  }
+
+  handleSubmit() {
+    // send to db
+  }
+
   render() {
     // const educations = this.props.educations;
     return (
       <div className="">
-        <EduForm/>
+        <EduForm onSubmit={this.handleSubmit} onChange={this.handleChange} props={this.state.educations} />
+
+        {/* <EduPresentation />  */}
         {/* <h1>Education<Link to={'/edu/new'} className="">Education ++</Link></h1>
         <div className="">
           <EduList educations={educations} />
@@ -38,7 +80,26 @@ function mapStateToProps(state) {
     };
   } else {
     return {
-      educations: [{id: '', institution: '', year: '', address: '', degree: '', testScores: '' }]
+      educations: [{
+        institution: '', 
+        year: 2017, 
+        country: '', 
+        city: '', 
+        state: '', 
+        degree: '', 
+        satReading: '', 
+        satWriting: '', 
+        satMath: '', 
+        actMath: '', 
+        actReading: '', 
+        actScience: '', 
+        actWriting: '', 
+        ibHistory: '', 
+        ibLanguage: '', 
+        ibMath: '', 
+        ibScience: ''
+      }],
+      authId: state.authId
     }
   }
 }
