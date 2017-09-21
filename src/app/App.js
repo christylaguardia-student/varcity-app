@@ -56,7 +56,6 @@ class App extends Component {
   }
 }
 
-<<<<<<< Updated upstream
 function mapDispatchToProps(dispatch) {
   return {
     retrieveWithToken: () => {
@@ -68,10 +67,3 @@ function mapDispatchToProps(dispatch) {
 export default connect(state => ({ authId: state.authId }), mapDispatchToProps)(
   App
 );
-=======
-App.PropTypes = {
-  children: PropTypes.object.isRequired
-};
-
-export default App;
->>>>>>> Stashed changes
