@@ -10,26 +10,43 @@ export class InfoContainer extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+
+    this.state = {
+      isLoadingData: true,
+      info: {
+        firstName: ''
+      }
+    };
+    
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleOnSave = this.handleOnSave.bind(this);
+    // this.updateInitialState = this.updateInitialState.bind(this);
   }
 
   componentWillMount() {
     this.props.getInfo(this.props.currentId);
   }
 
-  // componentDidMount() {
-  //   const { info } = this.props.athletes[this.props.currentId] || defaultValues[123];
-  //   this.setState({ info });
+  // updateInitialState() {
+  //   console.log('this.props', this.props);
+  //   const { info } = this.props.athletes[this.props.currentId];
+  //   this.setState({info});
   // }
 
-  handleOnChange(prop) {
-    console.log('prop',prop);
-    this.setState(prop);
+  // componentDidMount() {
+  //   this.updateInitialState();
+  // }
+
+  handleOnChange(event) {
+    console.log('event',event);
+    this.setState({
+      info: { [event.target.name]: event.target.value }
+    });
   }
 
-  handleOnSave(prop) {
-    this.props.updateInfo(this.props.currentId, prop);
+  handleOnSave() {
+    console.log('saving state', this.state.info);
+    this.props.updateInfo(this.props.currentId, this.state.info);
   }
 
 
@@ -43,12 +60,13 @@ export class InfoContainer extends Component {
     const editModeOn = true;
     const { info } = this.props.athletes[this.props.currentId] || defaultValues[123];
     // this.setState({ info });
+    // this.updateInitialState();
 
     return (
       <div>
         {editModeOn
-          ? <InfoEditor id={this.props.currentId} info={info} change={this.handleOnChange} save={this.handleOnSave} />
-          : <InfoPresentation info={info} /> }
+          ? <InfoEditor id={this.props.currentId} props={this.state.info} change={this.handleOnChange} save={this.handleOnSave} />
+          : <InfoPresentation info={this.state.info} /> }
       </div>
     );
   }

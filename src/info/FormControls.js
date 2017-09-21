@@ -1,12 +1,12 @@
 import React from 'react';
 
-export function TextInput({ prop, label, change }) {
+export function TextInput({ value, prop, label, change }) {
   return (
     <label className="label">
       {label}
       <input
         className="input"
-        value={prop}
+        value={value}
         name={prop}
         type="text"
         placeholder={label}
