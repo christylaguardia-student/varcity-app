@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import { TextInput, NumberInput, Dropdown } from '../app/FormControls';
+import { TextInput, NumberInput, Dropdown, DateInput } from '../app/FormControls';
 
 // export function SportForm(onSubmit, onChange, onDelete) 
 
 
-export default function Sportform({ onSubmit, onChange, props }) {
+export default function SportForm({ onSubmit, onChange, props }) {
   
     const { sport, organization, position, stat, seasonDates} = props;
       return (

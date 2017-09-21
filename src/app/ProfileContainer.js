@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Info from '../info/Info';
-import SportsContainer from '../sports/SportsContainer';
-import EduContainer from '../edu/EduContainer';
+import SportPage from '../sports/SportPage';
+import EduPages from '../edu/EduPages';
 import MediaGallery from '../media/MediaGallery';
 
 class ProfileContainer extends Component {

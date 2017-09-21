@@ -44,7 +44,7 @@ export function Checkbox({ prop, label, change, value }) {
   );
 }
 
-export function DateInput({ prop, label, change, value }) {
+export function DateInput({ prop, label, change, value, RIEInput, disabled, propName }) {
   return (
     <label className="label">
       {label}
