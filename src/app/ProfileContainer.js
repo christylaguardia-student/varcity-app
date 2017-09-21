@@ -13,18 +13,19 @@ class ProfileContainer extends Component {
     return (
       <Router>
         <div>
-          <div className="navbar is-transparent is-boxed">
-            <Link className="navbar-item" to={`/athletes/${id}`}>Info</Link>
-            <Link className="navbar-item" to={`/athletes/${id}/sports`}>Sports</Link>
-            <Link className="navbar-item" to={`/athletes/${id}/edu`}>Education</Link>
-            <Link className="navbar-item" to={`/athletes/${id}/media`}>Media</Link>
-            <hr className="navbar-divider" />
+          <div className="tabs is-centered is-boxed is-medium">
+            <ul>
+              <li className="is-active"><Link to={`/athletes/${id}`}>Info</Link></li>
+              <li><Link to={`/athletes/${id}/sports`}>Sports</Link></li>
+              <li><Link to={`/athletes/${id}/edu`}>Education</Link></li>
+              <li><Link to={`/athletes/${id}/media`}>Media</Link></li>
+            </ul>
           </div>
           <Switch>
-            <Route path={`/athletes/${id}`} component={InfoContainer} />
-            <Route path={`/athletes/${id}/sports`} component={SportsContainer} />
-            <Route path={`/athletes/${id}/edu`} component={EduContainer} />
-            <Route path={`/athletes/${id}/media`} component={MediaGallery} />
+            <Route path="/athletes/:id" component={InfoContainer} />
+            <Route path="/athletes/:id/sports" component={SportsContainer} />
+            <Route path="/athletes/:id/edu" component={EduContainer} />
+            <Route path="/athletes/:id/media" component={MediaGallery} />
           </Switch>
         </div>
       </Router>

@@ -5,8 +5,7 @@ export default function InfoPresentation({ info }) {
 
   return (
     <div>
-      viewer
-      <div className="image is-4by3">
+      <div className="image is-128x128">
         <img src={info.profileUrl} alt="Profile" />
       </div>
 
@@ -23,7 +22,7 @@ export default function InfoPresentation({ info }) {
             </tr>
             <tr>
               <td>Sport</td>
-              <td>{info.primarySport} ({info.position})</td>
+              <td>{info.primarySport} {info.position}</td>
             </tr>
             <tr>
               <td>Height</td>
@@ -39,13 +38,13 @@ export default function InfoPresentation({ info }) {
             </tr>
             <tr>
               <td>Location</td>
-              <td>{info.location.city}, {info.location.state}, {info.location.country}</td>
+              <td>{info.location.city} {info.location.state} {info.location.country}</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div>
+      <div className="box">
         <span>
           <a className="icon is-medium" href={info.socials.facebookUrl}>
             <i className="fa fa-facebook fa-lg"></i>
@@ -63,7 +62,7 @@ export default function InfoPresentation({ info }) {
         </span>
       </div>
 
-      <div className="content">
+      <div className="box content">
         <blockquote>{info.about}</blockquote>
         <p>{info.awards}</p>
       </div>

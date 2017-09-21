@@ -48,13 +48,13 @@ export function NumberInput({ value, prop, label, change }) {
 export function Checkbox({ value, prop, label, change }) {
   return (
     <label className="checkbox">
-      {label}
       <input
         className="checkbox"
         value={value || false}
         name={prop}
         type="checkbox"
         onChange={change} />
+      <span>{label}</span>
     </label>
   );
 }
