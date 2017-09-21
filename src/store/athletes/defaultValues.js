@@ -1,6 +1,6 @@
 
 export default {
-  _id: {
+  123: {
     info: {
       firstName: '',
       lastName: '',
