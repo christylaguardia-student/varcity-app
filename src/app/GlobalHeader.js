@@ -11,7 +11,6 @@ export default function GlobalHeader({ authId, signOut }) {
               <Link to="/"><i className="fa fa-home fa-2x"></i></Link>
             </li>
             <li>
-              {/* <input className="input" placeholder="search" /> */}
               <div className="control has-icons-left">
                 <input className="input" placeholder="Search" />
                 <span className="icon is-small is-left">
@@ -24,10 +23,10 @@ export default function GlobalHeader({ authId, signOut }) {
               <Link to="/about">About</Link>
             </li>
             <li>
-              <Link to="/athletes">Search</Link>
+              <Link to="/search">Search</Link>
             </li>
             <li>
-              <Link to={`/athletes/${authId}`}>Profile</Link>
+              <Link to={`/athletes/${authId}`}>My Profile</Link>
             </li>
             <li>
               <div>
