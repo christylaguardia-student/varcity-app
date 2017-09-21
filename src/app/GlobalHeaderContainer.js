@@ -1,9 +1,14 @@
 import { connect } from 'react-redux';
 import GlobalHeader from './GlobalHeader';
 import { signIn, signUp, signOut } from './actions';
+import { search } from '../search/actions';
+
 
 function mapDispatchToProps(dispatch) {
   return {
+    search: ({payload}) => {
+      dispatch(search({payload}));
+    },
     signUp: ({payload}) => {
       dispatch(signUp({payload}));
     },
@@ -18,7 +23,6 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
   return {
-    id: state.id,
     authId: state.authId
   };
 };
