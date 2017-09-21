@@ -107,3 +107,21 @@ export function TextArea({ value, prop, label, change }) {
     </label>
   );
 }
+
+export function ToggleEditor({ text, editModeOn, toggleFn }) {
+  const iconClass = editModeOn ? 'fa fa-times fa-lg' : 'fa fa-pencil fa-lg';
+  const buttonText = editModeOn ? 'Cancel Edit' : `Edit ${text}`;
+
+  return (
+    <div>
+      <p className="control" onClick={toggleFn}>
+        <a className="button">
+          <span className="icon is-small">
+            <i className={iconClass}></i>
+          </span>
+          <span>{buttonText}</span>
+        </a>
+      </p>
+    </div>
+  );
+}
