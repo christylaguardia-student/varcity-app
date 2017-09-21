@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import MediaForm from './MediaForm';
-// import 'bulma/css/bulma.css';
-// import PropTypes from 'prop-types';
 import { Dropdown, TextArea, TextInput } from '../app/FormControls';
 import { updateMedia, getMedia } from './actions';
 
@@ -29,6 +26,24 @@ export function GalleryItem({ onChange, onSubmit, props, onImageChange, rotateGa
   );
 }
 
+export function ToggleEditor({ editModeOn, toggleFn }) {
+  const iconClass = editModeOn ? 'fa fa-times fa-lg' : 'fa fa-pencil fa-lg';
+  const buttonText = editModeOn ? 'Close' : 'Edit Your Profile';
+  
+  return (
+    <div>
+      <p className="control" onClick={toggleFn}>
+        <a className="button">
+          <span className="icon is-small">
+            <i className={iconClass}></i>
+          </span>
+          <span>{buttonText}</span>
+        </a>
+      </p>
+    </div>
+  );
+}
+
 export class MediaGallery extends Component {
 
   constructor(props) {
@@ -40,16 +55,16 @@ export class MediaGallery extends Component {
         mediaType: 'Video Link', 
         videoUrl: '', 
         image: ''
-      }
+      },
+      editModeOn: false,
+      editAllowed: this.props.authId === this.props.currentId
     };
-    // this.rotateGallery = this.rotateGallery.bind(this);
-    // this.handleImageSubmit = this.handleImageSubmit.bind(this);
+    this.rotateGallery = this.rotateGallery.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.setImage = this.setImage.bind(this);
-    // this.holdData = this.holdData.bind(this);
-    // this.onSelect = this.onSelect.bind(this);
+    this.toggleEditMode = this.toggleEditMode.bind(this);
   }
 
   componentDidMount() {
@@ -68,7 +83,6 @@ export class MediaGallery extends Component {
     this.setState({
       mediaItem: { ...this.state.mediaItem, image: buf }
     });
-    console.log('in setImage, mediaItem is', this.state.mediaItem);
   }
 
   handleSubmit(e) {
@@ -79,7 +93,6 @@ export class MediaGallery extends Component {
     this.props.updateMedia(this.props.currentId, this.state.mediaItem);
   }
 
-  // referenced: https://codepen.io/hartzis/pen/VvNGZP?editors=0011
   handleImageChange(e) {
     e.preventDefault();
     const { files } = e.target;
@@ -92,112 +105,55 @@ export class MediaGallery extends Component {
     reader.readAsArrayBuffer(file);
   }
 
-  // handleImageChange(e) {
-  //   e.preventDefault();
+  toggleEditMode() {
+    if (this.state.editAllowed) {
+      const newState = this.state.editModeOn ? false : true;
+      this.setState({
+        editModeOn: newState
+      });
+    }
+  }
 
-  //   let reader = new FileReader();
-  //   let file = e.target.files[0];
-  //   reader.onloadend = () => {
-  //     this.holdData({ image: reader.result });
-  //     // this.setState({
-  //       // image: reader.result      
-  //     };
-  //     reader.readAsArrayBuffer(file);
-  // }
+  rotateGallery(incr) {
+    const itemCount = this.props.media.length;
+    let newItem = this.state.itemNum + incr;
+    if (newItem === itemCount) newItem = 0;
+    else if (newItem === -1) newItem = itemCount - 1;
+    else if (this.props.media.length === 0) newItem = 0;
+    this.setState({ itemNum: newItem });
+  }
 
-  // rotateGallery(incr) {
-    // const itemCount = this.props.items.length;
-    // let newItem = this.state.itemNum + incr;
-    // if (newItem === itemCount) newItem = 0;
-    // else if (newItem === -1) newItem = itemCount - 1;
-    // this.setState({ itemNum: newItem });
-  // }
-
-  // holdData(value) {
-  //   let result = '';
-  //   if(value.mediaType) result = value.mediaType.text;
-  //   else result = Object.values(value)[0];
-  //   mediaItem[Object.keys(value)] = result;
-  //   if (mediaItem.mediaType === 'video link') mediaItem.image = '';
-  //   else if (mediaItem.mediaType === 'image upload') mediaItem.videoUrl = '';
-  //   console.log('mediaItem is', mediaItem);
-  // }
-
-  // onSelect(value) {
-  //   console.log('value in onSelect is', value.mediaType);
-  //   this.setState({ select: value.mediaType })
-  // }
 
   render() {
-    // const { items } = this.props;
-    const { itemNum, rotateGallery, select, selectOptions } = this.state;
-    // const itemGallery = items.map((item, i) => (
-    //   <GalleryItem key={i} image={item} description={item.description} videoUrl={item.url} mediaType={item.mediaType} rotateGallery={rotateGallery} select={select} options={selectOptions}/>
-    // ));
+    const { media } = this.props;
+    const { itemNum, rotateGallery } = this.state;
+    const itemGallery = media.map((item, i) => (
+      <GalleryItem key={i} image={item} description={item.description} videoUrl={item.url} mediaType={item.mediaType} rotateGallery={rotateGallery} props={this.state.mediaItem}/>
+    ));
     return (
-      <div className="field">
-        {/* <ToggleEditMode value="edit" propName="edit" change={this.holdData} disabled={false} /> */}
-
-        <div className="tile">
-          <GalleryItem rotateGallery={rotateGallery} onImageChange={this.handleImageChange} onSubmit={this.handleSubmit} onChange={this.handleChange} props={this.state.mediaItem} />
-          <MediaForm onImageChange={this.handleImageChange} onSubmit={this.handleSubmit} onChange={this.handleChange} props={this.state.mediaItem} />
-          
-          {/* {itemGallery[itemNum]} */}
-          {/* <nav id="galleryNav">
-            <button onClick={() => rotateGallery(-1)}>&laquo; Previous</button> <button onClick={() => rotateGallery(1)}>Next &raquo;</button>
-            <p>item {itemNum + 1} of {items.length}</p>
-          </nav> */}
-        </div>
+      <div>
+      {this.state.editAllowed ? <ToggleEditor editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} /> : null }
+      {this.state.editModeOn
+        ? <MediaForm onImageChange={this.handleImageChange} onSubmit={this.handleSubmit} onChange={this.handleChange} props={this.state.mediaItem} />
+        : itemGallery[itemNum] }
+      {!this.state.editModeOn &&
+        <nav>
+            <button className="button" onClick={() => this.rotateGallery(-1)}>&laquo; Previous</button> 
+            <button  className="button" onClick={() => this.rotateGallery(1)}>Next &raquo;</button>
+            <p>item {itemNum} of {media.length}</p>
+        </nav>
+      }
       </div>
     );
   }
 }
 
-// toggleEditMode() {
-//   if (this.state.editAllowed) {
-//     const newState = this.state.editModeOn ? false : true;
-//     this.setState({
-//       editModeOn: newState
-//     });
-//   }
-// }
-
-// render() {
-//   // this.updateInitialState();
-//   return (
-//     <div>
-//       {this.state.editAllowed ? <ToggleEditor editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} /> : null }
-//       {this.state.editModeOn
-//         ? <InfoEditor id={this.props.currentId} props={this.state.info} change={this.handleOnChange} save={this.handleOnSave} />
-//         : <InfoPresentation info={this.state.info} /> }
-//     </div>
-//   );
-// }
-// }
-
-// function ToggleEditor({ editModeOn, toggleFn }) {
-// const iconClass = editModeOn ? 'fa fa-times fa-lg' : 'fa fa-pencil fa-lg';
-// const buttonText = editModeOn ? 'Close' : 'Edit Your Profile';
-
-// return (
-//   <div>
-//     <p className="control" onClick={toggleFn}>
-//       <a className="button">
-//         <span className="icon is-small">
-//           <i className={iconClass}></i>
-//         </span>
-//         <span>{buttonText}</span>
-//       </a>
-//     </p>
-//   </div>
-// );
-// }
 
 
 
 const mapStateToProps = (state) => { 
   return ({
-    media: state.items
+    media: state.items || []
   })
 };
 
