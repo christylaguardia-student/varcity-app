@@ -6,7 +6,7 @@ import Sport from './Sport';
 const SportList = ({ sports, dispatch }) => {
   console.log('sport is', sports, 'dispatch is', dispatch);
   return (
-    <div className='listgroup'>
+    <div className='sportgroup'>
       {sports.map(sport =>
         <Sport
           key={sport.id}
