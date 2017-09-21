@@ -17,3 +17,20 @@ function getSportsWithGenders() {
 }
 
 export default getSportsWithGenders();
+
+function getSportsWithGenders2() {
+  const sports = Object.keys(stats);
+  const sportsWithGenders = [];
+
+  sports.forEach(sport => {
+    stats[sport].genders.forEach(gender => {
+      sportsWithGenders.push(`${sport} - ${gender}`);
+    });
+  });
+  
+  sportsWithGenders.sort((a,b) => a.text > b.text ? 1 : -1);
+
+  return sportsWithGenders;
+}
+
+export const sportList = getSportsWithGenders2();

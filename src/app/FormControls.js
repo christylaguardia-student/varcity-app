@@ -1,12 +1,12 @@
 import React from 'react';
 
-export function TextInput({ prop, label, change, value }) {
+export function TextInput({ value, prop, label, change }) {
   return (
     <label className="label">
       {label}
       <input
         className="input"
-        value={value}
+        value={value || ''}
         name={prop}
         type="text"
         placeholder={label}
@@ -15,13 +15,28 @@ export function TextInput({ prop, label, change, value }) {
   );
 }
 
-export function NumberInput({ prop, label, change, value }) {
+export function UrlInput({ value, prop, label, change }) {
   return (
     <label className="label">
       {label}
       <input
         className="input"
-        value={value}
+        value={value || ''}
+        name={prop}
+        type="text"
+        placeholder={label}
+        onChange={change} />
+    </label>
+  );
+}
+
+export function NumberInput({ value, prop, label, change }) {
+  return (
+    <label className="label">
+      {label}
+      <input
+        className="input"
+        value={value || 0}
         name={prop}
         type="number"
         placeholder={label}
@@ -30,32 +45,27 @@ export function NumberInput({ prop, label, change, value }) {
   );
 }
 
-export function Checkbox({ prop, label, change, value }) {
+export function Checkbox({ value, prop, label, change }) {
   return (
     <label className="checkbox">
-      {label}
       <input
         className="checkbox"
-        value={value}
+        value={value || false}
         name={prop}
         type="checkbox"
         onChange={change} />
+      <span>{label}</span>
     </label>
   );
 }
 
-export function DateInput({ prop, label, change, value, RIEInput, disabled, propName }) {
+export function DateInput({ value, prop, label, change }) {
   return (
     <label className="label">
       {label}
-      <RIEInput
-        isDisabled={disabled}
-        type="text"
-        value={value}
-        change={change}
-        propName={propName}
+      <input
         className="input"
-        value={value}
+        value={value || '1987-04-23' }
         name={prop}
         type="date"
         placeholder={label}
@@ -64,13 +74,13 @@ export function DateInput({ prop, label, change, value, RIEInput, disabled, prop
   );
 }
 
-export function Dropdown({ prop, label, options, change, value }) {
+export function Dropdown({ value, prop, label, options, change }) {
   return (
     <label className="label">
       {label}
       <select
         className="input"
-        value={value}
+        value={value || options[0]}
         name={prop}
         onChange={change}>
 
@@ -83,13 +93,13 @@ export function Dropdown({ prop, label, options, change, value }) {
   );
 }
 
-export function TextArea({ prop, label, change, value }) {
+export function TextArea({ value, prop, label, change }) {
   return (
     <label className="label">
       {label}
       <textarea
         className="input"
-        value={value}
+        value={value || ''}
         name={prop}
         rows="10"
         cols="50"
@@ -97,3 +107,17 @@ export function TextArea({ prop, label, change, value }) {
     </label>
   );
 }
+
+// export function TableData({ value, prop, label, change }) {
+//   return (
+//     <label className="label">
+//     {label}
+//     <TableData 
+//       className="table"
+//       value= {value || 0}
+//       name={prop}
+//       type="number"
+//       onChange={change} />
+//     </label>
+//   );
+// }

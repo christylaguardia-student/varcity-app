@@ -2,8 +2,10 @@ import superagent from 'superagent';
 
 export const API_URL = '/api';
 
+const token = localStorage.getItem('varcity');
+
 const wrapper = cmd => cmd
-  // .set('Authorization', token)
+  .set('Authorization', token)
   .then(res => res.body,
     ({ response }) => {
       const { body, text } = response;

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // import 'bulma/css/bulma.css';
 // import PropTypes from 'prop-types';
-import { TextSelect, TextArea, UrlInput, Toggle, ToggleEditMode } from '../app/FormControls';
+import { TextInput, TextArea, UrlInput } from '../app/FormControls';
 import { updateMedia, getMedia } from './actions';
 
 // GalleryItem.propTypes = {
@@ -25,7 +25,7 @@ export function GalleryItem({ onImageChange, onImageSubmit, onSelect, holdData, 
         <img src={image} alt={description} />
         {/* <button onClick={() => onRemove(item)} >X</button> */}
         <div className="is-grouped is-grouped-multiline">
-          <TextSelect className="select" value={select} propName="mediaType" label="Media Type" change={onSelect} options={options} disabled={false} />
+          <TextInput className="select" value={select} propName="mediaType" label="Media Type" change={onSelect} options={options} disabled={false} />
           {select.text === 'video link' &&
             <UrlInput value={value} propName="videoUrl" label="Video Link" change={holdData} disabled={false} />
           }
@@ -133,7 +133,7 @@ export class MediaGallery extends Component {
     // ));
     return (
       <div className="field">
-        <ToggleEditMode value="edit" propName="edit" change={this.holdData} disabled={false} />
+        {/* <ToggleEditMode value="edit" propName="edit" change={this.holdData} disabled={false} /> */}
 
         <div className="tile">
           <GalleryItem rotateGallery={rotateGallery} select={select} options={selectOptions} holdData={this.holdData} onSelect={this.onSelect} onImageSubmit={this.handleImageSubmit} onImageChange={this.handleImageChange} image={this.state.image}/>
