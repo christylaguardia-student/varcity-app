@@ -68,7 +68,12 @@ export class MediaGallery extends Component {
   }
 
   componentDidMount() {
-    // this.props.getMedia(123);
+    this.props.getMedia(this.props.currentId);
+  }
+
+  updateInitialState() {
+    const { media } = this.props.athletes[this.props.currentId];
+    this.setState({ media });
   }
   
   handleChange(e) {
@@ -148,25 +153,22 @@ export class MediaGallery extends Component {
   }
 }
 
-
-
-
 const mapStateToProps = (state) => { 
   return ({
-    media: state.items || []
+    authId: state.authId,
+    media: state.media || []
   })
 };
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ getMedia, updateMedia }, dispatch);
-// }
-
 const mapDispatchToProps = { getMedia, updateMedia };
 
-export default connect(mapStateToProps, mapDispatchToProps, 
-  // (state, dispatch, own) => {
-  // return {
-  //   media: 
-  // }
-// }
-)(MediaGallery);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  (stateProps, dispatchProps, ownProps) => {
+    return {
+      ...stateProps,
+      ...dispatchProps,
+      currentId: ownProps.location.pathname.split('/athletes/')[1],
+    };
+  })(MediaGallery);
