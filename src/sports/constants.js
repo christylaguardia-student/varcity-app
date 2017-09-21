@@ -1,0 +1,3 @@
+export const LOAD_EDUCATIONS = 'LOAD_SPORT';
+export const CREATE_NEW_SPORT = 'CREATE_NEW_SPORT';
+export const DELETE_SPORT = 'DELETE_SPORT';
