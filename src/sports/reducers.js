@@ -2,7 +2,7 @@ import * as actions from './constants';
 
 export function sports(state = [], { type, payload }) {
     switch (type) {
-        case actions.LOAD_SPORT:
+        case actions.LOAD_SPORTS:
             return payload;
         case actions.CREATE_NEW_SPORT:
             return [
@@ -26,3 +26,15 @@ const newSportItem = (value) => {
   }
 };
 
+  // case 'DELETE_SPORT':
+  // const educations = state.sport;
+  // const newState = Object.assign([], state);
+  // // const index = sports.findIndex(e => e._id === payload);
+  // // return {
+  // //     ...state,
+  // //     sports: [...sports.slice(0, index), ...sports.slice(index + 1)]
+  // // };
+  // // }
+  // return state.filter((sport) => sport.id !== action.id)
+
+  
