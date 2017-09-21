@@ -84,7 +84,7 @@ export class Info extends Component {
             <TextInput value={info.firstName} propName="firstName" label="First Name" change={onChange} disabled={isDisabled} />
             <TextInput value={info.lastName} propName="lastName" label="Last Name" change={onChange} disabled={isDisabled} />  
             <Toggle value={info.public} propName="public" label="Public Profile?" change={onChange} disabled={isDisabled} />
-            {/* <DateInput value={info.person.dob} propName="dob" label="Birthday" change={onChange} disabled={isDisabled} /> */}
+            <DateInput value={info.person.dob} propName="dob" label="Birthday" change={onChange} disabled={isDisabled} />
             <TextSelect value={info.primarySport} propName="primarySport" label="Primary Sport" options={sports} change={onChange} disabled={isDisabled} />
             <TextInput value={info.position} propName="position" label="Position" change={onChange} disabled={isDisabled} />
             <TextInput value={info.organization} propName="organization" label="School/Organization" change={onChange} disabled={isDisabled} />
