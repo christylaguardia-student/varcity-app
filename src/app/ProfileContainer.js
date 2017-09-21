@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Info from '../info/Info';
-import SportsContainer from '../sports/SportsContainer';
+import SportPage from '../sports/SportPage';
 import EduPages from '../edu/EduPages';
 import MediaGallery from '../media/MediaGallery';
 
@@ -24,6 +24,7 @@ class ProfileContainer extends Component {
             <Route path={`/athletes/:id/sports`} component={SportsContainer} />
             <Route path={`/athletes/:id/edu`} component={EduPages} />
             <Route path={`/athletes/:id/media`} component={MediaGallery} />
+            <Route path={`/athletes/:id/sports`} component={SportPage} />
           </Switch>
         </div>
       </Router>
