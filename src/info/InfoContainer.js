@@ -16,6 +16,8 @@ export class InfoContainer extends Component {
     super(props);
 
     this.state = {
+      editAllowed: this.props.authId === this.props.currentId,
+      editModeOn: false,
       info: {
         firstName: '',
         lastName: '',
@@ -48,6 +50,7 @@ export class InfoContainer extends Component {
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnSave = this.handleOnSave.bind(this);
     this.updateInitialState = this.updateInitialState.bind(this);
+    this.toggleEditMode = this.toggleEditMode.bind(this);
   }
 
   componentWillMount() {
@@ -67,22 +70,47 @@ export class InfoContainer extends Component {
   }
   
   handleOnSave() {
-    this.props.updateInfo(this.props.currentId, this.state);
+    const newData = { info: this.state.info };
+    this.props.updateInfo(this.props.currentId, newData);
+  }
+
+  toggleEditMode() {
+    if (this.state.editAllowed) {
+      const newState = this.state.editModeOn ? false : true;
+      this.setState({
+        editModeOn: newState
+      });
+    }
   }
 
   render() {
-    const { currentId, authId } = this.props;
-    const editModeOn = (authId === currentId);
-    // this.updateInitialState();
-
     return (
       <div>
-        {editModeOn
+        {this.state.editAllowed ? <ToggleEditor editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} /> : null }
+        {this.state.editModeOn
           ? <InfoEditor id={this.props.currentId} props={this.state.info} change={this.handleOnChange} save={this.handleOnSave} />
           : <InfoPresentation info={this.state.info} /> }
       </div>
     );
   }
+}
+
+function ToggleEditor({ editModeOn, toggleFn }) {
+  const iconClass = editModeOn ? 'fa fa-times fa-lg' : 'fa fa-pencil fa-lg';
+  const buttonText = editModeOn ? 'Close' : 'Edit Your Profile';
+
+  return (
+    <div>
+      <p className="control" onClick={toggleFn}>
+        <a className="button">
+          <span className="icon is-small">
+            <i className={iconClass}></i>
+          </span>
+          <span>{buttonText}</span>
+        </a>
+      </p>
+    </div>
+  );
 }
 
 const mapStateToProps = (state) => {
