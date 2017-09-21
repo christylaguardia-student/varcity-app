@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function InfoPresentation({ info }) {
+  console.log('InfoPresentation',info);
   const age = getAge(info.person.dob);
 
   return (
@@ -70,7 +71,18 @@ export default function InfoPresentation({ info }) {
   );
 }
 
+// function _calculateAge(birthday) { // birthday is a date
+//   var ageDifMs = Date.now() - birthday.getTime();
+//   var ageDate = new Date(ageDifMs); // miliseconds from epoch
+//   return Math.abs(ageDate.getUTCFullYear() - 1970);
+// }
+
 function getAge(dob) {
-  let years = 17;
+  if (!dob) return 0;
+  const diffMS = Date.now() - dob.getTime();
+  const ageDate = new Date(diffMS);
+  const years = Math.abs(ageDate.getUTCFullYear() - 1970);
+  console.log('getAge',diffMS,ageDate,years );
+
   return `${years} years old`;
 }

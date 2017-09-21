@@ -1,6 +1,6 @@
 import React from 'react';
 import { sportList } from '../utils/sports';
-import { TextInput, Checkbox, DateInput, Dropdown, NumberInput, TextArea, UrlInput } from './FormControls';
+import { TextInput, Checkbox, DateInput, Dropdown, NumberInput, TextArea, UrlInput } from '../app/FormControls';
 
 export default function InfoEditor({ id, props, save, change }) {
   const heightUOM = ['in', 'cm'];
