@@ -3,25 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function GlobalHeader({ authId, signOut }) {
   return (
-    <div className="navbar-menu is-active">
-      <div className="navbar-start">
-        {
-          (authId && Object.entries(authId).length !== 0) &&
-          <div>
-            <form
-              onSubmit={event => {
-                event.preventDefault();
-                const form = event.target;
-                signOut({
-                  payload: { payload: null }
-                });
-                form.reset();
-              }}>
-              <button className="button is-primary is-outlined" type="submit" name="submit">Logout</button>
-            </form>
-          </div>
-        }
-      </div>
+    <div className="tabs">
       <div>
         <div>
           <ul>
@@ -29,7 +11,14 @@ export default function GlobalHeader({ authId, signOut }) {
               <Link to="/"><i className="fa fa-home fa-2x"></i></Link>
             </li>
             <li>
-              <input placeholder="search" />
+              {/* <input className="input" placeholder="search" /> */}
+              <div className="control has-icons-left">
+                <input className="input" placeholder="Search" />
+                <span className="icon is-small is-left">
+                  <i className="fa fa-search"></i>
+                </span>
+              </div>
+
             </li>
             <li>
               <Link to="/about">About</Link>
@@ -39,6 +28,26 @@ export default function GlobalHeader({ authId, signOut }) {
             </li>
             <li>
               <Link to={`/athletes/${authId}`}>Profile</Link>
+            </li>
+            <li>
+              <div>
+                {
+                  (authId && Object.entries(authId).length !== 0) &&
+                  <div>
+                    <form
+                      onSubmit={event => {
+                        event.preventDefault();
+                        const form = event.target;
+                        signOut({
+                          payload: { payload: null }
+                        });
+                        form.reset();
+                      }}>
+                      <button className="button is-primary is-outlined" type="submit" name="submit">Logout</button>
+                    </form>
+                  </div>
+                }
+              </div>
             </li>
           </ul>
         </div>
