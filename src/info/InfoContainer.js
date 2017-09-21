@@ -84,7 +84,7 @@ export class InfoContainer extends Component {
   }
 
   render() {
-    this.updateInitialState();
+    // this.updateInitialState();
     return (
       <div>
         {this.state.editAllowed ? <ToggleEditor editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} /> : null }
