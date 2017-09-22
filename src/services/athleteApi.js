@@ -1,6 +1,5 @@
 import superagent from 'superagent';
 import { request } from './_request';
-import superagent from 'superagent';
 
 const API_URL = '/api/athletes';
 
@@ -25,7 +24,5 @@ export default {
     .send(data)
     .set('Authorization', token)
     .then(res => res.body)
-    
-    return request.patch(`${API_URL}/${id}/${tab}`, data);
-  }
+      }
 };
