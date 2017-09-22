@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function InfoPresentation({ info }) {
-  console.log('info', info);
   return (
     <div>
       {info ? <HasInfo props={info}/> : <NoInfo /> }
@@ -11,8 +10,6 @@ export default function InfoPresentation({ info }) {
 }
 
 function HasInfo({ props }) {
-  console.log('props in HasInfo', props);
-
   let age = null;
   if (props.person.dob) age = getAge(props.person.dob);
 

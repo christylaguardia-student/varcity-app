@@ -61,13 +61,9 @@ export class InfoContainer extends Component {
     this.setState({
       info: { ...this.state.info, [name]: value }
     });
-    console.log('changed',name,value);
   }
   
   handleOnSave() {
-    // const dobDate = new Date(this.state.person.dob);
-    // this.setState({ person: { dob: dobDate } });
-    console.log('handleOnSave dob',this.state.person);
     const newData = { info: this.state.info };
     this.props.updateInfo(this.props.currentId, newData);
     this.setState({ editModeOn: false });
@@ -84,12 +80,10 @@ export class InfoContainer extends Component {
 
   checkIfHasProps(props) {
     let keys = Object.keys(props);
-    console.log('checkIfHasProps before', props);
   
     // has no props
     if (keys.length===0) return defaultInfo;
     
-    // has some props
     if (!props.firstName) props.firstName = defaultInfo.firstName;
     if (!props.lastName) props.lastName = defaultInfo.lastName;
     if (!props.public) props.public = defaultInfo.public;
@@ -114,13 +108,11 @@ export class InfoContainer extends Component {
     if (!props.socials.twitterUrl) props.socials.twitterUrl = defaultInfo.socials.twitterUrl;
     if (!props.socials.instagramUrl) props.socials.instagramUrl = defaultInfo.socials.instagramUrl;
 
-    console.log('checkIfHasProps after', props);
     return props;
   }
 
   render() {
     const athlete = this.props.athletes[this.props.currentId];
-    console.log('props in InfoContainer', this.props);
 
     return (
       <div>
