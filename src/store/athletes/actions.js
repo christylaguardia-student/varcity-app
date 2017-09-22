@@ -22,7 +22,7 @@ export function makeUpdateInfo(api) {
   return function updateInfo(id, data) {
     return dispatch => {
       return api
-        .update(id, data, 'info')
+        .updateInfoById(id, data)
         .then(athleteInfo => {
           dispatch({ type: actions.UPDATE_INFO, payload: athleteInfo });
         });

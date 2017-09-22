@@ -6,6 +6,34 @@ import InfoEditor from './InfoEditor';
 import InfoPresentation from './InfoPresentation';
 import { ToggleEditor } from '../app/FormControls';
 
+const defaultInfo = {
+  firstName: '',
+  lastName: '',
+  public: false,
+  profileUrl: '',
+  primarySport: '',
+  position: '',
+  person: {
+    dob: '2017-09-20',
+    gender: '', 
+    height: 0,
+    heightUom: 'in',
+    weight: 0,
+    weightUom: 'lb'
+  },
+  organization: '',
+  location: {
+    city: '',
+    state: '',
+    country: '',
+  },
+  socials: {
+    facebookUrl: '',
+    twitterUrl: '',
+    instagramUrl: '',
+  }
+};
+
 export class InfoContainer extends Component {
 
   constructor(props) {
@@ -20,6 +48,7 @@ export class InfoContainer extends Component {
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnSave = this.handleOnSave.bind(this);
     this.toggleEditMode = this.toggleEditMode.bind(this);
+    this.checkIfHasProps = this.checkIfHasProps.bind(this);
   }
 
   componentWillMount() {
@@ -47,8 +76,23 @@ export class InfoContainer extends Component {
     }
   }
 
+  checkIfHasProps(props) {
+    let keys = Object.keys(props);
+  
+    // has no props
+    if (keys.length===0) return defaultInfo;
+    
+    // has some props
+    let defaultKeys = Object.keys(defaultInfo);
+    for (let i=0; i<defaultKeys.length; i++) {
+      if (!keys.includes(defaultKeys[i])) {
+        props[defaultKeys[i]] = defaultInfo[defaultKeys[i]];
+      }
+    }
+    return props;
+  }
+
   render() {
-    console.log('props in InfoContainer', this.props);
     const athlete = this.props.athletes[this.props.currentId];
 
     return (
@@ -58,8 +102,8 @@ export class InfoContainer extends Component {
           : null }
         
         {(athlete && athlete.info) && (this.state.editModeOn
-          ? <InfoEditor props={athlete.info} change={this.handleOnChange} save={this.handleOnSave} />
-          : <InfoPresentation info={athlete.info} /> )}
+          ? <InfoEditor props={this.checkIfHasProps(athlete.info)} change={this.handleOnChange} save={this.handleOnSave} />
+          : <InfoPresentation info={this.checkIfHasProps(athlete.info)} /> )}
       </div>
     );
   }

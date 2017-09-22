@@ -11,7 +11,7 @@ class ProfileContainer extends Component {
   render() {
     console.log('this is the props', this.props);
     const id = this.props.location.pathname.split('/athletes/')[1];
-    console.log('got id from URL in ProfileContainer', id);
+    
     return (
       <Router>
         <div>
@@ -25,7 +25,7 @@ class ProfileContainer extends Component {
           </div>
 
           <Switch>
-            <div className="columns">
+            <div className="columns main-container">
               <div className="column"></div>
               <div className="column is-two-thirds">
                 <Route exact path="/athletes/:id" component={InfoContainer} />
