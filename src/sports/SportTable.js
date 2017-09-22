@@ -24,8 +24,8 @@ export default function SportTable({ onSubmit, onChange, props }) {
             <td></td>
           </tr>
           <tr>
-            <th></th>
-            <td></td>
+            <th>{Title}</th>
+            <td>{abbr}</td>
             <td></td>
           </tr>
           <tr>
