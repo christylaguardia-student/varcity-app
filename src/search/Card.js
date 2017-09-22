@@ -27,7 +27,7 @@ export default function Card() {
             </p>
           </div>
         </div>
-    
+
         <div className="content">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Phasellus nec iaculis mauris. <a>@bulmaio</a>.
