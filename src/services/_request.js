@@ -1,10 +1,8 @@
 import superagent from 'superagent';
-
 export const API_URL = '/api';
 
-const token = localStorage.getItem('varcity');
-
-const wrapper = cmd => cmd
+const wrapper = (cmd, token)  => {
+  cmd
   .set('Authorization', token)
   .then(res => res.body,
     ({ response }) => {
@@ -12,14 +10,18 @@ const wrapper = cmd => cmd
       const error = body ? body.error || body : text;
       throw error;
     }
-  );
+  )};
 
 
 export const request =  {
+
   get(url) {
-    return wrapper(superagent.get(`${API_URL}${url}`));
+    const storage = localStorage;
+    const token = storage.getItem('varcity');
+    return wrapper(superagent.get(`${API_URL}${url}`), token);
   },
   post(url, data) {
+
     return wrapper(superagent.post(`${API_URL}${url}`).send(data));
   },
   patch(url, data) {
