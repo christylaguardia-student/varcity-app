@@ -1,5 +1,6 @@
 import React from 'react';
 import { TextInput, Checkbox, DateInput, Dropdown, NumberInput, TextArea, UrlInput } from '../app/FormControls';
+import GalleryItem from './MediaGallery';
 
 export default function MediaForm({ id, props, onImageChange, onSubmit, onChange }) {
   const { description, mediaType, videoUrl } = props;
@@ -9,7 +10,7 @@ export default function MediaForm({ id, props, onImageChange, onSubmit, onChange
       <div className="column">
 
         <div className="is-grouped is-grouped-multiline">
-          <Dropdown value={mediaType} prop="mediaType" label="Media Type" change={onChange} options={['Video Link', 'Image Upload']} />
+          <Dropdown value={mediaType} prop="mediaType" label="Media Type" change={onChange} options={['Image Upload', 'Video Link']} />
 
           {mediaType === 'Video Link' &&
             <TextInput prop="videoUrl" value={videoUrl} label="Video Link" change={onChange} />

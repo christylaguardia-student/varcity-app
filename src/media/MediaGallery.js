@@ -8,38 +8,22 @@ export function GalleryItem({ onChange, onSubmit, props, onImageChange, rotateGa
 
   const { description, mediaType, videoUrl, image } = props;
   let imageUrl = null;
-  // if (image) {
-  //   const arrayView = new Uint8Array(image);
-  //   const blob = new Blob([arrayView], { type: "image/jpeg" });
-  //   imageUrl = image && URL.createObjectURL(blob);
-  // }
+  if (image) {
+    const arrayView = new Uint8Array(image);
+    const blob = new Blob([arrayView], { type: "image/jpeg" });
+    imageUrl = image && URL.createObjectURL(blob);
+  }
   return (
-    <div className="galleryView">
+    <div className="galleryView" style={{margin: "2em"}}>
       {imageUrl && (mediaType === 'Image Upload') &&
         <figure className="image is-128x128">
           <img className="image" src={imageUrl} alt={description} />
+          <p>{description}</p>
         </figure>
       }        
     </div>
   );
 }
-
-// https://stackoverflow.com/questions/33913737/inserting-the-iframe-into-react-component
-// var Iframe = React.createClass({     
-//   render: function() {
-//     return(         
-//       <div>          
-//         <iframe src={this.props.src} height={this.props.height} width={this.props.width}/>         
-//       </div>
-//     )
-//   }
-// });
-
-// ReactDOM.render(
-//   <Iframe src="http://plnkr.co/" height="500" width="500"/>,
-//   document.getElementById('example')
-// );
-
 
 export class MediaGallery extends Component {
 
@@ -49,7 +33,7 @@ export class MediaGallery extends Component {
       itemNum: 0,
       mediaItem: { 
         description: '', 
-        mediaType: 'Video Link', 
+        mediaType: 'Image Upload', 
         videoUrl: '', 
         image: ''
       },
@@ -60,7 +44,7 @@ export class MediaGallery extends Component {
     this.handleImageChange = this.handleImageChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    // this.setImage = this.setImage.bind(this);
+    this.setImage = this.setImage.bind(this);
     this.toggleEditMode = this.toggleEditMode.bind(this);
   }
 
@@ -77,12 +61,12 @@ export class MediaGallery extends Component {
     });
   }
 
-  // setImage (buf) {
-  //   console.log('in setImage mediaItem is', this.state.mediaItem);
-  //   this.setState({
-  //     mediaItem: { ...this.state.mediaItem, image: buf }
-  //   });
-  // }
+  setImage (buf) {
+    console.log('in setImage mediaItem is', this.state.mediaItem);
+    this.setState({
+      mediaItem: { ...this.state.mediaItem, image: buf }
+    });
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -97,17 +81,17 @@ export class MediaGallery extends Component {
     this.props.updateMedia(this.props.currentId, mediaToSend);
   }
 
-  // handleImageChange(e) {
-  //   e.preventDefault();
-  //   const { files } = e.target;
-  //   if(!files.length) return;
-  //   let reader = new FileReader();
-  //   let file = files[0];
-  //   reader.onloadend = () => {
-  //     this.setImage(reader.result);
-  //   }
-  //   reader.readAsArrayBuffer(file);
-  // }
+  handleImageChange(e) {
+    e.preventDefault();
+    const { files } = e.target;
+    if(!files.length) return;
+    let reader = new FileReader();
+    let file = files[0];
+    reader.onloadend = () => {
+      this.setImage(reader.result);
+    }
+    reader.readAsArrayBuffer(file);
+  }
 
   toggleEditMode() {
     if (this.state.editAllowed) {
@@ -135,6 +119,7 @@ export class MediaGallery extends Component {
     console.log('athlete is', athlete);
     const { itemNum, rotateGallery } = this.state;
     let items = athlete.media || [];
+    const num = items.length ? itemNum + 1 : 0;
     const itemGallery = items.map((item, i) => (
       <GalleryItem key={i} image={item} description={item.description} videoUrl={item.url} mediaType={item.mediaType} rotateGallery={rotateGallery} props={this.state.mediaItem}/>
     ));
@@ -145,7 +130,7 @@ export class MediaGallery extends Component {
         }
         {athlete && athlete.media &&
         <div>
-          {this.state.editAllowed ? <ToggleEditor editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} /> : null}
+          {this.state.editAllowed ? <ToggleEditor text="Media" editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} /> : null}
           {this.state.editModeOn
             ? <MediaForm onImageChange={this.handleImageChange} onSubmit={this.handleSubmit} onChange={this.handleChange} props={this.state.mediaItem} />
             : itemGallery[itemNum]}
@@ -153,7 +138,7 @@ export class MediaGallery extends Component {
             <nav>
               <button className="button" onClick={() => this.rotateGallery(-1)}>&laquo; Previous</button>
               <button className="button" onClick={() => this.rotateGallery(1)}>Next &raquo;</button>
-              <p>item {itemNum ? itemNum + 1 : 0} of {athlete.media.length}</p>
+              <p>item {num} of {athlete.media.length}</p>
             </nav>
           }
         </div>
