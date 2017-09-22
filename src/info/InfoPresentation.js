@@ -25,7 +25,7 @@ function HasInfo({ props }) {
 
         <div className="column">
           <div className="content">
-            <h1>{props.firstName} {props.lastName}</h1>
+            <h1 className="title">{props.firstName} {props.lastName}</h1>
           </div>
 
           <div>
