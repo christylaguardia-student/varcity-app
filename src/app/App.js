@@ -7,7 +7,7 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
-import SearchContainer from './SearchContainer';
+import SearchContainer from '../search/SearchContainer';
 import ProfileContainer from './ProfileContainer';
 import Home from './Home';
 import About from './About';
@@ -63,6 +63,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(state => ({ authId: state.authId }), mapDispatchToProps)(
+export default connect(state => ({ authId: state.authId, errorMessage: state.errorMessage }), mapDispatchToProps)(
   App
 );
