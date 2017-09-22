@@ -9,7 +9,6 @@ import MediaGallery from '../media/MediaGallery';
 class ProfileContainer extends Component {
 
   render() {
-    console.log('this is the props', this.props);
     const id = this.props.location.pathname.split('/athletes/')[1];
     
     return (
