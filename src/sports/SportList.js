@@ -1,19 +1,17 @@
 import React, { PropTypes } from 'react';
 import { deleteSport } from './actions';
 import { connect } from 'react-redux';
-import Sport from './Sport';
+// import sports from '../../utils/sports';
 // import SportList from './SportList';
 
 const SportList = ({ sports, dispatch }) => {
   console.log('sport is', sports, 'dispatch is', dispatch);
   return (
     <div className='sportgroup'>
-      {sports.map(sport =>
-        <Sport
-          key={sport.id}
-          {...sports}
-        />
-      )}
+      {sports.map(sport => {
+          return <p>sport</p>
+      })
+      }
     </div>
   );
 }

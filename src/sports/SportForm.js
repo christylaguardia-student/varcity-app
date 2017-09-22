@@ -21,8 +21,8 @@ export default function SportForm({ onSubmit, onChange, props }) {
             <TextInput prop="organization" label="Organization" change={onChange} value={organization}/>
             <TextInput prop="position" label="Position" change={onChange} value={position}/>
             <label className="label">Statistic</label>
-            <TexInput prop={"title"} label="Title" change={onChange} value={title} />
-            <NumberInput prop={"score"}label="Score" change={onChange} value={score}/>
+            <TextInput prop={"statTitle"} label="Title" change={onChange} value={statTitle} />
+            <NumberInput prop={"statScore"}label="Score" change={onChange} value={statScore}/>
             <DateInput prop="seasonDates" label="Season Played" change={onChange} value={seasonDates}/>
             </div> 
             <input type="submit" value="Submit" />
