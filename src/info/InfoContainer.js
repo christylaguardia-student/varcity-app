@@ -12,6 +12,7 @@ const defaultInfo = {
   public: false,
   profileUrl: '',
   primarySport: '',
+  primarySportGender: '',
   position: '',
   person: {
     dob: '2017-09-20',
@@ -94,6 +95,7 @@ export class InfoContainer extends Component {
 
   render() {
     const athlete = this.props.athletes[this.props.currentId];
+    console.log('props in InfoContainer', this.props);
 
     return (
       <div>
