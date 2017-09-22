@@ -10,6 +10,7 @@ export function makeGetInfo(api) {
       return api
         .getInfoById(id)
         .then(athleteInfo => {
+          console.log('athleteinfo is', athleteInfo);
           dispatch({ type: actions.GET_INFO, payload: athleteInfo });
         });
     };
@@ -24,6 +25,7 @@ export function makeUpdateInfo(api) {
       return api
         .updateInfoById(id, data)
         .then(athleteInfo => {
+          console.log('athleteinfo is', athleteInfo);          
           dispatch({ type: actions.UPDATE_INFO, payload: athleteInfo });
         });
     };
