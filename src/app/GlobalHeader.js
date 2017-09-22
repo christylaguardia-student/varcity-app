@@ -31,6 +31,7 @@ export default function GlobalHeader({ authId, search, signOut }) {
             </li>
             <li>
 
+
               <Link to={`/athletes/${authId}`}>My Profile</Link>
             </li>
             <li>

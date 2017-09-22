@@ -16,7 +16,6 @@ import { retrieveWithToken } from './actions';
 import 'bulma/css/bulma.css';
 import '../styles/index.css';
 
-
 class App extends Component {
   componentWillMount() {
     this.props.retrieveWithToken();
