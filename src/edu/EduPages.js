@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 // import {bindActionCreators} from 'redux';
 import {getEducation, updateEducation} from './actions';
-// import { browserHistory } from 'react-router';
-// import EduList from './EduList';
 import EduForm from './EduForm';
 
 
