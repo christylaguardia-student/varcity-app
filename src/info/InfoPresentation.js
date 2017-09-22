@@ -1,15 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function InfoPresentation({ info }) {
+  console.log('info', info);
   return (
     <div>
-      {info ? <NoInfo /> : <HasInfo info={info}/>}
+      {info ? <HasInfo props={info}/> : <NoInfo /> }
     </div>
   );
 }
 
 function HasInfo({ props }) {
-  const age = getAge(props.dob);
+  console.log('props in HasInfo', props);
+
+  let age = null;
+  if (props.person.dob) age = getAge(props.person.dob);
 
   return (
     <div>
@@ -27,18 +32,18 @@ function HasInfo({ props }) {
           </div>
 
           <div>
-            <span>
-              <a className="icon is-medium" href={props.facebookUrl}>
+            <span className="icon is-medium">
+              <a href={props.socials.facebookUrl}>
                 <i className="fa fa-facebook fa-lg"></i>
               </a>
             </span>
-            <span>
-              <a className="icon is-medium" href={props.twitterUrl}>
+            <span className="icon is-medium">
+              <a href={props.socials.twitterUrl}>
                 <i className="fa fa-twitter fa-lg"></i>
               </a>
             </span>
-            <span>
-              <a className="icon is-medium" href={props.instagramUrl}>
+            <span className="icon is-medium">
+              <a href={props.socials.instagramUrl}>
                 <i className="fa fa-instagram fa-lg"></i>
               </a>
             </span>
@@ -53,19 +58,15 @@ function HasInfo({ props }) {
                 </tr>
                 <tr>
                   <td>Sport</td>
-                  <td>{props.primarySport || null} {props.position}</td>
-                </tr>
-                <tr>
-                  <td>Gender</td>
-                  <td>{props.gender}</td>
+                  <td>{props.primarySport} {props.primarySportGender} {props.position}</td>
                 </tr>
                 <tr>
                   <td>Height</td>
-                  <td>{props.height} {props.heightUom}</td>
+                  <td>{props.person.height} {props.person.heightUom}</td>
                 </tr>
                 <tr>
                   <td>Weight</td>
-                  <td>{props.weight} {props.weightUom}</td>
+                  <td>{props.person.weight} {props.person.weightUom}</td>
                 </tr>
                 <tr>
                   <td>Organization</td>
@@ -73,7 +74,7 @@ function HasInfo({ props }) {
                 </tr>
                 <tr>
                   <td>Location</td>
-                  <td>{props.city} {props.region} {props.country}</td>
+                  <td>{props.location.city} {props.location.region} {props.location.country}</td>
                 </tr>
               </tbody>
             </table>

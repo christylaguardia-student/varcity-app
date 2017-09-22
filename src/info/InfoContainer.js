@@ -10,12 +10,12 @@ const defaultInfo = {
   firstName: '',
   lastName: '',
   public: false,
-  profileUrl: '',
+  profileUrl: '/image/default-profile.png',
   primarySport: '',
   primarySportGender: '',
   position: '',
   person: {
-    dob: '2017-09-20',
+    dob: new Date('2017-09-22'),
     gender: '', 
     height: 0,
     heightUom: 'in',
@@ -29,9 +29,9 @@ const defaultInfo = {
     country: '',
   },
   socials: {
-    facebookUrl: '',
-    twitterUrl: '',
-    instagramUrl: '',
+    facebookUrl: 'https://www.facebook.com/',
+    twitterUrl: 'https://www.twitter.com/',
+    instagramUrl: 'https://www.instagram.com/',
   }
 };
 
@@ -61,11 +61,16 @@ export class InfoContainer extends Component {
     this.setState({
       info: { ...this.state.info, [name]: value }
     });
+    console.log('changed',name,value);
   }
   
   handleOnSave() {
+    // const dobDate = new Date(this.state.person.dob);
+    // this.setState({ person: { dob: dobDate } });
+    console.log('handleOnSave dob',this.state.person);
     const newData = { info: this.state.info };
     this.props.updateInfo(this.props.currentId, newData);
+    this.setState({ editModeOn: false });
   }
 
   toggleEditMode() {
@@ -79,17 +84,37 @@ export class InfoContainer extends Component {
 
   checkIfHasProps(props) {
     let keys = Object.keys(props);
+    console.log('checkIfHasProps before', props);
   
     // has no props
     if (keys.length===0) return defaultInfo;
     
     // has some props
-    let defaultKeys = Object.keys(defaultInfo);
-    for (let i=0; i<defaultKeys.length; i++) {
-      if (!keys.includes(defaultKeys[i])) {
-        props[defaultKeys[i]] = defaultInfo[defaultKeys[i]];
-      }
-    }
+    if (!props.firstName) props.firstName = defaultInfo.firstName;
+    if (!props.lastName) props.lastName = defaultInfo.lastName;
+    if (!props.public) props.public = defaultInfo.public;
+    if (!props.profileUrl) props.profileUrl = defaultInfo.profileUrl;
+    if (!props.primarySport) props.primarySport = defaultInfo.primarySport;
+    if (!props.primarySportGender) props.primarySportGender = defaultInfo.primarySportGender;
+    if (!props.position) props.position = defaultInfo.position;
+    if (!props.person) props.person = defaultInfo.person;
+    if (!props.person.dob) props.person.dob = defaultInfo.person.dob;
+    if (!props.person.gender) props.person.gender = defaultInfo.person.gender;
+    if (!props.person.height) props.person.height = defaultInfo.person.height;
+    if (!props.person.heightUom) props.person.heightUom = defaultInfo.person.heightUom;
+    if (!props.person.weight) props.person.weight = defaultInfo.person.weight;
+    if (!props.person.weightUom) props.person.weightUom = defaultInfo.person.weightUom;
+    if (!props.organization) props.organization = defaultInfo.organization;
+    if (!props.location) props.location = defaultInfo.location;
+    if (!props.location.city) props.location.city = defaultInfo.location.city;
+    if (!props.location.state) props.location.state = defaultInfo.location.state;
+    if (!props.location.country) props.location.country = defaultInfo.location.country;
+    if (!props.socials) props.socials = defaultInfo.socials;
+    if (!props.socials.facebookUrl) props.socials.facebookUrl = defaultInfo.socials.facebookUrl;
+    if (!props.socials.twitterUrl) props.socials.twitterUrl = defaultInfo.socials.twitterUrl;
+    if (!props.socials.instagramUrl) props.socials.instagramUrl = defaultInfo.socials.instagramUrl;
+
+    console.log('checkIfHasProps after', props);
     return props;
   }
 
