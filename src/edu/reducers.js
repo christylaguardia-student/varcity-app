@@ -29,10 +29,10 @@ const newEducationItem = (item) => {
 //   case 'DELETE_EDUCATION':
 //   const educations = state.educations;
 //   const newState = Object.assign([], state);
-//   // const index = events.findIndex(e => e._id === payload);
+//   // const index = educations.findIndex(e => e._id === payload);
 //   // return {
 //   //     ...state,
-//   //     events: [...events.slice(0, index), ...events.slice(index + 1)]
+//   //     educations: [...events.slice(0, index), ...educations.slice(index + 1)]
 //   // };
 //   // }
 //   return state.filter((education) => education.id !== action.id)
