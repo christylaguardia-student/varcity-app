@@ -20,7 +20,7 @@ export function makeUpdateSport(api) {
     return function updateSport(id, data) {
         return dispatch => {
             return api
-                .update(id, data)
+                .updateSportById(id, data)
                 .then(sport => {
                     dispatch({ type: actions.CREATE_NEW_SPORT, payload: sport });
                 })

@@ -38,15 +38,17 @@ class SportPage extends React.Component {
     });
   }
 
-  handleSubmit() {
-    // send to db
+  handleSubmit (){
+
   }
+    
+  
 
   render() {
     // const sports = this.props.sports;
     return (
       <div className="">
-        <SportForm onSubmit={this.handleSubmit} onChange={this.handleChange} props={this.state.sports} />
+        <SportForm onSubmit={this.handleSubmit} onChange={this.handleChange} props={this.state.sports} id= {this.props.authId}/>
 
         {/* <SportPresent />  */}
         {/* <h1>Sports<Link to={'/sport/new'} className="">Sport ++</Link></h1>
