@@ -50,7 +50,7 @@ export default function EduPresentation({ props }) {
     <div className="content">
       <h1 className="title">Education</h1>
       <ul>
-        {defaultEdu.schools.map(school => <School school={school} /> )}
+        {defaultEdu.schools.map((school, index) => <School key={index} school={school} /> )}
       </ul>
       <br/>
       <h1 className="title">Testing</h1>
