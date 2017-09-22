@@ -1,56 +1,62 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-// import 'bulma/css/bulma.css';
-// import PropTypes from 'prop-types';
-import { TextSelect, TextArea, UrlInput, Toggle, ToggleEditMode, TextInput } from '../app/FormControls';
+import MediaForm from './MediaForm';
+import { Dropdown, TextArea, TextInput } from '../app/FormControls';
 import { updateMedia, getMedia } from './actions';
 
-// GalleryItem.propTypes = {
-//   description: PropTypes.string.isRequired,
-//   mediaType: PropTypes.string.isRequired,
-//   videoUrl: PropTypes.string,
-//   image: PropTypes.object,
-//   // onRemove: PropTypes.func.isRequired
-// }
+export function GalleryItem({ onChange, onSubmit, props, onImageChange, rotateGallery }) {
 
-
-let value = '';
-let mediaItem = { description: '', mediaType: '', videoUrl: '', image: '' };
-
-export function GalleryItem({ onImageChange, onImageSubmit, onSelect, holdData, options, select, description, videoUrl = '', image = '', mediaType, rotateGallery }) {
-
+  const { description, mediaType, videoUrl, image } = props;
+  let imageUrl = null;
+  if (image) {
+    const arrayView = new Uint8Array(image);
+    const blob = new Blob([arrayView], { type: "image/jpeg" });
+    imageUrl = image && URL.createObjectURL(blob);
+  }
   return (
     <div className="galleryView">
-        <img src={image} alt={description} />
-        {/* <button onClick={() => onRemove(item)} >X</button> */}
-        <div className="is-grouped is-grouped-multiline">
-          <TextInput className="select" value={select} propName="mediaType" label="Media Type" change={onSelect} options={options} disabled={false} />
-          {select.text === 'video link' &&
-            <UrlInput value={value} propName="videoUrl" label="Video Link" change={holdData} disabled={false} />
-          }
+      {imageUrl && (mediaType === 'Image Upload') &&
+        <figure className="image is-128x128">
+          <img className="image" src={imageUrl} alt={description} />
+        </figure>
+      }        
+    </div>
+  );
+}
 
-          {/* image file upload */}
-          <form className="field" encType="multipart/formData" onSubmit={e => onImageSubmit(e)}>
-            {select.text === 'image upload' &&
-              <div className="file">
-                <label className="file-label">
-                  <input className="file-input" type="file" name="imageUrl" onChange={e => onImageChange(e)} />
-                  <span className="file-cta">
-                    <span className="icon file-icon">
-                      <i className="fa fa-upload"></i>
-                    </span>
-                    <span className="file-label">
-                      Choose a file...
-                    </span>
-                  </span>
-                </label>
-              </div>
-            }
-          </form>
-          <TextArea value={value} propName="description" label="Description" change={holdData} disabled={false} />
-        </div>
-      <button className="submitButton" type="submit" onClick={e => onImageSubmit(e)}>Upload Image</button>
+// https://stackoverflow.com/questions/33913737/inserting-the-iframe-into-react-component
+// var Iframe = React.createClass({     
+//   render: function() {
+//     return(         
+//       <div>          
+//         <iframe src={this.props.src} height={this.props.height} width={this.props.width}/>         
+//       </div>
+//     )
+//   }
+// });
+
+// ReactDOM.render(
+//   <Iframe src="http://plnkr.co/" height="500" width="500"/>,
+//   document.getElementById('example')
+// );
+
+
+
+
+export function ToggleEditor({ editModeOn, toggleFn }) {
+  const iconClass = editModeOn ? 'fa fa-times fa-lg' : 'fa fa-pencil fa-lg';
+  const buttonText = editModeOn ? 'Close' : 'Edit Your Profile';
+  
+  return (
+    <div>
+      <p className="control" onClick={toggleFn}>
+        <a className="button">
+          <span className="icon is-small">
+            <i className={iconClass}></i>
+          </span>
+          <span>{buttonText}</span>
+        </a>
+      </p>
     </div>
   );
 }
@@ -61,109 +67,148 @@ export class MediaGallery extends Component {
     super(props);
     this.state = {
       itemNum: 0,
-      image: '',
-      select: { id: "0", text: "Select media type" },
-      selectOptions: [
-        { id: "0", text: "Select the media type" },
-        { id: "1", text: "video link" },
-        { id: "2", text: "image upload" }
-      ]
-    }
-    // this.rotateGallery = this.rotateGallery.bind(this);
-    this.handleImageSubmit = this.handleImageSubmit.bind(this);
+      mediaItem: { 
+        description: '', 
+        mediaType: 'Video Link', 
+        videoUrl: '', 
+        image: ''
+      },
+      editModeOn: false,
+      editAllowed: this.props.authId === this.props.currentId
+    };
+    this.rotateGallery = this.rotateGallery.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
-    this.holdData = this.holdData.bind(this);
-    this.onSelect = this.onSelect.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.setImage = this.setImage.bind(this);
+    this.toggleEditMode = this.toggleEditMode.bind(this);
   }
 
   componentDidMount() {
-    this.props.getMedia(123);
+    console.log('currentId is', this.props.currentId);
+    this.props.getMedia(this.props.currentId);
   }
   
-  handleImageSubmit(e) {
+  handleChange(e) {
     e.preventDefault();
-    console.log('handlImageSubmit', mediaItem);
-    // let image = new FormData();
-    this.props.updateMedia(123, mediaItem);
+    const { name, value } = e.target;
+    this.setState({
+      mediaItem: { ...this.state.mediaItem, [name]: value }
+    });
   }
 
-  // referenced: https://codepen.io/hartzis/pen/VvNGZP?editors=0011
+  setImage (buf) {
+    console.log('in setImage mediaItem is', this.state.mediaItem);
+    this.setState({
+      mediaItem: { ...this.state.mediaItem, image: buf }
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    // const media = this.props.athletes[this.props.currentId].media ? this.props.athletes[this.props.currentId].media : []; 
+    // console.log('media is', media);
+    // let mediaToSend = {};
+    // mediaToSend.media = [...media, this.state.mediaItem];
+    let mediaToSend = this.state.mediaItem;
+    if (mediaToSend.mediaType === 'Video Link') delete mediaToSend.image;
+    else if (mediaToSend.mediaType === 'Image Upload') delete mediaToSend.videoUrl;
+    console.log('currentid is', this.props.currentId, 'mediatosend is', mediaToSend);
+    this.props.updateMedia(this.props.currentId, mediaToSend);
+  }
+
   handleImageChange(e) {
     e.preventDefault();
-
+    const { files } = e.target;
+    if(!files.length) return;
     let reader = new FileReader();
-    let file = e.target.files[0];
+    let file = files[0];
     reader.onloadend = () => {
-      this.holdData({ image: reader.result });
-      // this.setState({
-        // image: reader.result      
-      };
-      reader.readAsArrayBuffer(file);
+      this.setImage(reader.result);
+    }
+    reader.readAsArrayBuffer(file);
+  }
+
+  toggleEditMode() {
+    if (this.state.editAllowed) {
+      const newState = this.state.editModeOn ? false : true;
+      this.setState({
+        editModeOn: newState
+      });
+    }
   }
 
   rotateGallery(incr) {
-    // const itemCount = this.props.items.length;
-    // let newItem = this.state.itemNum + incr;
-    // if (newItem === itemCount) newItem = 0;
-    // else if (newItem === -1) newItem = itemCount - 1;
-    // this.setState({ itemNum: newItem });
+    const athlete = this.props.athletes[this.props.currentId];  
+    console.log('athlete is', athlete);
+    const itemCount = athlete.media.length || 0;
+    let newItem = this.state.itemNum + incr;
+    if (newItem === itemCount) newItem = 0;
+    if (newItem === -1) newItem = itemCount - 1;
+    else if (athlete.media.length === 0) newItem = 0;
+    this.setState({ itemNum: newItem });
   }
 
-  holdData(value) {
-    let result = '';
-    if(value.mediaType) result = value.mediaType.text;
-    else result = Object.values(value)[0];
-    mediaItem[Object.keys(value)] = result;
-    if (mediaItem.mediaType === 'video link') mediaItem.image = '';
-    else if (mediaItem.mediaType === 'image upload') mediaItem.videoUrl = '';
-    console.log('mediaItem is', mediaItem);
-  }
-
-  onSelect(value) {
-    console.log('value in onSelect is', value.mediaType);
-    this.setState({ select: value.mediaType })
-    this.holdData(value);
-  }
 
   render() {
-    // const { items } = this.props;
-    const { itemNum, rotateGallery, select, selectOptions } = this.state;
-    // const itemGallery = items.map((item, i) => (
-    //   <GalleryItem key={i} image={item} description={item.description} videoUrl={item.url} mediaType={item.mediaType} rotateGallery={rotateGallery} select={select} options={selectOptions}/>
-    // ));
+    const athlete = this.props.athletes[this.props.currentId];
+    console.log('athlete is', athlete);
+    const { itemNum, rotateGallery } = this.state;
+    let items = athlete.media || [];
+    const itemGallery = items.map((item, i) => (
+      <GalleryItem key={i} image={item} description={item.description} videoUrl={item.url} mediaType={item.mediaType} rotateGallery={rotateGallery} props={this.state.mediaItem}/>
+    ));
     return (
-      <div className="field">
-        {/* <ToggleEditMode value="edit" propName="edit" change={this.holdData} disabled={false} /> */}
-
-        <div className="tile">
-          <GalleryItem rotateGallery={rotateGallery} select={select} options={selectOptions} holdData={this.holdData} onSelect={this.onSelect} onImageSubmit={this.handleImageSubmit} onImageChange={this.handleImageChange} image={this.state.image}/>
-          {/* {itemGallery[itemNum]} */}
-          {/* <nav id="galleryNav">
-            <button onClick={() => rotateGallery(-1)}>&laquo; Previous</button> <button onClick={() => rotateGallery(1)}>Next &raquo;</button>
-            <p>item {itemNum + 1} of {items.length}</p>
-          </nav> */}
+      <div>
+        {!athlete &&
+          <p>Loading...</p>
+        }
+        {athlete && athlete.media &&
+        <div>
+          {this.state.editAllowed ? <ToggleEditor editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} /> : null}
+          {this.state.editModeOn
+            ? <MediaForm onImageChange={this.handleImageChange} onSubmit={this.handleSubmit} onChange={this.handleChange} props={this.state.mediaItem} />
+            : itemGallery[itemNum]}
+          {!this.state.editModeOn && athlete.media &&
+            <nav>
+              <button className="button" onClick={() => this.rotateGallery(-1)}>&laquo; Previous</button>
+              <button className="button" onClick={() => this.rotateGallery(1)}>Next &raquo;</button>
+              <p>item {itemNum + 1} of {athlete.media.length}</p>
+            </nav>
+          }
         </div>
+        }
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => { 
-  return ({
-    media: state.items
-  })
+  return {
+    authId: state.authId,
+    // media: state.athletes.media,
+    athletes: state.athletes
+  };
 };
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ getMedia, updateMedia }, dispatch);
-// }
+const mapDispatchToProps = (dispatch) => { 
+  return {
+    getMedia: (id) => {
+      dispatch(getMedia(id));
+    },
+    updateMedia: (id, data) => {
+      dispatch(updateMedia(id, data));
+    }
+  }
+};
 
-const mapDispatchToProps = { getMedia, updateMedia };
-
-export default connect(mapStateToProps, mapDispatchToProps, 
-  // (state, dispatch, own) => {
-  // return {
-  //   media: 
-  // }
-// }
-)(MediaGallery);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  (stateProps, dispatchProps, ownProps) => {
+    return {
+      ...stateProps,
+      ...dispatchProps,
+      currentId: ownProps.location.pathname.split('/athletes/')[1].split('/media')[0],
+    };
+  })(MediaGallery);
