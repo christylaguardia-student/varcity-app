@@ -8,6 +8,9 @@ export default function GlobalHeader({ authId, signOut }) {
         <div>
           <ul>
             <li>
+              <h3 className="logo">Varcity</h3>
+            </li>
+            <li>
               <Link to="/"><i className="fa fa-home fa-2x"></i></Link>
             </li>
             <li>
