@@ -9,7 +9,7 @@ export default function MediaForm({ id, props, onImageChange, onSubmit, onChange
       <div className="column">
 
         <div className="is-grouped is-grouped-multiline">
-          <Dropdown value={mediaType} prop="mediaType" label="Media Type" change={onChange} options={['Image Link', 'Image Upload']} />
+          <Dropdown value={mediaType} prop="mediaType" label="Media Type" change={onChange} options={['Image Upload', 'Image Link']} />
 
           {mediaType === 'Image Link' &&
             <TextInput prop="videoUrl" value={videoUrl} label="Image Link" change={onChange} />
