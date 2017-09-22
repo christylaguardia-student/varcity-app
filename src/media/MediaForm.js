@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, Checkbox, DateInput, Dropdown, NumberInput, TextArea, UrlInput } from '../app/FormControls';
+import { TextInput, Dropdown, TextArea } from '../app/FormControls';
 
 export default function MediaForm({ id, props, onImageChange, onSubmit, onChange }) {
   const { description, mediaType, videoUrl } = props;

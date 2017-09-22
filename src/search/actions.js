@@ -10,6 +10,7 @@ export function search({ payload }) {
     return searchAPI
       .search({ payload })
       .then(results => {
+        console.log()
         if (results.length > 0) {
           dispatch({ type: GOT_RESULTS, payload: results });
         } else {

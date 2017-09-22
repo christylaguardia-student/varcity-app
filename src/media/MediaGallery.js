@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MediaForm from './MediaForm';
-import { Dropdown, TextArea, TextInput } from '../app/FormControls';
+// import { Dropdown, TextArea, TextInput } from '../app/FormControls';
 import { updateMedia, getMedia } from './actions';
 
 export function GalleryItem({ onChange, onSubmit, props, onImageChange, rotateGallery }) {
+  const { description, mediaType,  image } = props;
 
-  const { description, mediaType, videoUrl, image } = props;
+  // const { description, mediaType, videoUrl, image } = props;
   let imageUrl = null;
   if (image) {
     const arrayView = new Uint8Array(image);

@@ -31,15 +31,15 @@ class App extends Component {
 
       routes = [
         <Route key="1" path="/about" component={About} />,
-        <Route key="2" path="/:id/search" component={Search} />,
         <Route key="3" path="/athletes/:id" component={ProfileContainer} />,
+        <Route key="2" path="/search" component={Search} />,
         <Redirect key="5" to={`/athletes/${authId}`} />
       ];
     } else {
       routes = [
-        <Route key="1" exact path="/" component={Home} />,
-        <Route key="2" path="/about" component={About} />,
-        <Redirect  key="3" to="/" />
+        <Route key="4" exact path="/" component={Home} />,
+        <Route key="6" path="/about" component={About} />,
+        <Redirect  key="7" to="/" />
       ];
     }
 

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 // import {bindActionCreators} from 'redux';
 import { getSport, updateSport } from './actions';
-import { browserHistory } from 'react-router';
-import SportList from './SportList';
+// import { browserHistory } from 'react-router';
+// import SportList from './SportList';
 import SportForm from './SportForm';
 
 
@@ -41,8 +41,8 @@ class SportPage extends React.Component {
   handleSubmit (){
 
   }
-    
-  
+
+
 
   render() {
     // const sports = this.props.sports;

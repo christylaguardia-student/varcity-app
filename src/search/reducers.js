@@ -1,6 +1,6 @@
 import { GOT_RESULTS, NO_RESULTS, SEARCH_ERROR, SEARCHING } from './constants';
 
-export function search(state = {}, { type, payload }) {
+export function searcher(state = {}, { type, payload }) {
   console.log(type, payload);
   switch (type) {
     case GOT_RESULTS:
@@ -10,7 +10,7 @@ export function search(state = {}, { type, payload }) {
       case SEARCH_ERROR:
       return payload;
     case SEARCHING:
-      return payload;
+      return null;
     default:
       return state;
   }

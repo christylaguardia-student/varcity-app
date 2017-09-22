@@ -1,7 +1,7 @@
 import * as actions from './constants';
 
 export function media(state = {}, { type, payload }) {
-  console.log('type in reducer is', type);
+  // console.log('type in reducer is', type);
   switch (type) {
     case actions.GET_MEDIA: {
       console.log('payload in media get reducer is', payload, 'state is', state);
@@ -22,7 +22,7 @@ export function media(state = {}, { type, payload }) {
       };
     }
     default:
-      console.log('returning state instead', state);
+      // console.log('returning state instead', state);
       return state;
   }
 }

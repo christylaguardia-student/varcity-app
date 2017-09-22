@@ -1,10 +1,10 @@
 import React from 'react';
-import { sportList } from '../utils/sports';
-import { TextInput, Checkbox, DateInput, Dropdown, NumberInput, TextArea, UrlInput } from '../app/FormControls';
+// import { sportList } from '../utils/sports';
+// import { TextInput, Checkbox, DateInput, Dropdown, NumberInput, TextArea, UrlInput } from '../app/FormControls';
 
 export default function InfoEditor({ props, save, change }) {
-  const heightUOM = ['in', 'cm'];
-  const weightUOM = ['lb', 'kg'];
+  // const heightUOM = ['in', 'cm'];
+  // const weightUOM = ['lb', 'kg'];
 
   return (
     <div className="columns">

@@ -1,8 +1,7 @@
 import React from 'react';
 
-// TODO: copied from bulma sample
 
-export default function Card() {
+export default function Card({gotUsers}) {
   return (
     <div className="card">
       <div className="card-image">

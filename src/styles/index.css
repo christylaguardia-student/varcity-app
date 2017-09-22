@@ -45,9 +45,7 @@ h1 {
 .columns {
   width: 95 vw;
 }
-.column {
-  border: 1px solid blue;
-}
+
 
 .card {
   margin: 0 0 5px 0;

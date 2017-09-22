@@ -13,11 +13,13 @@ class ProfileContainer extends Component {
     // console.log('got id from URL in ProfileContainer', id);
     console.log('this is the props', this.props);
     // const id = this.props.location.pathname.split('/athletes/')[1];
-
+    const tabs = {
+      marginTop:2
+    }
     return (
       <Router>
         <div>
-          <div className="tabs is-centered is-medium">
+          <div style={tabs} className="tabs is-centered is-medium">
             <ul>
               <li>
                 <Link to={`/athletes/${id}`}>Info</Link>
