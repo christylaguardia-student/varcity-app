@@ -107,3 +107,17 @@ export function TextArea({ value, prop, label, change }) {
     </label>
   );
 }
+
+// export function TableData({ value, prop, label, change }) {
+//   return (
+//     <label className="label">
+//     {label}
+//     <TableData 
+//       className="table"
+//       value= {value || 0}
+//       name={prop}
+//       type="number"
+//       onChange={change} />
+//     </label>
+//   );
+// }

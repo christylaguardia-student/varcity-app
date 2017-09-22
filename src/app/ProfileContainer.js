@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import SportPage from '../sports/SportPage';
 import InfoContainer from '../info/InfoContainer';
-import SportsContainer from '../sports/SportsContainer';
 import EduPages from '../edu/EduPages';
 import MediaGallery from '../media/MediaGallery';
 
@@ -22,10 +22,10 @@ class ProfileContainer extends Component {
             </ul>
           </div>
           <Switch>
-            <Route exact path="/athletes/:id" component={InfoContainer} />
-            <Route path="/athletes/:id/sports" component={SportsContainer} />
-            <Route path="/athletes/:id/edu" component={EduPages} />
-            <Route path="/athletes/:id/media" component={MediaGallery} />
+            <Route exact path={`/athletes/:id`} component={InfoContainer} />
+            <Route path={`/athletes/:id/edu`} component={EduPages} />
+            <Route path={`/athletes/:id/media`} component={MediaGallery} />
+            <Route path={`/athletes/:id/sports`} component={SportPage} />
           </Switch>
         </div>
       </Router>
