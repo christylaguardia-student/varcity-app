@@ -8,7 +8,6 @@ export default function InfoEditor({ props, save, change }) {
 
   return (
     <div className="columns">
-      INFO EDITOR
       <div className="column">
         <form onSubmit={e => {
           e.preventDefault();
@@ -47,9 +46,4 @@ export default function InfoEditor({ props, save, change }) {
       </div>
     </div>
   );
-}
-
-function showIfHasProp(prop, elements) {
-  console.log('showIfHasProp elements', elements)
-  if (prop) return elements;
 }
