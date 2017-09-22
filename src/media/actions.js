@@ -8,10 +8,10 @@ export function makeGetMedia(api) {
       const athlete = athletes[id];
       if (athlete && athlete.media) return;
       return api
-        .get(id, 'media')
-        .then(media => {
-          console.log('media returning from get media is', media);
-          dispatch({ type: actions.GET_MEDIA, payload: {_id: id, media: media} });
+        .getMediaById(id)
+        .then(data => {
+          console.log('media returning from get media is', data);
+          dispatch({ type: actions.GET_MEDIA, payload: {_id: id, media: data } });
         })
         .catch(console.log);
     };
@@ -25,10 +25,10 @@ export function makeUpdateMedia(api) {
     console.log('incoming in updateMedia: id', id, "media:", media);
     return dispatch => {
       return api
-        .update(id, media, 'media')
+        .updateMediaById(id, media)
         .then(data => {
           console.log('media returning from update media is', data, 'id is', id);
-          dispatch({ type: actions.UPDATE_MEDIA, payload: {_id: id, media: data} });
+          dispatch({ type: actions.UPDATE_MEDIA, payload: {_id: id, media: data[0]} });
         })
         .catch(err => console.log('we got this error in updatemedia:', err));
     };

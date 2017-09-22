@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MediaForm from './MediaForm';
-import { Dropdown, TextArea, TextInput, ToggleEditor } from '../app/FormControls';
+import { Dropdown, TextArea, TextInput } from '../app/FormControls';
 import { updateMedia, getMedia } from './actions';
 
 export function GalleryItem({ onChange, onSubmit, props, onImageChange, rotateGallery }) {
@@ -74,7 +74,7 @@ export class MediaGallery extends Component {
     e.preventDefault();
     const { name, value } = e.target;
     this.setState({
-    mediaItem: { ...this.state.mediaItem, [name]: value }
+      mediaItem: { ...this.state.mediaItem, [name]: value }
     });
   }
 
@@ -87,6 +87,10 @@ export class MediaGallery extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    // const media = this.props.athletes[this.props.currentId].media ? this.props.athletes[this.props.currentId].media : []; 
+    // console.log('media is', media);
+    // let mediaToSend = {};
+    // mediaToSend.media = [...media, this.state.mediaItem];
     let mediaToSend = this.state.mediaItem;
     if (mediaToSend.mediaType === 'Video Link') delete mediaToSend.image;
     else if (mediaToSend.mediaType === 'Image Upload') delete mediaToSend.videoUrl;
@@ -116,11 +120,13 @@ export class MediaGallery extends Component {
   }
 
   rotateGallery(incr) {
-    const itemCount = this.props.media.length;
+    const athlete = this.props.athletes[this.props.currentId];  
+    console.log('athlete is', athlete);
+    const itemCount = athlete.media.length || 0;
     let newItem = this.state.itemNum + incr;
     if (newItem === itemCount) newItem = 0;
-    else if (newItem === -1) newItem = itemCount - 1;
-    else if (this.props.media.length === 0) newItem = 0;
+    if (newItem === -1) newItem = itemCount - 1;
+    else if (athlete.media.length === 0) newItem = 0;
     this.setState({ itemNum: newItem });
   }
 
@@ -129,25 +135,26 @@ export class MediaGallery extends Component {
     const athlete = this.props.athletes[this.props.currentId];
     console.log('athlete is', athlete);
     const { itemNum, rotateGallery } = this.state;
-    // const itemGallery = media.map((item, i) => (
-    //   <GalleryItem key={i} image={item} description={item.description} videoUrl={item.url} mediaType={item.mediaType} rotateGallery={rotateGallery} props={this.state.mediaItem}/>
-    // ));
+    let items = athlete.media || [];
+    const itemGallery = items.map((item, i) => (
+      <GalleryItem key={i} image={item} description={item.description} videoUrl={item.url} mediaType={item.mediaType} rotateGallery={rotateGallery} props={this.state.mediaItem}/>
+    ));
     return (
       <div>
         {!athlete &&
           <p>Loading...</p>
         }
-        {athlete &&
+        {athlete && athlete.media &&
         <div>
           {this.state.editAllowed ? <ToggleEditor editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} /> : null}
           {this.state.editModeOn
             ? <MediaForm onImageChange={this.handleImageChange} onSubmit={this.handleSubmit} onChange={this.handleChange} props={this.state.mediaItem} />
-            : <GalleryItem description="" onChange="onChange" onSubmit="onSubmit" props="props" />}
+            : itemGallery[itemNum]}
           {!this.state.editModeOn && athlete.media &&
             <nav>
               <button className="button" onClick={() => this.rotateGallery(-1)}>&laquo; Previous</button>
               <button className="button" onClick={() => this.rotateGallery(1)}>Next &raquo;</button>
-              <p>item {itemNum} of {athlete.media.length}</p>
+              <p>item {itemNum + 1} of {athlete.media.length}</p>
             </nav>
           }
         </div>
@@ -160,12 +167,21 @@ export class MediaGallery extends Component {
 const mapStateToProps = (state) => { 
   return {
     authId: state.authId,
-    // media: state.media || [],
+    // media: state.athletes.media,
     athletes: state.athletes
   };
 };
 
-const mapDispatchToProps = { getMedia, updateMedia };
+const mapDispatchToProps = (dispatch) => { 
+  return {
+    getMedia: (id) => {
+      dispatch(getMedia(id));
+    },
+    updateMedia: (id, data) => {
+      dispatch(updateMedia(id, data));
+    }
+  }
+};
 
 export default connect(
   mapStateToProps,

@@ -20,7 +20,8 @@ export default function InfoPresentation({ info }) {
   const facebookUrl = info.facebookUrl || '';
   const twitterUrl = info.twitterUrl || '';
   const instagramUrl = info.instagramUrl || '';
-  const age = info.person.dob ? getAge(info.person.dob) : null;
+  const age = '';
+  // const age = getAge(info.person.dob) || 0;
 
   return (
     <div>
