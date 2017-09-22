@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 // import 'bulma/css/bulma.css';
 // import PropTypes from 'prop-types';
-import { TextSelect, TextArea, UrlInput, Toggle, ToggleEditMode } from '../app/FormControls';
+import { TextSelect, TextArea, UrlInput, ToggleEditMode } from '../app/FormControlsRIEK';
 import { updateMedia, getMedia } from './actions';
 
 // GalleryItem.propTypes = {
@@ -79,7 +79,7 @@ export class MediaGallery extends Component {
   componentDidMount() {
     this.props.getMedia(123);
   }
-  
+
   handleImageSubmit(e) {
     e.preventDefault();
     console.log('handlImageSubmit', mediaItem);
@@ -96,7 +96,7 @@ export class MediaGallery extends Component {
     reader.onloadend = () => {
       this.holdData({ image: reader.result });
       // this.setState({
-        // image: reader.result      
+        // image: reader.result
       };
       reader.readAsArrayBuffer(file);
   }
@@ -127,7 +127,7 @@ export class MediaGallery extends Component {
 
   render() {
     // const { items } = this.props;
-    const { itemNum, rotateGallery, select, selectOptions } = this.state;
+    const { rotateGallery, select, selectOptions } = this.state;
     // const itemGallery = items.map((item, i) => (
     //   <GalleryItem key={i} image={item} description={item.description} videoUrl={item.url} mediaType={item.mediaType} rotateGallery={rotateGallery} select={select} options={selectOptions}/>
     // ));
@@ -148,7 +148,7 @@ export class MediaGallery extends Component {
   }
 }
 
-const mapStateToProps = (state) => { 
+const mapStateToProps = (state) => {
   return ({
     media: state.items
   })
@@ -160,10 +160,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = { getMedia, updateMedia };
 
-export default connect(mapStateToProps, mapDispatchToProps, 
+export default connect(mapStateToProps, mapDispatchToProps,
   // (state, dispatch, own) => {
   // return {
-  //   media: 
+  //   media:
   // }
 // }
 )(MediaGallery);

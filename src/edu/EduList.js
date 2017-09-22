@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { deleteEducation } from './actions';
 import { connect } from 'react-redux';
 import Education from './Education';
