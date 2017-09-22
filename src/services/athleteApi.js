@@ -11,6 +11,14 @@ export default {
       .set('Authorization', token)
       .then(res => res.body);
   },
+  updateInfoById(id, data) {
+    const token = localStorage.getItem('varcity');
+    return superagent
+      .patch(`${API_URL}/${id}/info`)
+      .send(data)
+      .set('Authorization', token)
+      .then(res => res.body);
+  },
   getMediaById(id) {
     const token = localStorage.getItem('varcity');
     return superagent
@@ -22,7 +30,6 @@ export default {
     const token = localStorage.getItem('varcity');
     return superagent
       .patch(`${API_URL}/${id}/media`)
-      .send(data)
       .set('Authorization', token)
       .then(res => res.body);
   },
@@ -30,6 +37,14 @@ export default {
     return request.get(`${API_URL}/${id}/${tab}`);
   },
   update(id, data, tab = '') {
-    return request.patch(`${API_URL}/${id}/${tab}`, data);
-  }
+    return request.patch(`${API_URL}/${id}/${tab}`, data).catch(err => console.log(err));
+  },
+  updateSportById(id, data) {
+    const token = localStorage.getItem('varcity');
+    return superagent
+    .patch(`${API_URL}/${id}/sports`)
+    .send(data)
+    .set('Authorization', token)
+    .then(res => res.body)
+      }
 };

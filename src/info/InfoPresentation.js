@@ -1,55 +1,44 @@
 import React from 'react';
 
 export default function InfoPresentation({ info }) {
-  const profileUrl = info.profileUrl || '';
-  const firstName = info.firstName || '';
-  const lastName = info.lastName || '';
-  const primarySport = info.primarySport || '';
-  const position = info.position || '';
-  const organization = info.organization || '';
-  const country = info.country || '';
-  const region = info.region || '';
-  const city = info.city || '';
-  const gender = info.gender || '';
-  const height = info.height || '';
-  const heightUom = info.heightUom || '';
-  const weight = info.weight || '';
-  const weightUom = info.weightUom || '';
-  const about = info.about || '';
-  const awards = info.awards || '';
-  const facebookUrl = info.facebookUrl || '';
-  const twitterUrl = info.twitterUrl || '';
-  const instagramUrl = info.instagramUrl || '';
-  const age = '';
-  // const age = getAge(info.person.dob) || 0;
+  return (
+    <div>
+      {info ? <NoInfo /> : <HasInfo info={info}/>}
+    </div>
+  );
+}
+
+function HasInfo({ props }) {
+  const age = getAge(props.dob);
 
   return (
     <div>
       <div className="columns level">
+
         <div className="column">
           <figure className="image is-3by2">
-            <img src={profileUrl} alt="Profile" />
+            <img src={props.profileUrl} alt="Profile" />
           </figure>
         </div>
 
         <div className="column">
           <div className="content">
-            <h1>{firstName} {lastName}</h1>
+            <h1>{props.firstName} {props.lastName}</h1>
           </div>
 
           <div>
             <span>
-              <a className="icon is-medium" href={facebookUrl}>
+              <a className="icon is-medium" href={props.facebookUrl}>
                 <i className="fa fa-facebook fa-lg"></i>
               </a>
             </span>
             <span>
-              <a className="icon is-medium" href={twitterUrl}>
+              <a className="icon is-medium" href={props.twitterUrl}>
                 <i className="fa fa-twitter fa-lg"></i>
               </a>
             </span>
             <span>
-              <a className="icon is-medium" href={instagramUrl}>
+              <a className="icon is-medium" href={props.instagramUrl}>
                 <i className="fa fa-instagram fa-lg"></i>
               </a>
             </span>
@@ -64,27 +53,27 @@ export default function InfoPresentation({ info }) {
                 </tr>
                 <tr>
                   <td>Sport</td>
-                  <td>{primarySport || null} {position}</td>
+                  <td>{props.primarySport || null} {props.position}</td>
                 </tr>
                 <tr>
                   <td>Gender</td>
-                  <td>{gender}</td>
+                  <td>{props.gender}</td>
                 </tr>
                 <tr>
                   <td>Height</td>
-                  <td>{height} {heightUom}</td>
+                  <td>{props.height} {props.heightUom}</td>
                 </tr>
                 <tr>
                   <td>Weight</td>
-                  <td>{weight} {weightUom}</td>
+                  <td>{props.weight} {props.weightUom}</td>
                 </tr>
                 <tr>
                   <td>Organization</td>
-                  <td>{organization}</td>
+                  <td>{props.organization}</td>
                 </tr>
                 <tr>
                   <td>Location</td>
-                  <td>{city} {region} {country}</td>
+                  <td>{props.city} {props.region} {props.country}</td>
                 </tr>
               </tbody>
             </table>
@@ -93,8 +82,18 @@ export default function InfoPresentation({ info }) {
         </div>
       </div>
       <div className="column box content">
-        <p>{about}</p>
-        <p>{awards}</p>
+        <p>{props.about}</p>
+        <p>{props.awards}</p>
+      </div>
+    </div>
+  );
+}
+
+function NoInfo() {
+  return (
+    <div className="main-container">
+      <div className="notification is-primary">
+        <h2>Uh oh! We have no info to show.</h2>
       </div>
     </div>
   );
