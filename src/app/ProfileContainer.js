@@ -8,13 +8,11 @@ import MediaGallery from '../media/MediaGallery';
 
 class ProfileContainer extends Component {
   render() {
-    console.log(99, this.props);
-    console.log(99, id, this.props);
-    // const { currentId } = this.props;
+
     const id = this.props.currentId;
     // console.log('got id from URL in ProfileContainer', id);
     console.log('this is the props', this.props);
-    const id = this.props.location.pathname.split('/athletes/')[1];
+    // const id = this.props.location.pathname.split('/athletes/')[1];
 
     return (
       <Router>
