@@ -7,14 +7,14 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
-import SearchContainer from '../search/SearchContainer';
+import Search from '../search/Search';
 import ProfileContainer from './ProfileContainer';
 import Home from './Home';
 import About from './About';
 import { connect } from 'react-redux';
 import { retrieveWithToken } from './actions';
 import 'bulma/css/bulma.css';
-import '../styles/index.css';
+import '../styles/index.css'
 
 class App extends Component {
   componentWillMount() {
@@ -23,6 +23,7 @@ class App extends Component {
 
   render() {
     let routes = null;
+
     const { authId } = this.props;
 
     if (authId && Object.entries(authId).length !== 0) {
@@ -30,7 +31,7 @@ class App extends Component {
 
       routes = [
         <Route key="1" path="/about" component={About} />,
-        <Route key="2" path="/search" component={SearchContainer} />,
+        <Route key="2" path="/:id/search" component={Search} />,
         <Route key="3" path="/athletes/:id" component={ProfileContainer} />,
         <Redirect key="5" to={`/athletes/${authId}`} />
       ];
@@ -62,6 +63,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(state => ({ authId: state.authId, errorMessage: state.errorMessage }), mapDispatchToProps)(
+export default connect(state => ({ authId: state.authId }), mapDispatchToProps)(
   App
 );

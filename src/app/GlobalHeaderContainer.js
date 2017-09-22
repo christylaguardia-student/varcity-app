@@ -29,4 +29,4 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(GlobalHeaderBulma);
+export default connect(mapStateToProps, mapDispatchToProps)(GlobalHeader);

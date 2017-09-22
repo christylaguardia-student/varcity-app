@@ -10,7 +10,7 @@ export function search(state = {}, { type, payload }) {
       case SEARCH_ERROR:
       return payload;
     case SEARCHING:
-      return state;
+      return payload;
     default:
       return state;
   }

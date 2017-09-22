@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function GlobalHeader({ authId, search, signOut }) {
+export default function GlobalHeaderBulma({ authId, search, signOut }) {
   return (
     <div className="navbar-menu level is-fluid"
       aria-label="main navigation">

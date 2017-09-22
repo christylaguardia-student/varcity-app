@@ -41,10 +41,13 @@ export function signUp({ payload }) {
 }
 
 export function signIn({ payload }) {
+  const storage = localStorage;
+  storage.clear('varcity');
   return function(dispatch) {
     return authAPI.signIn({ payload }).then(
       res => {
-        const storage = localStorage;
+        console.log(22, res)
+        // const storage = localStorage;
         storage.setItem('varcity', res.token);
         dispatch({ type: AUTHORIZED, payload: res.user._id });
       },
