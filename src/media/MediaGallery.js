@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MediaForm from './MediaForm';
-import { Dropdown, TextArea, TextInput } from '../app/FormControls';
+import { Dropdown, TextArea, TextInput, ToggleEditor } from '../app/FormControls';
 import { updateMedia, getMedia } from './actions';
 
 export function GalleryItem({ onChange, onSubmit, props, onImageChange, rotateGallery }) {
 
   const { description, mediaType, videoUrl, image } = props;
   let imageUrl = null;
-  if (image) {
-    const arrayView = new Uint8Array(image);
-    const blob = new Blob([arrayView], { type: "image/jpeg" });
-    imageUrl = image && URL.createObjectURL(blob);
-  }
+  // if (image) {
+  //   const arrayView = new Uint8Array(image);
+  //   const blob = new Blob([arrayView], { type: "image/jpeg" });
+  //   imageUrl = image && URL.createObjectURL(blob);
+  // }
   return (
     <div className="galleryView">
       {imageUrl && (mediaType === 'Image Upload') &&
@@ -41,26 +41,6 @@ export function GalleryItem({ onChange, onSubmit, props, onImageChange, rotateGa
 // );
 
 
-
-
-export function ToggleEditor({ editModeOn, toggleFn }) {
-  const iconClass = editModeOn ? 'fa fa-times fa-lg' : 'fa fa-pencil fa-lg';
-  const buttonText = editModeOn ? 'Close' : 'Edit Your Profile';
-  
-  return (
-    <div>
-      <p className="control" onClick={toggleFn}>
-        <a className="button">
-          <span className="icon is-small">
-            <i className={iconClass}></i>
-          </span>
-          <span>{buttonText}</span>
-        </a>
-      </p>
-    </div>
-  );
-}
-
 export class MediaGallery extends Component {
 
   constructor(props) {
@@ -80,7 +60,7 @@ export class MediaGallery extends Component {
     this.handleImageChange = this.handleImageChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.setImage = this.setImage.bind(this);
+    // this.setImage = this.setImage.bind(this);
     this.toggleEditMode = this.toggleEditMode.bind(this);
   }
 
@@ -97,12 +77,12 @@ export class MediaGallery extends Component {
     });
   }
 
-  setImage (buf) {
-    console.log('in setImage mediaItem is', this.state.mediaItem);
-    this.setState({
-      mediaItem: { ...this.state.mediaItem, image: buf }
-    });
-  }
+  // setImage (buf) {
+  //   console.log('in setImage mediaItem is', this.state.mediaItem);
+  //   this.setState({
+  //     mediaItem: { ...this.state.mediaItem, image: buf }
+  //   });
+  // }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -117,17 +97,17 @@ export class MediaGallery extends Component {
     this.props.updateMedia(this.props.currentId, mediaToSend);
   }
 
-  handleImageChange(e) {
-    e.preventDefault();
-    const { files } = e.target;
-    if(!files.length) return;
-    let reader = new FileReader();
-    let file = files[0];
-    reader.onloadend = () => {
-      this.setImage(reader.result);
-    }
-    reader.readAsArrayBuffer(file);
-  }
+  // handleImageChange(e) {
+  //   e.preventDefault();
+  //   const { files } = e.target;
+  //   if(!files.length) return;
+  //   let reader = new FileReader();
+  //   let file = files[0];
+  //   reader.onloadend = () => {
+  //     this.setImage(reader.result);
+  //   }
+  //   reader.readAsArrayBuffer(file);
+  // }
 
   toggleEditMode() {
     if (this.state.editAllowed) {
@@ -173,7 +153,7 @@ export class MediaGallery extends Component {
             <nav>
               <button className="button" onClick={() => this.rotateGallery(-1)}>&laquo; Previous</button>
               <button className="button" onClick={() => this.rotateGallery(1)}>Next &raquo;</button>
-              <p>item {itemNum + 1} of {athlete.media.length}</p>
+              <p>item {itemNum ? itemNum + 1 : 0} of {athlete.media.length}</p>
             </nav>
           }
         </div>
