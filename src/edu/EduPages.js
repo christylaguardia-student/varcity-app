@@ -2,33 +2,33 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 // import {bindActionCreators} from 'redux';
 import {getEducation, updateEducation} from './actions';
-import { browserHistory } from 'react-router';
-import EduList from './EduList';
+// import { browserHistory } from 'react-router';
+// import EduList from './EduList';
 import EduForm from './EduForm';
 
 
-class EduPages extends React.Component {
+class EduPages extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       educations: {
-        institution: '', 
-        year: 2017, 
-        country: '', 
-        city: '', 
-        state: '', 
-        degree: '', 
-        satReading: '', 
-        satWriting: '', 
-        satMath: '', 
-        actMath: '', 
-        actReading: '', 
-        actScience: '', 
-        actWriting: '', 
-        ibHistory: '', 
-        ibLanguage: '', 
-        ibMath: '', 
+        institution: '',
+        year: 2017,
+        country: '',
+        city: '',
+        state: '',
+        degree: '',
+        satReading: '',
+        satWriting: '',
+        satMath: '',
+        actMath: '',
+        actReading: '',
+        actScience: '',
+        actWriting: '',
+        ibHistory: '',
+        ibLanguage: '',
+        ibMath: '',
         ibScience: ''
       }
     }
@@ -75,28 +75,28 @@ class EduPages extends React.Component {
 function mapStateToProps(state) {
   if (state.educations.length > 0) {
     return {
-      educations: state.educations, 
+      educations: state.educations,
       authId: state.authId
     };
   } else {
     return {
       educations: [{
-        institution: '', 
-        year: 2017, 
-        country: '', 
-        city: '', 
-        state: '', 
-        degree: '', 
-        satReading: '', 
-        satWriting: '', 
-        satMath: '', 
-        actMath: '', 
-        actReading: '', 
-        actScience: '', 
-        actWriting: '', 
-        ibHistory: '', 
-        ibLanguage: '', 
-        ibMath: '', 
+        institution: '',
+        year: 2017,
+        country: '',
+        city: '',
+        state: '',
+        degree: '',
+        satReading: '',
+        satWriting: '',
+        satMath: '',
+        actMath: '',
+        actReading: '',
+        actScience: '',
+        actWriting: '',
+        ibHistory: '',
+        ibLanguage: '',
+        ibMath: '',
         ibScience: ''
       }],
       authId: state.authId
