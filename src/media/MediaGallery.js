@@ -3,11 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // import 'bulma/css/bulma.css';
 // import PropTypes from 'prop-types';
-<<<<<<< HEAD
-import { TextInput, TextArea, UrlInput } from '../app/FormControls';
-=======
 import { TextSelect, TextArea, UrlInput, Toggle, ToggleEditMode } from '../app/FormControlsRIEK';
->>>>>>> 1c3e3a739acb030fa668931b106aed21db6d0f19
 import { updateMedia, getMedia } from './actions';
 
 // GalleryItem.propTypes = {

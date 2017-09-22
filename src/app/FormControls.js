@@ -102,21 +102,6 @@ export function TextArea({ value, prop, label, change }) {
   );
 }
 
-<<<<<<< HEAD
-// export function TableData({ value, prop, label, change }) {
-//   return (
-//     <label className="label">
-//     {label}
-//     <TableData 
-//       className="table"
-//       value= {value || 0}
-//       name={prop}
-//       type="number"
-//       onChange={change} />
-//     </label>
-//   );
-// }
-=======
 export function ToggleEditor({ text, editModeOn, toggleFn }) {
   const iconClass = editModeOn ? 'fa fa-times fa-lg' : 'fa fa-pencil fa-lg';
   const buttonText = editModeOn ? 'Cancel Edit' : `Edit ${text}`;
@@ -149,4 +134,3 @@ export function ButtonWithIcon({ text, iconClass, onClickFn }) {
     </div>
   );
 }
->>>>>>> 1c3e3a739acb030fa668931b106aed21db6d0f19
