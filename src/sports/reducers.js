@@ -20,7 +20,9 @@ const newSportItem = (value) => {
     sport: value.sport,
     organization: value.organization,
     position: value.position,
-    stat: value.stat,
+    stat: value.position,
+    // statTitle: value.statTitle,
+    // statScore: value.statScore,
     seasonDates: value.seasonDates,
     // saving: false
   }
@@ -37,4 +39,3 @@ const newSportItem = (value) => {
   // // }
   // return state.filter((sport) => sport.id !== action.id)
 
-  

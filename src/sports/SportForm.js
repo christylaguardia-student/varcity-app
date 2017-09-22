@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from "react';
+import React, { Component, PropTypes } from 'react';
 import { TextInput, NumberInput, Dropdown, DateInput } from '../app/FormControls';
 
 // export function SportForm(onSubmit, onChange, onDelete) 
@@ -6,7 +6,7 @@ import { TextInput, NumberInput, Dropdown, DateInput } from '../app/FormControls
 
 export default function SportForm({ onSubmit, onChange, props }) {
   
-    const { sport, organization, position, stat, seasonDates} = props;
+    const { sport, organization, position, statTitle, statScore, seasonDates} = props;
       return (
         <div className="column">
           <div>
@@ -16,11 +16,11 @@ export default function SportForm({ onSubmit, onChange, props }) {
             </p>
           </div>
           <form onSubmit={onSubmit}>
-            <div className="Sport">
+            <div className="field">
             <TextInput prop="sport" label="Sport" change={onChange} value={sport}/>
             <TextInput prop="organization" label="Organization" change={onChange} value={organization}/>
             <TextInput prop="position" label="Position" change={onChange} value={position}/>
-            <label className="label">Statistics</label>
+            <label className="label">Statistic</label>
             <TexInput prop={"title"} label="Title" change={onChange} value={title} />
             <NumberInput prop={"score"}label="Score" change={onChange} value={score}/>
             <DateInput prop="seasonDates" label="Season Played" change={onChange} value={seasonDates}/>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 // import {bindActionCreators} from 'redux';
-import {getSport, updateSport} from './actions';
+import { getSport, updateSport } from './actions';
 import { browserHistory } from 'react-router';
 import SportList from './SportList';
 import SportForm from './SportForm';
@@ -16,10 +16,11 @@ class SportPage extends React.Component {
         sport: '',
         organization: '',
         position: '',
-        stat: '',
-        seasonDates: ''
-      }
+        statTitle: '',
+        statScore: '',
+      seasonDates: ''
     }
+  }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -32,7 +33,7 @@ class SportPage extends React.Component {
   handleChange(event) {
     this.setState({
       sports: {
-      [event.target.name]: event.target.value
+        [event.target.name]: event.target.value
       }
     });
   }
@@ -63,7 +64,7 @@ class SportPage extends React.Component {
 function mapStateToProps(state) {
   if (state.sports.length > 0) {
     return {
-      sports: state.sports, 
+      sports: state.sports,
       authId: state.authId
     };
   } else {
@@ -72,7 +73,8 @@ function mapStateToProps(state) {
         sport: '',
         organization: '',
         position: '',
-        stat: '',
+        statTitle: '',
+        statScore: '',
         seasonDates: ''
       }],
       authId: state.authId
@@ -80,11 +82,12 @@ function mapStateToProps(state) {
   }
 }
 
-const mapDispatchToProps = { getSport, updateSport };
+
+  const mapDispatchToProps = { getSport, updateSport };
 
 
-// function mapDispatchToProps(dispatch) {
-//   return {actions: bindActionCreators(actions, dispatch)}
-// }
+  // function mapDispatchToProps(dispatch) {
+  //   return {actions: bindActionCreators(actions, dispatch)}
+  // }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SportPage);
+  export default connect(mapStateToProps, mapDispatchToProps)(SportPage);
