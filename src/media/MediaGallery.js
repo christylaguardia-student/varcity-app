@@ -24,6 +24,25 @@ export function GalleryItem({ onChange, onSubmit, props, onImageChange, rotateGa
   );
 }
 
+// https://stackoverflow.com/questions/33913737/inserting-the-iframe-into-react-component
+// var Iframe = React.createClass({     
+//   render: function() {
+//     return(         
+//       <div>          
+//         <iframe src={this.props.src} height={this.props.height} width={this.props.width}/>         
+//       </div>
+//     )
+//   }
+// });
+
+// ReactDOM.render(
+//   <Iframe src="http://plnkr.co/" height="500" width="500"/>,
+//   document.getElementById('example')
+// );
+
+
+
+
 export function ToggleEditor({ editModeOn, toggleFn }) {
   const iconClass = editModeOn ? 'fa fa-times fa-lg' : 'fa fa-pencil fa-lg';
   const buttonText = editModeOn ? 'Close' : 'Edit Your Profile';
