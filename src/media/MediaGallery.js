@@ -19,9 +19,7 @@ export function GalleryItem({ onChange, onSubmit, props, onImageChange, rotateGa
         <figure className="image is-128x128">
           <img className="image" src={imageUrl} alt={description} />
         </figure>
-      }
-        {/* <button onClick={() => onRemove(item)} >X</button> */}
-        
+      }        
     </div>
   );
 }
@@ -68,12 +66,8 @@ export class MediaGallery extends Component {
   }
 
   componentDidMount() {
+    console.log('currentId is', this.props.currentId);
     this.props.getMedia(this.props.currentId);
-  }
-
-  updateInitialState() {
-    const { media } = this.props.athletes[this.props.currentId];
-    this.setState({ media });
   }
   
   handleChange(e) {
@@ -85,6 +79,7 @@ export class MediaGallery extends Component {
   }
 
   setImage (buf) {
+    console.log('in setImage mediaItem is', this.state.mediaItem);
     this.setState({
       mediaItem: { ...this.state.mediaItem, image: buf }
     });
@@ -93,9 +88,10 @@ export class MediaGallery extends Component {
   handleSubmit(e) {
     e.preventDefault();
     let mediaToSend = this.state.mediaItem;
-    if (mediaToSend.mediaType === 'Video Link') mediaToSend.image = '';
-    else if (mediaToSend.mediaType === 'Image Upload') mediaToSend.videoUrl = '';
-    this.props.updateMedia(this.props.currentId, this.state.mediaItem);
+    if (mediaToSend.mediaType === 'Video Link') delete mediaToSend.image;
+    else if (mediaToSend.mediaType === 'Image Upload') delete mediaToSend.videoUrl;
+    console.log('currentid is', this.props.currentId, 'mediatosend is', mediaToSend);
+    this.props.updateMedia(this.props.currentId, mediaToSend);
   }
 
   handleImageChange(e) {
@@ -130,34 +126,43 @@ export class MediaGallery extends Component {
 
 
   render() {
-    const { media } = this.props;
+    const athlete = this.props.athletes[this.props.currentId];
+    console.log('athlete is', athlete);
     const { itemNum, rotateGallery } = this.state;
-    const itemGallery = media.map((item, i) => (
-      <GalleryItem key={i} image={item} description={item.description} videoUrl={item.url} mediaType={item.mediaType} rotateGallery={rotateGallery} props={this.state.mediaItem}/>
-    ));
+    // const itemGallery = media.map((item, i) => (
+    //   <GalleryItem key={i} image={item} description={item.description} videoUrl={item.url} mediaType={item.mediaType} rotateGallery={rotateGallery} props={this.state.mediaItem}/>
+    // ));
     return (
       <div>
-      {this.state.editAllowed ? <ToggleEditor editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} /> : null }
-      {this.state.editModeOn
-        ? <MediaForm onImageChange={this.handleImageChange} onSubmit={this.handleSubmit} onChange={this.handleChange} props={this.state.mediaItem} />
-        : itemGallery[itemNum] }
-      {!this.state.editModeOn &&
-        <nav>
-            <button className="button" onClick={() => this.rotateGallery(-1)}>&laquo; Previous</button> 
-            <button  className="button" onClick={() => this.rotateGallery(1)}>Next &raquo;</button>
-            <p>item {itemNum} of {media.length}</p>
-        </nav>
-      }
+        {!athlete &&
+          <p>Loading...</p>
+        }
+        {athlete &&
+        <div>
+          {this.state.editAllowed ? <ToggleEditor editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} /> : null}
+          {this.state.editModeOn
+            ? <MediaForm onImageChange={this.handleImageChange} onSubmit={this.handleSubmit} onChange={this.handleChange} props={this.state.mediaItem} />
+            : <GalleryItem description="" onChange="onChange" onSubmit="onSubmit" props="props" />}
+          {!this.state.editModeOn && athlete.media &&
+            <nav>
+              <button className="button" onClick={() => this.rotateGallery(-1)}>&laquo; Previous</button>
+              <button className="button" onClick={() => this.rotateGallery(1)}>Next &raquo;</button>
+              <p>item {itemNum} of {athlete.media.length}</p>
+            </nav>
+          }
+        </div>
+        }
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => { 
-  return ({
+  return {
     authId: state.authId,
-    media: state.media || []
-  })
+    // media: state.media || [],
+    athletes: state.athletes
+  };
 };
 
 const mapDispatchToProps = { getMedia, updateMedia };
@@ -169,6 +174,6 @@ export default connect(
     return {
       ...stateProps,
       ...dispatchProps,
-      currentId: ownProps.location.pathname.split('/athletes/')[1],
+      currentId: ownProps.location.pathname.split('/athletes/')[1].split('/media')[0],
     };
   })(MediaGallery);

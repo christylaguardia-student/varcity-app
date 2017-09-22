@@ -1,7 +1,7 @@
 import * as actions from './constants';
-import defaultValues from './defaultValues';
+// import defaultValues from './defaultValues';
 
-export function athletes(state = defaultValues, { type, payload }) {
+export function athletes(state = {}, { type, payload }) {
   switch(type) {
     case actions.GET_INFO: {
       const { _id, info } = payload;
