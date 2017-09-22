@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import GlobalHeader from './GlobalHeader';
-import GlobalHeaderBulma from './GlobalHeaderBulma'
 import { signIn, signUp, signOut } from './actions';
 import { search } from '../search/actions';
 
