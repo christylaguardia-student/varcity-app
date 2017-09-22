@@ -1,14 +1,38 @@
 import React, { Component } from 'react';
+// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getInfo, updateInfo } from '../store/athletes/actions';
-import { getCountries, getRegions, getCities } from './address/actions';
 import InfoEditor from './InfoEditor';
 import InfoPresentation from './InfoPresentation';
+import { ToggleEditor } from '../app/FormControls';
 
-// TODO: how to get the exiting/initial values populated correctly?
-// numbers inputs are not updating correctly
-// location dropdowns need to be wired up with the api
-// may need to merge FormControls with Stephanie's
+const defaultInfo = {
+  firstName: '',
+  lastName: '',
+  public: false,
+  profileUrl: '',
+  primarySport: '',
+  position: '',
+  person: {
+    dob: '2017-09-20',
+    gender: '', 
+    height: 0,
+    heightUom: 'in',
+    weight: 0,
+    weightUom: 'lb'
+  },
+  organization: '',
+  location: {
+    city: '',
+    state: '',
+    country: '',
+  },
+  socials: {
+    facebookUrl: '',
+    twitterUrl: '',
+    instagramUrl: '',
+  }
+};
 
 export class InfoContainer extends Component {
 
@@ -18,48 +42,17 @@ export class InfoContainer extends Component {
     this.state = {
       editAllowed: this.props.authId === this.props.currentId,
       editModeOn: false,
-      info: {
-        firstName: '',
-        lastName: '',
-        public: false,
-        dob: '',
-        primarySport: '',
-        organization: '',
-        location: {
-          country: '',
-          region: '',
-          state: '',
-        },
-        person: {
-          gender: '',
-          height: 0,
-          heightUom: '',
-          weight: 0,
-          weightUom: '',
-        },
-        about: '',
-        awards: '',
-        socials: {
-          facebookUrl: '',
-          twitterUrl: '',
-          instagramUrl: '',
-        }
-      }
+      info: {}
     };
     
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnSave = this.handleOnSave.bind(this);
-    this.updateInitialState = this.updateInitialState.bind(this);
     this.toggleEditMode = this.toggleEditMode.bind(this);
+    this.checkIfHasProps = this.checkIfHasProps.bind(this);
   }
 
   componentWillMount() {
     this.props.getInfo(this.props.currentId);
-  }
-
-  updateInitialState() {
-    const { info } = this.props.athletes[this.props.currentId];
-    this.setState({ info });
   }
 
   handleOnChange(event) {
@@ -83,35 +76,37 @@ export class InfoContainer extends Component {
     }
   }
 
+  checkIfHasProps(props) {
+    let keys = Object.keys(props);
+  
+    // has no props
+    if (keys.length===0) return defaultInfo;
+    
+    // has some props
+    let defaultKeys = Object.keys(defaultInfo);
+    for (let i=0; i<defaultKeys.length; i++) {
+      if (!keys.includes(defaultKeys[i])) {
+        props[defaultKeys[i]] = defaultInfo[defaultKeys[i]];
+      }
+    }
+    return props;
+  }
+
   render() {
-    // this.updateInitialState();
+    const athlete = this.props.athletes[this.props.currentId];
+
     return (
       <div>
-        {this.state.editAllowed ? <ToggleEditor editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} /> : null }
-        {this.state.editModeOn
-          ? <InfoEditor id={this.props.currentId} props={this.state.info} change={this.handleOnChange} save={this.handleOnSave} />
-          : <InfoPresentation info={this.state.info} /> }
+        {this.state.editAllowed
+          ? <ToggleEditor text="Info" editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} />
+          : null }
+        
+        {(athlete && athlete.info) && (this.state.editModeOn
+          ? <InfoEditor props={this.checkIfHasProps(athlete.info)} change={this.handleOnChange} save={this.handleOnSave} />
+          : <InfoPresentation info={this.checkIfHasProps(athlete.info)} /> )}
       </div>
     );
   }
-}
-
-function ToggleEditor({ editModeOn, toggleFn }) {
-  const iconClass = editModeOn ? 'fa fa-times fa-lg' : 'fa fa-pencil fa-lg';
-  const buttonText = editModeOn ? 'Close' : 'Edit Your Profile';
-
-  return (
-    <div>
-      <p className="control" onClick={toggleFn}>
-        <a className="button">
-          <span className="icon is-small">
-            <i className={iconClass}></i>
-          </span>
-          <span>{buttonText}</span>
-        </a>
-      </p>
-    </div>
-  );
 }
 
 const mapStateToProps = (state) => {
@@ -128,15 +123,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     updateInfo: (id, data) => {
       dispatch(updateInfo(id, data));
-    },
-    getCountries: () => {
-      dispatch(getCountries());
-    },
-    getRegions: (country) => {
-      dispatch(getRegions(country));
-    },
-    getCities: (country, region) => {
-      dispatch(getCities(country, region));
     }
   };
 };

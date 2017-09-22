@@ -1,32 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import SportPage from '../sports/SportPage';
 import InfoContainer from '../info/InfoContainer';
-import SportsContainer from '../sports/SportsContainer';
 import EduPages from '../edu/EduPages';
 import MediaGallery from '../media/MediaGallery';
 
 class ProfileContainer extends Component {
 
   render() {
+    console.log('this is the props', this.props);
     const id = this.props.location.pathname.split('/athletes/')[1];
+    
     return (
       <Router>
         <div>
-          <div className="tabs is-centered is-boxed is-medium">
+          <div className="tabs is-centered is-medium">
             <ul>
-              <li className="is-active"><Link to={`/athletes/${id}`}>Info</Link></li>
+              <li><Link to={`/athletes/${id}`}>Info</Link></li>
               <li><Link to={`/athletes/${id}/sports`}>Sports</Link></li>
               <li><Link to={`/athletes/${id}/edu`}>Education</Link></li>
               <li><Link to={`/athletes/${id}/media`}>Media</Link></li>
             </ul>
           </div>
+
           <Switch>
-            <Route exact path="/athletes/:id" component={InfoContainer} />
-            <Route path="/athletes/:id/sports" component={SportsContainer} />
-            <Route path="/athletes/:id/edu" component={EduPages} />
-            <Route path="/athletes/:id/media" component={MediaGallery} />
+            <div className="columns main-container">
+              <div className="column"></div>
+              <div className="column is-two-thirds">
+                <Route exact path="/athletes/:id" component={InfoContainer} />
+                <Route path="/athletes/:id/sports" component={SportPage} />
+                <Route path="/athletes/:id/edu" component={EduPages} />
+                <Route path="/athletes/:id/media" component={MediaGallery} />
+              </div>
+              <div className="column"></div>
+            </div>
           </Switch>
+
         </div>
       </Router>
     );
