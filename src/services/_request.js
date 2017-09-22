@@ -25,8 +25,4 @@ export const request =  {
     const token = localStorage.getItem('varcity');
     return wrapper(superagent.patch(url).send(data), token);
   }
-  // ,
-  // delete(url) {
-  //   return wrapper(superagent.delete(url));
-  // }
 };
