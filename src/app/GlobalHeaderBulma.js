@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function GlobalHeader({ authId, search, signOut }) {
   return (
-    <nav
-      className="navbar level"
+    <div className="navbar-menu level is-fluid"
       aria-label="main navigation">
       <div className="navbar-brand level-item">
         <Link className="navbar-item" to="/">
@@ -63,6 +62,6 @@ export default function GlobalHeader({ authId, search, signOut }) {
           </div>
         </div>
       </div>
-    </nav>
+    </div>
   );
 }

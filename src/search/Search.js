@@ -2,9 +2,10 @@ import React from 'react';
 import Card from '../search/Card';
 import Pagination from '../search/Pagination';
 
-export default function SearchContainer() {
+export default function Search() {
   return (
-    <div>
+    <div className="columns is-mobile is-3">
+      <div className="column">
       <div className="field is-grouped">
         <p className="control is-expanded">
           <input className="input" type="text" placeholder="Find an athlete" />
@@ -36,6 +37,7 @@ export default function SearchContainer() {
         </div>
       </div>
       <Pagination />
+    </div>
     </div>
   );
 }
