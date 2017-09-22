@@ -12,10 +12,7 @@ export default {
       .then(res => res.body);
   },
   get(id, tab = '') {
-<<<<<<< Updated upstream
-=======
-    console.log(111, API_URL, id, tab)
->>>>>>> Stashed changes
+
     return request.get(`${API_URL}/${id}/${tab}`);
   },
   update(id, data, tab = '') {
