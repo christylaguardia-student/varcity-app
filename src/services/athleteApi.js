@@ -1,11 +1,19 @@
+import superagent from 'superagent';
 import { request } from './_request';
 import superagent from 'superagent';
 
-const API_URL = '/athletes';
+const API_URL = '/api/athletes';
 
 export default {
+  getInfoById(id) {
+    const token = localStorage.getItem('varcity');
+    return superagent
+      .get(`${API_URL}/${id}/info`)
+      .set('Authorization', token)
+      .then(res => res.body);
+  },
   get(id, tab = '') {
-    return request.get(`${API_URL}/${id}/${tab}`).catch(err => console.log(err));
+    return request.get(`${API_URL}/${id}/${tab}`);
   },
   update(id, data, tab = '') {
     return request.patch(`${API_URL}/${id}/${tab}`, data).catch(err => console.log(err));
@@ -18,5 +26,6 @@ export default {
     .set('Authorization', token)
     .then(res => res.body)
     
+    return request.patch(`${API_URL}/${id}/${tab}`, data);
   }
 };
