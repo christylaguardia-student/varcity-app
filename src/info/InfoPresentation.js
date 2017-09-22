@@ -1,88 +1,111 @@
 import React from 'react';
 
 export default function InfoPresentation({ info }) {
-  console.log('InfoPresentation',info);
-  const age = getAge(info.person.dob);
+  const profileUrl = info.profileUrl || '';
+  const firstName = info.firstName || '';
+  const lastName = info.lastName || '';
+  const primarySport = info.primarySport || '';
+  const position = info.position || '';
+  const organization = info.organization || '';
+  const country = info.country || '';
+  const region = info.region || '';
+  const city = info.city || '';
+  const gender = info.gender || '';
+  const height = info.height || '';
+  const heightUom = info.heightUom || '';
+  const weight = info.weight || '';
+  const weightUom = info.weightUom || '';
+  const about = info.about || '';
+  const awards = info.awards || '';
+  const facebookUrl = info.facebookUrl || '';
+  const twitterUrl = info.twitterUrl || '';
+  const instagramUrl = info.instagramUrl || '';
+  const age = info.person.dob ? getAge(info.person.dob) : null;
 
   return (
     <div>
-      <div className="image is-128x128">
-        <img src={info.profileUrl} alt="Profile" />
-      </div>
+      <div className="columns level">
+        <div className="column">
+          <figure className="image is-3by2">
+            <img src={profileUrl} alt="Profile" />
+          </figure>
+        </div>
 
-      <div className="content">
-        <h1>{info.firstName} {info.lastName}</h1>
-      </div>
+        <div className="column">
+          <div className="content">
+            <h1>{firstName} {lastName}</h1>
+          </div>
 
-      <div>
-        <table className="table">
-          <tbody>
-            <tr>
-              <td>Age</td>
-              <td>{age}</td>
-            </tr>
-            <tr>
-              <td>Sport</td>
-              <td>{info.primarySport} {info.position}</td>
-            </tr>
-            <tr>
-              <td>Height</td>
-              <td>{info.person.height} {info.person.heightUom}</td>
-            </tr>
-            <tr>
-              <td>Weight</td>
-              <td>{info.person.weight} {info.person.weightUom}</td>
-            </tr>
-            <tr>
-              <td>Organization</td>
-              <td>{info.organization}</td>
-            </tr>
-            <tr>
-              <td>Location</td>
-              <td>{info.location.city} {info.location.state} {info.location.country}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+          <div>
+            <span>
+              <a className="icon is-medium" href={facebookUrl}>
+                <i className="fa fa-facebook fa-lg"></i>
+              </a>
+            </span>
+            <span>
+              <a className="icon is-medium" href={twitterUrl}>
+                <i className="fa fa-twitter fa-lg"></i>
+              </a>
+            </span>
+            <span>
+              <a className="icon is-medium" href={instagramUrl}>
+                <i className="fa fa-instagram fa-lg"></i>
+              </a>
+            </span>
+          </div>
 
-      <div className="box">
-        <span>
-          <a className="icon is-medium" href={info.socials.facebookUrl}>
-            <i className="fa fa-facebook fa-lg"></i>
-          </a>
-        </span>
-        <span>
-          <a className="icon is-medium" href={info.socials.twitterUrl}>
-            <i className="fa fa-twitter fa-lg"></i>
-          </a>
-        </span>
-        <span>
-          <a className="icon is-medium" href={info.socials.instagramUrl}>
-            <i className="fa fa-instagram fa-lg"></i>
-          </a>
-        </span>
-      </div>
+          <div>
+            <table className="table">
+              <tbody>
+                <tr>
+                  <td>Age</td>
+                  <td>{age}</td>
+                </tr>
+                <tr>
+                  <td>Sport</td>
+                  <td>{primarySport || null} {position}</td>
+                </tr>
+                <tr>
+                  <td>Gender</td>
+                  <td>{gender}</td>
+                </tr>
+                <tr>
+                  <td>Height</td>
+                  <td>{height} {heightUom}</td>
+                </tr>
+                <tr>
+                  <td>Weight</td>
+                  <td>{weight} {weightUom}</td>
+                </tr>
+                <tr>
+                  <td>Organization</td>
+                  <td>{organization}</td>
+                </tr>
+                <tr>
+                  <td>Location</td>
+                  <td>{city} {region} {country}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-      <div className="box content">
-        <blockquote>{info.about}</blockquote>
-        <p>{info.awards}</p>
+        </div>
+      </div>
+      <div className="column box content">
+        <p>{about}</p>
+        <p>{awards}</p>
       </div>
     </div>
   );
 }
 
-// function _calculateAge(birthday) { // birthday is a date
-//   var ageDifMs = Date.now() - birthday.getTime();
-//   var ageDate = new Date(ageDifMs); // miliseconds from epoch
-//   return Math.abs(ageDate.getUTCFullYear() - 1970);
-// }
-
 function getAge(dob) {
   if (!dob) return 0;
+  
+  dob = new Date(dob);
   const diffMS = Date.now() - dob.getTime();
   const ageDate = new Date(diffMS);
   const years = Math.abs(ageDate.getUTCFullYear() - 1970);
-  console.log('getAge',diffMS,ageDate,years );
-
+  
   return `${years} years old`;
 }

@@ -1,10 +1,9 @@
 import * as actions from './constants';
-// import defaultValues from './defaultValues';
 
 export function athletes(state = {}, { type, payload }) {
   switch(type) {
     case actions.GET_INFO: {
-      const { _id, info } = payload;
+      const { _id, info={} } = payload;
       const athlete = state[_id] || {};
       return {
         ...state,
