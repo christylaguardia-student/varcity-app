@@ -16,7 +16,8 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "riek": "^1.1.0",
-    "superagent": "^3.6.0"
+    "superagent": "^3.6.0",
+    "video-react": "^0.8.8"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",

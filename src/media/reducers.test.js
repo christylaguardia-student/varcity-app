@@ -1,7 +1,7 @@
 import * as actions from './constants';
 import { media } from './reducers';
 
-describe('media reducer', () => {
+describe.skip('media reducer', () => {
 
   it('initial state', () => {
     const newState = media(undefined, { type: undefined });
