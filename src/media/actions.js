@@ -3,10 +3,16 @@ import athleteApi from '../services/athleteApi';
 
 export function makeGetMedia(api) {
   return function getMedia(id) {
-    return dispatch => {
+    return (dispatch, getState) => {
+      const { athletes } = getState();
+      const athlete = athletes[id];
+      if (athlete && athlete.media) return;
       return api
-        .get(id, 'media')
-        .then(media => dispatch({ type: actions.GET_MEDIA, payload: media }))
+        .getMediaById(id)
+        .then(data => {
+          console.log('media returning from get media is', data, 'id is', id);
+          dispatch({ type: actions.GET_MEDIA, payload: {_id: id, media: [...data] } });
+        })
         .catch(console.log);
     };
   };
@@ -16,11 +22,15 @@ export const getMedia = makeGetMedia(athleteApi);
 
 export function makeUpdateMedia(api) {
   return function updateMedia(id, media) {
+    console.log('incoming in updateMedia: id', id, "media:", media);
     return dispatch => {
       return api
-        .update(id, media, 'media')
-        .then(media => dispatch({ type: actions.UPDATE_MEDIA, payload: media }))
-        .catch(console.log);
+        .updateMediaById(id, media)
+        .then(data => {
+          console.log('media returning from update media is', data, 'id is', id);
+          dispatch({ type: actions.UPDATE_MEDIA, payload: {_id: id, media: [...data]} });
+        })
+        .catch(err => console.log('we got this error in updatemedia:', err));
     };
   };
 }

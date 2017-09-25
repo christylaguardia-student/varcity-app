@@ -12,25 +12,33 @@ import ProfileContainer from './ProfileContainer';
 import Home from './Home';
 import About from './About';
 import { connect } from 'react-redux';
+import { retrieveWithToken } from './actions';
+import 'bulma/css/bulma.css';
 
 class App extends Component {
-  render() {
+  componentWillMount() {
+    this.props.retrieveWithToken();
+  }
 
+  render() {
     let routes = null;
+
     const { authId } = this.props;
-    console.log(22, authId)
-    if (authId) {
+
+    if (authId && Object.entries(authId).length !== 0) {
+      // const id = this.props.location.pathname.split('/athletes/')[1];
+
       routes = [
-        <Route key="1" exact path="/about" component={About} />,
-        <Route key="4" path={`/athletes/${authId}`} component={ProfileContainer} />,
-        <Route key="3" exact path="/athletes" component={SearchContainer} />,
+        <Route key="1" path="/about" component={About} />,
+        <Route key="2" path="/search" component={SearchContainer} />,
+        <Route key="3" path="/athletes/:id" component={ProfileContainer} />,
         <Redirect key="5" to={`/athletes/${authId}`} />
       ];
     } else {
       routes = [
         <Route key="1" exact path="/" component={Home} />,
-        <Route key="1" path="/about" component={About} />,
-        <Redirect key="2" to="/" />
+        <Route key="2" path="/about" component={About} />,
+        <Redirect  key="3" to="/" />
       ];
     }
 
@@ -46,8 +54,14 @@ class App extends Component {
   }
 }
 
-export default connect(
-  state => ({ authId: state.authId }),
-  null
-)(App);
+function mapDispatchToProps(dispatch) {
+  return {
+    retrieveWithToken: () => {
+      dispatch(retrieveWithToken());
+    }
+  };
+}
 
+export default connect(state => ({ authId: state.authId }), mapDispatchToProps)(
+  App
+);

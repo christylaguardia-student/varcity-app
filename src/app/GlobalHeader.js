@@ -1,52 +1,58 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Home from './Home';
-import SearchContainer from '../search/SearchContainer';
-import MediaGallery from '../media/MediaGallery';
-import ProfileContainer from './ProfileContainer';
-import { signIn, signUp, httpCallback, signout } from './actions';
+import { Link } from 'react-router-dom';
 
 export default function GlobalHeader({ authId, signOut }) {
-  console.log(1, authId);
   return (
-    <div className="border">
-      <div>Global header!</div>
+    <div className="tabs">
       <div>
-        {authId &&
-      <div>
-        <div> Sign Out </div>
-        <form
-          onSubmit={event => {
-            event.preventDefault();
-            const form = event.target;
-            signOut({
-              payload: { payload: null }
-            });
-            form.reset();
-          }}>
-          <button type="submit" name="submit">log out</button>
-        </form>
-      </div>}
-      </div>
-      <div>
-          <div>
-            <ul>
-              <li>
-                <Link to="/">Home in the global header</Link>
-              </li>
-              <li>
-                <input placeholder="search" />
-              </li>
-              <li>
-                <Link to="/athletes">Search</Link>
-              </li>
-              <li>
-                <Link to={`/athletes/${authId}`}>Profile</Link>
-              </li>
-            </ul>
-          </div>
+        <div>
+          <ul>
+            <li>
+              <h3 className="logo">Varcity</h3>
+            </li>
+            <li>
+              <Link to="/"><i className="fa fa-home fa-2x"></i></Link>
+            </li>
+            <li>
+              <div className="control has-icons-left">
+                <input className="input" placeholder="Search" />
+                <span className="icon is-small is-left">
+                  <i className="fa fa-search"></i>
+                </span>
+              </div>
 
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/search">Search</Link>
+            </li>
+            <li>
+              <Link to={`/athletes/${authId}`}>My Profile</Link>
+            </li>
+            <li>
+              <div>
+                {
+                  (authId && Object.entries(authId).length !== 0) &&
+                  <div>
+                    <form
+                      onSubmit={event => {
+                        event.preventDefault();
+                        const form = event.target;
+                        signOut({
+                          payload: { payload: null }
+                        });
+                        form.reset();
+                      }}>
+                      <button className="button is-primary is-outlined" type="submit" name="submit">Logout</button>
+                    </form>
+                  </div>
+                }
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );

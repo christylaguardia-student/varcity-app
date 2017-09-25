@@ -1,149 +1,136 @@
 import React from 'react';
-import { RIEInput, RIEToggle, RIETextArea, RIENumber, RIESelect } from 'riek';
-import _ from 'lodash';
 
-export function TextInput({ value, propName, label, change, disabled=true }) {
+export function TextInput({ value, prop, label, change }) {
   return (
     <label className="label">
       {label}
-      <RIEInput
-        isDisabled={disabled}
-        value={value}
-        change={change}
-        propName={propName}
+      <input
         className="input"
-        validate={_.isString} />
+        name={prop}
+        type="text"
+        placeholder={value}
+        onChange={change} />
     </label>
   );
 }
 
-export function TextArea({ value, propName, label, change, disabled=true }) {
+export function UrlInput({ value, prop, label, change }) {
   return (
     <label className="label">
       {label}
-      <RIETextArea
-        isDisabled={disabled}
-        value={value}
-        change={change}
-        propName={propName}
-        rows={8}
-        columns={50}
-        className="textarea"
-        validate={_.isString} />
-    </label>
-  );
-}
-  
-export function NumberInput({ value, propName, label, change, disabled=true }) {
-  return (
-    <label className="label">
-      {label}
-      <RIENumber
-        isDisabled={disabled}
-        value={value}
-        change={change}
-        propName={propName}
+      <input
         className="input"
-        validate={_.isNumber} />
+        name={prop}
+        type="text"
+        placeholder={value}
+        onChange={change} />
     </label>
   );
 }
 
-export function DateInput({ value, propName, label, change, disabled=true }) {
+export function NumberInput({ value, prop, label, change }) {
   return (
     <label className="label">
       {label}
-      <RIEInput
-        isDisabled={disabled}
+      <input
+        className="input"
+        name={prop}
+        type="number"
+        placeholder={value}
+        onChange={change} />
+    </label>
+  );
+}
+
+export function Checkbox({ value, prop, label, change }) {
+  return (
+    <label className="checkbox">
+      <input
+        className="checkbox"
+        name={prop}
+        type="checkbox"
+        onChange={change} />
+      <span>{label}</span>
+    </label>
+  );
+}
+
+export function DateInput({ value, prop, label, change }) {
+  return (
+    <label className="label">
+      {label}
+      <input
+        className="input"
+        name={prop}
         type="date"
-        value={value}
-        change={change}
-        propName={propName}
-        className="input"
-        validate={_.isDate} />
+        placeholder={value}
+        onChange={change} />
     </label>
   );
 }
 
-export function Toggle({ value, propName, label, change, disabled=true }) {
+export function Dropdown({ value, prop, label, options, change }) {
   return (
     <label className="label">
       {label}
-      <RIEToggle
-        isDisabled={disabled}
-        value={value}
-        change={change}
-        propName={propName}
-        textTrue="Yes"
-        textFalse="No"
+      <select
         className="input"
-        validate={_.isString} />
+        name={prop}
+        placeholder={value}
+        onChange={change}>
+
+        {options.map((text, index) => {
+          return <option key={index} value={text}>{text}</option>;
+        })}
+
+      </select>
     </label>
   );
 }
 
-export function ToggleEditMode({ value, propName, change, disabled=true }) {
-  // TODO: need to work on this
+export function TextArea({ value, prop, label, change }) {
+  return (
+    <label className="label">
+      {label}
+      <textarea
+        className="input"
+        name={prop}
+        rows="10"
+        cols="50"
+        onChange={change} />
+    </label>
+  );
+}
+
+export function ToggleEditor({ text, editModeOn, toggleFn }) {
+  const iconClass = editModeOn ? 'fa fa-times fa-lg' : 'fa fa-pencil fa-lg';
+  const buttonText = editModeOn ? 'Cancel Edit' : `Edit ${text}`;
 
   return (
     <div>
-      <icon className="fa fa-check fa-lg" />
-      <icon className="fa fa-pencil fa-lg" />
+      <p className="control" onClick={toggleFn}>
+        <a className="button">
+          <span className="icon is-small">
+            <i className={iconClass}></i>
+          </span>
+          <span>{buttonText}</span>
+        </a>
+      </p>
     </div>
-  //   <RIEToggle
-  //     isDisabled={disabled}
-  //     value={value}
-  //     change={change}
-  //     propName={propName}
-  //     textTrue={pencil}
-  //     textFalse={check}
-  //     className="select" />
   );
 }
 
-export function TextSelect({ value, propName, label, options, change, disabled=true }) {
+export function ButtonWithIcon({ text, iconClass, onClickFn }) {
   return (
-    <label className="label">
-      {label}
-      <RIESelect
-        isDisabled={disabled}
-        value={value}
-        change={change}
-        propName={propName}
-        options={options}
-        className="input"
-        validate={_.isString} />
-    </label>
-  );
-}
-
-export function UrlInput({ value, propName, label, change, disabled=true }) {
-  return (
-    <label className="label">
-      {label}
-      <RIEInput
-        isDisabled={disabled}
-        value={value}
-        change={change}
-        propName={propName}
-        className="input"
-        validate={_.isString} />
-    </label>
-  );
-}
-
-export function EmailInput({ value, propName, label, change, disabled=true }) {
-  return (
-    <label className="label">
-      {label}
-      <RIEInput
-        isDisabled={disabled}
-        type="email"
-        value={value}
-        change={change}
-        propName={propName}
-        className="input has-icons-left"
-        validate={_.isString} />
-    </label>
+    <div>
+      <p className="control" onClick={onClickFn}>
+        <a className="button">
+          <span className="icon is-small">
+            <i className={iconClass}></i>
+          </span>
+          <span>{text}</span>
+        </a>
+      </p>
+    </div>
   );
 }
