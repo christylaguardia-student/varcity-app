@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import Education from './Education';
 
 const EduList = ({ educations, dispatch }) => {
-  console.log('education is', educations, 'dispatch is', dispatch);
   return (
     <div className='listgroup'>
       {educations.map(education =>

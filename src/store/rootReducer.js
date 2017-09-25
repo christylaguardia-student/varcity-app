@@ -4,7 +4,7 @@ import { athletes } from './athletes/reducers';
 import { educations } from '../edu/reducers';
 import { sports } from '../sports/reducers';
 import { media } from '../media/reducers';
-import {searcher} from '../search/reducers'
+import {search} from '../search/reducers'
 
 export default combineReducers({
   authId,
@@ -12,5 +12,5 @@ export default combineReducers({
   educations,
   media,
   sports,
-  searcher
+  search
 });

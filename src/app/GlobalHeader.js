@@ -1,15 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Card from '../search/Card';
 import { connect } from 'react-redux';
-import Search from '../search/Search';
-import {withRouter} from 'react-router-dom'
-
+import { withRouter } from 'react-router-dom';
 
 export function GlobalHeader({
   authId,
-  searcher,
   search,
+  searchDb,
   signOut,
   signIn,
   gotResults,
@@ -22,7 +19,7 @@ export function GlobalHeader({
 
   const columns = {
     marginBottom: 6
-  }
+  };
 
   return (
     <div style={headerStyle}>
@@ -43,8 +40,7 @@ export function GlobalHeader({
                   event.preventDefault();
                   const form = event.target;
                   const searchValue = form.elements[0].value;
-                  console.log(12, form.elements[0].value);
-                  searcher({
+                  searchDb({
                     payload: { searchValue: searchValue, authId: authId }
                   });
                   form.reset();
@@ -164,7 +160,7 @@ export function GlobalHeader({
 const mapStateToProps = state => {
   return {
     authId: state.authId
-    };
+  };
 };
 
 export default withRouter(connect(mapStateToProps, null)(GlobalHeader));

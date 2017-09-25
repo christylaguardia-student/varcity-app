@@ -10,8 +10,6 @@ import defaultValues from '../store/athletes/defaultValues';
 export class Info extends Component {
 
   componentDidMount() {
-    // const id = this.props.location.pathname.split('/athletes/')[1];
-    // console.log('id', id);
     const id = '59c07c3dee27d1b10998f54b';
     this.props.getInfo(id);
     this.props.getCountries();
@@ -40,18 +38,18 @@ export class Info extends Component {
           <div className="tile is-vertical">
             <UrlInput value={info.profileUrl} propName="profileUrl" label="Image" change={onChange} disabled={disabled} />
           </div>
-          
+
           <div className="tile is-vertical">
             <TextInput value={info.firstName} propName="firstName" label="First Name" change={onChange} disabled={disabled} />
-            <TextInput value={info.lastName} propName="lastName" label="Last Name" change={onChange} disabled={disabled} />  
+            <TextInput value={info.lastName} propName="lastName" label="Last Name" change={onChange} disabled={disabled} />
             <Toggle value={info.public} propName="public" label="Public Profile?" change={onChange} disabled={disabled} />
             {/* <DateInput value={info.person.dob} propName="dob" label="Birthday" change={onChange} disabled={disabled} /> */}
             <TextSelect value={info.primarySport} propName="primarySport" label="Primary Sport" options={sports} change={onChange} disabled={disabled} />
             <TextInput value={info.position} propName="position" label="Position" change={onChange} disabled={disabled} />
             <TextInput value={info.organization} propName="organization" label="School/Organization" change={onChange} disabled={disabled} />
             <TextSelect value={info.location.country} propName="country" label="Country" options={fakeOptions} change={onChange} disabled={disabled} />
-            <TextSelect value={info.location.state} propName="region" label="State/Region" options={fakeOptions} change={onChange} disabled={disabled} /> 
-            <TextSelect value={info.location.city} propName="city" label="City" options={fakeOptions} change={onChange} disabled={disabled} /> 
+            <TextSelect value={info.location.state} propName="region" label="State/Region" options={fakeOptions} change={onChange} disabled={disabled} />
+            <TextSelect value={info.location.city} propName="city" label="City" options={fakeOptions} change={onChange} disabled={disabled} />
           </div>
 
           <div className="field body is-narrow is-grouped is-grouped-multiline">

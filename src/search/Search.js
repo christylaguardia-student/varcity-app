@@ -3,63 +3,37 @@ import { connect } from 'react-redux';
 import { search } from './actions';
 import Pagination from '../search/Pagination';
 import Card from '../search/Card';
-import GlobalHeader from '../app/GlobalHeader'
+import GlobalHeader from '../app/GlobalHeader';
 
-export function Search({searcher}) {
-//   console.log(searcher[0])
+export function Search({ search }) {
 
-// let resultsArray = [];
-// for (let i = 0; i < 9; i++) {
-  // console.log(searcher[i].info)
-  // let result = resultsArray.push(searcher[i])
-
-// }
-
-// console.log(resultsArray)
-
-return (
-      <div>
-
-
-        <div>
-          <h1 className="title">Search Results</h1>
-          <div className="columns">
-            <div className="column">
-              <Card />
-              <Card />
-              <Card />
-            </div>
-            <div className="column">
-              <Card />
-              <Card />
-              <Card />
-            </div>
-            <div className="column">
-              <Card />
-              <Card />
-              <Card />
-            </div>
-          </div>
-        </div>
-        <div>
-          <Pagination />
-        </div>
+  if (search && !search.error) {
+    return (
+    <div>
+      {search.map((person, index) => {
+      return <Card key={index} user={person.info} />
+      })}
       </div>
-    );
+      )
+    } return null;
   }
-
-
-
 
 const mapStateToProps = state => {
   return {
-    searcher: state.searcher
+    search: state.search
   };
 };
 
-export default connect(
-  mapStateToProps,
-null
+
+export default connect(mapStateToProps, null)(Search);
 
 
-)(Search);
+
+// let divString = '';
+// if (index === 0 || index % 3 === 0) {
+//   divString = '<div className="column">';
+// } else if (index === 1 || index % 3 === 1) {
+//   divString = '';
+// } else if (index === 2 || index % 3 === 2) {
+//   divString = '</div>';
+// }

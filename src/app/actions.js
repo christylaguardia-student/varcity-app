@@ -46,8 +46,6 @@ export function signIn({ payload }) {
   return function(dispatch) {
     return authAPI.signIn({ payload }).then(
       res => {
-        console.log(22, res)
-        // const storage = localStorage;
         storage.setItem('varcity', res.token);
         dispatch({ type: AUTHORIZED, payload: res.user._id });
       },

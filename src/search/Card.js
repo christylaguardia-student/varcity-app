@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default function Card({gotUsers}) {
+export default function Card({user}) {
   return (
     <div className="card">
       <div className="card-image">

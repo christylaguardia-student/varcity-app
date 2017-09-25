@@ -1,16 +1,13 @@
 import { GOT_RESULTS, NO_RESULTS, SEARCH_ERROR, SEARCHING } from './constants';
 import searchAPI from './api';
 
-export function search({ payload }) {
-  console.log(19, payload);
+export function searchDb({ payload }) {
 
   return function(dispatch) {
     dispatch({ type: SEARCHING });
-    console.log(20, payload);
     return searchAPI
       .search({ payload })
       .then(results => {
-        console.log()
         if (results.length > 0) {
           dispatch({ type: GOT_RESULTS, payload: results });
         } else {
