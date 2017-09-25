@@ -3,7 +3,7 @@ import * as actions from './constants';
 
 describe('getMedia', () => {
 
-  it('GETs media', () => {
+  it.only('GETs media', () => {
     const testMedia = [{ something: 'three properties here' }];
     const api = { get: (id) => Promise.resolve(testMedia) };
     const dispatched = [];
@@ -21,7 +21,7 @@ describe('getMedia', () => {
 
 describe('updateMedia', () => {
 
-  it('Updates with new media', () => {
+  it.only('Updates with new media', () => {
     const testMedia = { something: 'three properties here' };
     const api = { update: (id, media) => Promise.resolve(media) };
     const dispatched = [];
