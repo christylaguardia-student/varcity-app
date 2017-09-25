@@ -17,7 +17,7 @@ export default function Card({user}) {
             </figure>
           </div> */}
           <div className="media-content">
-            <p className="title is-4">John Smith</p>
+            <p className="title is-4"><a href={`/athletes/${user._id}`}>{user.firstName} {user.lastName}</a></p>
             <p className="subtitle is-6">
               <span className="button is-small"><i className="fa fa-futbol-o fa-lg"></i></span>
               <span className="button is-small"><i className="fa fa-facebook fa-lg"></i></span>
