@@ -2,7 +2,7 @@ import { GOT_RESULTS, NO_RESULTS, SEARCH_ERROR, SEARCHING } from './constants';
 import searchAPI from './api';
 
 export function searchDb({ payload }) {
-
+console.log(44, payload)
   return function(dispatch) {
     dispatch({ type: SEARCHING });
     return searchAPI
@@ -15,7 +15,8 @@ export function searchDb({ payload }) {
         }
       })
       .catch(error => {
-        dispatch({ type: SEARCH_ERROR, payload: { error } });
+        console.log(55, error)
+        // dispatch({ type: SEARCH_ERROR, payload: {error} });
       });
   };
 }

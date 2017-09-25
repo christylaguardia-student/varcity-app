@@ -5,7 +5,7 @@ export default function Card({user}) {
   return (
     <div className="card">
       <div className="card-image">
-        <figure className="image is-4by3">
+        <figure className="image is-square">
           <img src="http://bulma.io/images/placeholders/1280x960.png" alt="Placeholder" />
         </figure>
       </div>

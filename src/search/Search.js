@@ -6,17 +6,20 @@ import Card from '../search/Card';
 import GlobalHeader from '../app/GlobalHeader';
 
 export function Search({ search }) {
+  console.log(786, search.length);
 
-  if (search && !search.error) {
+  if (search.length > 0 && !search.error) {
     return (
-    <div>
-      {search.map((person, index) => {
-      return <Card key={index} user={person.info} />
-      })}
+      <div>
+        {search.map((person, index) => {
+          return <Card key={index} user={person.info} />;
+        })}
       </div>
-      )
-    } return null;
+    );
+  } else {
+    return null;
   }
+}
 
 const mapStateToProps = state => {
   return {
@@ -24,16 +27,4 @@ const mapStateToProps = state => {
   };
 };
 
-
 export default connect(mapStateToProps, null)(Search);
-
-
-
-// let divString = '';
-// if (index === 0 || index % 3 === 0) {
-//   divString = '<div className="column">';
-// } else if (index === 1 || index % 3 === 1) {
-//   divString = '';
-// } else if (index === 2 || index % 3 === 2) {
-//   divString = '</div>';
-// }

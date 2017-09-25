@@ -159,8 +159,9 @@ export function GlobalHeader({
 
 const mapStateToProps = state => {
   return {
-    authId: state.authId
-  };
+    authId: state.authId,
+    search: state.search
+    };
 };
 
 export default withRouter(connect(mapStateToProps, null)(GlobalHeader));
