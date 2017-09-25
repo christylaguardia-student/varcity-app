@@ -2,22 +2,25 @@ import React from 'react';
 import { TextInput, Checkbox, DateInput, Dropdown, NumberInput, TextArea, UrlInput } from '../app/FormControls';
 
 export default function MediaForm({ id, props, onImageChange, onSubmit, onChange }) {
-  const { description, mediaType, videoUrl } = props;
+  const { description, mediaType, videoUrl, imageUrl } = props;
 
   return (
     <div className="columns">
       <div className="column">
 
         <div className="is-grouped is-grouped-multiline">
-          <Dropdown value={mediaType} prop="mediaType" label="Media Type" change={onChange} options={['Image Upload', 'Image Link']} />
+          <Dropdown value={mediaType} prop="mediaType" label="Media Type" change={onChange} options={['Image Link', 'Video Link']} />
 
           {mediaType === 'Image Link' &&
-            <TextInput prop="videoUrl" value={videoUrl} label="Image Link" change={onChange} />
+            <TextInput prop="imageUrl" value={imageUrl} label="Image Link" change={onChange} />
           }
 
-          {/* image file upload */}
+          {mediaType === 'Video Link' &&
+            <TextInput prop="videoUrl" value={videoUrl} label="Video Link" change={onChange} />
+          }
+
           <form className="field" encType="multipart/formData" onSubmit={e => onSubmit(e)}>
-            {mediaType === 'Image Upload' &&
+            {/* {mediaType === 'Image Upload' &&
               <div className="file">
                 <label className="file-label">
                   <input className="file-input" type="file" name="imageUrl" onChange={e => onImageChange(e)} />
@@ -31,7 +34,7 @@ export default function MediaForm({ id, props, onImageChange, onSubmit, onChange
                   </span>
                 </label>
               </div>
-            }
+            } */}
             <TextArea value={description} prop="description" label="Description" change={onChange} />
             <button className="submitButton" type="submit" value="Save" onClick={e => onSubmit(e)}>Add Media</button>
           </form>
