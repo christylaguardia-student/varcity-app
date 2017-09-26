@@ -13,7 +13,7 @@ export class MediaGallery extends Component {
       itemNum: 0,
       mediaItem: { 
         description: '', 
-        mediaType: 'Image Upload', 
+        mediaType: 'Image Link', 
         videoUrl: '', 
         imageUrl: ''
       },
@@ -96,14 +96,14 @@ export class MediaGallery extends Component {
           <p>Loading...</p>
         }
         {athlete && athlete.media &&
-        <div>
-          {this.state.editAllowed 
-          ? <ToggleEditor text="Media" editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} /> 
-          : null}
-          {this.state.editModeOn
-            ? <MediaForm onImageChange={this.handleImageChange} onSubmit={this.handleSubmit} onChange={this.handleChange} props={this.state.mediaItem} />
-            : <MediaPresentation mediaArr={athlete.media} onUpdate={this.rotateGallery} itemNum={this.state.itemNum} />}
-        </div>
+          <div>
+            {this.state.editAllowed
+              ? <ToggleEditor text="Media" editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} />
+              : null}
+            {this.state.editModeOn
+              ? <MediaForm onImageChange={this.handleImageChange} onSubmit={this.handleSubmit} onChange={this.handleChange} props={this.state.mediaItem}/>
+              : <MediaPresentation mediaArr={athlete.media} onUpdate={this.rotateGallery} itemNum={this.state.itemNum} />}
+          </div>
         }
       </div>
     );

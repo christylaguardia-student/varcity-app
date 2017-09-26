@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Player } from 'video-react';
+import { ButtonWithIcon } from '../app/FormControls';
 
 export function MediaItem({ description, mediaType, videoUrl, imageUrl }) {
   return (
@@ -19,14 +19,10 @@ export function MediaItem({ description, mediaType, videoUrl, imageUrl }) {
         </div>
       </div>
     ) 
-    : (
+      : (
         <div className="card">
           <div className="card-image">
-            <figure className="image is-4by3">
-              <Player>
-                <source src={videoUrl} />
-              </Player>
-            </figure>
+            <iframe title="description" width="560" height="315" src={videoUrl} frameBorder="0" allowFullScreen></iframe>
           </div>
           <div className="card-content">
             <div className="media-content0">
@@ -46,16 +42,21 @@ export class MediaPresentation extends Component {
       <MediaItem key={i} description={item.description} mediaType={item.mediaType} videoUrl={item.videoUrl} imageUrl={item.imageUrl} onUpdate={onUpdate} />
     ));
 
+    const displayNum = ( mediaArr < 1 ) ? 0 : itemNum + 1;
+
     return (
-      <div>
+      <div className="content">
+        <h1 className="title">Media Gallery</h1>
         <div className="columns level">
+          <div className="column is-one-quarter is-pulled-left">
+            <ButtonWithIcon text={'Left'} iconClass={'fa fa-arrow-left'} onClickFn={() => onUpdate(-1)} />
+          </div>
           <div className="column">
-              <nav id="galleryNav">
-                <button onClick={() => onUpdate(-1)}>&laquo; </button> 
-                <button onClick={() => onUpdate(1)}>&raquo;</button>
-                <p>{itemNum + 1} of {mediaArr.length}</p>
-              </nav>
-              {mediaGallery[itemNum]}
+            <p>{displayNum} of {mediaArr.length}</p>
+            {mediaGallery[itemNum]}
+          </div>
+          <div className="column is-one-quarter is-pulled-right">
+          <ButtonWithIcon text={'Right'} iconClass={'fa fa-arrow-right'} onClickFn={() => onUpdate(1)} />
           </div>
         </div>
       </div>

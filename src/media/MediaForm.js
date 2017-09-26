@@ -1,5 +1,6 @@
 import React from 'react';
-import { TextInput, Checkbox, DateInput, Dropdown, NumberInput, TextArea, UrlInput } from '../app/FormControls';
+import { Dropdown, TextArea, UrlInput } from '../app/FormControls';
+import Preview from './Preview';
 
 export default function MediaForm({ id, props, onImageChange, onSubmit, onChange }) {
   const { description, mediaType, videoUrl, imageUrl } = props;
@@ -12,33 +13,19 @@ export default function MediaForm({ id, props, onImageChange, onSubmit, onChange
           <Dropdown value={mediaType} prop="mediaType" label="Media Type" change={onChange} options={['Image Link', 'Video Link']} />
 
           {mediaType === 'Image Link' &&
-            <TextInput prop="imageUrl" value={imageUrl} label="Image Link" change={onChange} />
+            <UrlInput prop="imageUrl" value={imageUrl} label="Image Link" change={onChange} />
           }
 
           {mediaType === 'Video Link' &&
-            <TextInput prop="videoUrl" value={videoUrl} label="Video Link" change={onChange} />
+            <UrlInput prop="videoUrl" value={videoUrl} label="Video Link" change={onChange} />
           }
 
           <form className="field" encType="multipart/formData" onSubmit={e => onSubmit(e)}>
-            {/* {mediaType === 'Image Upload' &&
-              <div className="file">
-                <label className="file-label">
-                  <input className="file-input" type="file" name="imageUrl" onChange={e => onImageChange(e)} />
-                  <span className="file-cta">
-                    <span className="icon file-icon">
-                      <i className="fa fa-upload"></i>
-                    </span>
-                    <span className="file-label">
-                      Choose a file...
-                    </span>
-                  </span>
-                </label>
-              </div>
-            } */}
             <TextArea value={description} prop="description" label="Description" change={onChange} />
             <button className="submitButton" type="submit" value="Save" onClick={e => onSubmit(e)}>Add Media</button>
           </form>
         </div>
+        <Preview description={description} mediaType={mediaType} videoUrl={videoUrl} imageUrl={imageUrl}/>
       </div>
     </div>
   );
