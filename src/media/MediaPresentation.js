@@ -13,24 +13,24 @@ export function MediaItem({ description, mediaType, videoUrl, imageUrl }) {
           </figure>
         </div>
         <div className="card-content">
-          <div className="media-content0">
+          <div className="media-content">
             <p className="title is-4">{description}</p>
           </div>
         </div>
       </div>
     ) 
-      : (
-        <div className="card">
-          <div className="card-image">
-            <iframe title="description" width="560" height="315" src={videoUrl} frameBorder="0" allowFullScreen></iframe>
-          </div>
-          <div className="card-content">
-            <div className="media-content0">
-              <p className="title is-4">{description}</p>
-            </div>
+    : (
+      <div className="card">
+        <div className="card-image">
+          <iframe title="description" width="100%" height="auto" src={videoUrl} frameBorder="0" allowFullScreen></iframe>
+        </div>
+        <div className="card-content">
+          <div className="media-content0">
+            <p className="title is-4">{description}</p>
           </div>
         </div>
-      )
+      </div>
+    )
   );
 }
 
@@ -39,7 +39,7 @@ export class MediaPresentation extends Component {
     const { mediaArr, onUpdate, itemNum } = this.props;
 
     const mediaGallery = mediaArr.map((item, i) => (
-      <MediaItem key={i} description={item.description} mediaType={item.mediaType} videoUrl={item.videoUrl} imageUrl={item.imageUrl} onUpdate={onUpdate} />
+      <MediaItem className="is-flex-mobile" key={i} description={item.description} mediaType={item.mediaType} videoUrl={item.videoUrl} imageUrl={item.imageUrl} onUpdate={onUpdate} />
     ));
 
     const displayNum = ( mediaArr < 1 ) ? 0 : itemNum + 1;
@@ -55,8 +55,16 @@ export class MediaPresentation extends Component {
             <p>{displayNum} of {mediaArr.length}</p>
             {mediaGallery[itemNum]}
           </div>
-          <div className="column is-one-quarter is-pulled-right">
-          <ButtonWithIcon text={'Right'} iconClass={'fa fa-arrow-right'} onClickFn={() => onUpdate(1)} />
+          <div className="column is-one-quarter">
+            <p className="control is-pulled-right" onClick={() => onUpdate(1)}>
+              <a className="button">
+                <span className="icon is-small">
+                  <i className={'fa fa-arrow-right'}></i>
+                </span>
+                <span>{'Right'}</span>
+              </a>
+            </p>
+            {/* <ButtonWithIcon className="is-pulled-right" text={'Right'} iconClass={'fa fa-arrow-right'} onClickFn={() => onUpdate(1)} /> */}
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MediaForm from './MediaForm';
 import { MediaPresentation } from './MediaPresentation';
-import { Dropdown, TextArea, TextInput, ToggleEditor } from '../app/FormControls';
+import { ToggleEditor } from '../app/FormControls';
 import { updateMedia, getMedia } from './actions';
 
 export class MediaGallery extends Component {
@@ -20,10 +20,8 @@ export class MediaGallery extends Component {
       editModeOn: false,
       editAllowed: this.props.authId === this.props.currentId
     };
-    // this.handleImageChange = this.handleImageChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    // this.setImage = this.setImage.bind(this);
     this.toggleEditMode = this.toggleEditMode.bind(this);
     this.rotateGallery = this.rotateGallery.bind(this);
   }
@@ -49,35 +47,13 @@ export class MediaGallery extends Component {
     });
   }
 
-  // setImage (buf) {
-  //   this.setState({
-  //     mediaItem: { ...this.state.mediaItem, image: buf }
-  //   });
-  // }
-
   handleSubmit(e) {
     e.preventDefault();
-    // const media = this.props.athletes[this.props.currentId].media ? this.props.athletes[this.props.currentId].media : []; 
-    // console.log('media is', media);
-    // let mediaToSend = {};
-    // mediaToSend.media = [...media, this.state.mediaItem];
     let mediaToSend = this.state.mediaItem;
     if (mediaToSend.mediaType === 'Video Link') delete mediaToSend.imageUrl;
     else if (mediaToSend.mediaType === 'Image Link') delete mediaToSend.videoUrl;
     this.props.updateMedia(this.props.currentId, mediaToSend);
   }
-
-  // handleImageChange(e) {
-  //   e.preventDefault();
-  //   const { files } = e.target;
-  //   if(!files.length) return;
-  //   let reader = new FileReader();
-  //   let file = files[0];
-  //   reader.onloadend = () => {
-  //     this.setImage(reader.result);
-  //   }
-  //   reader.readAsArrayBuffer(file);
-  // }
 
   toggleEditMode() {
     if (this.state.editAllowed) {
@@ -93,7 +69,7 @@ export class MediaGallery extends Component {
     return (
       <div>
         {!athlete &&
-          <p>Loading...</p>
+          <a className="button is-loading">Loading</a>
         }
         {athlete && athlete.media &&
           <div>
@@ -113,7 +89,6 @@ export class MediaGallery extends Component {
 const mapStateToProps = (state) => { 
   return {
     authId: state.authId,
-    // media: state.athletes.media,
     athletes: state.athletes
   };
 };
