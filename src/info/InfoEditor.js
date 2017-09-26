@@ -1,10 +1,12 @@
 import React from 'react';
-// import { sportList } from '../utils/sports';
-// import { TextInput, Checkbox, DateInput, Dropdown, NumberInput, TextArea, UrlInput } from '../app/FormControls';
+
+import { TextInput, Checkbox, DateInput, Dropdown, NumberInput, TextArea, UrlInput } from '../app/FormControls';
 
 export default function InfoEditor({ props, save, change }) {
-  // const heightUOM = ['in', 'cm'];
-  // const weightUOM = ['lb', 'kg'];
+  const heightUOM = ['in', 'cm'];
+  const weightUOM = ['lb', 'kg'];
+  const sportList = [ 'Basketball', 'Baseball', 'Football', 'Soccer', 'Volleyball' ];
+  const genderList = [ 'Boy\'s', 'Girl\'s', 'Men\'s', 'Women\'s' ];
 
   return (
     <div className="columns">
@@ -19,9 +21,11 @@ export default function InfoEditor({ props, save, change }) {
           <TextInput value={props.firstName} prop="firstName" label="First Name" change={change} />
           <TextInput value={props.lastName} prop="lastName" label="Last Name" change={change} />
           <Checkbox value={props.public} prop="public" label="Public Profile?" change={change} />
-          <DateInput value={props.dob} prop="dob" label="Birthday" change={change} />
+
+          <DateInput value={props.person.dob} prop="person.dob" label="Birthday" change={change} />
 
           <Dropdown value={props.primarySport} prop="primarySport" label="Primary Sport" options={sportList} change={change} />
+          <Dropdown value={props.primarySportGender} prop="primarySportGender" label="Sport Gender" options={genderList} change={change} />
           <TextInput value={props.position} prop="position" label="Position" change={change} />
           <TextInput value={props.organization} prop="organization" label="School/Organization" change={change} />
 
