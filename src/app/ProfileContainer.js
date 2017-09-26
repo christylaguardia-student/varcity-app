@@ -14,8 +14,6 @@ class ProfileContainer extends Component {
       marginTop:2
     }
 
-    const id = this.props.location.pathname.split('/athletes/')[1];
-
     return (
       <Router>
         <div>

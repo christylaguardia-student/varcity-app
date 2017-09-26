@@ -16,7 +16,7 @@ console.log(44, payload)
       })
       .catch(error => {
         console.log(55, error)
-        // dispatch({ type: SEARCH_ERROR, payload: {error} });
+        dispatch({ type: SEARCH_ERROR, payload: {error} });
       });
   };
 }
