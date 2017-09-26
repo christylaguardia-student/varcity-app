@@ -28,12 +28,20 @@ export function athletes(state = {}, { type, payload }) {
         [_id]: { ...athlete,  edu }
       };
     }
-    case eduActions.UPDATE_EDU: {
-      const { _id, edu } = payload;
+    case eduActions.UPDATE_SCHOOLS: {
+      const { _id, schools } = payload;
       const athlete = state[_id] || {};
       return {
         ...state,
-        [_id]: { ...athlete,  edu }
+        [_id]: { ...athlete, edu: { schools: [...schools] } }
+      };
+    }
+    case eduActions.UPDATE_TESTSCORES: {
+      const { _id, test } = payload;
+      const athlete = state[_id] || {};
+      return {
+        ...state,
+        [_id]: { ...athlete, edu: { testScores: { test } } }
       };
     }
     case mediaActions.GET_MEDIA: {

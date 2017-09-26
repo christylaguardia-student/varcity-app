@@ -1,45 +1,58 @@
 import * as actions from './constants';
 import athleteApi from '../services/athleteApi';
 
-export function makeGetEducation(api) {
-    return function getEducation(id) {
-        return dispatch => {
+export function makeGetEdu(api) {
+    return function getEdu(id) {
+        return (dispatch, getState) => {
+            const { athletes } = getState();
+            const athlete = athletes[id];
+            if (athlete && athlete.edu) return;
             return api
-                .get(id)
-                .then(education => {
-                    dispatch({ type: actions.LOAD_EDUCATIONS, payload: education });
+                .getEduById(id)
+                .then(edu => {
+                    dispatch({ type: actions.GET_EDU, payload: edu });
                 })
                 .catch(console.log);
         };
     };
 }
 
-export const getEducation = makeGetEducation(athleteApi);
+export const getEdu = makeGetEdu(athleteApi);
 
-export function makeUpdateEducation(api) {
-    return function updateEducation(id, data) {
-        return dispatch => {
+
+export function makeUpdateSchools(api) {
+    return function updateSchools(id, data) {
+        return (dispatch, getState) => {
+            const { athletes } = getState();
+            const athlete = athletes[id];
+            if (athlete && athlete.edu) return;
             return api
-                .update(id, data)
-                .then(education => {
-                    dispatch({ type: actions.CREATE_NEW_EDUCATION, payload: education });
+                .updateSchoolsById(id, data)
+                .then(edu => {
+                    dispatch({ type: actions.UPDATE_SCHOOLS, payload: edu });
                 })
                 .catch(console.log);
         };
     };
 }
 
-export const updateEducation = makeUpdateEducation(athleteApi);
+export const updateSchools = makeUpdateSchools(athleteApi);
 
-// export const createNewEducation = (education, newId) => {
-//     return {
-//         type: 'CREATE_NEW_EDUCATION',
-//         _id: newId,
-//         institution: education.institution,
-//         year: education.year,
-//         address: education.address,
-//         degree: education.degree,
-//         testScores: education.testScores,
-//         saving: false
-//     }
-// }
+
+export function makeUpdateTestScores(api) {
+    return function updateTestScores(id, data) {
+        return (dispatch, getState) => {
+            const { athletes } = getState();
+            const athlete = athletes[id];
+            if (athlete && athlete.edu) return;
+            return api
+                .updateTestScoresById(id, data)
+                .then(edu => {
+                    dispatch({ type: actions.UPDATE_TESTSCORES, payload: edu });
+                })
+                .catch(console.log);
+        };
+    };
+}
+
+export const updateTestScores = makeUpdateTestScores(athleteApi);
