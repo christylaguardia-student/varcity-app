@@ -20,7 +20,7 @@ export default function MediaForm({ id, props, onImageChange, onSubmit, onChange
             <UrlInput prop="videoUrl" value={videoUrl} label="Video Link" change={onChange} />
           }
           {mediaType === 'Video Link' &&
-          <strong>Note: Paste the "embed" link above for best results. For example, under a youtube video, click "share", then "embed", and copy and paste the link shown.</strong>
+          <div className="notification"><strong>Note: Paste the "embed" link above for best results. For example, under a youtube video, click "share", then "embed", and copy and paste the link shown.</strong></div>
           }
 
           <form className="field" encType="multipart/formData" onSubmit={e => onSubmit(e)}>

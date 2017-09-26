@@ -25,7 +25,7 @@ export function MediaItem({ description, mediaType, videoUrl, imageUrl }) {
           <iframe title="description" width="100%" height="auto" src={videoUrl} frameBorder="0" allowFullScreen></iframe>
         </div>
         <div className="card-content">
-          <div className="media-content0">
+          <div className="media-content">
             <p className="title is-4">{description}</p>
           </div>
         </div>
@@ -64,7 +64,6 @@ export class MediaPresentation extends Component {
                 <span>{'Right'}</span>
               </a>
             </p>
-            {/* <ButtonWithIcon className="is-pulled-right" text={'Right'} iconClass={'fa fa-arrow-right'} onClickFn={() => onUpdate(1)} /> */}
           </div>
         </div>
       </div>
