@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 export default function Card({ user }) {
   return (
@@ -13,9 +14,9 @@ export default function Card({ user }) {
       </div>
       <div className="card-content">
         <p className="title is-4">
-          <a href={`/athletes/${user._id}`}>
+          <Link to={`/athletes/${user._id}/info`}>
             {user.firstName} {user.lastName}
-          </a>
+          </Link>
         </p>
         <p className="title is-5">{user.primarySport}</p>
         <p className="title is-6">{user.position}</p>
@@ -30,7 +31,7 @@ export default function Card({ user }) {
             </a>
           </span>
           <span className="button is-small">
-            <a href={user.twitterUrl}>
+            <a href={user.twitterUrl} target="_blank">
               <i className="fa fa-twitter fa-lg" />
             </a>
           </span>
