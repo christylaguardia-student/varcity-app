@@ -46,6 +46,7 @@ export default {
     // }
   },
   get(id, tab = '') {
+
     return request.get(`${API_URL}/${id}/${tab}`);
   },
   update(id, data, tab = '') {

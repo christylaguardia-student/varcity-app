@@ -1,12 +1,11 @@
 import React from 'react';
 
-// TODO: copied from bulma sample
 
-export default function Card() {
+export default function Card({user}) {
   return (
     <div className="card">
       <div className="card-image">
-        <figure className="image is-4by3">
+        <figure className="image is-square">
           <img src="http://bulma.io/images/placeholders/1280x960.png" alt="Placeholder" />
         </figure>
       </div>
@@ -18,7 +17,7 @@ export default function Card() {
             </figure>
           </div> */}
           <div className="media-content">
-            <p className="title is-4">John Smith</p>
+            <p className="title is-4"><a href={`/athletes/${user._id}`}>{user.firstName} {user.lastName}</a></p>
             <p className="subtitle is-6">
               <span className="button is-small"><i className="fa fa-futbol-o fa-lg"></i></span>
               <span className="button is-small"><i className="fa fa-facebook fa-lg"></i></span>
@@ -27,7 +26,7 @@ export default function Card() {
             </p>
           </div>
         </div>
-    
+
         <div className="content">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Phasellus nec iaculis mauris. <a>@bulmaio</a>.
