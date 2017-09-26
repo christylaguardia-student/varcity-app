@@ -2,9 +2,10 @@ import { GOT_RESULTS, NO_RESULTS, SEARCH_ERROR, SEARCHING } from './constants';
 import searchAPI from './api';
 
 export function searchDb({ payload }) {
-console.log(44, payload)
   return function(dispatch) {
     dispatch({ type: SEARCHING });
+    const storage = localStorage;
+    payload.token = storage.getItem('varcity') || '';
     return searchAPI
       .search({ payload })
       .then(results => {
@@ -15,7 +16,6 @@ console.log(44, payload)
         }
       })
       .catch(error => {
-        console.log(55, error)
         dispatch({ type: SEARCH_ERROR, payload: {error} });
       });
   };

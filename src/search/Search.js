@@ -6,7 +6,6 @@ import Card from '../search/Card';
 import GlobalHeader from '../app/GlobalHeader';
 
 export function Search({ search }) {
-  console.log(786, search.length);
 
   if (search.length > 0 && !search.error) {
     return (

@@ -102,7 +102,7 @@ export function GlobalHeader({
             </div>
 
             <div className="column is-4 level-right">
-              <p className="field-is-grouped-right level-item">
+              <div className="field-is-grouped-right level-item">
                 <form
                   onSubmit={event => {
                     event.preventDefault();
@@ -148,7 +148,7 @@ export function GlobalHeader({
                     </button>
                   </div>
                 </form>
-              </p>
+              </div>
             </div>
           </div>
         )}
