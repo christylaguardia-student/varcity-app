@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { search } from './actions';
 import Pagination from '../search/Pagination';
@@ -9,6 +9,7 @@ export function Search({ search }) {
 
   if (search.length > 0 && !search.error) {
     return (
+      <div>
       <div className="flexrow">
         {search.map((person, index) => {
           return (
@@ -17,6 +18,8 @@ export function Search({ search }) {
           </div>
           );
         })}
+      </div>
+      <Pagination users={search}/>
       </div>
     );
   } else {
