@@ -1,6 +1,7 @@
 import React from 'react';
 
-export default function Pagination() {
+export default function Pagination({users}) {
+  // console.log(111, users)
   return (
     <nav className="pagination" aria-label="pagination">
       <a className="pagination-previous" title="This is the first page" disabled>Previous</a>
