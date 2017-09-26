@@ -10,9 +10,13 @@ export function Search({ search }) {
 
   if (search.length > 0 && !search.error) {
     return (
-      <div>
+      <div className="flexrow">
         {search.map((person, index) => {
-          return <Card key={index} user={person.info} />;
+          return (
+            <div key={index} className="flexcol">
+          <Card user={person.info} />
+          </div>
+          );
         })}
       </div>
     );

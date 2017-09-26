@@ -50,3 +50,22 @@ h1 {
 .card {
   margin: 0 0 5px 0;
 }
+
+
+.flexrow {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: top;
+  align-content: center;
+}
+
+.flexcol {
+  flex: 1 1 8%;
+  margin: 0 0 0.5rem 0;
+  padding: 0.5em 10px;
+  box-sizing: border-box;
+  flex-basis: 33.33%;
+}
