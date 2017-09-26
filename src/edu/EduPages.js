@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 // import {bindActionCreators} from 'redux';
 import {getEducation, updateEducation} from './actions';
-import { browserHistory } from 'react-router';
-import EduList from './EduList';
 import EduForm from './EduForm';
 import EduPresentation from './EduPresentation';
 import { ToggleEditor } from '../app/FormControls';
+
 
 export default class EduPages extends Component {
 
@@ -15,22 +14,22 @@ export default class EduPages extends Component {
     this.state = {
       editModeOn: false,
       educations: {
-        institution: '', 
-        year: 2017, 
-        country: '', 
-        city: '', 
-        state: '', 
-        degree: '', 
-        satReading: '', 
-        satWriting: '', 
-        satMath: '', 
-        actMath: '', 
-        actReading: '', 
-        actScience: '', 
-        actWriting: '', 
-        ibHistory: '', 
-        ibLanguage: '', 
-        ibMath: '', 
+        institution: '',
+        year: 2017,
+        country: '',
+        city: '',
+        state: '',
+        degree: '',
+        satReading: '',
+        satWriting: '',
+        satMath: '',
+        actMath: '',
+        actReading: '',
+        actScience: '',
+        actWriting: '',
+        ibHistory: '',
+        ibLanguage: '',
+        ibMath: '',
         ibScience: ''
       }
     }
@@ -67,7 +66,7 @@ export default class EduPages extends Component {
     // const educations = this.props.educations;
     return (
       <div className="">
-        
+
 
         <ToggleEditor text="Info" editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} />
 
@@ -94,28 +93,28 @@ export default class EduPages extends Component {
 // function mapStateToProps(state) {
 //   if (state.educations.length > 0) {
 //     return {
-//       educations: state.educations, 
+//       educations: state.educations,
 //       authId: state.authId
 //     };
 //   } else {
 //     return {
 //       educations: [{
-//         institution: '', 
-//         year: 2017, 
-//         country: '', 
-//         city: '', 
-//         state: '', 
-//         degree: '', 
-//         satReading: '', 
-//         satWriting: '', 
-//         satMath: '', 
-//         actMath: '', 
-//         actReading: '', 
-//         actScience: '', 
-//         actWriting: '', 
-//         ibHistory: '', 
-//         ibLanguage: '', 
-//         ibMath: '', 
+//         institution: '',
+//         year: 2017,
+//         country: '',
+//         city: '',
+//         state: '',
+//         degree: '',
+//         satReading: '',
+//         satWriting: '',
+//         satMath: '',
+//         actMath: '',
+//         actReading: '',
+//         actScience: '',
+//         actWriting: '',
+//         ibHistory: '',
+//         ibLanguage: '',
+//         ibMath: '',
 //         ibScience: ''
 //       }],
 //       authId: state.authId

@@ -11,10 +11,11 @@ export class MediaGallery extends Component {
     super(props);
     this.state = {
       itemNum: 0,
-      mediaItem: { 
-        description: '', 
-        mediaType: 'Image Upload', 
-        videoUrl: '', 
+
+      mediaItem: {
+        description: '',
+        mediaType: 'Image Upload',
+        videoUrl: '',
         image: ''
       },
       editModeOn: false,
@@ -30,7 +31,8 @@ export class MediaGallery extends Component {
   componentDidMount() {
     this.props.getMedia(this.props.currentId);
   }
-  
+
+
   handleChange(e) {
     e.preventDefault();
     const { name, value } = e.target;
@@ -47,7 +49,7 @@ export class MediaGallery extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // const media = this.props.athletes[this.props.currentId].media ? this.props.athletes[this.props.currentId].media : []; 
+    // const media = this.props.athletes[this.props.currentId].media ? this.props.athletes[this.props.currentId].media : [];
     // console.log('media is', media);
     // let mediaToSend = {};
     // mediaToSend.media = [...media, this.state.mediaItem];
@@ -64,6 +66,7 @@ export class MediaGallery extends Component {
     let reader = new FileReader();
     let file = files[0];
     reader.onloadend = () => {
+
       this.setImage(reader.result);
     }
     reader.readAsArrayBuffer(file);
@@ -79,6 +82,7 @@ export class MediaGallery extends Component {
   }
 
   render() {
+
     const athlete = this.props.athletes[this.props.currentId];
     return (
       <div>
@@ -98,7 +102,8 @@ export class MediaGallery extends Component {
   }
 }
 
-const mapStateToProps = (state) => { 
+
+const mapStateToProps = (state) => {
   return {
     authId: state.authId,
     // media: state.athletes.media,
@@ -106,7 +111,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => { 
+const mapDispatchToProps = (dispatch) => {
   return {
     getMedia: (id) => {
       dispatch(getMedia(id));
@@ -116,6 +121,7 @@ const mapDispatchToProps = (dispatch) => {
     }
   }
 };
+
 
 export default connect(
   mapStateToProps,

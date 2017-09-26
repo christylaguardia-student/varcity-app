@@ -1,8 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React  from 'react';
 import { TextInput, NumberInput, Dropdown } from '../app/FormControls';
+// import PropTypes from 'prop-types';
 
 
-// export function EduForm(onSubmit, onChange, institution, year, country, city, state, degree, satReading, satMath, satWriting, actReading, actMath, actWriting, actScience, ibHistory, ibMath, ibLanguage, ibScience) 
+// export function EduForm(onSubmit, onChange, institution, year, country, city, state, degree, satReading, satMath, satWriting, actReading, actMath, actWriting, actScience, ibHistory, ibMath, ibLanguage, ibScience)
 export default function Eduform({ onSubmit, onChange, props }) {
 
   const { institution, year, country, city, state, degree, satReading, satWriting, satMath, actMath, actReading, actScience, actWriting, ibHistory, ibLanguage, ibMath, ibScience } = props;
@@ -163,10 +164,10 @@ export default function Eduform({ onSubmit, onChange, props }) {
 //     IB: PropTypes.shape({
 //       language: PropTypes.number,
 //       math: PropTypes.number,
-//       science: PropTypes.number, 
+//       science: PropTypes.number,
 //       history: PropTypes.number
 //     })
-//   }), 
+//   }),
 //   handleDelete: PropTypes.func
 // }
 
@@ -186,8 +187,8 @@ export default function Eduform({ onSubmit, onChange, props }) {
 //     dispatch(createNewEducation({
 //       institution: values.institution,
 //       year: values.year,
-//       address: values.address, 
-//       degree: values.degree, 
+//       address: values.address,
+//       degree: values.degree,
 //       testScores: values.testScores
 //     }))
 //     dispatch(reset('AddEducationForm'))

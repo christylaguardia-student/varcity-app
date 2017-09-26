@@ -5,6 +5,7 @@ body {
   margin: 0;
   padding: 1rem;
   font-family: 'Open Sans', sans-serif;
+
 }
 
 .border {
@@ -22,7 +23,8 @@ body {
   background-size: cover; */
 }
 
-.logo, h1 {
+.logo,
+h1 {
   font-family: 'Graduate', cursive;
 }
 
@@ -39,4 +41,12 @@ body {
 #about-title {
   padding: 3rem;
   text-align: center;
+}
+.columns {
+  width: 95 vw;
+}
+
+
+.card {
+  margin: 0 0 5px 0;
 }

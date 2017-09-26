@@ -1,59 +1,167 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-export default function GlobalHeader({ authId, signOut }) {
+export function GlobalHeader({
+  authId,
+  search,
+  searchDb,
+  signOut,
+  signIn,
+  gotResults,
+  history
+}) {
+  const headerStyle = {
+    marginBottom: 20,
+    borderBottom: '1px solid lightgrey'
+  };
+
+  const columns = {
+    marginBottom: 6
+  };
+
   return (
-    <div className="tabs">
+    <div style={headerStyle}>
       <div>
-        <div>
-          <ul>
-            <li>
-              <h3 className="logo">Varcity</h3>
-            </li>
-            <li>
-              <Link to="/"><i className="fa fa-home fa-2x"></i></Link>
-            </li>
-            <li>
-              <div className="control has-icons-left">
-                <input className="input" placeholder="Search" />
-                <span className="icon is-small is-left">
-                  <i className="fa fa-search"></i>
-                </span>
-              </div>
-
-            </li>
-            <li>
+        {authId &&
+        Object.entries(authId).length !== 0 && (
+          <div className="columns" style={columns}>
+            <div className="column is-2">
+              <Link to="/">
+                <h3 className="logo">Varcity</h3>
+                <i className="fa fa-home fa-2x" />
+              </Link>
               <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/search">Search</Link>
-            </li>
-            <li>
-              <Link to={`/athletes/${authId}`}>My Profile</Link>
-            </li>
-            <li>
-              <div>
-                {
-                  (authId && Object.entries(authId).length !== 0) &&
-                  <div>
-                    <form
-                      onSubmit={event => {
-                        event.preventDefault();
-                        const form = event.target;
-                        signOut({
-                          payload: { payload: null }
-                        });
-                        form.reset();
-                      }}>
-                      <button className="button is-primary is-outlined" type="submit" name="submit">Logout</button>
-                    </form>
+            </div>
+            <div className="column is-8">
+              <form
+                onSubmit={event => {
+                  event.preventDefault();
+                  const form = event.target;
+                  const searchValue = form.elements[0].value;
+                  searchDb({
+                    payload: { searchValue: searchValue, authId: authId }
+                  });
+                  form.reset();
+                  history.push('/search');
+                }}>
+                <div className="field has-addons">
+                  <div className="control has-icons-left is-expanded">
+                    <input className="input" placeholder="Search" />
+                    <span className="icon is-small is-left">
+                      <i className="fa fa-search" />
+                    </span>
                   </div>
-                }
+                  <button
+                    className="button is-primary is-outlined"
+                    type="submit"
+                    name="submit">
+                    Search{' '}
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div className="column is-2">
+              <form
+                onSubmit={event => {
+                  event.preventDefault();
+                  const form = event.target;
+                  signOut({
+                    payload: { payload: null }
+                  });
+                  form.reset();
+                }}>
+                <div className="field">
+                  <button
+                    className="button is-primary is-outlined"
+                    type="submit"
+                    name="submit">
+                    Logout
+                  </button>
+                </div>
+              </form>
+
+              <div>
+                <Link to={`/athletes/${authId}`}>My Profile</Link>
               </div>
-            </li>
-          </ul>
-        </div>
+            </div>
+          </div>
+        )}
+      </div>
+      <div>
+        {!authId && (
+          <div className="columns level">
+            <div className="column is-8 level-left">
+              <Link to="/">
+                <h3 className="logo">Varcity</h3>
+                <i className="fa fa-home fa-2x" />
+              </Link>
+              <Link to="/about">About</Link>
+            </div>
+
+            <div className="column is-4 level-right">
+              <p className="field-is-grouped-right level-item">
+                <form
+                  onSubmit={event => {
+                    event.preventDefault();
+                    const form = event.target;
+                    const { email, password } = form.elements;
+                    signIn({
+                      payload: { email: email.value, password: password.value }
+                    });
+                    form.reset();
+                  }}>
+                  <div className="field">
+                    <div className="control has-icons-left has-icons-right">
+                      <input
+                        className="input"
+                        type="text"
+                        name="email"
+                        placeholder="email"
+                      />
+                      <span className="icon is-small is-left">
+                        <i className="fa fa-user" />
+                      </span>
+                    </div>
+                  </div>
+                  <div className="field">
+                    <div className="control has-icons-left has-icons-right">
+                      <input
+                        className="input"
+                        type="password"
+                        name="password"
+                        placeholder="password"
+                      />
+                      <span className="icon is-small is-left">
+                        <i className="fa fa-lock" />
+                      </span>
+                    </div>
+                  </div>
+                  <div className="field">
+                    <button
+                      className="button is-primary is-outlined"
+                      type="submit"
+                      name="submit">
+                      Sign In
+                    </button>
+                  </div>
+                </form>
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
 }
+
+const mapStateToProps = state => {
+  return {
+    authId: state.authId,
+    search: state.search
+    };
+};
+
+export default withRouter(connect(mapStateToProps, null)(GlobalHeader));

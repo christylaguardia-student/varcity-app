@@ -1,5 +1,4 @@
 // import * as actions from './constants';
-
 // export function media(state = {}, { type, payload }) {
 //   console.log('type in reducer is', type);
 //   switch (type) {

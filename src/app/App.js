@@ -7,13 +7,14 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
-import SearchContainer from './SearchContainer';
+import Search from '../search/Search';
 import ProfileContainer from './ProfileContainer';
 import Home from './Home';
 import About from './About';
 import { connect } from 'react-redux';
 import { retrieveWithToken } from './actions';
 import 'bulma/css/bulma.css';
+import '../styles/index.css'
 
 class App extends Component {
   componentWillMount() {
@@ -30,15 +31,15 @@ class App extends Component {
 
       routes = [
         <Route key="1" path="/about" component={About} />,
-        <Route key="2" path="/search" component={SearchContainer} />,
         <Route key="3" path="/athletes/:id" component={ProfileContainer} />,
+        <Route key="2" path="/search" component={Search} />,
         <Redirect key="5" to={`/athletes/${authId}`} />
       ];
     } else {
       routes = [
-        <Route key="1" exact path="/" component={Home} />,
-        <Route key="2" path="/about" component={About} />,
-        <Redirect  key="3" to="/" />
+        <Route key="4" exact path="/" component={Home} />,
+        <Route key="6" path="/about" component={About} />,
+        <Redirect  key="7" to="/" />
       ];
     }
 
