@@ -8,13 +8,13 @@ export default function Card({ user }) {
         <figure className="image is-128x128">
           <img
             src={user.profileUrl || '../images/default-profile.png'}
-            alt="profile picture"
+            alt="user profile pic"
           />
         </figure>
       </div>
       <div className="card-content">
         <p className="title is-4">
-          <Link to={`/athletes/${user._id}/info`}>
+          <Link to={`/athletes/${user._id}`}>
             {user.firstName} {user.lastName}
           </Link>
         </p>
