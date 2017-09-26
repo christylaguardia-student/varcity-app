@@ -14,7 +14,7 @@ import About from './About';
 import { connect } from 'react-redux';
 import { retrieveWithToken } from './actions';
 import 'bulma/css/bulma.css';
-import '../styles/index.css'
+import '../styles/index.css';
 
 class App extends Component {
   componentWillMount() {
@@ -27,8 +27,6 @@ class App extends Component {
     const { authId } = this.props;
 
     if (authId && Object.entries(authId).length !== 0) {
-      // const id = this.props.location.pathname.split('/athletes/')[1];
-
       routes = [
         <Route key="1" path="/about" component={About} />,
         <Route key="3" path="/athletes/:id" component={ProfileContainer} />,
@@ -39,7 +37,7 @@ class App extends Component {
       routes = [
         <Route key="4" exact path="/" component={Home} />,
         <Route key="6" path="/about" component={About} />,
-        <Redirect  key="7" to="/" />
+        <Redirect key="7" to="/" />
       ];
     }
 
