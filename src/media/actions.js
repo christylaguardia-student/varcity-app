@@ -10,27 +10,23 @@ export function makeGetMedia(api) {
       return api
         .getMediaById(id)
         .then(data => {
-          console.log('media returning from get media is', data, 'id is', id);
           dispatch({ type: actions.GET_MEDIA, payload: {_id: id, media: [...data] } });
-        })
-        .catch(console.log);
-    };
+        });
+      };
   };
 }
 
 export const getMedia = makeGetMedia(athleteApi);
 
+
 export function makeUpdateMedia(api) {
   return function updateMedia(id, media) {
-    console.log('incoming in updateMedia: id', id, "media:", media);
     return dispatch => {
       return api
         .updateMediaById(id, media)
         .then(data => {
-          console.log('media returning from update media is', data, 'id is', id);
           dispatch({ type: actions.UPDATE_MEDIA, payload: {_id: id, media: [...data]} });
-        })
-        .catch(err => console.log('we got this error in updatemedia:', err));
+        });
     };
   };
 }
