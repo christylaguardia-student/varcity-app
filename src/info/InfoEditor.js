@@ -16,7 +16,7 @@ export default function InfoEditor({ props, save, change }) {
           const form = e.target;
           save(form.elements); }}>
 
-          {/* <input className="button" type="submit" value="Save" />
+          <input className="button" type="submit" value="Save" />
 
           <TextInput value={props.firstName} prop="firstName" label="First Name" change={change} />
           <TextInput value={props.lastName} prop="lastName" label="Last Name" change={change} />
@@ -45,7 +45,7 @@ export default function InfoEditor({ props, save, change }) {
           <UrlInput value={props.socials.instagramUrl} prop="socials.instagramUrl" label="Instagram URL" change={change} />
 
           <TextArea value={props.about} prop="about" label="About" change={change} />
-          <TextArea value={props.awards} prop="awards" label="Awards" change={change} /> */}
+          <TextArea value={props.awards} prop="awards" label="Awards" change={change} />
         </form>
       </div>
     </div>
