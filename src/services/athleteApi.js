@@ -35,6 +35,7 @@ export default {
       .then(res => res.body);
   },
   get(id, tab = '') {
+
     return request.get(`${API_URL}/${id}/${tab}`);
   },
   update(id, data, tab = '') {

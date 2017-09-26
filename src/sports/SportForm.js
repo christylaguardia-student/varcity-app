@@ -1,13 +1,13 @@
-import React, { Component, PropTypes } from 'react';
-import { TextInput, NumberInput, Dropdown, DateInput } from '../app/FormControls';
-import {getSport, updateSport} from './actions';
+import React from 'react';
+import { TextInput, NumberInput, DateInput } from '../app/FormControls';
+import {updateSport} from './actions';
 import { connect } from 'react-redux';
 
-// export function SportForm(onSubmit, onChange, onDelete) 
+// export function SportForm(onSubmit, onChange, onDelete)
 
 
 function SportForm({ onSubmit, onChange, props, id, updateSport }) {
-  
+
     const { sport, organization, position, statTitle, statScore, seasonDates} = props;
 
       return (
@@ -29,7 +29,7 @@ function SportForm({ onSubmit, onChange, props, id, updateSport }) {
             <TextInput prop={"statTitle"} label="Title" change={onChange} value={statTitle} />
             <NumberInput prop={"statScore"}label="Score" change={onChange} value={statScore}/>
             <DateInput prop="seasonDates" label="Season Played" change={onChange} value={seasonDates}/>
-            </div> 
+            </div>
             <input type="submit" value="Submit" />
         </form>
       </div>
@@ -38,4 +38,3 @@ function SportForm({ onSubmit, onChange, props, id, updateSport }) {
 
   const mapDispatchToProps = { updateSport };
   export default connect(null, mapDispatchToProps)(SportForm);
-  

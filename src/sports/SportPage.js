@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
 // import {bindActionCreators} from 'redux';
 import { getSport, updateSport } from './actions';
-import { browserHistory } from 'react-router';
-import SportList from './SportList';
+// import { browserHistory } from 'react-router';
+// import SportList from './SportList';
 import SportForm from './SportForm';
 import SportPresentation from './SportPresentation';
 import { ToggleEditor } from '../app/FormControls';
@@ -52,8 +52,7 @@ export default class SportPage extends Component {
       editModeOn: newState
     });
   }
-    
-  
+
 
   render() {
     // const sports = this.props.sports;

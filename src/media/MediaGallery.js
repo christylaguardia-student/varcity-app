@@ -65,6 +65,7 @@ export class MediaGallery extends Component {
   }
 
   render() {
+
     const athlete = this.props.athletes[this.props.currentId];
     return (
       <div>
@@ -86,14 +87,15 @@ export class MediaGallery extends Component {
   }
 }
 
-const mapStateToProps = (state) => { 
+
+const mapStateToProps = (state) => {
   return {
     authId: state.authId,
     athletes: state.athletes
   };
 };
 
-const mapDispatchToProps = (dispatch) => { 
+const mapDispatchToProps = (dispatch) => {
   return {
     getMedia: (id) => {
       dispatch(getMedia(id));
@@ -103,6 +105,7 @@ const mapDispatchToProps = (dispatch) => {
     }
   }
 };
+
 
 export default connect(
   mapStateToProps,
