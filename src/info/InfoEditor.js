@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import { TextInput, Checkbox, DateInput, Dropdown, NumberInput, TextArea, UrlInput } from '../app/FormControls';
+import { TextInput, Checkbox, DateInput, Dropdown, NumberInput, TextArea, UrlInput } from '../app/FormControls';
 
 export default function InfoEditor({ props, save, change }) {
   const heightUOM = ['in', 'cm'];
