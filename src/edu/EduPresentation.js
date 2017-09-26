@@ -1,56 +1,14 @@
 import React from 'react';
 
-const defaultEdu = {
-  schools: [
-    {
-      institution: 'Alchemy Code Lab', 
-      year: 2017, 
-      country: 'United States', 
-      city: 'Portland', 
-      state: 'Oregon', 
-      degree: 'Full-Stack JavaScript',
-    },
-    {
-      institution: 'Portland State University', 
-      year: 2007, 
-      country: 'United States', 
-      city: 'Portland', 
-      state: 'Oregon', 
-      degree: 'Mechanical Engineering',
-    },
-    {
-      institution: 'David Douglas High School', 
-      year: 2005, 
-      country: 'United States', 
-      city: 'Portland', 
-      state: 'Oregon', 
-      degree: 'Diploma',
-    }
-  ],
-  satReading: '1020', 
-  satWriting: '1090', 
-  satMath: '1100',
-
-  actMath: '1140', 
-  actReading: '1290', 
-  actScience: '1030', 
-  actWriting: '1200', 
-
-  ibHistory: '1130', 
-  ibLanguage: '1120', 
-  ibMath: '1100', 
-  ibScience: '1110'
-};
-
-
 export default function EduPresentation({ props }) {
-  if (!props) props = defaultEdu;
+
+  const { schools, testScores } = this.props;
 
   return (
     <div className="content">
       <h1 className="title">Education</h1>
       <ul>
-        {defaultEdu.schools.map((school, index) => <School key={index} school={school} /> )}
+        {schools.map((school, i) => <School key={i} institution={school.institution} year={school.year} country={school.country} city={school.city} state={school.state} degree={school.degree} /> )}
       </ul>
       <br/>
       <h1 className="title">Testing</h1>
@@ -67,19 +25,19 @@ export default function EduPresentation({ props }) {
           </tr>
           <tr>
             <td>SAT</td>
-            <td>{props.satReading}</td>
-            <td>{props.satWriting}</td>
-            <td>{props.satMath}</td>
+            <td>{testScores.satReading}</td>
+            <td>{testScores.satWriting}</td>
+            <td>{testScores.satMath}</td>
             <td> - </td>
             <td> - </td>
             <td> - </td>
           </tr>
           <tr>
             <td>ACT</td>
-            <td>{props.actReading}</td>
-            <td>{props.actWriting}</td>
-            <td>{props.actMath}</td>
-            <td>{props.actScience}</td>
+            <td>{testScores.actReading}</td>
+            <td>{testScores.actWriting}</td>
+            <td>{testScores.actMath}</td>
+            <td>{testScores.actScience}</td>
             <td> - </td>
             <td> - </td>
           </tr>
@@ -87,10 +45,10 @@ export default function EduPresentation({ props }) {
             <td>IB</td>
             <td> - </td>
             <td> - </td>
-            <td>{props.actMath}</td>
-            <td>{props.actScience}</td>
-            <td>{props.ibHistory}</td>
-            <td>{props.ibLanguage}</td>
+            <td>{testScores.actMath}</td>
+            <td>{testScores.actScience}</td>
+            <td>{testScores.ibHistory}</td>
+            <td>{testScores.ibLanguage}</td>
           </tr>
         </tbody>
       </table>
