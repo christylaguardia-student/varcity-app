@@ -102,53 +102,7 @@ export function GlobalHeader({
             </div>
 
             <div className="column is-4 level-right">
-              <div className="field-is-grouped-right level-item">
-                <form
-                  onSubmit={event => {
-                    event.preventDefault();
-                    const form = event.target;
-                    const { email, password } = form.elements;
-                    signIn({
-                      payload: { email: email.value, password: password.value }
-                    });
-                    form.reset();
-                  }}>
-                  <div className="field">
-                    <div className="control has-icons-left has-icons-right">
-                      <input
-                        className="input"
-                        type="text"
-                        name="email"
-                        placeholder="email"
-                      />
-                      <span className="icon is-small is-left">
-                        <i className="fa fa-user" />
-                      </span>
-                    </div>
-                  </div>
-                  <div className="field">
-                    <div className="control has-icons-left has-icons-right">
-                      <input
-                        className="input"
-                        type="password"
-                        name="password"
-                        placeholder="password"
-                      />
-                      <span className="icon is-small is-left">
-                        <i className="fa fa-lock" />
-                      </span>
-                    </div>
-                  </div>
-                  <div className="field">
-                    <button
-                      className="button is-primary is-outlined"
-                      type="submit"
-                      name="submit">
-                      Sign In
-                    </button>
-                  </div>
-                </form>
-              </div>
+
             </div>
           </div>
         )}
