@@ -2,7 +2,7 @@ import React from 'react';
 import { TextInput, NumberInput, DateInput, Dropdown } from '../app/FormControls';
 
 export default function SportEditor({ sports, save, change }) {
-  console.log('SportEditor sports', sports);
+  // console.log('SportEditor sports', sports);
 
   return (
     <div>
