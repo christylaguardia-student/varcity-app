@@ -9,11 +9,8 @@ export default function About() {
       <div className="column is-two-thirds container is-fluid">
         <div className="content is-medium is-centered">
 
-          <h1 id="about-title">A new kind of social network.</h1>
+          <h1 className="centered-title">A new kind of social network.</h1>
 
-          <figure>
-            <img src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/WFMM0O6D9V.jpg" alt="Varcity Network"/>
-          </figure>
 
           <div>
             <div className="box">

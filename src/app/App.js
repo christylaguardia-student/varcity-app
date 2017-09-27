@@ -10,7 +10,6 @@ import {
 import Search from '../search/Search';
 import ProfileContainer from './ProfileContainer';
 import Home from './Home';
-import About from './About';
 import { connect } from 'react-redux';
 import { retrieveWithToken } from './actions';
 import 'bulma/css/bulma.css';
@@ -28,7 +27,6 @@ class App extends Component {
 
     if (authId && Object.entries(authId).length !== 0) {
       routes = [
-        <Route key="1" path="/about" component={About} />,
         <Route key="3" path="/athletes/:id" component={ProfileContainer} />,
         <Route key="2" path="/search" component={Search} />,
         <Redirect key="5" to={`/athletes/${authId}`} />
@@ -36,7 +34,6 @@ class App extends Component {
     } else {
       routes = [
         <Route key="4" exact path="/" component={Home} />,
-        <Route key="6" path="/about" component={About} />,
         <Redirect key="7" to="/" />
       ];
     }

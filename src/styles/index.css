@@ -12,23 +12,18 @@ body {
   border: 1px solid red;
 }
 
-#home {
-  /* background-image: url("https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/29I66QEHME.jpg"); */
-  /* background-image: url("https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/B65VCAYIUF.jpg"); */
-  /* background-image: url("https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/7I1KUVZ01H.jpg"); */
-  /* background-image: url("https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/9DF07977DF.jpg"); */
-  /* background-image: url("https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/ZIS75NJPCB.jpg"); */
-  /* background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover; */
+.logo {
+  font-family: 'Graduate', cursive;
+  font-size: 32px;
+  text-transform: bold;
+  text-shadow: 1px #000;
 }
 
-.logo,
 h1 {
   font-family: 'Graduate', cursive;
 }
 
-.main-container {
+section, .main-container {
   min-height: 90vh;
 }
 
@@ -38,15 +33,14 @@ h1 {
   padding-bottom: 2rem;
 }
 
-#about-title {
+.centered-title {
   padding: 3rem;
   text-align: center;
 }
+
 .columns {
   width: 95 vw;
 }
-
-
 
 .card {
   margin: 0 0 5px 0;
@@ -68,4 +62,10 @@ h1 {
   padding: 0.5em 10px;
   box-sizing: border-box;
   flex-basis: 33.33%;
+}
+
+.testimony-image {
+  display: inline-block;
+  max-height: 128px;
+  border-radius: 3px;
 }
