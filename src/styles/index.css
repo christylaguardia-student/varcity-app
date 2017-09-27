@@ -63,9 +63,3 @@ section, .main-container {
   box-sizing: border-box;
   flex-basis: 33.33%;
 }
-
-.testimony-image {
-  display: inline-block;
-  max-height: 128px;
-  border-radius: 3px;
-}

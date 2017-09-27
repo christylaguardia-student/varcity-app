@@ -18,8 +18,8 @@ export function Home({ signIn, signUp, authId }) {
       <section className="columns level">
         <div className="column"></div>
         <div className="column is-fluid is-6 padded-container">
-          <h1 className="title">Varcity Network</h1>
-          <p className="subtitle">Connecting student athletes to success.</p>
+          <h2 className="title">Connecting student athletes to success.</h2>
+          <p className="subtitle">Meet recruiters, get connected with players, show off your athletic and educational skills.</p>
           <figure>
             <img
               src="https://d193o8p26ehxdy.cloudfront.net/img-thumbs/960w/WFMM0O6D9V.jpg"

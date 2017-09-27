@@ -46,6 +46,7 @@ function Testimony({ testimony }) {
   return (
     <div className="card is-level">
       <div className="card-content">
+        <p><em>{testimony.quote}</em></p>
         <div className="media">
           <div className="media-left">
             <figure className="image is-64x64">
@@ -55,7 +56,6 @@ function Testimony({ testimony }) {
           <div className="media-content">
             <p className="title is-4">{testimony.author}</p>
             <p className="subtitle is-6">{testimony.team}</p>
-            <p><em>{testimony.quote}</em></p>
           </div>
         </div>
       </div>

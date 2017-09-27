@@ -23,7 +23,7 @@ export function GlobalHeader({
   };
   return (
     <div style={headerStyle}>
-      <div>
+      <div className="">
         {authId &&
         Object.entries(authId).length !== 0 && (
             <div className="columns" style={columns}>
@@ -78,10 +78,6 @@ export function GlobalHeader({
                     </button>
                   </div>
                 </form>
-
-                <div>
-                  <Link to={`/athletes/${authId}`}>My Profile</Link>
-                </div>
               </div>
             </div>
           )}
@@ -105,7 +101,7 @@ export function GlobalHeader({
 
 function Logo() {
   return (
-    <Link to="/" className="logo">V</Link>
+    <Link to="/" className="logo">Varcity</Link>
   );
 }
 
