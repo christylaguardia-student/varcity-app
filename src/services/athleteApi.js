@@ -7,14 +7,14 @@ export default {
   getInfoById(id) {
     const token = localStorage.getItem('varcity');
     return superagent
-      .get(`${API_URL}/${id}/info`)
+      .get(`${API_URL}/${id}`)
       .set('Authorization', token)
       .then(res => res.body);
   },
   updateInfoById(id, data) {
     const token = localStorage.getItem('varcity');
     return superagent
-      .patch(`${API_URL}/${id}/info`)
+      .patch(`${API_URL}/${id}`)
       .send(data)
       .set('Authorization', token)
       .then(res => res.body);

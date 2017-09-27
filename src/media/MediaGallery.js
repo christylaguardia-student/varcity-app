@@ -11,10 +11,10 @@ export class MediaGallery extends Component {
     super(props);
     this.state = {
       itemNum: 0,
-      mediaItem: { 
-        description: '', 
-        mediaType: 'Image Link', 
-        videoUrl: '', 
+      mediaItem: {
+        description: '',
+        mediaType: 'Image Link',
+        videoUrl: '',
         imageUrl: ''
       },
       editModeOn: false,

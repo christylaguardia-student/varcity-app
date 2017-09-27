@@ -18,7 +18,7 @@ function HasInfo({ props }) {
       <div className="columns level">
 
         <div className="column">
-          <figure className="image is-3by2">
+          <figure className="image is-square">
             <img src={props.profileUrl} alt="Profile" />
           </figure>
         </div>
