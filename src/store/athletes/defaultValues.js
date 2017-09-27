@@ -34,7 +34,7 @@ export default {
       awards: '',
     },
     edu: {
-      [],
+      schools: [],
       testScores: {
         SAT: {
           reading: 0,
