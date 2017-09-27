@@ -2,12 +2,13 @@ import React from 'react';
 import { Dropdown, TextArea, UrlInput } from '../app/FormControls';
 import Preview from './Preview';
 
-export default function MediaForm({ id, props, onImageChange, onSubmit, onChange }) {
+export default function MediaForm({ props,onSubmit, onChange }) {
   const { description, mediaType, videoUrl, imageUrl } = props;
 
   return (
     <div className="columns">
       <div className="column">
+      <p className="is-size-3">Add a new media item to your gallery</p>
 
         <div className="is-grouped is-grouped-multiline">
           <Dropdown value={mediaType} prop="mediaType" label="Media Type" change={onChange} options={['Image Link', 'Video Link']} />

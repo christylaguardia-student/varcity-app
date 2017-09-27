@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 import SportsContainer from '../sports/SportsContainer';
 import InfoContainer from '../info/InfoContainer';
 import EduPages from '../edu/EduPages';
@@ -9,13 +9,12 @@ import MediaGallery from '../media/MediaGallery';
 class ProfileContainer extends Component {
   render() {
 
-    const id = this.props.currentId;
+    const id = this.props.match.params.id;
     const tabs = {
       marginTop:2
     };
 
     return (
-      <Router>
         <div>
           <div style={tabs} className="tabs is-centered is-medium">
             <ul>
@@ -35,7 +34,6 @@ class ProfileContainer extends Component {
           </div>
 
           <Switch>
-
             <div className="columns main-container">
               <div className="column"></div>
               <div className="column is-two-thirds">
@@ -48,19 +46,11 @@ class ProfileContainer extends Component {
             </div>
           </Switch>
         </div>
-      </Router>
     );
   }
 }
 
 export default connect(
   state => ({ id: state.id }),
-  null,
-  (stateProps, dispatchProps, ownProps) => {
-    return {
-      ...stateProps,
-      ...dispatchProps,
-      currentId: ownProps.location.pathname.split('/athletes/')[1] || ''
-    };
-  }
+  null
 )(ProfileContainer);

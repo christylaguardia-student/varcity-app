@@ -21,7 +21,6 @@ export function GlobalHeader({
   const columns = {
     marginBottom: 6
   };
-console.log(400, currentId)
   return (
     <div style={headerStyle}>
       <div>

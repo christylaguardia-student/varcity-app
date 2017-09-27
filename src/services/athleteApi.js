@@ -38,6 +38,32 @@ export default {
       .then(res => res.body);
   },
   
+  getEduById(id) {
+    const token = localStorage.getItem('varcity');
+    return superagent
+      .get(`${API_URL}/${id}/edu`)
+      .set('Authorization', token)
+      .then(res => res.body);
+  },
+
+  updateSchoolsById(id, data) {
+    const token = localStorage.getItem('varcity');
+    return superagent
+      .patch(`${API_URL}/${id}/edu`)
+      .set('Authorization', token)
+      .send(data)
+      .then(res => res.body);
+  },
+
+  updateTestScoresById(id, data) {
+    const token = localStorage.getItem('varcity');
+    return superagent
+      .patch(`${API_URL}/${id}/edu`)
+      .set('Authorization', token)
+      .send(data)
+      .then(res => res.body);
+  },
+
   getSportsById(id) {
     const token = localStorage.getItem('varcity');
     return superagent
