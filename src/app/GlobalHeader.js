@@ -10,12 +10,11 @@ export function GlobalHeader({
   searchDb,
   signOut,
   signIn,
-  gotResults,
-  history,
-  currentId,id
+  history
+
+
 })
 {
-console.log(400, currentId, id, authId)
 
   const headerStyle = {
     marginBottom: 20,
@@ -25,6 +24,7 @@ console.log(400, currentId, id, authId)
   const columns = {
     marginBottom: 6
   };
+
   return (
     <div style={headerStyle}>
       <div>
@@ -118,8 +118,7 @@ console.log(400, currentId, id, authId)
 const mapStateToProps = state => {
   return {
     authId: state.authId,
-    search: state.search,
-    currentId: state.currentId
+    search: state.search
     };
 };
 

@@ -26,23 +26,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = state => {
-
   return {
-    authId: state.authId,
-    id: state.id
+    authId: state.authId
   };
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-    (stateProps, dispatchProps, ownProps) => {
-      return {
-        ...stateProps,
-        ...dispatchProps,
-        currentId: ownProps.location.pathname.split('/athletes/')[1]
-      };
-    }
-  )(GlobalHeader)
+  connect(mapStateToProps, mapDispatchToProps)(GlobalHeader)
 );
