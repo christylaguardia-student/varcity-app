@@ -8,8 +8,8 @@ import MediaGallery from '../media/MediaGallery';
 
 class ProfileContainer extends Component {
   render() {
-    const id = this.props.currentId;
-    // const id = this.props.match.params.id;
+    const id = this.props.id;
+
     const tabs = {
       marginTop: 2
     };
@@ -46,18 +46,13 @@ class ProfileContainer extends Component {
           </div>
         </Switch>
       </div>
+
     );
   }
 }
 
 export default connect(
   state => ({ id: state.id }),
-  null,
-  (stateProps, dispatchProps, ownProps) => {
-    return {
-      ...stateProps,
-      ...dispatchProps,
-      currentId: ownProps.location.pathname.split('/athletes/')[1] || ''
-    };
-  }
+
+  null
 )(ProfileContainer);

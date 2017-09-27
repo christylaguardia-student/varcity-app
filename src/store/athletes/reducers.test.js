@@ -2,7 +2,7 @@ import * as actions from './constants';
 import { athletes } from './reducers';
 import defaultValues from './defaultValues';
 
-describe('athletes reducer', () => {
+describe.skip('athletes reducer', () => {
 
   it('initial state', () => {
     const newState = athletes(undefined, { type: undefined });
