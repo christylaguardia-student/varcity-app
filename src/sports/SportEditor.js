@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, NumberInput, DateInput, Dropdown } from '../app/FormControls';
+import { TextInput, DateInput, Dropdown } from '../app/FormControls';
 
 export default function SportEditor({ sports, save, change }) {
   // console.log('SportEditor sports', sports);
@@ -57,22 +57,5 @@ function Sport({ props, save, change }) {
         </form>
       </div>
     </div>
-  );
-}
-
-{/* <h3>Stats</h3>
-<table className="table">
-  <tbody>
-    {props.stats.map((stat, index) => <StatRow key={index} stat={stat} />)}
-  </tbody>
-</table> */}
-
-function StatRow(stat) {
-  return (
-    <tr>
-      <td>{stat.abbr}</td>
-      <td>{stat.value}</td>
-      <td><input className="button" type="submit" value="Delete" /></td>
-    </tr>
   );
 }
