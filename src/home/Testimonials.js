@@ -26,19 +26,21 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <div className="content">
-      <h1 className="centered-title">What they're saying about Varcity Network</h1>
-      <div className="columns content">
-        <div className="column">
-          <Testimony testimony={testimonials[0]}/>
-          <Testimony testimony={testimonials[1]}/>
-        </div>
-        <div className="column">
-          <Testimony testimony={testimonials[2]}/>
-          <Testimony testimony={testimonials[3]}/>
+    <section>
+      <div className="content">
+        <h1 className="centered-title">What they're saying about Varcity Network</h1>
+        <div className="columns content">
+          <div className="column">
+            <Testimony testimony={testimonials[0]}/>
+            <Testimony testimony={testimonials[1]}/>
+          </div>
+          <div className="column">
+            <Testimony testimony={testimonials[2]}/>
+            <Testimony testimony={testimonials[3]}/>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -46,11 +48,11 @@ function Testimony({ testimony }) {
   return (
     <div className="card is-level">
       <div className="card-content">
-        <p><em>{testimony.quote}</em></p>
+        <p className="subtitle is-4"><em>{testimony.quote}</em></p>
         <div className="media">
           <div className="media-left">
             <figure className="image is-64x64">
-              <img src={testimony.image} alt="{testimony.author}" />
+              <img src={testimony.image} alt={testimony.author} />
             </figure>
           </div>
           <div className="media-content">

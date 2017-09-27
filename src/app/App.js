@@ -14,6 +14,12 @@ import { connect } from 'react-redux';
 import { retrieveWithToken } from './actions';
 import 'bulma/css/bulma.css';
 import '../styles/index.css';
+import About from '../home/About';
+import Contact from '../home/Contact';
+import News from '../home/News';
+import Privacy from '../home/Privacy';
+import Resources from '../home/Resources';
+import TermsOfUse from '../home/TermsOfUse';
 
 class App extends Component {
   componentWillMount() {
@@ -34,7 +40,13 @@ class App extends Component {
     } else {
       routes = [
         <Route key="4" exact path="/" component={Home} />,
-        <Redirect key="7" to="/" />
+        <Route key="5" exact path="/about" component={About} />,
+        <Route key="6" exact path="/news" component={News} />,
+        <Route key="7" exact path="/resources" component={Resources} />,
+        <Route key="8" exact path="/terms" component={TermsOfUse} />,
+        <Route key="8" exact path="/privacy" component={Privacy} />,
+        <Route key="9" exact path="/contact" component={Contact} />,
+        <Redirect key="10" to="/" />
       ];
     }
 

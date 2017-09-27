@@ -84,14 +84,13 @@ export function GlobalHeader({
       </div>
       <div>
         {!authId && (
-          <div className="columns level">
-            <div className="column is-8 level-left">
-              <Logo />
-            </div>
-
-            <div className="column is-4 level-right">
-
-            </div>
+          <div className="tabs">
+            <Logo />
+            <Link to="/about">About</Link>
+            <Link to="/news">News</Link>
+            <Link to="/resources">Resources</Link>
+            <Link to="/contact">Contact</Link>
+            <Link to="/privacy">Privacy Policy</Link>
           </div>
         )}
       </div>

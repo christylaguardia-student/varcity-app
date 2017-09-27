@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { signIn, signUp } from './actions';
 import { connect } from 'react-redux';
 import Testimonials from '../home/Testimonials';
-import About from '../home/About';
 
 export function Home({ signIn, signUp, authId }) {
   Home.propTypes = {
@@ -140,10 +139,6 @@ export function Home({ signIn, signUp, authId }) {
 
       <section>
         <Testimonials />
-      </section>
-      
-      <section>
-        <About />
       </section>
     </div>
   );
