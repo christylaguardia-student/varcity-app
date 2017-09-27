@@ -2,7 +2,6 @@ import React from 'react';
 import { TextInput, DateInput, Dropdown } from '../app/FormControls';
 
 export default function SportEditor({ sports, save, change }) {
-  // console.log('SportEditor sports', sports);
 
   return (
     <div>
@@ -25,7 +24,7 @@ function Sport({ props, save, change }) {
   return (
     <div className="columns">
       <div className="column content">
-        
+
         <form onSubmit={ e => {
           e.preventDefault();
           const form = e.target;
@@ -53,7 +52,7 @@ function Sport({ props, save, change }) {
           </form>
 
           <input className="button" type="submit" value="Save" />
-          
+
         </form>
       </div>
     </div>

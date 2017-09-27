@@ -26,17 +26,16 @@ const defaultInfo = {
   location: {
     city: '',
     state: '',
-    country: '',
+    country: ''
   },
   socials: {
     facebookUrl: 'https://www.facebook.com/',
     twitterUrl: 'https://www.twitter.com/',
-    instagramUrl: 'https://www.instagram.com/',
+    instagramUrl: 'https://www.instagram.com/'
   }
 };
 
 export class InfoContainer extends Component {
-
   constructor(props) {
     super(props);
 
@@ -82,62 +81,83 @@ export class InfoContainer extends Component {
     let keys = Object.keys(props);
 
     // has no props
-    if (keys.length===0) return defaultInfo;
+    if (keys.length === 0) return defaultInfo;
 
     if (!props.firstName) props.firstName = defaultInfo.firstName;
     if (!props.lastName) props.lastName = defaultInfo.lastName;
     if (!props.public) props.public = defaultInfo.public;
     if (!props.profileUrl) props.profileUrl = defaultInfo.profileUrl;
     if (!props.primarySport) props.primarySport = defaultInfo.primarySport;
-    if (!props.primarySportGender) props.primarySportGender = defaultInfo.primarySportGender;
+    if (!props.primarySportGender)
+      props.primarySportGender = defaultInfo.primarySportGender;
     if (!props.position) props.position = defaultInfo.position;
     if (!props.person) props.person = defaultInfo.person;
     if (!props.person.dob) props.person.dob = defaultInfo.person.dob;
     if (!props.person.gender) props.person.gender = defaultInfo.person.gender;
     if (!props.person.height) props.person.height = defaultInfo.person.height;
-    if (!props.person.heightUom) props.person.heightUom = defaultInfo.person.heightUom;
+    if (!props.person.heightUom)
+      props.person.heightUom = defaultInfo.person.heightUom;
     if (!props.person.weight) props.person.weight = defaultInfo.person.weight;
-    if (!props.person.weightUom) props.person.weightUom = defaultInfo.person.weightUom;
+    if (!props.person.weightUom)
+      props.person.weightUom = defaultInfo.person.weightUom;
     if (!props.organization) props.organization = defaultInfo.organization;
     if (!props.location) props.location = defaultInfo.location;
     if (!props.location.city) props.location.city = defaultInfo.location.city;
-    if (!props.location.state) props.location.state = defaultInfo.location.state;
-    if (!props.location.country) props.location.country = defaultInfo.location.country;
+    if (!props.location.state)
+      props.location.state = defaultInfo.location.state;
+    if (!props.location.country)
+      props.location.country = defaultInfo.location.country;
     if (!props.socials) props.socials = defaultInfo.socials;
-    if (!props.socials.facebookUrl) props.socials.facebookUrl = defaultInfo.socials.facebookUrl;
-    if (!props.socials.twitterUrl) props.socials.twitterUrl = defaultInfo.socials.twitterUrl;
-    if (!props.socials.instagramUrl) props.socials.instagramUrl = defaultInfo.socials.instagramUrl;
+    if (!props.socials.facebookUrl)
+      props.socials.facebookUrl = defaultInfo.socials.facebookUrl;
+    if (!props.socials.twitterUrl)
+      props.socials.twitterUrl = defaultInfo.socials.twitterUrl;
+    if (!props.socials.instagramUrl)
+      props.socials.instagramUrl = defaultInfo.socials.instagramUrl;
 
     return props;
   }
 
   render() {
+
     const athlete = this.props.athletes[this.props.currentId];
 
     return (
       <div>
-        {this.state.editAllowed
-          ? <ToggleEditor text="Info" editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} />
-          : null }
+        {this.state.editAllowed ? (
+          <ToggleEditor
+            text="Info"
+            editModeOn={this.state.editModeOn}
+            toggleFn={this.toggleEditMode}
+          />
+        ) : null}
 
-        {(athlete && athlete.info) && (this.state.editModeOn
-          ? <InfoEditor props={this.checkIfHasProps(athlete.info)} change={this.handleOnChange} save={this.handleOnSave} />
-          : <InfoPresentation info={this.checkIfHasProps(athlete.info)} /> )}
+        {athlete &&
+          athlete.info &&
+          (this.state.editModeOn ? (
+            <InfoEditor
+              props={this.checkIfHasProps(athlete.info)}
+              change={this.handleOnChange}
+              save={this.handleOnSave}
+            />
+          ) : (
+            <InfoPresentation info={this.checkIfHasProps(athlete.info)} />
+          ))}
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     authId: state.authId,
     athletes: state.athletes
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    getInfo: (id) => {
+    getInfo: id => {
       dispatch(getInfo(id));
     },
     updateInfo: (id, data) => {
@@ -153,6 +173,7 @@ export default connect(
     return {
       ...stateProps,
       ...dispatchProps,
-      currentId: ownProps.location.pathname.split('/athletes/')[1],
+      currentId: ownProps.location.pathname.split('/athletes/')[1]
     };
-  })(InfoContainer);
+  }
+)(InfoContainer);

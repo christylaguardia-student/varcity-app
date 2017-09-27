@@ -27,7 +27,8 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = state => {
   return {
-    authId: state.authId
+    authId: state.authId,
+    id: state.id
   };
 };
 

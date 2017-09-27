@@ -37,7 +37,7 @@ export default {
       .send(data)
       .then(res => res.body);
   },
-  
+
   getEduById(id) {
     const token = localStorage.getItem('varcity');
     return superagent
@@ -71,7 +71,7 @@ export default {
       .set('Authorization', token)
       .then(res => res.body);
   },
-  
+
   updateSportsById(id, data) {
     const token = localStorage.getItem('varcity');
     return superagent

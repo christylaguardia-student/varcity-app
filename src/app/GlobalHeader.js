@@ -10,6 +10,7 @@ export function GlobalHeader({
   searchDb,
   signOut,
   signIn,
+  id,
   history
 
 
@@ -118,7 +119,8 @@ export function GlobalHeader({
 const mapStateToProps = state => {
   return {
     authId: state.authId,
-    search: state.search
+    search: state.search,
+    id: state.id
     };
 };
 

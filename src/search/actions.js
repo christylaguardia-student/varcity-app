@@ -9,7 +9,6 @@ export function searchDb({ payload }) {
     return searchAPI
       .search({ payload })
       .then(results => {
-        console.log(99, results);
         if (results.length > 0) {
           dispatch({ type: GOT_RESULTS, payload: results });
         } else {

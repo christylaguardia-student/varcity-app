@@ -8,12 +8,11 @@ import MediaGallery from '../media/MediaGallery';
 
 class ProfileContainer extends Component {
   render() {
-    const id = this.props.id;
+    let id = this.props.id;
 
     const tabs = {
       marginTop: 2
     };
-
     return (
       <div>
         <div style={tabs} className="tabs is-centered is-medium">
@@ -46,13 +45,13 @@ class ProfileContainer extends Component {
           </div>
         </Switch>
       </div>
-
     );
   }
 }
 
-export default connect(
-  state => ({ id: state.id }),
 
-  null
+
+export default connect(
+state => ({id:state.id}),
+null
 )(ProfileContainer);
