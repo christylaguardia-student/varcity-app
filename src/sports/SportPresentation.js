@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function SportPresentation({ sports }) {
   return (
-    <div>
+    <div className="content">
       <h1 className="title">Sports</h1>
       {sports.map((sport, index) => <SportTbl key={index} sport={sport} />)}
     </div>
@@ -13,12 +13,13 @@ function SportTbl({ sport }) {
   return (
     <div className="content">
       <h3>{sport.sport}</h3>
-      <p>{sport.position}</p>
-      <p>{sport.organization}</p>
-      <p>{sport.seasonStart} - {sport.seasonEnd}</p>
-      <br/>
-      
+      <p>{sport.position} for {sport.organization}</p>
       <table className="table">
+        <thead>
+          <tr>
+            <th colSpan={sport.stats.length}>Stats {sport.seasonStart} - {sport.seasonEnd}</th>
+          </tr>
+        </thead>
         <tbody>
           <AbbrRow stats={sport.stats} />
           <ValueRow stats={sport.stats} />
@@ -31,7 +32,7 @@ function SportTbl({ sport }) {
 function AbbrRow({ stats }) {
   return (
     <tr>
-      {stats.map((stat, index) => <td key={index}>{stat.abbr}</td> )}
+      {stats.map((stat, index) => <th key={index}>{stat.abbr}</th> )}
     </tr>
   );
 }
@@ -43,7 +44,3 @@ function ValueRow({ stats }) {
     </tr>
   );
 }
-
-
-//<tr>{s.stats.map((stat, i) => <th key={i}>{stat.statTitle}</th>)}</tr>
-//<tr>{s.stats.map((stat, i) => <th key={i}>{stat.statScore}</th>)}</tr>

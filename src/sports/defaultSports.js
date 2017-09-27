@@ -7,20 +7,20 @@ export default [
     position: 'Left Field',
     stats: [
       {
-        statTitle: 'GP',
-        statScore: 95,
+        abbr: 'GP',
+        value: 95,
       },
       {
-        statTitle: 'A',
-        statScore: 23,
+        abbr: 'A',
+        value: 23,
       },
       {
-        statTitle: 'B',
-        statScore: 92,
+        abbr: 'B',
+        value: 92,
       },
       {
-        statTitle: 'C',
-        statScore: 23,
+        abbr: 'C',
+        value: 23,
       },
     ],
     seasonStart: '2016',
@@ -33,20 +33,28 @@ export default [
     position: 'Right Field',
     stats: [
       {
-        statTitle: 'GP',
-        statScore: 2,
+        abbr: 'GP',
+        value: 2,
       },
       {
-        statTitle: 'A',
-        statScore: 43,
+        abbr: 'A',
+        value: 43,
       },
       {
-        statTitle: 'B',
-        statScore: 2,
+        abbr: 'B',
+        value: 2,
       },
       {
-        statTitle: 'C',
-        statScore: 22,
+        abbr: 'C',
+        value: 22,
+      },
+      {
+        abbr: 'D',
+        value: 90,
+      },
+      {
+        abbr: 'E',
+        value: 18,
       },
     ],
     seasonStart: '2016',

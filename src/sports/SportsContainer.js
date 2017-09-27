@@ -29,6 +29,15 @@ export class SportsContainer extends Component {
 
   checkIfHasProps(props) {
     if (!props || props.length === 0) return defaultSports;
+    if (!props.sport) props.sport = defaultSports.sport;
+    if (!props.sportGender) props.sportGender = defaultSports.sportGender;
+    if (!props.organization) props.organization = defaultSports.organization;
+    if (!props.position) props.position = defaultSports.position;
+    if (!props.stats) props.stats = defaultSports.stats;
+    if (!props.seasonStart) props.seasonStart = defaultSports.seasonStart;
+    if (!props.seasonEnd) props.seasonEnd = defaultSports.seasonEnd;
+
+    console.log('checkIfHasProps props', props);
     return props;
   }
 
@@ -64,7 +73,7 @@ export class SportsContainer extends Component {
           : null }
 
         {(athlete && athlete.sports) && (this.state.editModeOn
-          ? <SportEditor props={this.checkIfHasProps(athlete.sports)} change={this.handleOnChange} save={this.handleOnSave} />
+          ? <SportEditor sports={this.checkIfHasProps(athlete.sports)} change={this.handleOnChange} save={this.handleOnSave} />
           : <SportPresentation sports={this.checkIfHasProps(athlete.sports)} /> )}
       </div>
     );
