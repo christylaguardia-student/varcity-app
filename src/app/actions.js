@@ -41,9 +41,8 @@ export function signUp({ payload }) {
 }
 
 export function signIn({ payload }) {
-  const storage = localStorage;
-  storage.clear('varcity');
   return function(dispatch) {
+    const storage = localStorage;
     return authAPI.signIn({ payload }).then(
       res => {
         storage.setItem('varcity', res.token);
