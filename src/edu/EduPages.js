@@ -1,25 +1,26 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-// import {bindActionCreators} from 'redux';
-import {getEducation, updateEducation} from './actions';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getEdu, updateSchools, updateTestScores } from './actions';
 import EduForm from './EduForm';
 import EduPresentation from './EduPresentation';
 import { ToggleEditor } from '../app/FormControls';
 
-
-export default class EduPages extends Component {
+export class EduPages extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       editModeOn: false,
-      educations: {
+      editAllowed: this.props.authId === this.props.currentId,
+      school: {
         institution: '',
         year: 2017,
         country: '',
         city: '',
         state: '',
-        degree: '',
+        degree: ''
+      },
+      testScores: {
         satReading: '',
         satWriting: '',
         satMath: '',
@@ -33,26 +34,41 @@ export default class EduPages extends Component {
         ibScience: ''
       }
     }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleNewSchoolAddition = this.handleNewSchoolAddition.bind(this);
+    this.handleNewSchoolSubmit = this.handleNewSchoolSubmit.bind(this);
+    this.handleTestsUpdate = this.handleTestsUpdate.bind(this);
+    this.handleTestsSubmit = this.handleTestsSubmit.bind(this);
     this.toggleEditMode = this.toggleEditMode.bind(this);
   }
-  // componentWillMount() {
-  //   if (this.props.educations[0].id == '') {
-  //     this.props.actions.loadEducation();
-  //   }
-  // }
+  
+  componentDidMount() {
+    this.props.getEdu(this.props.currentId);
+  }
 
-  handleChange(event) {
+  handleNewSchoolAddition(e) {
+    e.preventDefault();
+    const { name, value } = e.target;
     this.setState({
-      educations: {
-        [event.target.name]: event.target.value
-      }
+      school: { ...this.state.school, [name]: value }
     });
   }
 
-  handleSubmit() {
-    // send to db
+  handleNewSchoolSubmit(e) {
+    e.preventDefault();
+    this.props.updateSchools(this.props.currentId, this.state.school);
+  }
+
+  handleTestsUpdate(e) {
+    e.preventDefault();
+    const { name, value } = e.target;
+    this.setState({
+      testScores: { ...this.state.testScores, [name]: value }
+    });
+  }
+
+  handleTestsSubmit(e) {
+    e.preventDefault();
+    this.props.updateTestScores(this.props.currentId, this.state.testScores);
   }
 
   toggleEditMode() {
@@ -63,70 +79,56 @@ export default class EduPages extends Component {
   }
 
   render() {
-    // const educations = this.props.educations;
+    const athlete = this.props.athletes[this.props.currentId];
+
     return (
-      <div className="">
-
-
-        <ToggleEditor text="Info" editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} />
-
-        {this.state.editModeOn
-          ? <EduForm onSubmit={this.handleSubmit} onChange={this.handleChange} props={this.state.educations} />
-          : <EduPresentation />
+      <div>
+        {!athlete &&
+          <a className="button is-loading">Loading</a>
         }
-
-
-
-        {/* <EduPresentation />  */}
-        {/* <h1>Education<Link to={'/edu/new'} className="">Education ++</Link></h1>
-        <div className="">
-          <EduList educations={educations} />
-        </div>
-        <div className="">
-          {this.props.children}
-        </div> */}
+        {athlete && athlete.edu &&
+          <div>
+            {this.state.editAllowed
+              ? <ToggleEditor text="Education" editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} />
+              : null}
+            {this.state.editModeOn
+              ? <EduForm onSchoolChange={this.handleNewSchoolAddition} onSchoolSubmit={this.handleSchoolSubmit} onTestChange={this.handleTestsUpdate} onTestSubmit={this.handleTestsSubmit} school={this.state.school} tests={this.state.testScores} />
+              : <EduPresentation schools={athlete.edu.schools} testScores={athlete.edu.testScores} />}
+          </div>
+        }
       </div>
     );
   }
 }
 
-// function mapStateToProps(state) {
-//   if (state.educations.length > 0) {
-//     return {
-//       educations: state.educations,
-//       authId: state.authId
-//     };
-//   } else {
-//     return {
-//       educations: [{
-//         institution: '',
-//         year: 2017,
-//         country: '',
-//         city: '',
-//         state: '',
-//         degree: '',
-//         satReading: '',
-//         satWriting: '',
-//         satMath: '',
-//         actMath: '',
-//         actReading: '',
-//         actScience: '',
-//         actWriting: '',
-//         ibHistory: '',
-//         ibLanguage: '',
-//         ibMath: '',
-//         ibScience: ''
-//       }],
-//       authId: state.authId
-//     };
-//   }
-// }
+const mapStateToProps = (state) => {
+  return {
+    authId: state.authId,
+    athletes: state.athletes
+  };
+};
 
-// const mapDispatchToProps = { getEducation, updateEducation };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getEdu: (id) => {
+      dispatch(getEdu(id));
+    },
+    updateSchools: (id, data) => {
+      dispatch(updateSchools(id, data));
+    },
+    updateTestScores: (id, data) => {
+      dispatch(updateTestScores(id, data));
+    }
+  }
+};
 
-
-// function mapDispatchToProps(dispatch) {
-//   return {actions: bindActionCreators(actions, dispatch)}
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(EduPages);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  (stateProps, dispatchProps, ownProps) => {
+    return {
+      ...stateProps,
+      ...dispatchProps,
+      currentId: ownProps.location.pathname.split('/athletes/')[1].split('/edu')[0],
+    };
+  })(EduPages);
