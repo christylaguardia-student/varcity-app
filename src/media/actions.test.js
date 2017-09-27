@@ -1,9 +1,9 @@
 import { makeGetMedia, makeUpdateMedia } from './actions';
 import * as actions from './constants';
 
-describe('getMedia', () => {
+describe.skip('getMedia', () => {
 
-  it.only('GETs media', () => {
+  it('GETs media', () => {
     const testMedia = [{ something: 'three properties here' }];
     const api = { get: (id) => Promise.resolve(testMedia) };
     const dispatched = [];
@@ -19,9 +19,9 @@ describe('getMedia', () => {
   });
 });
 
-describe('updateMedia', () => {
+describe.skip('updateMedia', () => {
 
-  it.only('Updates with new media', () => {
+  it('Updates with new media', () => {
     const testMedia = { something: 'three properties here' };
     const api = { update: (id, media) => Promise.resolve(media) };
     const dispatched = [];

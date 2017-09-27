@@ -1,5 +1,5 @@
 import * as actions from './constants';
-import { media } from './reducers';
+import { media } from '../store/athletes/reducers';
 
 describe.skip('media reducer', () => {
 
