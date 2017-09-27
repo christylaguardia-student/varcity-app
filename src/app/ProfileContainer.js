@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, Link } from 'react-router-dom';
-import SportPage from '../sports/SportPage';
+import SportsContainer from '../sports/SportsContainer';
 import InfoContainer from '../info/InfoContainer';
 import EduPages from '../edu/EduPages';
 import MediaGallery from '../media/MediaGallery';
@@ -12,7 +12,7 @@ class ProfileContainer extends Component {
     const id = this.props.match.params.id;
     const tabs = {
       marginTop:2
-    }
+    };
 
     return (
         <div>
@@ -34,12 +34,11 @@ class ProfileContainer extends Component {
           </div>
 
           <Switch>
-
             <div className="columns main-container">
               <div className="column"></div>
               <div className="column is-two-thirds">
                 <Route exact path="/athletes/:id" component={InfoContainer} />
-                <Route path="/athletes/:id/sports" component={SportPage} />
+                <Route path="/athletes/:id/sports" component={SportsContainer} />
                 <Route path="/athletes/:id/edu" component={EduPages} />
                 <Route path="/athletes/:id/media" component={MediaGallery} />
               </div>

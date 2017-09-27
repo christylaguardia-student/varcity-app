@@ -10,7 +10,8 @@ export function GlobalHeader({
   signOut,
   signIn,
   gotResults,
-  history
+  history,
+  currentId
 }) {
   const headerStyle = {
     marginBottom: 20,
@@ -20,7 +21,6 @@ export function GlobalHeader({
   const columns = {
     marginBottom: 6
   };
-
   return (
     <div style={headerStyle}>
       <div>
