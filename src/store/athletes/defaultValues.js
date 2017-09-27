@@ -7,6 +7,7 @@ export default {
       public: false,
       profileUrl: '',
       primarySport: '',
+      primaryGender: '',
       position: '',
       person: {
         dob: '9/20/2017',
@@ -32,18 +33,20 @@ export default {
       about: '',
       awards: '',
     },
-    edu: [],
-    testScores: {
-      SAT: {
-        reading: 0,
-        math: 0,
-        writing: 0
-      },
-      ACT: {
-        reading: 0,
-        math: 0,
-        writing: 0,
-        science: 0
+    edu: {
+      [],
+      testScores: {
+        SAT: {
+          reading: 0,
+          math: 0,
+          writing: 0
+        },
+        ACT: {
+          reading: 0,
+          math: 0,
+          writing: 0,
+          science: 0
+        }
       }
     },
     sports: [],

@@ -1,89 +1,45 @@
-
 import React from 'react';
-const defaultSports = [
-  {
-    sport: 'Baseball',
-    organization: 'Alchemy Code Team',
-    position: 'Left Field',
-    stats: [
-      {
-        statTitle: 'GP',
-        statScore: 95,
-      },
-      {
-        statTitle: 'A',
-        statScore: 23,
-      },
-      {
-        statTitle: 'B',
-        statScore: 92,
-      },
-      {
-        statTitle: 'C',
-        statScore: 23,
-      },
-    ],
-    seasonDates: '2016-2017'
-  },
-  {
-    sport: 'Baseball',
-    organization: 'Code Fellows PDX Team',
-    position: 'Right Field',
-    stats: [
-      {
-        statTitle: 'GP',
-        statScore: 2,
-      },
-      {
-        statTitle: 'A',
-        statScore: 43,
-      },
-      {
-        statTitle: 'B',
-        statScore: 2,
-      },
-      {
-        statTitle: 'C',
-        statScore: 22,
-      },
-    ],
-    seasonDates: '2015-2016'
-  }
-];
 
-export default function SportPresentation() {
-
+export default function SportPresentation({ sports }) {
   return (
-    <div className="content">
+    <div>
       <h1 className="title">Sports</h1>
-      {defaultSports.map((s, i) => <Sport s={s} key={i} />)}
+      {sports.map((sport, index) => <SportTbl key={index} sport={sport} />)}
     </div>
   );
 }
 
-function Sport({ s }) {
+function SportTbl({ sport }) {
   return (
-    <div>
-      <h3>{s.sport}</h3>
-      <p>{s.organization}</p>
-      <p>{s.position}</p>
-      <p>{s.seasonDates}</p>
+    <div className="content">
+      <h3>{sport.sport}</h3>
+      <p>{sport.position}</p>
+      <p>{sport.organization}</p>
+      <p>{sport.seasonStart} - {sport.seasonEnd}</p>
       <br/>
       
       <table className="table">
         <tbody>
-          {s.stats.map((st, i) => <StatRow key={i} stat={st}/> )}
+          <AbbrRow stats={sport.stats} />
+          <ValueRow stats={sport.stats} />
         </tbody>
       </table>
     </div>
   );
 }
 
-function StatRow({ stat }) {
+function AbbrRow({ stats }) {
   return (
     <tr>
-      <td>{stat.statTitle}</td>
-      <td>{stat.statScore}</td>
+      {stats.map((stat, index) => <td key={index}>{stat.abbr}</td> )}
+    </tr>
+  );
+}
+
+function ValueRow({ stats }) {
+  return (
+    <tr>
+      {stats.map((stat, index) => <td key={index}>{stat.value}</td> )}
     </tr>
   );
 }
