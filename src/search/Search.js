@@ -8,9 +8,9 @@ export function Search({ search }) {
     return (
       <div>
         <div className="flexrow">
-          {search.map((person, index) => {
+          {search.map(person => {
             return (
-              <div key={index} className="flexcol">
+              <div key={person._id} className="flexcol">
                 <Card user={person.info} />
               </div>
             );

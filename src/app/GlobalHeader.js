@@ -5,13 +5,18 @@ import { withRouter } from 'react-router-dom';
 
 export function GlobalHeader({
   authId,
+  getInfo,
   search,
   searchDb,
   signOut,
   signIn,
   gotResults,
-  history
-}) {
+  history,
+  currentId,id
+})
+{
+console.log(400, currentId, id, authId)
+
   const headerStyle = {
     marginBottom: 20,
     borderBottom: '1px solid lightgrey'
@@ -20,7 +25,6 @@ export function GlobalHeader({
   const columns = {
     marginBottom: 6
   };
-
   return (
     <div style={headerStyle}>
       <div>
@@ -114,7 +118,8 @@ export function GlobalHeader({
 const mapStateToProps = state => {
   return {
     authId: state.authId,
-    search: state.search
+    search: state.search,
+    currentId: state.currentId
     };
 };
 
