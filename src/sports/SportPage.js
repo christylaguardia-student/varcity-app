@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 // import {bindActionCreators} from 'redux';
-import { getSport, updateSport } from './actions';
+// import { getSport, updateSport } from './actions';
 // import { browserHistory } from 'react-router';
 // import SportList from './SportList';
 import SportForm from './SportForm';

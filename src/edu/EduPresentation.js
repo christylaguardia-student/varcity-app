@@ -1,8 +1,6 @@
 import React from 'react';
 
-export default function EduPresentation({ props }) {
-
-  const { schools, testScores } = this.props;
+export default function EduPresentation({ schools, testScores }) {
 
   return (
     <div className="content">

@@ -80,13 +80,14 @@ export class EduPages extends Component {
 
   render() {
     const athlete = this.props.athletes[this.props.currentId];
+    athlete.edu = { schools: [], testScores: {}};
 
     return (
       <div>
         {!athlete &&
           <a className="button is-loading">Loading</a>
         }
-        {athlete && athlete.edu &&
+        {athlete &&
           <div>
             {this.state.editAllowed
               ? <ToggleEditor text="Education" editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} />

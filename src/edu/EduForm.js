@@ -1,9 +1,9 @@
 import React from 'react';
 import { TextInput, NumberInput, Dropdown } from '../app/FormControls';
 
-export default function Eduform({ onSchoolSubmit, onTestSubmit, onSchoolChange, onTestChange, schools, tests }) {
+export default function Eduform({ onSchoolSubmit, onTestSubmit, onSchoolChange, onTestChange, school, tests }) {
 
-  const { institution, year, country, city, state, degree } = schools;
+  const { institution, year, country, city, state, degree } = school;
   const { satReading, satWriting, satMath, actMath, actReading, actScience, actWriting, ibHistory, ibLanguage, ibMath, ibScience } = tests;
   return (
     <div className="column">
@@ -20,7 +20,7 @@ export default function Eduform({ onSchoolSubmit, onTestSubmit, onSchoolChange, 
         </div>
         <input type="submit" value="Submit" />
       </form>
-      <form School={onTestSubmit}>
+      <form onSubmit={onTestSubmit}>
         <div className="field">
           <p className="is-size-3">Update your test scores</p>
           <h5>SAT</h5>

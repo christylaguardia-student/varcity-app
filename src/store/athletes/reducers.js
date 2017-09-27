@@ -25,7 +25,7 @@ export function athletes(state = {}, { type, payload }) {
       const athlete = state[_id] || {};
       return {
         ...state,
-        [_id]: { ...athlete,  edu }
+        [_id]: { ...athlete,  edu: { schools: edu.schools, testScores: edu.testScores} }
       };
     }
     case eduActions.UPDATE_SCHOOLS: {
