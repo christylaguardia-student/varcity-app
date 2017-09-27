@@ -12,7 +12,9 @@ export default {
       });
   },
   signIn({ payload }) {
-    const { email, password, token } = payload || '';
+    const { email, password } = payload || '';
+    const { token } = payload || '';
+
     return req
       .post(`${AUTH_API_URL}/signin`)
       .send({ email, password })

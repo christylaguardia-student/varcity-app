@@ -1,43 +1,72 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { ButtonWithIcon } from '../app/FormControls';
 
-
-export default function MediaPresentation(media) {
-
-
+export function MediaItem({ description, mediaType, videoUrl, imageUrl }) {
   return (
-    <div>
-      <div className="columns level">
-
-        <div className="column">
-          <div>
-            <table className="table">
-              <tbody>
-                <tr>
-                  <td><figure><img alt="running woman" src="https://d193o8p26ehxdy.cloudfront.net/img-thumbs/960w/RKCOZX0VN8.jpg"></img></figure></td>
-                </tr>
-                <tr>I love to run.</tr>
-                <tr>
-                  <td><figure><img alt="new shoes" src="https://d193o8p26ehxdy.cloudfront.net/img-thumbs/960w/RUFNMXXX2F.jpg"></img></figure></td>
-                </tr>
-                <tr>New shoes.</tr>
-                <tr>
-                  <td><figure><img alt="big game" src="https://d193o8p26ehxdy.cloudfront.net/img-thumbs/960w/CTKY2SVZM8.jpg"></img></figure></td>
-                </tr>
-                <tr>The big game.</tr>
-                <tr>
-                  <td><figure><img alt="track and field days" src="https://d193o8p26ehxdy.cloudfront.net/img-thumbs/960w/5WKVKGI5DU.jpg"></img></figure></td>
-                </tr>
-                <tr>Track and Field Days.</tr>
-                <tr>
-                  <td><figure><img alt={media.description} src={media.videoUrl}></img></figure></td>
-                </tr>
-                <tr>{media.description}</tr>
-              </tbody>
-            </table>
+    mediaType === 'Image Link' 
+    ? (
+      <div className="card">
+        <div className="card-image">
+          <figure className="image is-4by3">
+            <img alt={description} src={imageUrl}>
+            </img>
+          </figure>
+        </div>
+        <div className="card-content">
+          <div className="media-content">
+            <p className="title is-4">{description}</p>
           </div>
-
         </div>
       </div>
-    </div>
+    ) 
+    : (
+      <div className="card">
+        <div className="card-image">
+          <iframe title="description" width="100%" height="auto" src={videoUrl} frameBorder="0" allowFullScreen></iframe>
+        </div>
+        <div className="card-content">
+          <div className="media-content">
+            <p className="title is-4">{description}</p>
+          </div>
+        </div>
+      </div>
+    )
   );
+}
+
+export class MediaPresentation extends Component {
+  render() {
+    const { mediaArr, onUpdate, itemNum } = this.props;
+
+    const mediaGallery = mediaArr.map((item, i) => (
+      <MediaItem className="is-flex-mobile" key={i} description={item.description} mediaType={item.mediaType} videoUrl={item.videoUrl} imageUrl={item.imageUrl} onUpdate={onUpdate} />
+    ));
+
+    const displayNum = ( mediaArr < 1 ) ? 0 : itemNum + 1;
+
+    return (
+      <div className="content">
+        <h1 className="title">Media Gallery</h1>
+        <div className="columns level">
+          <div className="column is-one-quarter is-pulled-left">
+            <ButtonWithIcon text={'Left'} iconClass={'fa fa-arrow-left'} onClickFn={() => onUpdate(-1)} />
+          </div>
+          <div className="column">
+            <p>{displayNum} of {mediaArr.length}</p>
+            {mediaGallery[itemNum]}
+          </div>
+          <div className="column is-one-quarter">
+            <p className="control is-pulled-right" onClick={() => onUpdate(1)}>
+              <a className="button">
+                <span className="icon is-small">
+                  <i className={'fa fa-arrow-right'}></i>
+                </span>
+                <span>{'Right'}</span>
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }

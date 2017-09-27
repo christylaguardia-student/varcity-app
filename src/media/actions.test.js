@@ -1,7 +1,7 @@
 import { makeGetMedia, makeUpdateMedia } from './actions';
 import * as actions from './constants';
 
-describe('getMedia', () => {
+describe.skip('getMedia', () => {
 
   it('GETs media', () => {
     const testMedia = [{ something: 'three properties here' }];
@@ -19,7 +19,7 @@ describe('getMedia', () => {
   });
 });
 
-describe('updateMedia', () => {
+describe.skip('updateMedia', () => {
 
   it('Updates with new media', () => {
     const testMedia = { something: 'three properties here' };

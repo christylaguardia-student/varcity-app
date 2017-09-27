@@ -10,13 +10,13 @@ const defaultInfo = {
   firstName: '',
   lastName: '',
   public: false,
-  profileUrl: '/image/default-profile.png',
+  profileUrl: '/images/default-profile.png',
   primarySport: '',
   primarySportGender: '',
   position: '',
   person: {
     dob: new Date('2017-09-22'),
-    gender: '', 
+    gender: '',
     height: 0,
     heightUom: 'in',
     weight: 0,
@@ -45,7 +45,7 @@ export class InfoContainer extends Component {
       editModeOn: false,
       info: {}
     };
-    
+
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnSave = this.handleOnSave.bind(this);
     this.toggleEditMode = this.toggleEditMode.bind(this);
@@ -62,7 +62,7 @@ export class InfoContainer extends Component {
       info: { ...this.state.info, [name]: value }
     });
   }
-  
+
   handleOnSave() {
     const newData = { info: this.state.info };
     this.props.updateInfo(this.props.currentId, newData);
@@ -80,10 +80,10 @@ export class InfoContainer extends Component {
 
   checkIfHasProps(props) {
     let keys = Object.keys(props);
-  
+
     // has no props
     if (keys.length===0) return defaultInfo;
-    
+
     if (!props.firstName) props.firstName = defaultInfo.firstName;
     if (!props.lastName) props.lastName = defaultInfo.lastName;
     if (!props.public) props.public = defaultInfo.public;
@@ -119,7 +119,7 @@ export class InfoContainer extends Component {
         {this.state.editAllowed
           ? <ToggleEditor text="Info" editModeOn={this.state.editModeOn} toggleFn={this.toggleEditMode} />
           : null }
-        
+
         {(athlete && athlete.info) && (this.state.editModeOn
           ? <InfoEditor props={this.checkIfHasProps(athlete.info)} change={this.handleOnChange} save={this.handleOnSave} />
           : <InfoPresentation info={this.checkIfHasProps(athlete.info)} /> )}

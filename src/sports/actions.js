@@ -1,32 +1,33 @@
-import * as actions from './constants';
+import * as actions from '../sports/constants';
 import athleteApi from '../services/athleteApi';
 
-export function makeGetSport(api) {
-    return function getSport(id) {
-        return dispatch => {
-            return api
-                .get(id)
-                .then(sport => {
-                    dispatch({ type: actions.LOAD_SPORTS, payload: sport });
-                })
-                .catch(console.log);
-        };
+export function makeGetSports(api) {
+  return function getSports(id) {
+    return (dispatch, getState) => {
+      const { athletes } = getState();
+      const athlete = athletes[id];
+      if (athlete && athlete.sports) return;
+      return api
+        .getSportsById(id)
+        .then(sports => {
+          dispatch({ type: actions.GET_SPORTS, payload: sports });
+        });
     };
+  };
 }
 
-export const getSport = makeGetSport(athleteApi);
+export const getSports = makeGetSports(athleteApi);
 
-export function makeUpdateSport(api) {
-    return function updateSport(id, data) {
-        return dispatch => {
-            return api
-                .updateSportById(id, data)
-                .then(sport => {
-                    dispatch({ type: actions.CREATE_NEW_SPORT, payload: sport });
-                })
-                .catch(console.log);
-        };
+export function makeUpdateSports(api) {
+  return function updateSports(id, data) {
+    return dispatch => {
+      return api
+        .updateSportsById(id, data)
+        .then(sports => {
+          dispatch({ type: actions.UPDATE_SPORTS, payload: sports });
+        });
     };
+  };
 }
 
-export const updateSport = makeUpdateSport(athleteApi);
+export const updateSports = makeGetSports(athleteApi);

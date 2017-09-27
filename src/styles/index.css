@@ -5,6 +5,7 @@ body {
   margin: 0;
   padding: 1rem;
   font-family: 'Open Sans', sans-serif;
+
 }
 
 .border {
@@ -22,7 +23,8 @@ body {
   background-size: cover; */
 }
 
-.logo, h1 {
+.logo,
+h1 {
   font-family: 'Graduate', cursive;
 }
 
@@ -39,4 +41,31 @@ body {
 #about-title {
   padding: 3rem;
   text-align: center;
+}
+.columns {
+  width: 95 vw;
+}
+
+
+
+.card {
+  margin: 0 0 5px 0;
+}
+
+.flexrow {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: top;
+  align-content: center;
+}
+
+.flexcol {
+  flex: 1 1 8%;
+  margin: 0 0 0.5rem 0;
+  padding: 0.5em 10px;
+  box-sizing: border-box;
+  flex-basis: 33.33%;
 }

@@ -42,9 +42,9 @@ export function signUp({ payload }) {
 
 export function signIn({ payload }) {
   return function(dispatch) {
+    const storage = localStorage;
     return authAPI.signIn({ payload }).then(
       res => {
-        const storage = localStorage;
         storage.setItem('varcity', res.token);
         dispatch({ type: AUTHORIZED, payload: res.user._id });
       },

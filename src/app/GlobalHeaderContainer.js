@@ -1,14 +1,23 @@
 import { connect } from 'react-redux';
 import GlobalHeader from './GlobalHeader';
 import { signIn, signUp, signOut } from './actions';
+import { searchDb } from '../search/actions';
+import { getInfo } from '../store/athletes/actions';
+import { withRouter } from 'react-router-dom';
 
 function mapDispatchToProps(dispatch) {
   return {
-    signUp: ({payload}) => {
-      dispatch(signUp({payload}));
+    getInfo: id => {
+      dispatch(getInfo(id));
     },
-    signIn: ({payload}) => {
-      dispatch(signIn({payload}));
+    searchDb: ({ payload }) => {
+      dispatch(searchDb({ payload }));
+    },
+    signUp: ({ payload }) => {
+      dispatch(signUp({ payload }));
+    },
+    signIn: ({ payload }) => {
+      dispatch(signIn({ payload }));
     },
     signOut: () => {
       dispatch(signOut());
@@ -16,12 +25,22 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    id: state.id,
     authId: state.authId
   };
 };
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(GlobalHeader);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+    (stateProps, dispatchProps, ownProps) => {
+      return {
+        ...stateProps,
+        ...dispatchProps,
+        currentId: ownProps.location.pathname.split('/athletes/')[1]
+      };
+    }
+  )(GlobalHeader)
+);

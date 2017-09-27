@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 export default function InfoPresentation({ info }) {
   return (
@@ -18,7 +18,7 @@ function HasInfo({ props }) {
       <div className="columns level">
 
         <div className="column">
-          <figure className="image is-3by2">
+          <figure className="image is-square">
             <img src={props.profileUrl} alt="Profile" />
           </figure>
         </div>
@@ -99,11 +99,11 @@ function NoInfo() {
 
 function getAge(dob) {
   if (!dob) return 0;
-  
+
   dob = new Date(dob);
   const diffMS = Date.now() - dob.getTime();
   const ageDate = new Date(diffMS);
   const years = Math.abs(ageDate.getUTCFullYear() - 1970);
-  
+
   return `${years} years old`;
 }
