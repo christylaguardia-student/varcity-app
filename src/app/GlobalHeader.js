@@ -23,87 +23,82 @@ export function GlobalHeader({
   };
   return (
     <div style={headerStyle}>
-      <div>
+      <div className="">
         {authId &&
         Object.entries(authId).length !== 0 && (
-          <div className="columns" style={columns}>
-            <div className="column is-2">
-              <Link to="/">
-                <h3 className="logo">Varcity</h3>
-                <i className="fa fa-home fa-2x" />
-              </Link>
-              <Link to="/about">About</Link>
-            </div>
-            <div className="column is-8">
-              <form
-                onSubmit={event => {
-                  event.preventDefault();
-                  const form = event.target;
-                  const searchValue = form.elements[0].value;
-                  searchDb({
-                    payload: { searchValue: searchValue, authId: authId }
-                  });
-                  form.reset();
-                  history.push('/search');
-                }}>
-                <div className="field has-addons">
-                  <div className="control has-icons-left is-expanded">
-                    <input className="input" placeholder="Search" />
-                    <span className="icon is-small is-left">
-                      <i className="fa fa-search" />
-                    </span>
-                  </div>
-                  <button
-                    className="button is-primary is-outlined"
-                    type="submit"
-                    name="submit">
+            <div className="columns" style={columns}>
+              <div className="column is-2">
+                <Logo />
+              </div>
+              <div className="column is-8">
+                <form
+                  onSubmit={event => {
+                    event.preventDefault();
+                    const form = event.target;
+                    const searchValue = form.elements[0].value;
+                    searchDb({
+                      payload: { searchValue: searchValue, authId: authId }
+                    });
+                    form.reset();
+                    history.push('/search');
+                  }}>
+                  <div className="field has-addons">
+                    <div className="control has-icons-left is-expanded">
+                      <input className="input" placeholder="Search" />
+                      <span className="icon is-small is-left">
+                        <i className="fa fa-search" />
+                      </span>
+                    </div>
+                    <button
+                      className="button is-primary is-outlined"
+                      type="submit"
+                      name="submit">
                     Search{' '}
-                  </button>
-                </div>
-              </form>
-            </div>
+                    </button>
+                  </div>
+                </form>
+              </div>
 
-            <div className="column is-2">
-              <form
-                onSubmit={event => {
-                  event.preventDefault();
-                  const form = event.target;
-                  signOut({
-                    payload: { payload: null }
-                  });
-                  form.reset();
-                }}>
-                <div className="field">
-                  <button
-                    className="button is-primary is-outlined"
-                    type="submit"
-                    name="submit">
+              <div className="column is-2">
+                <form
+                  onSubmit={event => {
+                    event.preventDefault();
+                    const form = event.target;
+                    signOut({
+                      payload: { payload: null }
+                    });
+                    form.reset();
+                  }}>
+                  <div className="field">
+                    <button
+                      className="button is-primary is-outlined"
+                      type="submit"
+                      name="submit">
                     Logout
-                  </button>
-                </div>
-              </form>
-
-              <div>
-                <Link to={`/athletes/${authId}`}>My Profile</Link>
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
-          </div>
-        )}
+          )}
+          
+        {/* <div className="tabs">
+          <Link to="/about">About</Link>
+          <Link to="/news">News</Link>
+          <Link to="/resources">Resources</Link>
+          <Link to="/contact">Contact</Link>
+          <Link to="/privacy">Privacy Policy</Link>
+        </div> */}
       </div>
       <div>
         {!authId && (
-          <div className="columns level">
-            <div className="column is-8 level-left">
-              <Link to="/">
-                <h3 className="logo">Varcity</h3>
-                <i className="fa fa-home fa-2x" />
-              </Link>
-              <Link to="/about">About</Link>
-            </div>
-
-            <div className="column is-4 level-right">
-
-            </div>
+          <div className="tabs">
+            <Logo />
+            <Link to="/about">About</Link>
+            <Link to="/news">News</Link>
+            <Link to="/resources">Resources</Link>
+            <Link to="/contact">Contact</Link>
+            <Link to="/privacy">Privacy Policy</Link>
           </div>
         )}
       </div>
@@ -111,11 +106,17 @@ export function GlobalHeader({
   );
 }
 
+function Logo() {
+  return (
+    <Link to="/" className="logo">Varcity</Link>
+  );
+}
+
 const mapStateToProps = state => {
   return {
     authId: state.authId,
     search: state.search
-    };
+  };
 };
 
 export default withRouter(connect(mapStateToProps, null)(GlobalHeader));
