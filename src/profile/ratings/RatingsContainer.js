@@ -26,7 +26,7 @@ export default function RatingsContainer() {
     <section>
       <h1>Overall</h1>
       <Totals />
-      {reviews.map((review, index) => <IndividualReview name={review.name} review={review.review} />)}
+      {reviews.map((review, index) => <IndividualReview key={index} name={review.name} review={review.review} />)}
     </section>
   );
 }
