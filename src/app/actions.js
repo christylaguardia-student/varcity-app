@@ -26,7 +26,6 @@ export function signUp({ payload }) {
       res => {
         const { token } = res.body;
         const storage = localStorage;
-        storage.clear('varcity');
         storage.setItem('varcity', token);
         payload.token = token;
         return authAPI.signIn({ payload }).then(savedUser => {

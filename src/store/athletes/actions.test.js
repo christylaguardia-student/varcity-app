@@ -1,6 +1,7 @@
 import * as actions from './constants';
 import { makeGetInfo, makeUpdateAthlete } from './actions';
 
+// .skip to my lou...
 describe.skip('info actions', () => {
 
   const testId = 123;
