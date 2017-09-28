@@ -5,7 +5,9 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 BigCalendar.momentLocalizer(moment);
 
 const events = [];
-let allViews = Object.keys(BigCalendar.views).map(k => BigCalendar.views[k]);
+// let allViews = Object.keys(BigCalendar.views).map(k => BigCalendar.views[k]);
+// console.log('allViews',allViews);
+let allViews = ['month'];
 
 export default function CalendarViewer() {
   return (
