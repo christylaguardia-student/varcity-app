@@ -22,7 +22,7 @@ const connections = [
 export default function Connections() {
   return (
     <section>
-      {connections.map((con, index) => <Connection name={con.name} title={con.title} />)}
+      {connections.map((con, index) => <Connection key={index} name={con.name} title={con.title} />)}
     </section>
   );
 }
