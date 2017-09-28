@@ -81,6 +81,14 @@ export function GlobalHeader({
               </div>
             </div>
           )}
+          
+        {/* <div className="tabs">
+          <Link to="/about">About</Link>
+          <Link to="/news">News</Link>
+          <Link to="/resources">Resources</Link>
+          <Link to="/contact">Contact</Link>
+          <Link to="/privacy">Privacy Policy</Link>
+        </div> */}
       </div>
       <div>
         {!authId && (
