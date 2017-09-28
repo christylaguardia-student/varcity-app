@@ -93,7 +93,7 @@ export function TextArea({ value, prop, label, change }) {
     <label className="label">
       {label}
       <textarea
-        className="input"
+        className="textarea"
         name={prop}
         rows="10"
         cols="50"
