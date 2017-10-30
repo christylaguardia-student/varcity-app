@@ -1,0 +1,65 @@
+@import url('./font-awesome-4.7.0/css/font-awesome.min.css');
+@import url('https://fonts.googleapis.com/css?family=Graduate|Open+Sans');
+
+body {
+  margin: 0;
+  padding: 1rem;
+  font-family: 'Open Sans', sans-serif;
+
+}
+
+.border {
+  border: 1px solid red;
+}
+
+.logo {
+  font-family: 'Graduate', cursive;
+  font-size: 32px;
+  text-transform: bold;
+  text-shadow: 1px #000;
+}
+
+h1 {
+  font-family: 'Graduate', cursive;
+}
+
+section, .main-container {
+  min-height: 90vh;
+}
+
+.padded-container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 2rem;
+}
+
+.centered-title {
+  padding: 3rem;
+  text-align: center;
+}
+
+.columns {
+  width: 95 vw;
+}
+
+.card {
+  margin: 0 0 5px 0;
+}
+
+.flexrow {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: top;
+  align-content: center;
+}
+
+.flexcol {
+  flex: 1 1 8%;
+  margin: 0 0 0.5rem 0;
+  padding: 0.5em 10px;
+  box-sizing: border-box;
+  flex-basis: 33.33%;
+}

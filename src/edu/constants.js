@@ -1,0 +1,3 @@
+export const UPDATE_TESTSCORES = 'UPDATE_TESTSCORES';
+export const UPDATE_SCHOOLS = 'UPDATE_SCHOOLS';
+export const GET_EDU = 'GET_EDU';

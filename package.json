@@ -3,16 +3,38 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bulma": "^0.5.2",
+    "dotenv": "^4.0.0",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
     "react": "^15.6.1",
+    "react-big-calendar": "^0.15.0",
     "react-dom": "^15.6.1",
-    "react-scripts": "1.0.13"
+    "react-redux": "^5.0.6",
+    "react-redux-form": "^1.14.1",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
+    "react-scripts": "1.0.13",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "riek": "^1.1.0",
+    "superagent": "^3.6.0",
+    "video-react": "^0.8.8"
   },
   "scripts": {
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start": "react-scripts start",
     "build": "react-scripts build && npm run copy",
     "copy": "rm -rf ../varcity-server/public && cp -R ./build ../varcity-server/public",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://localhost:3001",
+  "devDependencies": {
+    "enzyme": "^2.9.1",
+    "enzyme-to-json": "^1.6.0",
+    "node-sass-chokidar": "0.0.3",
+    "react-test-renderer": "^15.6.1"
+  }
 }
