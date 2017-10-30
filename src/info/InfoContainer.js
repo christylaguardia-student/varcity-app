@@ -52,6 +52,7 @@ export class InfoContainer extends Component {
   }
 
   componentWillMount() {
+    console.log(555, this)
     this.props.getInfo(this.props.currentId);
   }
 
@@ -119,8 +120,8 @@ export class InfoContainer extends Component {
   }
 
   render() {
-
     const athlete = this.props.athletes[this.props.currentId];
+    console.log(22222, athlete);
 
     return (
       <div>
@@ -151,17 +152,18 @@ export class InfoContainer extends Component {
 const mapStateToProps = state => {
   return {
     authId: state.authId,
-    athletes: state.athletes
+    athletes: state.athletes,
+    currentId: state.currentId
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getInfo: id => {
-      dispatch(getInfo(id));
+    getInfo: currentId => {
+      dispatch(getInfo(currentId));
     },
-    updateInfo: (id, data) => {
-      dispatch(updateInfo(id, data));
+    updateInfo: (currentId, data) => {
+      dispatch(updateInfo(currentId, data));
     }
   };
 };
@@ -173,7 +175,8 @@ export default connect(
     return {
       ...stateProps,
       ...dispatchProps,
-      currentId: ownProps.location.pathname.split('/athletes/')[1]
+      currentId: ownProps.currentId
+      // currentId: ownProps.location.pathname.split('/athletes/')[1]
     };
   }
 )(InfoContainer);

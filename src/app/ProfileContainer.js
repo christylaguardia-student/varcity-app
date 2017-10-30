@@ -8,7 +8,8 @@ import MediaGallery from '../media/MediaGallery';
 
 class ProfileContainer extends Component {
   render() {
-    let id = this.props.id;
+
+    let id = this.props.currentId ? this.props.currentId : this.props.match.params.id
 
     const tabs = {
       marginTop: 2
@@ -52,6 +53,6 @@ class ProfileContainer extends Component {
 
 
 export default connect(
-state => ({id:state.id}),
+state => ({currentId:state.currentId}),
 null
 )(ProfileContainer);

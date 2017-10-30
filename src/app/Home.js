@@ -154,7 +154,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    authId: state.authId
+    authId: state.authId,
+    currentId: state.currentId
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -23,15 +23,16 @@ class App extends Component {
 
   render() {
     let routes = null;
+    let { authId, currentId } = this.props;
 
-    const { authId } = this.props;
-
+    currentId = authId ? authId : currentId;
+    console.log(8787, currentId)
     if (authId && Object.entries(authId).length !== 0) {
       routes = [
         <Route key="1" path="/about" component={About} />,
         <Route key="3" path="/athletes/:id" component={ProfileContainer} />,
         <Route key="2" path="/search" component={Search} />,
-        <Redirect key="5" to={`/athletes/${authId}`} />
+        <Redirect key="5" to={`/athletes/${currentId}`} />
       ];
     } else {
       routes = [
@@ -61,6 +62,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(state => ({ authId: state.authId }), mapDispatchToProps)(
+export default connect(state => ({ authId: state.authId, currentId:state.currentId }), mapDispatchToProps)(
   App
 );

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Pagination from '../search/Pagination';
 import Card from '../search/Card';
 
-export function Search({ search }) {
+export function Search({ search, currentId }) {
   if (search && search.length > 0 && !search.error) {
     return (
       <div>
@@ -11,7 +11,7 @@ export function Search({ search }) {
           {search.map(person => {
             return (
               <div key={person._id} className="flexcol">
-                <Card user={person.info} />
+                <Card user={person} />
               </div>
             );
           })}
@@ -25,6 +25,7 @@ export function Search({ search }) {
 }
 
 const mapStateToProps = state => {
+  console.log(565656, state)
   return {
     search: state.search
   };

@@ -120,7 +120,7 @@ const mapStateToProps = state => {
   return {
     authId: state.authId,
     search: state.search,
-    id: state.id
+    currentId: state.currentId
     };
 };
 
